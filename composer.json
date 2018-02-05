@@ -1,6 +1,6 @@
 {
     "description": "This repository contains GroupDocs.Viewer for Cloud SDK for PHP source code.",
-    "name": "groupdocs/viewer-sdk-php",
+    "name": "groupdocscloud/viewer-sdk-php",
     "version": "18.2",
     "license": "MIT",
     "type": "library",

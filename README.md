@@ -12,7 +12,7 @@ To use SDK you need AppSID and AppKey authorization keys. You can your AppSID an
 
 The package is available at [Packagist](https://packagist.org/) and it can be installed via [Composer](http://getcomposer.org/) by executing following command:
 ```
-composer require groupdocs/viewer-sdk-php
+composer require groupdocscloud/viewer-sdk-php
 ``` 
 
 Or you can install SDK via [Composer](http://getcomposer.org/) directly from this repository, add the following to `composer.json`:
@@ -26,7 +26,7 @@ Or you can install SDK via [Composer](http://getcomposer.org/) directly from thi
     }
   ],
   "require": {
-    "groupdocs/viewer-sdk-php": "*"
+    "groupdocscloud/viewer-sdk-php": "*"
   }
 }
 ```
