@@ -35,7 +35,7 @@ Then run `composer install`
 
 ### Manual Installation
 
-Download the files, then run `composer install` in the root directory and include `autoload.php`:
+Clone or download this repository, then run `composer install` in the root directory to install dependencies and include `autoload.php` into your code file:
 
 ```php
 require_once('/path/to/groupdocs-viewer-cloud-php/vendor/autoload.php');
