@@ -35,7 +35,6 @@ use \Exception;
  */
 class HeaderSelector
 {
-
     /*
      * Selects headers for request
      * @param string[] $accept type of header

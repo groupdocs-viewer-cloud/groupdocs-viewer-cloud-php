@@ -97,11 +97,11 @@ class Configuration
     protected $host = 'https://api.groupdocs.cloud';
 
     /*
-     * The API version, set to "v1' by default
+     * The base path, set to '/v1' by default
      *
      * @var string
      */
-    protected $apiVersion = 'v1';
+    protected $basePath = '/v1';
 
     /*
      * User agent of the HTTP request, set to 'php sdk' by default
@@ -139,7 +139,7 @@ class Configuration
 
     /*
      * Constructor
-     * 
+     *
      */
     public function __construct()
     {
@@ -367,26 +367,26 @@ class Configuration
     }
 
     /*
-     * Sets the API version
+     * Sets the BasePath
      *
-     * @param string $apiVersion
+     * @param string $basePath
      *
      * @return $this
      */
-    public function setApiVersion($apiVersion)
+    public function setBasePath($basePath)
     {
-        $this->apiVersion = $apiVersion;
+        $this->basePath = $basePath;
         return $this;
     }
 
     /*
-     * Gets the apiVersion
+     * Gets the basePath
      *
-     * @return string ApiVersion
+     * @return string BasePath
      */
-    public function getApiVersion()
+    public function getBasePath()
     {
-        return $this->apiVersion;
+        return $this->basePath;
     }
 
     /*
@@ -522,7 +522,7 @@ class Configuration
         $report  = 'PHP SDK (GroupDocs\Viewer) Debug Report:' . PHP_EOL;
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
-        $report .= '    OpenAPI Spec Version: 17.12' . PHP_EOL;
+        $report .= '    SDK Package Version: 18.2' . PHP_EOL;
         $report .= '    Temp Folder Path: ' . self::getDefaultConfiguration()->getTempFolderPath() . PHP_EOL;
 
         return $report;

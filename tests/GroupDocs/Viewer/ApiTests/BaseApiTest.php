@@ -70,7 +70,7 @@ abstract class BaseApiTest extends \PHPUnit_Framework_TestCase
     {
         $config = self::_getConfig();
 
-        //TODO: Get your AppSID and AppKey at https://dashboard.groupdocs.cloud 
+        //TODO: Get your AppSID and AppKey at https://dashboard.groupdocs.cloud
         //      (free registration is required).
         $appSid = $config["AppSID"];
         $appKey = $config["AppKey"];

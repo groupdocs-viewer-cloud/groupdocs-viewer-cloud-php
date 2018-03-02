@@ -1,5 +1,4 @@
 <?php
-
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="HtmlGetZipWithPagesRequest.php">

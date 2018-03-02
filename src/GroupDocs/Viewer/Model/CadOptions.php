@@ -60,7 +60,8 @@ class CadOptions implements ArrayAccess
         'width' => 'int',
         'height' => 'int',
         'renderLayouts' => 'bool',
-        'layoutName' => 'string'
+        'layoutName' => 'string',
+        'layers' => 'string[]'
     ];
 
     /*
@@ -73,7 +74,8 @@ class CadOptions implements ArrayAccess
         'width' => 'int32',
         'height' => 'int32',
         'renderLayouts' => null,
-        'layoutName' => null
+        'layoutName' => null,
+        'layers' => null
     ];
 
     /*
@@ -107,7 +109,8 @@ class CadOptions implements ArrayAccess
         'width' => 'Width',
         'height' => 'Height',
         'renderLayouts' => 'RenderLayouts',
-        'layoutName' => 'LayoutName'
+        'layoutName' => 'LayoutName',
+        'layers' => 'Layers'
     ];
 
     /*
@@ -120,7 +123,8 @@ class CadOptions implements ArrayAccess
         'width' => 'setWidth',
         'height' => 'setHeight',
         'renderLayouts' => 'setRenderLayouts',
-        'layoutName' => 'setLayoutName'
+        'layoutName' => 'setLayoutName',
+        'layers' => 'setLayers'
     ];
 
     /*
@@ -133,7 +137,8 @@ class CadOptions implements ArrayAccess
         'width' => 'getWidth',
         'height' => 'getHeight',
         'renderLayouts' => 'getRenderLayouts',
-        'layoutName' => 'getLayoutName'
+        'layoutName' => 'getLayoutName',
+        'layers' => 'getLayers'
     ];
 
     /*
@@ -201,6 +206,7 @@ class CadOptions implements ArrayAccess
         $this->container['height'] = isset($data['height']) ? $data['height'] : null;
         $this->container['renderLayouts'] = isset($data['renderLayouts']) ? $data['renderLayouts'] : null;
         $this->container['layoutName'] = isset($data['layoutName']) ? $data['layoutName'] : null;
+        $this->container['layers'] = isset($data['layers']) ? $data['layers'] : null;
     }
 
     /*
@@ -367,6 +373,30 @@ class CadOptions implements ArrayAccess
     public function setLayoutName($layoutName)
     {
         $this->container['layoutName'] = $layoutName;
+
+        return $this;
+    }
+
+    /*
+     * Gets layers
+     *
+     * @return string[]
+     */
+    public function getLayers()
+    {
+        return $this->container['layers'];
+    }
+
+    /*
+     * Sets layers
+     *
+     * @param string[] $layers The list of document layers to render. By default all layers will be rendered. Layer names are case sensitive.
+     *
+     * @return $this
+     */
+    public function setLayers($layers)
+    {
+        $this->container['layers'] = $layers;
 
         return $this;
     }

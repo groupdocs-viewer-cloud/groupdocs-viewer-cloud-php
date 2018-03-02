@@ -37,7 +37,7 @@ use GuzzleHttp\RequestOptions;
 use GroupDocs\Viewer\Model\Requests;
 
 /*
- * ViewerApi GroupDocs.Viewer for Cloud API.
+ * GroupDocs.Viewer for Cloud API
  */
 class ViewerApi
 {
@@ -223,6 +223,9 @@ class ViewerApi
         $headerParams = [];
         $httpBody = "";
         $multipart = false;
+    
+
+    
     
         $resourcePath = $this->_parseURL($resourcePath, $queryParams);
 
@@ -483,6 +486,9 @@ class ViewerApi
         $headerParams = [];
         $httpBody = "";
         $multipart = false;
+    
+
+    
     
         $resourcePath = $this->_parseURL($resourcePath, $queryParams);
 
@@ -20626,12 +20632,12 @@ class ViewerApi
     private function _parseURL($url, $queryParams)
     {
         // parse the url
-        $UrlToSign = trim($url, '/');
+        $urlPath = trim($url, '/');
         $urlQuery = http_build_query($queryParams);
  
-        $urlPartToSign = '/' . $this->config->getApiVersion() . '/' . parse_url($UrlToSign, PHP_URL_PATH) . "?" . $urlQuery;
+        $urlToSign = $this->config->getBasePath() . '/' . $urlPath . "?" . $urlQuery;
         
-        return $urlPartToSign;
+        return $urlToSign;
     }
   
     /*
