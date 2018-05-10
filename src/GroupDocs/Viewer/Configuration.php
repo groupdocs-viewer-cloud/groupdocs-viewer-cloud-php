@@ -135,7 +135,7 @@ class Configuration
      * Version of client SDK
      *
      */
-    protected $clientVersion = '18.2';
+    protected $clientVersion = '18.2.1';
 
     /*
      * Constructor
@@ -522,7 +522,7 @@ class Configuration
         $report  = 'PHP SDK (GroupDocs\Viewer) Debug Report:' . PHP_EOL;
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
-        $report .= '    SDK Package Version: 18.2' . PHP_EOL;
+        $report .= '    SDK Package Version: 18.2.1' . PHP_EOL;
         $report .= '    Temp Folder Path: ' . self::getDefaultConfiguration()->getTempFolderPath() . PHP_EOL;
 
         return $report;
