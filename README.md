@@ -46,7 +46,7 @@ require_once('/path/to/groupdocs-viewer-cloud-php/vendor/autoload.php');
 To run the unit tests set your AppSID and AppKey in [json.config](tests/GroupDocs/Viewer/config.json) and execute following commands:
 
 ```
-composer install
+php composer.phar install
 ./vendor/bin/phpunit
 ```
 

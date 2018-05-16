@@ -38,7 +38,7 @@ class HtmlGetDocumentInfoRequest
      * @param string $fileName The file name.
      * @param string $password The document password.
      * @param bool $renderComments Allows to render document comments. Not required if PDF document was created before.
-     * @param bool $renderHiddenPages Enables document hidden pages, sheets or slides rendering.
+     * @param bool $renderHiddenPages Enables rendering of document hidden pages, sheets or slides.
      * @param string $folder The folder which contains specified file in storage.
      * @param string $storage The file storage which have to be used.
      */
@@ -68,7 +68,7 @@ class HtmlGetDocumentInfoRequest
     public $renderComments;
     
     /*
-     * Enables document hidden pages, sheets or slides rendering.
+     * Enables rendering of document hidden pages, sheets or slides.
      */
     public $renderHiddenPages;
     

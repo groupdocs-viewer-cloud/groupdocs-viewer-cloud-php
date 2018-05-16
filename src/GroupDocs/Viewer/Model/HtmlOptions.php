@@ -59,7 +59,8 @@ class HtmlOptions extends RenderOptions
         'ignoreResourcePathInResources' => 'bool',
         'embedResources' => 'bool',
         'enableMinification' => 'bool',
-        'enableResponsiveRendering' => 'bool'
+        'enableResponsiveRendering' => 'bool',
+        'excludeFonts' => 'bool'
     ];
 
     /*
@@ -72,7 +73,8 @@ class HtmlOptions extends RenderOptions
         'ignoreResourcePathInResources' => null,
         'embedResources' => null,
         'enableMinification' => null,
-        'enableResponsiveRendering' => null
+        'enableResponsiveRendering' => null,
+        'excludeFonts' => null
     ];
 
     /*
@@ -106,7 +108,8 @@ class HtmlOptions extends RenderOptions
         'ignoreResourcePathInResources' => 'IgnoreResourcePathInResources',
         'embedResources' => 'EmbedResources',
         'enableMinification' => 'EnableMinification',
-        'enableResponsiveRendering' => 'EnableResponsiveRendering'
+        'enableResponsiveRendering' => 'EnableResponsiveRendering',
+        'excludeFonts' => 'ExcludeFonts'
     ];
 
     /*
@@ -119,7 +122,8 @@ class HtmlOptions extends RenderOptions
         'ignoreResourcePathInResources' => 'setIgnoreResourcePathInResources',
         'embedResources' => 'setEmbedResources',
         'enableMinification' => 'setEnableMinification',
-        'enableResponsiveRendering' => 'setEnableResponsiveRendering'
+        'enableResponsiveRendering' => 'setEnableResponsiveRendering',
+        'excludeFonts' => 'setExcludeFonts'
     ];
 
     /*
@@ -132,7 +136,8 @@ class HtmlOptions extends RenderOptions
         'ignoreResourcePathInResources' => 'getIgnoreResourcePathInResources',
         'embedResources' => 'getEmbedResources',
         'enableMinification' => 'getEnableMinification',
-        'enableResponsiveRendering' => 'getEnableResponsiveRendering'
+        'enableResponsiveRendering' => 'getEnableResponsiveRendering',
+        'excludeFonts' => 'getExcludeFonts'
     ];
 
     /*
@@ -196,6 +201,7 @@ class HtmlOptions extends RenderOptions
         $this->container['embedResources'] = isset($data['embedResources']) ? $data['embedResources'] : null;
         $this->container['enableMinification'] = isset($data['enableMinification']) ? $data['enableMinification'] : null;
         $this->container['enableResponsiveRendering'] = isset($data['enableResponsiveRendering']) ? $data['enableResponsiveRendering'] : null;
+        $this->container['excludeFonts'] = isset($data['excludeFonts']) ? $data['excludeFonts'] : null;
     }
 
     /*
@@ -311,7 +317,7 @@ class HtmlOptions extends RenderOptions
     /*
      * Sets enableMinification
      *
-     * @param bool $enableMinification Enables content (HTML and SVG) minification.
+     * @param bool $enableMinification Enables content (HTML, CSS and SVG) minification.
      *
      * @return $this
      */
@@ -342,6 +348,30 @@ class HtmlOptions extends RenderOptions
     public function setEnableResponsiveRendering($enableResponsiveRendering)
     {
         $this->container['enableResponsiveRendering'] = $enableResponsiveRendering;
+
+        return $this;
+    }
+
+    /*
+     * Gets excludeFonts
+     *
+     * @return bool
+     */
+    public function getExcludeFonts()
+    {
+        return $this->container['excludeFonts'];
+    }
+
+    /*
+     * Sets excludeFonts
+     *
+     * @param bool $excludeFonts Prevents adding fonts to the output HTML document.
+     *
+     * @return $this
+     */
+    public function setExcludeFonts($excludeFonts)
+    {
+        $this->container['excludeFonts'] = $excludeFonts;
 
         return $this;
     }

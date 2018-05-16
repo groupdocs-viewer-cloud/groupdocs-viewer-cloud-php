@@ -4796,6 +4796,16 @@ class ViewerApi
             }
         }
         // query params
+        if ($request->excludeFonts !== null) {
+            $localName = lcfirst('ExcludeFonts');
+            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
         if ($request->renderComments !== null) {
             $localName = lcfirst('RenderComments');
             $localValue = is_bool($request->renderComments) ? ($request->renderComments ? 'true' : 'false') : $request->renderComments;
@@ -5521,6 +5531,16 @@ class ViewerApi
         if ($request->enableResponsiveRendering !== null) {
             $localName = lcfirst('EnableResponsiveRendering');
             $localValue = is_bool($request->enableResponsiveRendering) ? ($request->enableResponsiveRendering ? 'true' : 'false') : $request->enableResponsiveRendering;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
+        if ($request->excludeFonts !== null) {
+            $localName = lcfirst('ExcludeFonts');
+            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
             if (strpos($resourcePath, '{' . $localName . '}') !== false) {
                 $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
             } else {
@@ -7859,6 +7879,16 @@ class ViewerApi
             }
         }
         // query params
+        if ($request->excludeFonts !== null) {
+            $localName = lcfirst('ExcludeFonts');
+            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
         if ($request->password !== null) {
             $localName = lcfirst('Password');
             $localValue = is_bool($request->password) ? ($request->password ? 'true' : 'false') : $request->password;
@@ -8563,6 +8593,16 @@ class ViewerApi
             }
         }
         // query params
+        if ($request->excludeFonts !== null) {
+            $localName = lcfirst('ExcludeFonts');
+            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
         if ($request->startPageNumber !== null) {
             $localName = lcfirst('StartPageNumber');
             $localValue = is_bool($request->startPageNumber) ? ($request->startPageNumber ? 'true' : 'false') : $request->startPageNumber;
@@ -8984,6 +9024,16 @@ class ViewerApi
         if ($request->enableResponsiveRendering !== null) {
             $localName = lcfirst('EnableResponsiveRendering');
             $localValue = is_bool($request->enableResponsiveRendering) ? ($request->enableResponsiveRendering ? 'true' : 'false') : $request->enableResponsiveRendering;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
+        if ($request->excludeFonts !== null) {
+            $localName = lcfirst('ExcludeFonts');
+            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
             if (strpos($resourcePath, '{' . $localName . '}') !== false) {
                 $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
             } else {
@@ -10114,6 +10164,16 @@ class ViewerApi
             }
         }
         // query params
+        if ($request->excludeFonts !== null) {
+            $localName = lcfirst('ExcludeFonts');
+            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
         if ($request->startPageNumber !== null) {
             $localName = lcfirst('StartPageNumber');
             $localValue = is_bool($request->startPageNumber) ? ($request->startPageNumber ? 'true' : 'false') : $request->startPageNumber;
@@ -10530,6 +10590,16 @@ class ViewerApi
         if ($request->enableResponsiveRendering !== null) {
             $localName = lcfirst('EnableResponsiveRendering');
             $localValue = is_bool($request->enableResponsiveRendering) ? ($request->enableResponsiveRendering ? 'true' : 'false') : $request->enableResponsiveRendering;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
+        if ($request->excludeFonts !== null) {
+            $localName = lcfirst('ExcludeFonts');
+            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
             if (strpos($resourcePath, '{' . $localName . '}') !== false) {
                 $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
             } else {

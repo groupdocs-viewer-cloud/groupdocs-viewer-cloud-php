@@ -44,7 +44,7 @@ class ImageGetZipWithAttachmentPagesRequest
      * @param int $startPageNumber The starting document page number to render.
      * @param int $countPages The count of document pages to render.
      * @param bool $renderComments Allows to render document comments.
-     * @param bool $renderHiddenPages Enables document hidden pages, sheets or slides rendering.
+     * @param bool $renderHiddenPages Enables rendering of document hidden pages, sheets or slides.
      * @param string $password The document password.
      * @param string $attachmentPassword The attachment password.
      * @param bool $extractText When this options is set to true text contained in document will be extracted and returned along with other information.
@@ -120,7 +120,7 @@ class ImageGetZipWithAttachmentPagesRequest
     public $renderComments;
     
     /*
-     * Enables document hidden pages, sheets or slides rendering.
+     * Enables rendering of document hidden pages, sheets or slides.
      */
     public $renderHiddenPages;
     

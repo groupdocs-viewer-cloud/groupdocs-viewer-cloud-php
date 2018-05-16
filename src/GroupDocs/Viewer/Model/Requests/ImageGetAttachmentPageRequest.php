@@ -46,7 +46,7 @@ class ImageGetAttachmentPageRequest
      * @param string $attachmentPassword The attachment password.
      * @param bool $extractText When this options is set to true text contained in document will be extracted and returned along with other information.
      * @param bool $renderComments Allows to render document comments.
-     * @param bool $renderHiddenPages Enables document hidden pages, sheets or slides rendering.
+     * @param bool $renderHiddenPages Enables rendering of document hidden pages, sheets or slides.
      * @param string $defaultFontName The name of the default font.
      * @param string $fontsFolder The folder with custom fonts in storage.
      * @param string $folder The folder which contains specified file in storage.
@@ -128,7 +128,7 @@ class ImageGetAttachmentPageRequest
     public $renderComments;
     
     /*
-     * Enables document hidden pages, sheets or slides rendering.
+     * Enables rendering of document hidden pages, sheets or slides.
      */
     public $renderHiddenPages;
     

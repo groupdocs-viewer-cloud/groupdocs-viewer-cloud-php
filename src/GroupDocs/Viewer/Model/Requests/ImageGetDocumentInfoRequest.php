@@ -39,7 +39,7 @@ class ImageGetDocumentInfoRequest
      * @param string $password The document password.
      * @param bool $extractText When this options is set to true text contained in document will be extracted and returned along with other information.
      * @param bool $renderComments Allows to render document comments. Not required if PDF document was created before.
-     * @param bool $renderHiddenPages Enables document hidden pages, sheets or slides rendering.
+     * @param bool $renderHiddenPages Enables rendering of document hidden pages, sheets or slides.
      * @param string $folder The folder which contains specified file in storage.
      * @param string $storage The file storage which have to be used.
      */
@@ -75,7 +75,7 @@ class ImageGetDocumentInfoRequest
     public $renderComments;
     
     /*
-     * Enables document hidden pages, sheets or slides rendering.
+     * Enables rendering of document hidden pages, sheets or slides.
      */
     public $renderHiddenPages;
     

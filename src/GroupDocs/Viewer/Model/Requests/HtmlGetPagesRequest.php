@@ -39,19 +39,20 @@ class HtmlGetPagesRequest
      * @param string $resourcePath The HTML resource path.
      * @param bool $ignoreResourcePathInResources When this option enabled ResourcePath won't be added to resource reference in *.css and *.svg files.
      * @param bool $embedResources Whether to embed HTML resources or save them separate.
-     * @param bool $enableMinification Enables content (HTML and SVG) minification.
+     * @param bool $enableMinification Enables content (HTML, CSS and SVG) minification.
      * @param bool $enableResponsiveRendering Indicates whether rendering will provide responsive web pages, that look well on different device types.
+     * @param bool $excludeFonts Prevents adding fonts to the output HTML document.
      * @param int $startPageNumber The starting document page number to render.
      * @param int $countPages The count of document pages to render.
      * @param string $password The document password.
      * @param bool $renderComments Allows to render document comments.
-     * @param bool $renderHiddenPages Enables document hidden pages, sheets or slides rendering.
+     * @param bool $renderHiddenPages Enables rendering of document hidden pages, sheets or slides.
      * @param string $defaultFontName The name of the default font.
      * @param string $fontsFolder The folder with custom fonts in storage.
      * @param string $folder The folder which contains specified file in storage.
      * @param string $storage The file storage which have to be used.
      */
-    public function __construct($fileName, $resourcePath = null, $ignoreResourcePathInResources = null, $embedResources = null, $enableMinification = null, $enableResponsiveRendering = null, $startPageNumber = null, $countPages = null, $password = null, $renderComments = null, $renderHiddenPages = null, $defaultFontName = null, $fontsFolder = null, $folder = null, $storage = null)
+    public function __construct($fileName, $resourcePath = null, $ignoreResourcePathInResources = null, $embedResources = null, $enableMinification = null, $enableResponsiveRendering = null, $excludeFonts = null, $startPageNumber = null, $countPages = null, $password = null, $renderComments = null, $renderHiddenPages = null, $defaultFontName = null, $fontsFolder = null, $folder = null, $storage = null)
     {
         $this->fileName = $fileName;
         $this->resourcePath = $resourcePath;
@@ -59,6 +60,7 @@ class HtmlGetPagesRequest
         $this->embedResources = $embedResources;
         $this->enableMinification = $enableMinification;
         $this->enableResponsiveRendering = $enableResponsiveRendering;
+        $this->excludeFonts = $excludeFonts;
         $this->startPageNumber = $startPageNumber;
         $this->countPages = $countPages;
         $this->password = $password;
@@ -91,7 +93,7 @@ class HtmlGetPagesRequest
     public $embedResources;
     
     /*
-     * Enables content (HTML and SVG) minification.
+     * Enables content (HTML, CSS and SVG) minification.
      */
     public $enableMinification;
     
@@ -99,6 +101,11 @@ class HtmlGetPagesRequest
      * Indicates whether rendering will provide responsive web pages, that look well on different device types.
      */
     public $enableResponsiveRendering;
+    
+    /*
+     * Prevents adding fonts to the output HTML document.
+     */
+    public $excludeFonts;
     
     /*
      * The starting document page number to render.
@@ -121,7 +128,7 @@ class HtmlGetPagesRequest
     public $renderComments;
     
     /*
-     * Enables document hidden pages, sheets or slides rendering.
+     * Enables rendering of document hidden pages, sheets or slides.
      */
     public $renderHiddenPages;
     

@@ -58,7 +58,8 @@ class PdfOptions implements ArrayAccess
     protected static $swaggerTypes = [
         'enablePreciseRendering' => 'bool',
         'enableInitialContentOrdering' => 'bool',
-        'renderLayersSeparately' => 'bool'
+        'renderLayersSeparately' => 'bool',
+        'imageQuality' => 'string'
     ];
 
     /*
@@ -69,7 +70,8 @@ class PdfOptions implements ArrayAccess
     protected static $swaggerFormats = [
         'enablePreciseRendering' => null,
         'enableInitialContentOrdering' => null,
-        'renderLayersSeparately' => null
+        'renderLayersSeparately' => null,
+        'imageQuality' => null
     ];
 
     /*
@@ -101,7 +103,8 @@ class PdfOptions implements ArrayAccess
     protected static $attributeMap = [
         'enablePreciseRendering' => 'EnablePreciseRendering',
         'enableInitialContentOrdering' => 'EnableInitialContentOrdering',
-        'renderLayersSeparately' => 'RenderLayersSeparately'
+        'renderLayersSeparately' => 'RenderLayersSeparately',
+        'imageQuality' => 'ImageQuality'
     ];
 
     /*
@@ -112,7 +115,8 @@ class PdfOptions implements ArrayAccess
     protected static $setters = [
         'enablePreciseRendering' => 'setEnablePreciseRendering',
         'enableInitialContentOrdering' => 'setEnableInitialContentOrdering',
-        'renderLayersSeparately' => 'setRenderLayersSeparately'
+        'renderLayersSeparately' => 'setRenderLayersSeparately',
+        'imageQuality' => 'setImageQuality'
     ];
 
     /*
@@ -123,7 +127,8 @@ class PdfOptions implements ArrayAccess
     protected static $getters = [
         'enablePreciseRendering' => 'getEnablePreciseRendering',
         'enableInitialContentOrdering' => 'getEnableInitialContentOrdering',
-        'renderLayersSeparately' => 'getRenderLayersSeparately'
+        'renderLayersSeparately' => 'getRenderLayersSeparately',
+        'imageQuality' => 'getImageQuality'
     ];
 
     /*
@@ -189,6 +194,7 @@ class PdfOptions implements ArrayAccess
         $this->container['enablePreciseRendering'] = isset($data['enablePreciseRendering']) ? $data['enablePreciseRendering'] : null;
         $this->container['enableInitialContentOrdering'] = isset($data['enableInitialContentOrdering']) ? $data['enableInitialContentOrdering'] : null;
         $this->container['renderLayersSeparately'] = isset($data['renderLayersSeparately']) ? $data['renderLayersSeparately'] : null;
+        $this->container['imageQuality'] = isset($data['imageQuality']) ? $data['imageQuality'] : null;
     }
 
     /*
@@ -301,6 +307,30 @@ class PdfOptions implements ArrayAccess
     public function setRenderLayersSeparately($renderLayersSeparately)
     {
         $this->container['renderLayersSeparately'] = $renderLayersSeparately;
+
+        return $this;
+    }
+
+    /*
+     * Gets imageQuality
+     *
+     * @return string
+     */
+    public function getImageQuality()
+    {
+        return $this->container['imageQuality'];
+    }
+
+    /*
+     * Sets imageQuality
+     *
+     * @param string $imageQuality Specifies output image quality for image resources when rendering as HTML. The default value is Low. Supported values {Low|Medium|High}: 1. Low - satisfying image quality and smallest image size. 2. Medium - better image quality and larger image size. 3. High - best image quality with largest image size.
+     *
+     * @return $this
+     */
+    public function setImageQuality($imageQuality)
+    {
+        $this->container['imageQuality'] = $imageQuality;
 
         return $this;
     }

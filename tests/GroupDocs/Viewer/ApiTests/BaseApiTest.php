@@ -28,34 +28,41 @@
 namespace GroupDocs\Viewer\ApiTests;
 
 use PHPUnit\Framework\TestCase;
-use Aspose\Storage\StorageApi;
 use GroupDocs\Viewer\Configuration;
 use GroupDocs\Viewer\ViewerApi;
 
 abstract class BaseApiTest extends \PHPUnit_Framework_TestCase
 {
-    protected static $config;
+    protected static $viewerConfig;
     protected static $viewerApi;
+
+    protected static $storageConfig;
     protected static $storageApi;
     
     protected static $fontsFolder = "fonts";
     protected static $fromUrlFolder = "tests\\from_url";
     protected static $fromContentFolder = "tests\\from_content";
 
-    protected static $testFilesUploaded;
+    protected static $testFilesUploaded = true;
 
     /**
      * Cleanup after each test case
      */
     public function tearDown()
     {
-        self::_removeTempFiles();
+        self::_deleteFolder("cache");
+        self::_deleteFolder("tests");
     }
 
-    private static function _removeTempFiles()
+    private static function _deleteFolder($folder)
     {
-        self::$storageApi->DeleteFolder("cache", null, "true");
-        self::$storageApi->DeleteFolder("tests", null, "true");
+        $request = new \GroupDocs\Storage\Model\Requests\DeleteFolderRequest(
+            $folder,
+            null,
+            true
+        );
+
+        self::$storageApi->DeleteFolder($request);
     }
 
     /**
@@ -76,16 +83,17 @@ abstract class BaseApiTest extends \PHPUnit_Framework_TestCase
         $appKey = $config["AppKey"];
         $apiBaseUrl = $config["ApiBaseUrl"];
 
-        self::$storageApi = new StorageApi();
-        self::$storageApi->apiClient->appSid = $appSid;
-        self::$storageApi->apiClient->apiKey = $appKey;
-        self::$storageApi->apiClient->apiServer = $apiBaseUrl . "/v1";
+        self::$storageConfig = new \GroupDocs\Storage\Configuration();
+        self::$storageConfig->setAppKey($appKey);
+        self::$storageConfig->setAppSid($appSid);
+        self::$storageConfig->setHost($apiBaseUrl);
+        self::$storageApi = new \GroupDocs\Storage\Api\StorageApi(self::$storageConfig);
 
-        self::$config = new Configuration();
-        self::$config->setAppSid($appSid);
-        self::$config->setAppKey($appKey);
-        self::$config->setHost($apiBaseUrl);
-        self::$viewerApi = new ViewerApi(self::$config);
+        self::$viewerConfig = new Configuration();
+        self::$viewerConfig->setAppSid($appSid);
+        self::$viewerConfig->setAppKey($appKey);
+        self::$viewerConfig->setHost($apiBaseUrl);
+        self::$viewerApi = new ViewerApi(self::$viewerConfig);
 
         self::_uploadTestFiles();
     }
@@ -115,9 +123,11 @@ abstract class BaseApiTest extends \PHPUnit_Framework_TestCase
                 $filePathInStorage = str_replace($folder . '\\', "", $filePath);
                 $filePathInStorage = str_replace("\\", "/", $filePathInStorage);
 
-                $response = self::$storageApi->GetIsExist($filePathInStorage);
-                if (!$response->fileExist->isExist) {
-                    self::$storageApi->PutCreate($filePathInStorage, null, null, $filePath);
+                $isExistRequest = new \GroupDocs\Storage\Model\Requests\GetIsExistRequest($filePathInStorage);
+                $isExistResponse = self::$storageApi->GetIsExist($isExistRequest);
+                if (!$isExistResponse->getFileExist()->getIsExist()) {
+                    $putCreateRequest = new \GroupDocs\Storage\Model\Requests\PutCreateRequest($filePathInStorage, $filePath);
+                    $putCreateResponse = self::$storageApi->PutCreate($putCreateRequest);
                 }
             }
         }
