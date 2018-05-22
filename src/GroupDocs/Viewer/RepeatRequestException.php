@@ -26,7 +26,7 @@
  * --------------------------------------------------------------------------------------------------------------------
  */
 
-namespace Aspose\Words;
+namespace GroupDocs\Viewer;
 
 /*
  * Class for handling repeat request
