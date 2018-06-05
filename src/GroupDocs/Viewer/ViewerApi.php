@@ -11,10 +11,10 @@
  *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  *  copies of the Software, and to permit persons to whom the Software is
  *  furnished to do so, subject to the following conditions:
- *
+ * 
  *  The above copyright notice and this permission notice shall be included in all
  *  copies or substantial portions of the Software.
- *
+ * 
  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -76,7 +76,7 @@ class ViewerApi
      * Gets the config
      * @return Configuration
      */
-    public function getConfig()
+    public function getConfig() 
     {
         return $this->config;
     }
@@ -95,10 +95,11 @@ class ViewerApi
     public function deleteFontsCache(Requests\DeleteFontsCacheRequest $request)
     {
         try {
-            $this->deleteFontsCacheWithHttpInfo($request);
-        } catch (RepeatRequestException $e) {
-            $this->deleteFontsCacheWithHttpInfo($request);
+             $this->deleteFontsCacheWithHttpInfo($request);
         }
+        catch(RepeatRequestException $e) {
+             $this->deleteFontsCacheWithHttpInfo($request);
+        } 
     }
 
     /*
@@ -137,6 +138,7 @@ class ViewerApi
             }
 
             return [null, $statusCode, $response->getHeaders()];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
@@ -154,7 +156,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteFontsCacheAsync(Requests\DeleteFontsCacheRequest $request)
+    public function deleteFontsCacheAsync(Requests\DeleteFontsCacheRequest $request) 
     {
         return $this->deleteFontsCacheAsyncWithHttpInfo($request)
             ->then(
@@ -174,7 +176,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteFontsCacheAsyncWithHttpInfo(Requests\DeleteFontsCacheRequest $request)
+    public function deleteFontsCacheAsyncWithHttpInfo(Requests\DeleteFontsCacheRequest $request) 
     {
         $returnType = '';
         $request = $this->DeleteFontsCacheRequest($request);
@@ -185,7 +187,7 @@ class ViewerApi
                 function ($response) use ($returnType) {
                     return [null, $response->getStatusCode(), $response->getHeaders()];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -195,13 +197,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -217,6 +213,7 @@ class ViewerApi
      */
     protected function DeleteFontsCacheRequest(Requests\DeleteFontsCacheRequest $request)
     {
+
         $resourcePath = '/viewer/fonts/cache';
         $formParams = [];
         $queryParams = [];
@@ -262,8 +259,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -316,12 +315,13 @@ class ViewerApi
     public function getFonts(Requests\GetFontsRequest $request)
     {
         try {
-            list($response) = $this->getFontsWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->getFontsWithHttpInfo($request);
-            return $response;
+             list($response) = $this->getFontsWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->getFontsWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -378,6 +378,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -399,7 +400,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getFontsAsync(Requests\GetFontsRequest $request)
+    public function getFontsAsync(Requests\GetFontsRequest $request) 
     {
         return $this->getFontsAsyncWithHttpInfo($request)
             ->then(
@@ -419,7 +420,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getFontsAsyncWithHttpInfo(Requests\GetFontsRequest $request)
+    public function getFontsAsyncWithHttpInfo(Requests\GetFontsRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\FontCollection';
         $request = $this->GetFontsRequest($request);
@@ -448,7 +449,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -458,13 +459,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -480,6 +475,7 @@ class ViewerApi
      */
     protected function GetFontsRequest(Requests\GetFontsRequest $request)
     {
+
         $resourcePath = '/viewer/fonts';
         $formParams = [];
         $queryParams = [];
@@ -525,8 +521,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -579,12 +577,13 @@ class ViewerApi
     public function getSupportedFileFormats(Requests\GetSupportedFileFormatsRequest $request)
     {
         try {
-            list($response) = $this->getSupportedFileFormatsWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->getSupportedFileFormatsWithHttpInfo($request);
-            return $response;
+             list($response) = $this->getSupportedFileFormatsWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->getSupportedFileFormatsWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -641,6 +640,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -662,7 +662,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getSupportedFileFormatsAsync(Requests\GetSupportedFileFormatsRequest $request)
+    public function getSupportedFileFormatsAsync(Requests\GetSupportedFileFormatsRequest $request) 
     {
         return $this->getSupportedFileFormatsAsyncWithHttpInfo($request)
             ->then(
@@ -682,7 +682,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getSupportedFileFormatsAsyncWithHttpInfo(Requests\GetSupportedFileFormatsRequest $request)
+    public function getSupportedFileFormatsAsyncWithHttpInfo(Requests\GetSupportedFileFormatsRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\FormatCollection';
         $request = $this->GetSupportedFileFormatsRequest($request);
@@ -711,7 +711,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -721,13 +721,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -743,6 +737,7 @@ class ViewerApi
      */
     protected function GetSupportedFileFormatsRequest(Requests\GetSupportedFileFormatsRequest $request)
     {
+
         $resourcePath = '/viewer/formats';
         $formParams = [];
         $queryParams = [];
@@ -788,8 +783,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -842,12 +839,13 @@ class ViewerApi
     public function htmlCreateAttachmentPagesCache(Requests\HtmlCreateAttachmentPagesCacheRequest $request)
     {
         try {
-            list($response) = $this->htmlCreateAttachmentPagesCacheWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlCreateAttachmentPagesCacheWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlCreateAttachmentPagesCacheWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlCreateAttachmentPagesCacheWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -904,6 +902,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 201:
@@ -925,7 +924,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlCreateAttachmentPagesCacheAsync(Requests\HtmlCreateAttachmentPagesCacheRequest $request)
+    public function htmlCreateAttachmentPagesCacheAsync(Requests\HtmlCreateAttachmentPagesCacheRequest $request) 
     {
         return $this->htmlCreateAttachmentPagesCacheAsyncWithHttpInfo($request)
             ->then(
@@ -945,7 +944,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlCreateAttachmentPagesCacheAsyncWithHttpInfo(Requests\HtmlCreateAttachmentPagesCacheRequest $request)
+    public function htmlCreateAttachmentPagesCacheAsyncWithHttpInfo(Requests\HtmlCreateAttachmentPagesCacheRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlAttachmentPageCollection';
         $request = $this->HtmlCreateAttachmentPagesCacheRequest($request);
@@ -974,7 +973,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -984,13 +983,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -1071,7 +1064,7 @@ class ViewerApi
         $_tempBody = null;
         if (isset($request->htmlOptions)) {
             if (is_string($request->htmlOptions)) {
-                $_tempBody = "\"" . $request->htmlOptions . "\"";
+                $_tempBody = "\"" . $request->htmlOptions . "\"";   
             } else {
                 $_tempBody = $request->htmlOptions;
             }
@@ -1107,8 +1100,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -1161,12 +1156,13 @@ class ViewerApi
     public function htmlCreatePagesCache(Requests\HtmlCreatePagesCacheRequest $request)
     {
         try {
-            list($response) = $this->htmlCreatePagesCacheWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlCreatePagesCacheWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlCreatePagesCacheWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlCreatePagesCacheWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -1223,6 +1219,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 201:
@@ -1244,7 +1241,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlCreatePagesCacheAsync(Requests\HtmlCreatePagesCacheRequest $request)
+    public function htmlCreatePagesCacheAsync(Requests\HtmlCreatePagesCacheRequest $request) 
     {
         return $this->htmlCreatePagesCacheAsyncWithHttpInfo($request)
             ->then(
@@ -1264,7 +1261,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlCreatePagesCacheAsyncWithHttpInfo(Requests\HtmlCreatePagesCacheRequest $request)
+    public function htmlCreatePagesCacheAsyncWithHttpInfo(Requests\HtmlCreatePagesCacheRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlPageCollection';
         $request = $this->HtmlCreatePagesCacheRequest($request);
@@ -1293,7 +1290,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -1303,13 +1300,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -1381,7 +1372,7 @@ class ViewerApi
         $_tempBody = null;
         if (isset($request->htmlOptions)) {
             if (is_string($request->htmlOptions)) {
-                $_tempBody = "\"" . $request->htmlOptions . "\"";
+                $_tempBody = "\"" . $request->htmlOptions . "\"";   
             } else {
                 $_tempBody = $request->htmlOptions;
             }
@@ -1417,8 +1408,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -1471,12 +1464,13 @@ class ViewerApi
     public function htmlCreatePagesCacheFromContent(Requests\HtmlCreatePagesCacheFromContentRequest $request)
     {
         try {
-            list($response) = $this->htmlCreatePagesCacheFromContentWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlCreatePagesCacheFromContentWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlCreatePagesCacheFromContentWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlCreatePagesCacheFromContentWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -1533,6 +1527,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 201:
@@ -1554,7 +1549,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlCreatePagesCacheFromContentAsync(Requests\HtmlCreatePagesCacheFromContentRequest $request)
+    public function htmlCreatePagesCacheFromContentAsync(Requests\HtmlCreatePagesCacheFromContentRequest $request) 
     {
         return $this->htmlCreatePagesCacheFromContentAsyncWithHttpInfo($request)
             ->then(
@@ -1574,7 +1569,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlCreatePagesCacheFromContentAsyncWithHttpInfo(Requests\HtmlCreatePagesCacheFromContentRequest $request)
+    public function htmlCreatePagesCacheFromContentAsyncWithHttpInfo(Requests\HtmlCreatePagesCacheFromContentRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlPageCollection';
         $request = $this->HtmlCreatePagesCacheFromContentRequest($request);
@@ -1603,7 +1598,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -1613,13 +1608,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -1747,8 +1736,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -1801,12 +1792,13 @@ class ViewerApi
     public function htmlCreatePagesCacheFromUrl(Requests\HtmlCreatePagesCacheFromUrlRequest $request)
     {
         try {
-            list($response) = $this->htmlCreatePagesCacheFromUrlWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlCreatePagesCacheFromUrlWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlCreatePagesCacheFromUrlWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlCreatePagesCacheFromUrlWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -1863,6 +1855,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 201:
@@ -1884,7 +1877,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlCreatePagesCacheFromUrlAsync(Requests\HtmlCreatePagesCacheFromUrlRequest $request)
+    public function htmlCreatePagesCacheFromUrlAsync(Requests\HtmlCreatePagesCacheFromUrlRequest $request) 
     {
         return $this->htmlCreatePagesCacheFromUrlAsyncWithHttpInfo($request)
             ->then(
@@ -1904,7 +1897,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlCreatePagesCacheFromUrlAsyncWithHttpInfo(Requests\HtmlCreatePagesCacheFromUrlRequest $request)
+    public function htmlCreatePagesCacheFromUrlAsyncWithHttpInfo(Requests\HtmlCreatePagesCacheFromUrlRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlPageCollection';
         $request = $this->HtmlCreatePagesCacheFromUrlRequest($request);
@@ -1933,7 +1926,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -1943,13 +1936,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -2036,7 +2023,7 @@ class ViewerApi
         $_tempBody = null;
         if (isset($request->htmlOptions)) {
             if (is_string($request->htmlOptions)) {
-                $_tempBody = "\"" . $request->htmlOptions . "\"";
+                $_tempBody = "\"" . $request->htmlOptions . "\"";   
             } else {
                 $_tempBody = $request->htmlOptions;
             }
@@ -2072,8 +2059,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -2126,12 +2115,13 @@ class ViewerApi
     public function htmlCreatePdfFile(Requests\HtmlCreatePdfFileRequest $request)
     {
         try {
-            list($response) = $this->htmlCreatePdfFileWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlCreatePdfFileWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlCreatePdfFileWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlCreatePdfFileWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -2188,6 +2178,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 201:
@@ -2209,7 +2200,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlCreatePdfFileAsync(Requests\HtmlCreatePdfFileRequest $request)
+    public function htmlCreatePdfFileAsync(Requests\HtmlCreatePdfFileRequest $request) 
     {
         return $this->htmlCreatePdfFileAsyncWithHttpInfo($request)
             ->then(
@@ -2229,7 +2220,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlCreatePdfFileAsyncWithHttpInfo(Requests\HtmlCreatePdfFileRequest $request)
+    public function htmlCreatePdfFileAsyncWithHttpInfo(Requests\HtmlCreatePdfFileRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\PdfFileInfo';
         $request = $this->HtmlCreatePdfFileRequest($request);
@@ -2258,7 +2249,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -2268,13 +2259,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -2346,7 +2331,7 @@ class ViewerApi
         $_tempBody = null;
         if (isset($request->pdfFileOptions)) {
             if (is_string($request->pdfFileOptions)) {
-                $_tempBody = "\"" . $request->pdfFileOptions . "\"";
+                $_tempBody = "\"" . $request->pdfFileOptions . "\"";   
             } else {
                 $_tempBody = $request->pdfFileOptions;
             }
@@ -2382,8 +2367,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -2436,12 +2423,13 @@ class ViewerApi
     public function htmlCreatePdfFileFromContent(Requests\HtmlCreatePdfFileFromContentRequest $request)
     {
         try {
-            list($response) = $this->htmlCreatePdfFileFromContentWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlCreatePdfFileFromContentWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlCreatePdfFileFromContentWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlCreatePdfFileFromContentWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -2498,6 +2486,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 201:
@@ -2519,7 +2508,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlCreatePdfFileFromContentAsync(Requests\HtmlCreatePdfFileFromContentRequest $request)
+    public function htmlCreatePdfFileFromContentAsync(Requests\HtmlCreatePdfFileFromContentRequest $request) 
     {
         return $this->htmlCreatePdfFileFromContentAsyncWithHttpInfo($request)
             ->then(
@@ -2539,7 +2528,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlCreatePdfFileFromContentAsyncWithHttpInfo(Requests\HtmlCreatePdfFileFromContentRequest $request)
+    public function htmlCreatePdfFileFromContentAsyncWithHttpInfo(Requests\HtmlCreatePdfFileFromContentRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\PdfFileInfo';
         $request = $this->HtmlCreatePdfFileFromContentRequest($request);
@@ -2568,7 +2557,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -2578,13 +2567,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -2712,8 +2695,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -2766,12 +2751,13 @@ class ViewerApi
     public function htmlCreatePdfFileFromUrl(Requests\HtmlCreatePdfFileFromUrlRequest $request)
     {
         try {
-            list($response) = $this->htmlCreatePdfFileFromUrlWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlCreatePdfFileFromUrlWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlCreatePdfFileFromUrlWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlCreatePdfFileFromUrlWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -2828,6 +2814,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 201:
@@ -2849,7 +2836,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlCreatePdfFileFromUrlAsync(Requests\HtmlCreatePdfFileFromUrlRequest $request)
+    public function htmlCreatePdfFileFromUrlAsync(Requests\HtmlCreatePdfFileFromUrlRequest $request) 
     {
         return $this->htmlCreatePdfFileFromUrlAsyncWithHttpInfo($request)
             ->then(
@@ -2869,7 +2856,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlCreatePdfFileFromUrlAsyncWithHttpInfo(Requests\HtmlCreatePdfFileFromUrlRequest $request)
+    public function htmlCreatePdfFileFromUrlAsyncWithHttpInfo(Requests\HtmlCreatePdfFileFromUrlRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\PdfFileInfo';
         $request = $this->HtmlCreatePdfFileFromUrlRequest($request);
@@ -2898,7 +2885,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -2908,13 +2895,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -3001,7 +2982,7 @@ class ViewerApi
         $_tempBody = null;
         if (isset($request->pdfFileOptions)) {
             if (is_string($request->pdfFileOptions)) {
-                $_tempBody = "\"" . $request->pdfFileOptions . "\"";
+                $_tempBody = "\"" . $request->pdfFileOptions . "\"";   
             } else {
                 $_tempBody = $request->pdfFileOptions;
             }
@@ -3037,8 +3018,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -3091,10 +3074,11 @@ class ViewerApi
     public function htmlDeleteAttachmentPagesCache(Requests\HtmlDeleteAttachmentPagesCacheRequest $request)
     {
         try {
-            $this->htmlDeleteAttachmentPagesCacheWithHttpInfo($request);
-        } catch (RepeatRequestException $e) {
-            $this->htmlDeleteAttachmentPagesCacheWithHttpInfo($request);
+             $this->htmlDeleteAttachmentPagesCacheWithHttpInfo($request);
         }
+        catch(RepeatRequestException $e) {
+             $this->htmlDeleteAttachmentPagesCacheWithHttpInfo($request);
+        } 
     }
 
     /*
@@ -3133,6 +3117,7 @@ class ViewerApi
             }
 
             return [null, $statusCode, $response->getHeaders()];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
@@ -3150,7 +3135,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlDeleteAttachmentPagesCacheAsync(Requests\HtmlDeleteAttachmentPagesCacheRequest $request)
+    public function htmlDeleteAttachmentPagesCacheAsync(Requests\HtmlDeleteAttachmentPagesCacheRequest $request) 
     {
         return $this->htmlDeleteAttachmentPagesCacheAsyncWithHttpInfo($request)
             ->then(
@@ -3170,7 +3155,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlDeleteAttachmentPagesCacheAsyncWithHttpInfo(Requests\HtmlDeleteAttachmentPagesCacheRequest $request)
+    public function htmlDeleteAttachmentPagesCacheAsyncWithHttpInfo(Requests\HtmlDeleteAttachmentPagesCacheRequest $request) 
     {
         $returnType = '';
         $request = $this->HtmlDeleteAttachmentPagesCacheRequest($request);
@@ -3181,7 +3166,7 @@ class ViewerApi
                 function ($response) use ($returnType) {
                     return [null, $response->getStatusCode(), $response->getHeaders()];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -3191,13 +3176,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -3297,8 +3276,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -3351,10 +3332,11 @@ class ViewerApi
     public function htmlDeletePagesCache(Requests\HtmlDeletePagesCacheRequest $request)
     {
         try {
-            $this->htmlDeletePagesCacheWithHttpInfo($request);
-        } catch (RepeatRequestException $e) {
-            $this->htmlDeletePagesCacheWithHttpInfo($request);
+             $this->htmlDeletePagesCacheWithHttpInfo($request);
         }
+        catch(RepeatRequestException $e) {
+             $this->htmlDeletePagesCacheWithHttpInfo($request);
+        } 
     }
 
     /*
@@ -3393,6 +3375,7 @@ class ViewerApi
             }
 
             return [null, $statusCode, $response->getHeaders()];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
@@ -3410,7 +3393,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlDeletePagesCacheAsync(Requests\HtmlDeletePagesCacheRequest $request)
+    public function htmlDeletePagesCacheAsync(Requests\HtmlDeletePagesCacheRequest $request) 
     {
         return $this->htmlDeletePagesCacheAsyncWithHttpInfo($request)
             ->then(
@@ -3430,7 +3413,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlDeletePagesCacheAsyncWithHttpInfo(Requests\HtmlDeletePagesCacheRequest $request)
+    public function htmlDeletePagesCacheAsyncWithHttpInfo(Requests\HtmlDeletePagesCacheRequest $request) 
     {
         $returnType = '';
         $request = $this->HtmlDeletePagesCacheRequest($request);
@@ -3441,7 +3424,7 @@ class ViewerApi
                 function ($response) use ($returnType) {
                     return [null, $response->getStatusCode(), $response->getHeaders()];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -3451,13 +3434,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -3548,8 +3525,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -3602,12 +3581,13 @@ class ViewerApi
     public function htmlGetAttachment(Requests\HtmlGetAttachmentRequest $request)
     {
         try {
-            list($response) = $this->htmlGetAttachmentWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlGetAttachmentWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlGetAttachmentWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlGetAttachmentWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -3664,6 +3644,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -3685,7 +3666,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetAttachmentAsync(Requests\HtmlGetAttachmentRequest $request)
+    public function htmlGetAttachmentAsync(Requests\HtmlGetAttachmentRequest $request) 
     {
         return $this->htmlGetAttachmentAsyncWithHttpInfo($request)
             ->then(
@@ -3705,7 +3686,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetAttachmentAsyncWithHttpInfo(Requests\HtmlGetAttachmentRequest $request)
+    public function htmlGetAttachmentAsyncWithHttpInfo(Requests\HtmlGetAttachmentRequest $request) 
     {
         $returnType = '\SplFileObject';
         $request = $this->HtmlGetAttachmentRequest($request);
@@ -3734,7 +3715,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -3744,13 +3725,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -3860,8 +3835,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -3914,12 +3891,13 @@ class ViewerApi
     public function htmlGetAttachmentInfo(Requests\HtmlGetAttachmentInfoRequest $request)
     {
         try {
-            list($response) = $this->htmlGetAttachmentInfoWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlGetAttachmentInfoWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlGetAttachmentInfoWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlGetAttachmentInfoWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -3976,6 +3954,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -3997,7 +3976,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetAttachmentInfoAsync(Requests\HtmlGetAttachmentInfoRequest $request)
+    public function htmlGetAttachmentInfoAsync(Requests\HtmlGetAttachmentInfoRequest $request) 
     {
         return $this->htmlGetAttachmentInfoAsyncWithHttpInfo($request)
             ->then(
@@ -4017,7 +3996,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetAttachmentInfoAsyncWithHttpInfo(Requests\HtmlGetAttachmentInfoRequest $request)
+    public function htmlGetAttachmentInfoAsyncWithHttpInfo(Requests\HtmlGetAttachmentInfoRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
         $request = $this->HtmlGetAttachmentInfoRequest($request);
@@ -4046,7 +4025,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -4056,13 +4035,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -4182,8 +4155,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -4236,12 +4211,13 @@ class ViewerApi
     public function htmlGetAttachmentInfoWithOptions(Requests\HtmlGetAttachmentInfoWithOptionsRequest $request)
     {
         try {
-            list($response) = $this->htmlGetAttachmentInfoWithOptionsWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlGetAttachmentInfoWithOptionsWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlGetAttachmentInfoWithOptionsWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlGetAttachmentInfoWithOptionsWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -4298,6 +4274,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -4319,7 +4296,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetAttachmentInfoWithOptionsAsync(Requests\HtmlGetAttachmentInfoWithOptionsRequest $request)
+    public function htmlGetAttachmentInfoWithOptionsAsync(Requests\HtmlGetAttachmentInfoWithOptionsRequest $request) 
     {
         return $this->htmlGetAttachmentInfoWithOptionsAsyncWithHttpInfo($request)
             ->then(
@@ -4339,7 +4316,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetAttachmentInfoWithOptionsAsyncWithHttpInfo(Requests\HtmlGetAttachmentInfoWithOptionsRequest $request)
+    public function htmlGetAttachmentInfoWithOptionsAsyncWithHttpInfo(Requests\HtmlGetAttachmentInfoWithOptionsRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
         $request = $this->HtmlGetAttachmentInfoWithOptionsRequest($request);
@@ -4368,7 +4345,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -4378,13 +4355,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -4455,7 +4426,7 @@ class ViewerApi
         $_tempBody = null;
         if (isset($request->documentInfoOptions)) {
             if (is_string($request->documentInfoOptions)) {
-                $_tempBody = "\"" . $request->documentInfoOptions . "\"";
+                $_tempBody = "\"" . $request->documentInfoOptions . "\"";   
             } else {
                 $_tempBody = $request->documentInfoOptions;
             }
@@ -4491,8 +4462,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -4545,12 +4518,13 @@ class ViewerApi
     public function htmlGetAttachmentPage(Requests\HtmlGetAttachmentPageRequest $request)
     {
         try {
-            list($response) = $this->htmlGetAttachmentPageWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlGetAttachmentPageWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlGetAttachmentPageWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlGetAttachmentPageWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -4607,6 +4581,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -4628,7 +4603,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetAttachmentPageAsync(Requests\HtmlGetAttachmentPageRequest $request)
+    public function htmlGetAttachmentPageAsync(Requests\HtmlGetAttachmentPageRequest $request) 
     {
         return $this->htmlGetAttachmentPageAsyncWithHttpInfo($request)
             ->then(
@@ -4648,7 +4623,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetAttachmentPageAsyncWithHttpInfo(Requests\HtmlGetAttachmentPageRequest $request)
+    public function htmlGetAttachmentPageAsyncWithHttpInfo(Requests\HtmlGetAttachmentPageRequest $request) 
     {
         $returnType = '\SplFileObject';
         $request = $this->HtmlGetAttachmentPageRequest($request);
@@ -4677,7 +4652,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -4687,13 +4662,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -4789,16 +4758,6 @@ class ViewerApi
         if ($request->enableResponsiveRendering !== null) {
             $localName = lcfirst('EnableResponsiveRendering');
             $localValue = is_bool($request->enableResponsiveRendering) ? ($request->enableResponsiveRendering ? 'true' : 'false') : $request->enableResponsiveRendering;
-            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
-                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
-            } else {
-                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
-            }
-        }
-        // query params
-        if ($request->excludeFonts !== null) {
-            $localName = lcfirst('ExcludeFonts');
-            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
             if (strpos($resourcePath, '{' . $localName . '}') !== false) {
                 $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
             } else {
@@ -4922,8 +4881,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -4976,12 +4937,13 @@ class ViewerApi
     public function htmlGetAttachmentPageResource(Requests\HtmlGetAttachmentPageResourceRequest $request)
     {
         try {
-            list($response) = $this->htmlGetAttachmentPageResourceWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlGetAttachmentPageResourceWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlGetAttachmentPageResourceWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlGetAttachmentPageResourceWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -5038,6 +5000,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -5059,7 +5022,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetAttachmentPageResourceAsync(Requests\HtmlGetAttachmentPageResourceRequest $request)
+    public function htmlGetAttachmentPageResourceAsync(Requests\HtmlGetAttachmentPageResourceRequest $request) 
     {
         return $this->htmlGetAttachmentPageResourceAsyncWithHttpInfo($request)
             ->then(
@@ -5079,7 +5042,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetAttachmentPageResourceAsyncWithHttpInfo(Requests\HtmlGetAttachmentPageResourceRequest $request)
+    public function htmlGetAttachmentPageResourceAsyncWithHttpInfo(Requests\HtmlGetAttachmentPageResourceRequest $request) 
     {
         $returnType = '\SplFileObject';
         $request = $this->HtmlGetAttachmentPageResourceRequest($request);
@@ -5108,7 +5071,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -5118,13 +5081,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -5242,8 +5199,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -5296,12 +5255,13 @@ class ViewerApi
     public function htmlGetAttachmentPages(Requests\HtmlGetAttachmentPagesRequest $request)
     {
         try {
-            list($response) = $this->htmlGetAttachmentPagesWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlGetAttachmentPagesWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlGetAttachmentPagesWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlGetAttachmentPagesWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -5358,6 +5318,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -5379,7 +5340,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetAttachmentPagesAsync(Requests\HtmlGetAttachmentPagesRequest $request)
+    public function htmlGetAttachmentPagesAsync(Requests\HtmlGetAttachmentPagesRequest $request) 
     {
         return $this->htmlGetAttachmentPagesAsyncWithHttpInfo($request)
             ->then(
@@ -5399,7 +5360,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetAttachmentPagesAsyncWithHttpInfo(Requests\HtmlGetAttachmentPagesRequest $request)
+    public function htmlGetAttachmentPagesAsyncWithHttpInfo(Requests\HtmlGetAttachmentPagesRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlAttachmentPageCollection';
         $request = $this->HtmlGetAttachmentPagesRequest($request);
@@ -5428,7 +5389,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -5438,13 +5399,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -5531,16 +5486,6 @@ class ViewerApi
         if ($request->enableResponsiveRendering !== null) {
             $localName = lcfirst('EnableResponsiveRendering');
             $localValue = is_bool($request->enableResponsiveRendering) ? ($request->enableResponsiveRendering ? 'true' : 'false') : $request->enableResponsiveRendering;
-            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
-                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
-            } else {
-                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
-            }
-        }
-        // query params
-        if ($request->excludeFonts !== null) {
-            $localName = lcfirst('ExcludeFonts');
-            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
             if (strpos($resourcePath, '{' . $localName . '}') !== false) {
                 $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
             } else {
@@ -5684,8 +5629,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -5738,12 +5685,13 @@ class ViewerApi
     public function htmlGetAttachments(Requests\HtmlGetAttachmentsRequest $request)
     {
         try {
-            list($response) = $this->htmlGetAttachmentsWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlGetAttachmentsWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlGetAttachmentsWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlGetAttachmentsWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -5800,6 +5748,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -5821,7 +5770,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetAttachmentsAsync(Requests\HtmlGetAttachmentsRequest $request)
+    public function htmlGetAttachmentsAsync(Requests\HtmlGetAttachmentsRequest $request) 
     {
         return $this->htmlGetAttachmentsAsyncWithHttpInfo($request)
             ->then(
@@ -5841,7 +5790,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetAttachmentsAsyncWithHttpInfo(Requests\HtmlGetAttachmentsRequest $request)
+    public function htmlGetAttachmentsAsyncWithHttpInfo(Requests\HtmlGetAttachmentsRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\AttachmentCollection';
         $request = $this->HtmlGetAttachmentsRequest($request);
@@ -5870,7 +5819,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -5880,13 +5829,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -5987,8 +5930,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -6041,12 +5986,13 @@ class ViewerApi
     public function htmlGetDocumentInfo(Requests\HtmlGetDocumentInfoRequest $request)
     {
         try {
-            list($response) = $this->htmlGetDocumentInfoWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlGetDocumentInfoWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlGetDocumentInfoWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlGetDocumentInfoWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -6103,6 +6049,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -6124,7 +6071,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetDocumentInfoAsync(Requests\HtmlGetDocumentInfoRequest $request)
+    public function htmlGetDocumentInfoAsync(Requests\HtmlGetDocumentInfoRequest $request) 
     {
         return $this->htmlGetDocumentInfoAsyncWithHttpInfo($request)
             ->then(
@@ -6144,7 +6091,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetDocumentInfoAsyncWithHttpInfo(Requests\HtmlGetDocumentInfoRequest $request)
+    public function htmlGetDocumentInfoAsyncWithHttpInfo(Requests\HtmlGetDocumentInfoRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
         $request = $this->HtmlGetDocumentInfoRequest($request);
@@ -6173,7 +6120,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -6183,13 +6130,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -6310,8 +6251,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -6364,12 +6307,13 @@ class ViewerApi
     public function htmlGetDocumentInfoFromContent(Requests\HtmlGetDocumentInfoFromContentRequest $request)
     {
         try {
-            list($response) = $this->htmlGetDocumentInfoFromContentWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlGetDocumentInfoFromContentWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlGetDocumentInfoFromContentWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlGetDocumentInfoFromContentWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -6426,6 +6370,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -6447,7 +6392,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetDocumentInfoFromContentAsync(Requests\HtmlGetDocumentInfoFromContentRequest $request)
+    public function htmlGetDocumentInfoFromContentAsync(Requests\HtmlGetDocumentInfoFromContentRequest $request) 
     {
         return $this->htmlGetDocumentInfoFromContentAsyncWithHttpInfo($request)
             ->then(
@@ -6467,7 +6412,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetDocumentInfoFromContentAsyncWithHttpInfo(Requests\HtmlGetDocumentInfoFromContentRequest $request)
+    public function htmlGetDocumentInfoFromContentAsyncWithHttpInfo(Requests\HtmlGetDocumentInfoFromContentRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
         $request = $this->HtmlGetDocumentInfoFromContentRequest($request);
@@ -6496,7 +6441,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -6506,13 +6451,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -6630,8 +6569,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -6684,12 +6625,13 @@ class ViewerApi
     public function htmlGetDocumentInfoFromUrl(Requests\HtmlGetDocumentInfoFromUrlRequest $request)
     {
         try {
-            list($response) = $this->htmlGetDocumentInfoFromUrlWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlGetDocumentInfoFromUrlWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlGetDocumentInfoFromUrlWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlGetDocumentInfoFromUrlWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -6746,6 +6688,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -6767,7 +6710,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetDocumentInfoFromUrlAsync(Requests\HtmlGetDocumentInfoFromUrlRequest $request)
+    public function htmlGetDocumentInfoFromUrlAsync(Requests\HtmlGetDocumentInfoFromUrlRequest $request) 
     {
         return $this->htmlGetDocumentInfoFromUrlAsyncWithHttpInfo($request)
             ->then(
@@ -6787,7 +6730,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetDocumentInfoFromUrlAsyncWithHttpInfo(Requests\HtmlGetDocumentInfoFromUrlRequest $request)
+    public function htmlGetDocumentInfoFromUrlAsyncWithHttpInfo(Requests\HtmlGetDocumentInfoFromUrlRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
         $request = $this->HtmlGetDocumentInfoFromUrlRequest($request);
@@ -6816,7 +6759,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -6826,13 +6769,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -6968,8 +6905,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -7022,12 +6961,13 @@ class ViewerApi
     public function htmlGetDocumentInfoFromUrlWithOptions(Requests\HtmlGetDocumentInfoFromUrlWithOptionsRequest $request)
     {
         try {
-            list($response) = $this->htmlGetDocumentInfoFromUrlWithOptionsWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlGetDocumentInfoFromUrlWithOptionsWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlGetDocumentInfoFromUrlWithOptionsWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlGetDocumentInfoFromUrlWithOptionsWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -7084,6 +7024,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -7105,7 +7046,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetDocumentInfoFromUrlWithOptionsAsync(Requests\HtmlGetDocumentInfoFromUrlWithOptionsRequest $request)
+    public function htmlGetDocumentInfoFromUrlWithOptionsAsync(Requests\HtmlGetDocumentInfoFromUrlWithOptionsRequest $request) 
     {
         return $this->htmlGetDocumentInfoFromUrlWithOptionsAsyncWithHttpInfo($request)
             ->then(
@@ -7125,7 +7066,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetDocumentInfoFromUrlWithOptionsAsyncWithHttpInfo(Requests\HtmlGetDocumentInfoFromUrlWithOptionsRequest $request)
+    public function htmlGetDocumentInfoFromUrlWithOptionsAsyncWithHttpInfo(Requests\HtmlGetDocumentInfoFromUrlWithOptionsRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
         $request = $this->HtmlGetDocumentInfoFromUrlWithOptionsRequest($request);
@@ -7154,7 +7095,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -7164,13 +7105,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -7247,7 +7182,7 @@ class ViewerApi
         $_tempBody = null;
         if (isset($request->documentInfoOptions)) {
             if (is_string($request->documentInfoOptions)) {
-                $_tempBody = "\"" . $request->documentInfoOptions . "\"";
+                $_tempBody = "\"" . $request->documentInfoOptions . "\"";   
             } else {
                 $_tempBody = $request->documentInfoOptions;
             }
@@ -7283,8 +7218,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -7337,12 +7274,13 @@ class ViewerApi
     public function htmlGetDocumentInfoWithOptions(Requests\HtmlGetDocumentInfoWithOptionsRequest $request)
     {
         try {
-            list($response) = $this->htmlGetDocumentInfoWithOptionsWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlGetDocumentInfoWithOptionsWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlGetDocumentInfoWithOptionsWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlGetDocumentInfoWithOptionsWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -7399,6 +7337,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -7420,7 +7359,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetDocumentInfoWithOptionsAsync(Requests\HtmlGetDocumentInfoWithOptionsRequest $request)
+    public function htmlGetDocumentInfoWithOptionsAsync(Requests\HtmlGetDocumentInfoWithOptionsRequest $request) 
     {
         return $this->htmlGetDocumentInfoWithOptionsAsyncWithHttpInfo($request)
             ->then(
@@ -7440,7 +7379,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetDocumentInfoWithOptionsAsyncWithHttpInfo(Requests\HtmlGetDocumentInfoWithOptionsRequest $request)
+    public function htmlGetDocumentInfoWithOptionsAsyncWithHttpInfo(Requests\HtmlGetDocumentInfoWithOptionsRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
         $request = $this->HtmlGetDocumentInfoWithOptionsRequest($request);
@@ -7469,7 +7408,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -7479,13 +7418,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -7547,7 +7480,7 @@ class ViewerApi
         $_tempBody = null;
         if (isset($request->documentInfoOptions)) {
             if (is_string($request->documentInfoOptions)) {
-                $_tempBody = "\"" . $request->documentInfoOptions . "\"";
+                $_tempBody = "\"" . $request->documentInfoOptions . "\"";   
             } else {
                 $_tempBody = $request->documentInfoOptions;
             }
@@ -7583,8 +7516,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -7637,12 +7572,13 @@ class ViewerApi
     public function htmlGetPage(Requests\HtmlGetPageRequest $request)
     {
         try {
-            list($response) = $this->htmlGetPageWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlGetPageWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlGetPageWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlGetPageWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -7699,6 +7635,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -7720,7 +7657,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetPageAsync(Requests\HtmlGetPageRequest $request)
+    public function htmlGetPageAsync(Requests\HtmlGetPageRequest $request) 
     {
         return $this->htmlGetPageAsyncWithHttpInfo($request)
             ->then(
@@ -7740,7 +7677,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetPageAsyncWithHttpInfo(Requests\HtmlGetPageRequest $request)
+    public function htmlGetPageAsyncWithHttpInfo(Requests\HtmlGetPageRequest $request) 
     {
         $returnType = '\SplFileObject';
         $request = $this->HtmlGetPageRequest($request);
@@ -7769,7 +7706,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -7779,13 +7716,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -7872,16 +7803,6 @@ class ViewerApi
         if ($request->enableResponsiveRendering !== null) {
             $localName = lcfirst('EnableResponsiveRendering');
             $localValue = is_bool($request->enableResponsiveRendering) ? ($request->enableResponsiveRendering ? 'true' : 'false') : $request->enableResponsiveRendering;
-            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
-                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
-            } else {
-                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
-            }
-        }
-        // query params
-        if ($request->excludeFonts !== null) {
-            $localName = lcfirst('ExcludeFonts');
-            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
             if (strpos($resourcePath, '{' . $localName . '}') !== false) {
                 $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
             } else {
@@ -7995,8 +7916,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -8049,12 +7972,13 @@ class ViewerApi
     public function htmlGetPageResource(Requests\HtmlGetPageResourceRequest $request)
     {
         try {
-            list($response) = $this->htmlGetPageResourceWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlGetPageResourceWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlGetPageResourceWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlGetPageResourceWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -8111,6 +8035,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -8132,7 +8057,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetPageResourceAsync(Requests\HtmlGetPageResourceRequest $request)
+    public function htmlGetPageResourceAsync(Requests\HtmlGetPageResourceRequest $request) 
     {
         return $this->htmlGetPageResourceAsyncWithHttpInfo($request)
             ->then(
@@ -8152,7 +8077,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetPageResourceAsyncWithHttpInfo(Requests\HtmlGetPageResourceRequest $request)
+    public function htmlGetPageResourceAsyncWithHttpInfo(Requests\HtmlGetPageResourceRequest $request) 
     {
         $returnType = '\SplFileObject';
         $request = $this->HtmlGetPageResourceRequest($request);
@@ -8181,7 +8106,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -8191,13 +8116,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -8306,8 +8225,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -8360,12 +8281,13 @@ class ViewerApi
     public function htmlGetPages(Requests\HtmlGetPagesRequest $request)
     {
         try {
-            list($response) = $this->htmlGetPagesWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlGetPagesWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlGetPagesWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlGetPagesWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -8422,6 +8344,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -8443,7 +8366,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetPagesAsync(Requests\HtmlGetPagesRequest $request)
+    public function htmlGetPagesAsync(Requests\HtmlGetPagesRequest $request) 
     {
         return $this->htmlGetPagesAsyncWithHttpInfo($request)
             ->then(
@@ -8463,7 +8386,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetPagesAsyncWithHttpInfo(Requests\HtmlGetPagesRequest $request)
+    public function htmlGetPagesAsyncWithHttpInfo(Requests\HtmlGetPagesRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlPageCollection';
         $request = $this->HtmlGetPagesRequest($request);
@@ -8492,7 +8415,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -8502,13 +8425,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -8586,16 +8503,6 @@ class ViewerApi
         if ($request->enableResponsiveRendering !== null) {
             $localName = lcfirst('EnableResponsiveRendering');
             $localValue = is_bool($request->enableResponsiveRendering) ? ($request->enableResponsiveRendering ? 'true' : 'false') : $request->enableResponsiveRendering;
-            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
-                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
-            } else {
-                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
-            }
-        }
-        // query params
-        if ($request->excludeFonts !== null) {
-            $localName = lcfirst('ExcludeFonts');
-            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
             if (strpos($resourcePath, '{' . $localName . '}') !== false) {
                 $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
             } else {
@@ -8729,8 +8636,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -8783,12 +8692,13 @@ class ViewerApi
     public function htmlGetPagesFromUrl(Requests\HtmlGetPagesFromUrlRequest $request)
     {
         try {
-            list($response) = $this->htmlGetPagesFromUrlWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlGetPagesFromUrlWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlGetPagesFromUrlWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlGetPagesFromUrlWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -8845,6 +8755,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -8866,7 +8777,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetPagesFromUrlAsync(Requests\HtmlGetPagesFromUrlRequest $request)
+    public function htmlGetPagesFromUrlAsync(Requests\HtmlGetPagesFromUrlRequest $request) 
     {
         return $this->htmlGetPagesFromUrlAsyncWithHttpInfo($request)
             ->then(
@@ -8886,7 +8797,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetPagesFromUrlAsyncWithHttpInfo(Requests\HtmlGetPagesFromUrlRequest $request)
+    public function htmlGetPagesFromUrlAsyncWithHttpInfo(Requests\HtmlGetPagesFromUrlRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlPageCollection';
         $request = $this->HtmlGetPagesFromUrlRequest($request);
@@ -8915,7 +8826,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -8925,13 +8836,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -9031,16 +8936,6 @@ class ViewerApi
             }
         }
         // query params
-        if ($request->excludeFonts !== null) {
-            $localName = lcfirst('ExcludeFonts');
-            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
-            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
-                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
-            } else {
-                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
-            }
-        }
-        // query params
         if ($request->startPageNumber !== null) {
             $localName = lcfirst('StartPageNumber');
             $localValue = is_bool($request->startPageNumber) ? ($request->startPageNumber ? 'true' : 'false') : $request->startPageNumber;
@@ -9167,8 +9062,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -9221,12 +9118,13 @@ class ViewerApi
     public function htmlGetPdfFile(Requests\HtmlGetPdfFileRequest $request)
     {
         try {
-            list($response) = $this->htmlGetPdfFileWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlGetPdfFileWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlGetPdfFileWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlGetPdfFileWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -9283,6 +9181,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -9304,7 +9203,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetPdfFileAsync(Requests\HtmlGetPdfFileRequest $request)
+    public function htmlGetPdfFileAsync(Requests\HtmlGetPdfFileRequest $request) 
     {
         return $this->htmlGetPdfFileAsyncWithHttpInfo($request)
             ->then(
@@ -9324,7 +9223,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetPdfFileAsyncWithHttpInfo(Requests\HtmlGetPdfFileRequest $request)
+    public function htmlGetPdfFileAsyncWithHttpInfo(Requests\HtmlGetPdfFileRequest $request) 
     {
         $returnType = '\SplFileObject';
         $request = $this->HtmlGetPdfFileRequest($request);
@@ -9353,7 +9252,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -9363,13 +9262,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -9510,8 +9403,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -9564,12 +9459,13 @@ class ViewerApi
     public function htmlGetPdfFileFromUrl(Requests\HtmlGetPdfFileFromUrlRequest $request)
     {
         try {
-            list($response) = $this->htmlGetPdfFileFromUrlWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlGetPdfFileFromUrlWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlGetPdfFileFromUrlWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlGetPdfFileFromUrlWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -9626,6 +9522,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -9647,7 +9544,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetPdfFileFromUrlAsync(Requests\HtmlGetPdfFileFromUrlRequest $request)
+    public function htmlGetPdfFileFromUrlAsync(Requests\HtmlGetPdfFileFromUrlRequest $request) 
     {
         return $this->htmlGetPdfFileFromUrlAsyncWithHttpInfo($request)
             ->then(
@@ -9667,7 +9564,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetPdfFileFromUrlAsyncWithHttpInfo(Requests\HtmlGetPdfFileFromUrlRequest $request)
+    public function htmlGetPdfFileFromUrlAsyncWithHttpInfo(Requests\HtmlGetPdfFileFromUrlRequest $request) 
     {
         $returnType = '\SplFileObject';
         $request = $this->HtmlGetPdfFileFromUrlRequest($request);
@@ -9696,7 +9593,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -9706,13 +9603,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -9868,8 +9759,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -9922,12 +9815,13 @@ class ViewerApi
     public function htmlGetZipWithAttachmentPages(Requests\HtmlGetZipWithAttachmentPagesRequest $request)
     {
         try {
-            list($response) = $this->htmlGetZipWithAttachmentPagesWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlGetZipWithAttachmentPagesWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlGetZipWithAttachmentPagesWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlGetZipWithAttachmentPagesWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -9984,6 +9878,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -10005,7 +9900,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetZipWithAttachmentPagesAsync(Requests\HtmlGetZipWithAttachmentPagesRequest $request)
+    public function htmlGetZipWithAttachmentPagesAsync(Requests\HtmlGetZipWithAttachmentPagesRequest $request) 
     {
         return $this->htmlGetZipWithAttachmentPagesAsyncWithHttpInfo($request)
             ->then(
@@ -10025,7 +9920,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetZipWithAttachmentPagesAsyncWithHttpInfo(Requests\HtmlGetZipWithAttachmentPagesRequest $request)
+    public function htmlGetZipWithAttachmentPagesAsyncWithHttpInfo(Requests\HtmlGetZipWithAttachmentPagesRequest $request) 
     {
         $returnType = '\SplFileObject';
         $request = $this->HtmlGetZipWithAttachmentPagesRequest($request);
@@ -10054,7 +9949,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -10064,13 +9959,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -10157,16 +10046,6 @@ class ViewerApi
         if ($request->enableResponsiveRendering !== null) {
             $localName = lcfirst('EnableResponsiveRendering');
             $localValue = is_bool($request->enableResponsiveRendering) ? ($request->enableResponsiveRendering ? 'true' : 'false') : $request->enableResponsiveRendering;
-            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
-                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
-            } else {
-                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
-            }
-        }
-        // query params
-        if ($request->excludeFonts !== null) {
-            $localName = lcfirst('ExcludeFonts');
-            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
             if (strpos($resourcePath, '{' . $localName . '}') !== false) {
                 $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
             } else {
@@ -10310,8 +10189,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -10364,12 +10245,13 @@ class ViewerApi
     public function htmlGetZipWithPages(Requests\HtmlGetZipWithPagesRequest $request)
     {
         try {
-            list($response) = $this->htmlGetZipWithPagesWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlGetZipWithPagesWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlGetZipWithPagesWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlGetZipWithPagesWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -10426,6 +10308,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -10447,7 +10330,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetZipWithPagesAsync(Requests\HtmlGetZipWithPagesRequest $request)
+    public function htmlGetZipWithPagesAsync(Requests\HtmlGetZipWithPagesRequest $request) 
     {
         return $this->htmlGetZipWithPagesAsyncWithHttpInfo($request)
             ->then(
@@ -10467,7 +10350,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlGetZipWithPagesAsyncWithHttpInfo(Requests\HtmlGetZipWithPagesRequest $request)
+    public function htmlGetZipWithPagesAsyncWithHttpInfo(Requests\HtmlGetZipWithPagesRequest $request) 
     {
         $returnType = '\SplFileObject';
         $request = $this->HtmlGetZipWithPagesRequest($request);
@@ -10496,7 +10379,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -10506,13 +10389,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -10590,16 +10467,6 @@ class ViewerApi
         if ($request->enableResponsiveRendering !== null) {
             $localName = lcfirst('EnableResponsiveRendering');
             $localValue = is_bool($request->enableResponsiveRendering) ? ($request->enableResponsiveRendering ? 'true' : 'false') : $request->enableResponsiveRendering;
-            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
-                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
-            } else {
-                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
-            }
-        }
-        // query params
-        if ($request->excludeFonts !== null) {
-            $localName = lcfirst('ExcludeFonts');
-            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
             if (strpos($resourcePath, '{' . $localName . '}') !== false) {
                 $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
             } else {
@@ -10733,8 +10600,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -10787,12 +10656,13 @@ class ViewerApi
     public function htmlTransformPages(Requests\HtmlTransformPagesRequest $request)
     {
         try {
-            list($response) = $this->htmlTransformPagesWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->htmlTransformPagesWithHttpInfo($request);
-            return $response;
+             list($response) = $this->htmlTransformPagesWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->htmlTransformPagesWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -10849,6 +10719,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -10870,7 +10741,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlTransformPagesAsync(Requests\HtmlTransformPagesRequest $request)
+    public function htmlTransformPagesAsync(Requests\HtmlTransformPagesRequest $request) 
     {
         return $this->htmlTransformPagesAsyncWithHttpInfo($request)
             ->then(
@@ -10890,7 +10761,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function htmlTransformPagesAsyncWithHttpInfo(Requests\HtmlTransformPagesRequest $request)
+    public function htmlTransformPagesAsyncWithHttpInfo(Requests\HtmlTransformPagesRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\PageInfoCollection';
         $request = $this->HtmlTransformPagesRequest($request);
@@ -10919,7 +10790,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -10929,13 +10800,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -10997,7 +10862,7 @@ class ViewerApi
         $_tempBody = null;
         if (isset($request->transformOptions)) {
             if (is_string($request->transformOptions)) {
-                $_tempBody = "\"" . $request->transformOptions . "\"";
+                $_tempBody = "\"" . $request->transformOptions . "\"";   
             } else {
                 $_tempBody = $request->transformOptions;
             }
@@ -11033,8 +10898,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -11087,12 +10954,13 @@ class ViewerApi
     public function imageCreateAttachmentPagesCache(Requests\ImageCreateAttachmentPagesCacheRequest $request)
     {
         try {
-            list($response) = $this->imageCreateAttachmentPagesCacheWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageCreateAttachmentPagesCacheWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageCreateAttachmentPagesCacheWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageCreateAttachmentPagesCacheWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -11149,6 +11017,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 201:
@@ -11170,7 +11039,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageCreateAttachmentPagesCacheAsync(Requests\ImageCreateAttachmentPagesCacheRequest $request)
+    public function imageCreateAttachmentPagesCacheAsync(Requests\ImageCreateAttachmentPagesCacheRequest $request) 
     {
         return $this->imageCreateAttachmentPagesCacheAsyncWithHttpInfo($request)
             ->then(
@@ -11190,7 +11059,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageCreateAttachmentPagesCacheAsyncWithHttpInfo(Requests\ImageCreateAttachmentPagesCacheRequest $request)
+    public function imageCreateAttachmentPagesCacheAsyncWithHttpInfo(Requests\ImageCreateAttachmentPagesCacheRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\ImageAttachmentPageCollection';
         $request = $this->ImageCreateAttachmentPagesCacheRequest($request);
@@ -11219,7 +11088,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -11229,13 +11098,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -11316,7 +11179,7 @@ class ViewerApi
         $_tempBody = null;
         if (isset($request->imageOptions)) {
             if (is_string($request->imageOptions)) {
-                $_tempBody = "\"" . $request->imageOptions . "\"";
+                $_tempBody = "\"" . $request->imageOptions . "\"";   
             } else {
                 $_tempBody = $request->imageOptions;
             }
@@ -11352,8 +11215,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -11406,12 +11271,13 @@ class ViewerApi
     public function imageCreatePagesCache(Requests\ImageCreatePagesCacheRequest $request)
     {
         try {
-            list($response) = $this->imageCreatePagesCacheWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageCreatePagesCacheWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageCreatePagesCacheWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageCreatePagesCacheWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -11468,6 +11334,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 201:
@@ -11489,7 +11356,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageCreatePagesCacheAsync(Requests\ImageCreatePagesCacheRequest $request)
+    public function imageCreatePagesCacheAsync(Requests\ImageCreatePagesCacheRequest $request) 
     {
         return $this->imageCreatePagesCacheAsyncWithHttpInfo($request)
             ->then(
@@ -11509,7 +11376,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageCreatePagesCacheAsyncWithHttpInfo(Requests\ImageCreatePagesCacheRequest $request)
+    public function imageCreatePagesCacheAsyncWithHttpInfo(Requests\ImageCreatePagesCacheRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\ImagePageCollection';
         $request = $this->ImageCreatePagesCacheRequest($request);
@@ -11538,7 +11405,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -11548,13 +11415,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -11626,7 +11487,7 @@ class ViewerApi
         $_tempBody = null;
         if (isset($request->imageOptions)) {
             if (is_string($request->imageOptions)) {
-                $_tempBody = "\"" . $request->imageOptions . "\"";
+                $_tempBody = "\"" . $request->imageOptions . "\"";   
             } else {
                 $_tempBody = $request->imageOptions;
             }
@@ -11662,8 +11523,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -11716,12 +11579,13 @@ class ViewerApi
     public function imageCreatePagesCacheFromContent(Requests\ImageCreatePagesCacheFromContentRequest $request)
     {
         try {
-            list($response) = $this->imageCreatePagesCacheFromContentWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageCreatePagesCacheFromContentWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageCreatePagesCacheFromContentWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageCreatePagesCacheFromContentWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -11778,6 +11642,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 201:
@@ -11799,7 +11664,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageCreatePagesCacheFromContentAsync(Requests\ImageCreatePagesCacheFromContentRequest $request)
+    public function imageCreatePagesCacheFromContentAsync(Requests\ImageCreatePagesCacheFromContentRequest $request) 
     {
         return $this->imageCreatePagesCacheFromContentAsyncWithHttpInfo($request)
             ->then(
@@ -11819,7 +11684,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageCreatePagesCacheFromContentAsyncWithHttpInfo(Requests\ImageCreatePagesCacheFromContentRequest $request)
+    public function imageCreatePagesCacheFromContentAsyncWithHttpInfo(Requests\ImageCreatePagesCacheFromContentRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\ImagePageCollection';
         $request = $this->ImageCreatePagesCacheFromContentRequest($request);
@@ -11848,7 +11713,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -11858,13 +11723,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -11992,8 +11851,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -12046,12 +11907,13 @@ class ViewerApi
     public function imageCreatePagesCacheFromUrl(Requests\ImageCreatePagesCacheFromUrlRequest $request)
     {
         try {
-            list($response) = $this->imageCreatePagesCacheFromUrlWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageCreatePagesCacheFromUrlWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageCreatePagesCacheFromUrlWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageCreatePagesCacheFromUrlWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -12108,6 +11970,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 201:
@@ -12129,7 +11992,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageCreatePagesCacheFromUrlAsync(Requests\ImageCreatePagesCacheFromUrlRequest $request)
+    public function imageCreatePagesCacheFromUrlAsync(Requests\ImageCreatePagesCacheFromUrlRequest $request) 
     {
         return $this->imageCreatePagesCacheFromUrlAsyncWithHttpInfo($request)
             ->then(
@@ -12149,7 +12012,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageCreatePagesCacheFromUrlAsyncWithHttpInfo(Requests\ImageCreatePagesCacheFromUrlRequest $request)
+    public function imageCreatePagesCacheFromUrlAsyncWithHttpInfo(Requests\ImageCreatePagesCacheFromUrlRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\ImagePageCollection';
         $request = $this->ImageCreatePagesCacheFromUrlRequest($request);
@@ -12178,7 +12041,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -12188,13 +12051,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -12281,7 +12138,7 @@ class ViewerApi
         $_tempBody = null;
         if (isset($request->imageOptions)) {
             if (is_string($request->imageOptions)) {
-                $_tempBody = "\"" . $request->imageOptions . "\"";
+                $_tempBody = "\"" . $request->imageOptions . "\"";   
             } else {
                 $_tempBody = $request->imageOptions;
             }
@@ -12317,8 +12174,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -12371,12 +12230,13 @@ class ViewerApi
     public function imageCreatePdfFile(Requests\ImageCreatePdfFileRequest $request)
     {
         try {
-            list($response) = $this->imageCreatePdfFileWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageCreatePdfFileWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageCreatePdfFileWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageCreatePdfFileWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -12433,6 +12293,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 201:
@@ -12454,7 +12315,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageCreatePdfFileAsync(Requests\ImageCreatePdfFileRequest $request)
+    public function imageCreatePdfFileAsync(Requests\ImageCreatePdfFileRequest $request) 
     {
         return $this->imageCreatePdfFileAsyncWithHttpInfo($request)
             ->then(
@@ -12474,7 +12335,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageCreatePdfFileAsyncWithHttpInfo(Requests\ImageCreatePdfFileRequest $request)
+    public function imageCreatePdfFileAsyncWithHttpInfo(Requests\ImageCreatePdfFileRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\PdfFileInfo';
         $request = $this->ImageCreatePdfFileRequest($request);
@@ -12503,7 +12364,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -12513,13 +12374,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -12591,7 +12446,7 @@ class ViewerApi
         $_tempBody = null;
         if (isset($request->pdfFileOptions)) {
             if (is_string($request->pdfFileOptions)) {
-                $_tempBody = "\"" . $request->pdfFileOptions . "\"";
+                $_tempBody = "\"" . $request->pdfFileOptions . "\"";   
             } else {
                 $_tempBody = $request->pdfFileOptions;
             }
@@ -12627,8 +12482,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -12681,12 +12538,13 @@ class ViewerApi
     public function imageCreatePdfFileFromContent(Requests\ImageCreatePdfFileFromContentRequest $request)
     {
         try {
-            list($response) = $this->imageCreatePdfFileFromContentWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageCreatePdfFileFromContentWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageCreatePdfFileFromContentWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageCreatePdfFileFromContentWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -12743,6 +12601,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 201:
@@ -12764,7 +12623,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageCreatePdfFileFromContentAsync(Requests\ImageCreatePdfFileFromContentRequest $request)
+    public function imageCreatePdfFileFromContentAsync(Requests\ImageCreatePdfFileFromContentRequest $request) 
     {
         return $this->imageCreatePdfFileFromContentAsyncWithHttpInfo($request)
             ->then(
@@ -12784,7 +12643,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageCreatePdfFileFromContentAsyncWithHttpInfo(Requests\ImageCreatePdfFileFromContentRequest $request)
+    public function imageCreatePdfFileFromContentAsyncWithHttpInfo(Requests\ImageCreatePdfFileFromContentRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\PdfFileInfo';
         $request = $this->ImageCreatePdfFileFromContentRequest($request);
@@ -12813,7 +12672,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -12823,13 +12682,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -12957,8 +12810,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -13011,12 +12866,13 @@ class ViewerApi
     public function imageCreatePdfFileFromUrl(Requests\ImageCreatePdfFileFromUrlRequest $request)
     {
         try {
-            list($response) = $this->imageCreatePdfFileFromUrlWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageCreatePdfFileFromUrlWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageCreatePdfFileFromUrlWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageCreatePdfFileFromUrlWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -13073,6 +12929,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 201:
@@ -13094,7 +12951,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageCreatePdfFileFromUrlAsync(Requests\ImageCreatePdfFileFromUrlRequest $request)
+    public function imageCreatePdfFileFromUrlAsync(Requests\ImageCreatePdfFileFromUrlRequest $request) 
     {
         return $this->imageCreatePdfFileFromUrlAsyncWithHttpInfo($request)
             ->then(
@@ -13114,7 +12971,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageCreatePdfFileFromUrlAsyncWithHttpInfo(Requests\ImageCreatePdfFileFromUrlRequest $request)
+    public function imageCreatePdfFileFromUrlAsyncWithHttpInfo(Requests\ImageCreatePdfFileFromUrlRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\PdfFileInfo';
         $request = $this->ImageCreatePdfFileFromUrlRequest($request);
@@ -13143,7 +13000,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -13153,13 +13010,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -13246,7 +13097,7 @@ class ViewerApi
         $_tempBody = null;
         if (isset($request->pdfFileOptions)) {
             if (is_string($request->pdfFileOptions)) {
-                $_tempBody = "\"" . $request->pdfFileOptions . "\"";
+                $_tempBody = "\"" . $request->pdfFileOptions . "\"";   
             } else {
                 $_tempBody = $request->pdfFileOptions;
             }
@@ -13282,8 +13133,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -13336,10 +13189,11 @@ class ViewerApi
     public function imageDeleteAttachmentPagesCache(Requests\ImageDeleteAttachmentPagesCacheRequest $request)
     {
         try {
-            $this->imageDeleteAttachmentPagesCacheWithHttpInfo($request);
-        } catch (RepeatRequestException $e) {
-            $this->imageDeleteAttachmentPagesCacheWithHttpInfo($request);
+             $this->imageDeleteAttachmentPagesCacheWithHttpInfo($request);
         }
+        catch(RepeatRequestException $e) {
+             $this->imageDeleteAttachmentPagesCacheWithHttpInfo($request);
+        } 
     }
 
     /*
@@ -13378,6 +13232,7 @@ class ViewerApi
             }
 
             return [null, $statusCode, $response->getHeaders()];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
@@ -13395,7 +13250,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageDeleteAttachmentPagesCacheAsync(Requests\ImageDeleteAttachmentPagesCacheRequest $request)
+    public function imageDeleteAttachmentPagesCacheAsync(Requests\ImageDeleteAttachmentPagesCacheRequest $request) 
     {
         return $this->imageDeleteAttachmentPagesCacheAsyncWithHttpInfo($request)
             ->then(
@@ -13415,7 +13270,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageDeleteAttachmentPagesCacheAsyncWithHttpInfo(Requests\ImageDeleteAttachmentPagesCacheRequest $request)
+    public function imageDeleteAttachmentPagesCacheAsyncWithHttpInfo(Requests\ImageDeleteAttachmentPagesCacheRequest $request) 
     {
         $returnType = '';
         $request = $this->ImageDeleteAttachmentPagesCacheRequest($request);
@@ -13426,7 +13281,7 @@ class ViewerApi
                 function ($response) use ($returnType) {
                     return [null, $response->getStatusCode(), $response->getHeaders()];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -13436,13 +13291,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -13542,8 +13391,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -13596,10 +13447,11 @@ class ViewerApi
     public function imageDeletePagesCache(Requests\ImageDeletePagesCacheRequest $request)
     {
         try {
-            $this->imageDeletePagesCacheWithHttpInfo($request);
-        } catch (RepeatRequestException $e) {
-            $this->imageDeletePagesCacheWithHttpInfo($request);
+             $this->imageDeletePagesCacheWithHttpInfo($request);
         }
+        catch(RepeatRequestException $e) {
+             $this->imageDeletePagesCacheWithHttpInfo($request);
+        } 
     }
 
     /*
@@ -13638,6 +13490,7 @@ class ViewerApi
             }
 
             return [null, $statusCode, $response->getHeaders()];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
@@ -13655,7 +13508,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageDeletePagesCacheAsync(Requests\ImageDeletePagesCacheRequest $request)
+    public function imageDeletePagesCacheAsync(Requests\ImageDeletePagesCacheRequest $request) 
     {
         return $this->imageDeletePagesCacheAsyncWithHttpInfo($request)
             ->then(
@@ -13675,7 +13528,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageDeletePagesCacheAsyncWithHttpInfo(Requests\ImageDeletePagesCacheRequest $request)
+    public function imageDeletePagesCacheAsyncWithHttpInfo(Requests\ImageDeletePagesCacheRequest $request) 
     {
         $returnType = '';
         $request = $this->ImageDeletePagesCacheRequest($request);
@@ -13686,7 +13539,7 @@ class ViewerApi
                 function ($response) use ($returnType) {
                     return [null, $response->getStatusCode(), $response->getHeaders()];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -13696,13 +13549,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -13793,8 +13640,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -13847,12 +13696,13 @@ class ViewerApi
     public function imageGetAttachment(Requests\ImageGetAttachmentRequest $request)
     {
         try {
-            list($response) = $this->imageGetAttachmentWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageGetAttachmentWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageGetAttachmentWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageGetAttachmentWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -13909,6 +13759,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -13930,7 +13781,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetAttachmentAsync(Requests\ImageGetAttachmentRequest $request)
+    public function imageGetAttachmentAsync(Requests\ImageGetAttachmentRequest $request) 
     {
         return $this->imageGetAttachmentAsyncWithHttpInfo($request)
             ->then(
@@ -13950,7 +13801,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetAttachmentAsyncWithHttpInfo(Requests\ImageGetAttachmentRequest $request)
+    public function imageGetAttachmentAsyncWithHttpInfo(Requests\ImageGetAttachmentRequest $request) 
     {
         $returnType = '\SplFileObject';
         $request = $this->ImageGetAttachmentRequest($request);
@@ -13979,7 +13830,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -13989,13 +13840,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -14105,8 +13950,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -14159,12 +14006,13 @@ class ViewerApi
     public function imageGetAttachmentInfo(Requests\ImageGetAttachmentInfoRequest $request)
     {
         try {
-            list($response) = $this->imageGetAttachmentInfoWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageGetAttachmentInfoWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageGetAttachmentInfoWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageGetAttachmentInfoWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -14221,6 +14069,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -14242,7 +14091,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetAttachmentInfoAsync(Requests\ImageGetAttachmentInfoRequest $request)
+    public function imageGetAttachmentInfoAsync(Requests\ImageGetAttachmentInfoRequest $request) 
     {
         return $this->imageGetAttachmentInfoAsyncWithHttpInfo($request)
             ->then(
@@ -14262,7 +14111,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetAttachmentInfoAsyncWithHttpInfo(Requests\ImageGetAttachmentInfoRequest $request)
+    public function imageGetAttachmentInfoAsyncWithHttpInfo(Requests\ImageGetAttachmentInfoRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
         $request = $this->ImageGetAttachmentInfoRequest($request);
@@ -14291,7 +14140,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -14301,13 +14150,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -14437,8 +14280,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -14491,12 +14336,13 @@ class ViewerApi
     public function imageGetAttachmentInfoWithOptions(Requests\ImageGetAttachmentInfoWithOptionsRequest $request)
     {
         try {
-            list($response) = $this->imageGetAttachmentInfoWithOptionsWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageGetAttachmentInfoWithOptionsWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageGetAttachmentInfoWithOptionsWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageGetAttachmentInfoWithOptionsWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -14553,6 +14399,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -14574,7 +14421,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetAttachmentInfoWithOptionsAsync(Requests\ImageGetAttachmentInfoWithOptionsRequest $request)
+    public function imageGetAttachmentInfoWithOptionsAsync(Requests\ImageGetAttachmentInfoWithOptionsRequest $request) 
     {
         return $this->imageGetAttachmentInfoWithOptionsAsyncWithHttpInfo($request)
             ->then(
@@ -14594,7 +14441,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetAttachmentInfoWithOptionsAsyncWithHttpInfo(Requests\ImageGetAttachmentInfoWithOptionsRequest $request)
+    public function imageGetAttachmentInfoWithOptionsAsyncWithHttpInfo(Requests\ImageGetAttachmentInfoWithOptionsRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
         $request = $this->ImageGetAttachmentInfoWithOptionsRequest($request);
@@ -14623,7 +14470,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -14633,13 +14480,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -14710,7 +14551,7 @@ class ViewerApi
         $_tempBody = null;
         if (isset($request->documentInfoOptions)) {
             if (is_string($request->documentInfoOptions)) {
-                $_tempBody = "\"" . $request->documentInfoOptions . "\"";
+                $_tempBody = "\"" . $request->documentInfoOptions . "\"";   
             } else {
                 $_tempBody = $request->documentInfoOptions;
             }
@@ -14746,8 +14587,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -14800,12 +14643,13 @@ class ViewerApi
     public function imageGetAttachmentPage(Requests\ImageGetAttachmentPageRequest $request)
     {
         try {
-            list($response) = $this->imageGetAttachmentPageWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageGetAttachmentPageWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageGetAttachmentPageWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageGetAttachmentPageWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -14862,6 +14706,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -14883,7 +14728,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetAttachmentPageAsync(Requests\ImageGetAttachmentPageRequest $request)
+    public function imageGetAttachmentPageAsync(Requests\ImageGetAttachmentPageRequest $request) 
     {
         return $this->imageGetAttachmentPageAsyncWithHttpInfo($request)
             ->then(
@@ -14903,7 +14748,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetAttachmentPageAsyncWithHttpInfo(Requests\ImageGetAttachmentPageRequest $request)
+    public function imageGetAttachmentPageAsyncWithHttpInfo(Requests\ImageGetAttachmentPageRequest $request) 
     {
         $returnType = '\SplFileObject';
         $request = $this->ImageGetAttachmentPageRequest($request);
@@ -14932,7 +14777,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -14942,13 +14787,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -15167,8 +15006,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -15221,12 +15062,13 @@ class ViewerApi
     public function imageGetAttachmentPages(Requests\ImageGetAttachmentPagesRequest $request)
     {
         try {
-            list($response) = $this->imageGetAttachmentPagesWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageGetAttachmentPagesWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageGetAttachmentPagesWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageGetAttachmentPagesWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -15283,6 +15125,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -15304,7 +15147,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetAttachmentPagesAsync(Requests\ImageGetAttachmentPagesRequest $request)
+    public function imageGetAttachmentPagesAsync(Requests\ImageGetAttachmentPagesRequest $request) 
     {
         return $this->imageGetAttachmentPagesAsyncWithHttpInfo($request)
             ->then(
@@ -15324,7 +15167,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetAttachmentPagesAsyncWithHttpInfo(Requests\ImageGetAttachmentPagesRequest $request)
+    public function imageGetAttachmentPagesAsyncWithHttpInfo(Requests\ImageGetAttachmentPagesRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\ImageAttachmentPageCollection';
         $request = $this->ImageGetAttachmentPagesRequest($request);
@@ -15353,7 +15196,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -15363,13 +15206,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -15599,8 +15436,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -15653,12 +15492,13 @@ class ViewerApi
     public function imageGetAttachments(Requests\ImageGetAttachmentsRequest $request)
     {
         try {
-            list($response) = $this->imageGetAttachmentsWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageGetAttachmentsWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageGetAttachmentsWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageGetAttachmentsWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -15715,6 +15555,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -15736,7 +15577,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetAttachmentsAsync(Requests\ImageGetAttachmentsRequest $request)
+    public function imageGetAttachmentsAsync(Requests\ImageGetAttachmentsRequest $request) 
     {
         return $this->imageGetAttachmentsAsyncWithHttpInfo($request)
             ->then(
@@ -15756,7 +15597,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetAttachmentsAsyncWithHttpInfo(Requests\ImageGetAttachmentsRequest $request)
+    public function imageGetAttachmentsAsyncWithHttpInfo(Requests\ImageGetAttachmentsRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\AttachmentCollection';
         $request = $this->ImageGetAttachmentsRequest($request);
@@ -15785,7 +15626,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -15795,13 +15636,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -15902,8 +15737,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -15956,12 +15793,13 @@ class ViewerApi
     public function imageGetDocumentInfo(Requests\ImageGetDocumentInfoRequest $request)
     {
         try {
-            list($response) = $this->imageGetDocumentInfoWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageGetDocumentInfoWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageGetDocumentInfoWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageGetDocumentInfoWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -16018,6 +15856,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -16039,7 +15878,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetDocumentInfoAsync(Requests\ImageGetDocumentInfoRequest $request)
+    public function imageGetDocumentInfoAsync(Requests\ImageGetDocumentInfoRequest $request) 
     {
         return $this->imageGetDocumentInfoAsyncWithHttpInfo($request)
             ->then(
@@ -16059,7 +15898,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetDocumentInfoAsyncWithHttpInfo(Requests\ImageGetDocumentInfoRequest $request)
+    public function imageGetDocumentInfoAsyncWithHttpInfo(Requests\ImageGetDocumentInfoRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
         $request = $this->ImageGetDocumentInfoRequest($request);
@@ -16088,7 +15927,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -16098,13 +15937,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -16235,8 +16068,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -16289,12 +16124,13 @@ class ViewerApi
     public function imageGetDocumentInfoFromContent(Requests\ImageGetDocumentInfoFromContentRequest $request)
     {
         try {
-            list($response) = $this->imageGetDocumentInfoFromContentWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageGetDocumentInfoFromContentWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageGetDocumentInfoFromContentWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageGetDocumentInfoFromContentWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -16351,6 +16187,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -16372,7 +16209,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetDocumentInfoFromContentAsync(Requests\ImageGetDocumentInfoFromContentRequest $request)
+    public function imageGetDocumentInfoFromContentAsync(Requests\ImageGetDocumentInfoFromContentRequest $request) 
     {
         return $this->imageGetDocumentInfoFromContentAsyncWithHttpInfo($request)
             ->then(
@@ -16392,7 +16229,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetDocumentInfoFromContentAsyncWithHttpInfo(Requests\ImageGetDocumentInfoFromContentRequest $request)
+    public function imageGetDocumentInfoFromContentAsyncWithHttpInfo(Requests\ImageGetDocumentInfoFromContentRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
         $request = $this->ImageGetDocumentInfoFromContentRequest($request);
@@ -16421,7 +16258,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -16431,13 +16268,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -16555,8 +16386,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -16609,12 +16442,13 @@ class ViewerApi
     public function imageGetDocumentInfoFromUrl(Requests\ImageGetDocumentInfoFromUrlRequest $request)
     {
         try {
-            list($response) = $this->imageGetDocumentInfoFromUrlWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageGetDocumentInfoFromUrlWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageGetDocumentInfoFromUrlWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageGetDocumentInfoFromUrlWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -16671,6 +16505,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -16692,7 +16527,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetDocumentInfoFromUrlAsync(Requests\ImageGetDocumentInfoFromUrlRequest $request)
+    public function imageGetDocumentInfoFromUrlAsync(Requests\ImageGetDocumentInfoFromUrlRequest $request) 
     {
         return $this->imageGetDocumentInfoFromUrlAsyncWithHttpInfo($request)
             ->then(
@@ -16712,7 +16547,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetDocumentInfoFromUrlAsyncWithHttpInfo(Requests\ImageGetDocumentInfoFromUrlRequest $request)
+    public function imageGetDocumentInfoFromUrlAsyncWithHttpInfo(Requests\ImageGetDocumentInfoFromUrlRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
         $request = $this->ImageGetDocumentInfoFromUrlRequest($request);
@@ -16741,7 +16576,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -16751,13 +16586,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -16903,8 +16732,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -16957,12 +16788,13 @@ class ViewerApi
     public function imageGetDocumentInfoFromUrlWithOptions(Requests\ImageGetDocumentInfoFromUrlWithOptionsRequest $request)
     {
         try {
-            list($response) = $this->imageGetDocumentInfoFromUrlWithOptionsWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageGetDocumentInfoFromUrlWithOptionsWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageGetDocumentInfoFromUrlWithOptionsWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageGetDocumentInfoFromUrlWithOptionsWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -17019,6 +16851,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -17040,7 +16873,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetDocumentInfoFromUrlWithOptionsAsync(Requests\ImageGetDocumentInfoFromUrlWithOptionsRequest $request)
+    public function imageGetDocumentInfoFromUrlWithOptionsAsync(Requests\ImageGetDocumentInfoFromUrlWithOptionsRequest $request) 
     {
         return $this->imageGetDocumentInfoFromUrlWithOptionsAsyncWithHttpInfo($request)
             ->then(
@@ -17060,7 +16893,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetDocumentInfoFromUrlWithOptionsAsyncWithHttpInfo(Requests\ImageGetDocumentInfoFromUrlWithOptionsRequest $request)
+    public function imageGetDocumentInfoFromUrlWithOptionsAsyncWithHttpInfo(Requests\ImageGetDocumentInfoFromUrlWithOptionsRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
         $request = $this->ImageGetDocumentInfoFromUrlWithOptionsRequest($request);
@@ -17089,7 +16922,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -17099,13 +16932,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -17182,7 +17009,7 @@ class ViewerApi
         $_tempBody = null;
         if (isset($request->documentInfoOptions)) {
             if (is_string($request->documentInfoOptions)) {
-                $_tempBody = "\"" . $request->documentInfoOptions . "\"";
+                $_tempBody = "\"" . $request->documentInfoOptions . "\"";   
             } else {
                 $_tempBody = $request->documentInfoOptions;
             }
@@ -17218,8 +17045,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -17272,12 +17101,13 @@ class ViewerApi
     public function imageGetDocumentInfoWithOptions(Requests\ImageGetDocumentInfoWithOptionsRequest $request)
     {
         try {
-            list($response) = $this->imageGetDocumentInfoWithOptionsWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageGetDocumentInfoWithOptionsWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageGetDocumentInfoWithOptionsWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageGetDocumentInfoWithOptionsWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -17334,6 +17164,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -17355,7 +17186,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetDocumentInfoWithOptionsAsync(Requests\ImageGetDocumentInfoWithOptionsRequest $request)
+    public function imageGetDocumentInfoWithOptionsAsync(Requests\ImageGetDocumentInfoWithOptionsRequest $request) 
     {
         return $this->imageGetDocumentInfoWithOptionsAsyncWithHttpInfo($request)
             ->then(
@@ -17375,7 +17206,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetDocumentInfoWithOptionsAsyncWithHttpInfo(Requests\ImageGetDocumentInfoWithOptionsRequest $request)
+    public function imageGetDocumentInfoWithOptionsAsyncWithHttpInfo(Requests\ImageGetDocumentInfoWithOptionsRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
         $request = $this->ImageGetDocumentInfoWithOptionsRequest($request);
@@ -17404,7 +17235,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -17414,13 +17245,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -17482,7 +17307,7 @@ class ViewerApi
         $_tempBody = null;
         if (isset($request->documentInfoOptions)) {
             if (is_string($request->documentInfoOptions)) {
-                $_tempBody = "\"" . $request->documentInfoOptions . "\"";
+                $_tempBody = "\"" . $request->documentInfoOptions . "\"";   
             } else {
                 $_tempBody = $request->documentInfoOptions;
             }
@@ -17518,8 +17343,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -17572,12 +17399,13 @@ class ViewerApi
     public function imageGetPage(Requests\ImageGetPageRequest $request)
     {
         try {
-            list($response) = $this->imageGetPageWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageGetPageWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageGetPageWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageGetPageWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -17634,6 +17462,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -17655,7 +17484,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetPageAsync(Requests\ImageGetPageRequest $request)
+    public function imageGetPageAsync(Requests\ImageGetPageRequest $request) 
     {
         return $this->imageGetPageAsyncWithHttpInfo($request)
             ->then(
@@ -17675,7 +17504,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetPageAsyncWithHttpInfo(Requests\ImageGetPageRequest $request)
+    public function imageGetPageAsyncWithHttpInfo(Requests\ImageGetPageRequest $request) 
     {
         $returnType = '\SplFileObject';
         $request = $this->ImageGetPageRequest($request);
@@ -17704,7 +17533,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -17714,13 +17543,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -17920,8 +17743,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -17974,12 +17799,13 @@ class ViewerApi
     public function imageGetPages(Requests\ImageGetPagesRequest $request)
     {
         try {
-            list($response) = $this->imageGetPagesWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageGetPagesWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageGetPagesWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageGetPagesWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -18036,6 +17862,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -18057,7 +17884,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetPagesAsync(Requests\ImageGetPagesRequest $request)
+    public function imageGetPagesAsync(Requests\ImageGetPagesRequest $request) 
     {
         return $this->imageGetPagesAsyncWithHttpInfo($request)
             ->then(
@@ -18077,7 +17904,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetPagesAsyncWithHttpInfo(Requests\ImageGetPagesRequest $request)
+    public function imageGetPagesAsyncWithHttpInfo(Requests\ImageGetPagesRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\ImagePageCollection';
         $request = $this->ImageGetPagesRequest($request);
@@ -18106,7 +17933,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -18116,13 +17943,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -18333,8 +18154,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -18387,12 +18210,13 @@ class ViewerApi
     public function imageGetPagesFromUrl(Requests\ImageGetPagesFromUrlRequest $request)
     {
         try {
-            list($response) = $this->imageGetPagesFromUrlWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageGetPagesFromUrlWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageGetPagesFromUrlWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageGetPagesFromUrlWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -18449,6 +18273,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -18470,7 +18295,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetPagesFromUrlAsync(Requests\ImageGetPagesFromUrlRequest $request)
+    public function imageGetPagesFromUrlAsync(Requests\ImageGetPagesFromUrlRequest $request) 
     {
         return $this->imageGetPagesFromUrlAsyncWithHttpInfo($request)
             ->then(
@@ -18490,7 +18315,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetPagesFromUrlAsyncWithHttpInfo(Requests\ImageGetPagesFromUrlRequest $request)
+    public function imageGetPagesFromUrlAsyncWithHttpInfo(Requests\ImageGetPagesFromUrlRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\ImagePageCollection';
         $request = $this->ImageGetPagesFromUrlRequest($request);
@@ -18519,7 +18344,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -18529,13 +18354,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -18761,8 +18580,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -18815,12 +18636,13 @@ class ViewerApi
     public function imageGetPdfFile(Requests\ImageGetPdfFileRequest $request)
     {
         try {
-            list($response) = $this->imageGetPdfFileWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageGetPdfFileWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageGetPdfFileWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageGetPdfFileWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -18877,6 +18699,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -18898,7 +18721,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetPdfFileAsync(Requests\ImageGetPdfFileRequest $request)
+    public function imageGetPdfFileAsync(Requests\ImageGetPdfFileRequest $request) 
     {
         return $this->imageGetPdfFileAsyncWithHttpInfo($request)
             ->then(
@@ -18918,7 +18741,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetPdfFileAsyncWithHttpInfo(Requests\ImageGetPdfFileRequest $request)
+    public function imageGetPdfFileAsyncWithHttpInfo(Requests\ImageGetPdfFileRequest $request) 
     {
         $returnType = '\SplFileObject';
         $request = $this->ImageGetPdfFileRequest($request);
@@ -18947,7 +18770,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -18957,13 +18780,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -19104,8 +18921,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -19158,12 +18977,13 @@ class ViewerApi
     public function imageGetPdfFileFromUrl(Requests\ImageGetPdfFileFromUrlRequest $request)
     {
         try {
-            list($response) = $this->imageGetPdfFileFromUrlWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageGetPdfFileFromUrlWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageGetPdfFileFromUrlWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageGetPdfFileFromUrlWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -19220,6 +19040,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -19241,7 +19062,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetPdfFileFromUrlAsync(Requests\ImageGetPdfFileFromUrlRequest $request)
+    public function imageGetPdfFileFromUrlAsync(Requests\ImageGetPdfFileFromUrlRequest $request) 
     {
         return $this->imageGetPdfFileFromUrlAsyncWithHttpInfo($request)
             ->then(
@@ -19261,7 +19082,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetPdfFileFromUrlAsyncWithHttpInfo(Requests\ImageGetPdfFileFromUrlRequest $request)
+    public function imageGetPdfFileFromUrlAsyncWithHttpInfo(Requests\ImageGetPdfFileFromUrlRequest $request) 
     {
         $returnType = '\SplFileObject';
         $request = $this->ImageGetPdfFileFromUrlRequest($request);
@@ -19290,7 +19111,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -19300,13 +19121,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -19462,8 +19277,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -19516,12 +19333,13 @@ class ViewerApi
     public function imageGetZipWithAttachmentPages(Requests\ImageGetZipWithAttachmentPagesRequest $request)
     {
         try {
-            list($response) = $this->imageGetZipWithAttachmentPagesWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageGetZipWithAttachmentPagesWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageGetZipWithAttachmentPagesWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageGetZipWithAttachmentPagesWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -19578,6 +19396,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -19599,7 +19418,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetZipWithAttachmentPagesAsync(Requests\ImageGetZipWithAttachmentPagesRequest $request)
+    public function imageGetZipWithAttachmentPagesAsync(Requests\ImageGetZipWithAttachmentPagesRequest $request) 
     {
         return $this->imageGetZipWithAttachmentPagesAsyncWithHttpInfo($request)
             ->then(
@@ -19619,7 +19438,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetZipWithAttachmentPagesAsyncWithHttpInfo(Requests\ImageGetZipWithAttachmentPagesRequest $request)
+    public function imageGetZipWithAttachmentPagesAsyncWithHttpInfo(Requests\ImageGetZipWithAttachmentPagesRequest $request) 
     {
         $returnType = '\SplFileObject';
         $request = $this->ImageGetZipWithAttachmentPagesRequest($request);
@@ -19648,7 +19467,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -19658,13 +19477,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -19894,8 +19707,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -19948,12 +19763,13 @@ class ViewerApi
     public function imageGetZipWithPages(Requests\ImageGetZipWithPagesRequest $request)
     {
         try {
-            list($response) = $this->imageGetZipWithPagesWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageGetZipWithPagesWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageGetZipWithPagesWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageGetZipWithPagesWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -20010,6 +19826,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
@@ -20031,7 +19848,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetZipWithPagesAsync(Requests\ImageGetZipWithPagesRequest $request)
+    public function imageGetZipWithPagesAsync(Requests\ImageGetZipWithPagesRequest $request) 
     {
         return $this->imageGetZipWithPagesAsyncWithHttpInfo($request)
             ->then(
@@ -20051,7 +19868,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageGetZipWithPagesAsyncWithHttpInfo(Requests\ImageGetZipWithPagesRequest $request)
+    public function imageGetZipWithPagesAsyncWithHttpInfo(Requests\ImageGetZipWithPagesRequest $request) 
     {
         $returnType = '\SplFileObject';
         $request = $this->ImageGetZipWithPagesRequest($request);
@@ -20080,7 +19897,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -20090,13 +19907,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -20307,8 +20118,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -20361,12 +20174,13 @@ class ViewerApi
     public function imageTransformPages(Requests\ImageTransformPagesRequest $request)
     {
         try {
-            list($response) = $this->imageTransformPagesWithHttpInfo($request);
-            return $response;
-        } catch (RepeatRequestException $e) {
-            list($response) = $this->imageTransformPagesWithHttpInfo($request);
-            return $response;
+             list($response) = $this->imageTransformPagesWithHttpInfo($request);
+             return $response;
         }
+        catch(RepeatRequestException $e) {
+             list($response) = $this->imageTransformPagesWithHttpInfo($request);
+             return $response;
+        } 
     }
 
     /*
@@ -20423,6 +20237,7 @@ class ViewerApi
                 $response->getStatusCode(),
                 $response->getHeaders()
             ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 201:
@@ -20444,7 +20259,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageTransformPagesAsync(Requests\ImageTransformPagesRequest $request)
+    public function imageTransformPagesAsync(Requests\ImageTransformPagesRequest $request) 
     {
         return $this->imageTransformPagesAsyncWithHttpInfo($request)
             ->then(
@@ -20464,7 +20279,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function imageTransformPagesAsyncWithHttpInfo(Requests\ImageTransformPagesRequest $request)
+    public function imageTransformPagesAsyncWithHttpInfo(Requests\ImageTransformPagesRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\PageInfoCollection';
         $request = $this->ImageTransformPagesRequest($request);
@@ -20493,7 +20308,7 @@ class ViewerApi
                         $response->getHeaders()
                     ];
                 },
-                function ($exception) {
+                function ($exception) {        
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
           
@@ -20503,13 +20318,7 @@ class ViewerApi
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()),
-          
-                        $statusCode,
-          
-                        $response->getHeaders(),
-          
-                        $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
                     );
                 }
             );
@@ -20571,7 +20380,7 @@ class ViewerApi
         $_tempBody = null;
         if (isset($request->transformOptions)) {
             if (is_string($request->transformOptions)) {
-                $_tempBody = "\"" . $request->transformOptions . "\"";
+                $_tempBody = "\"" . $request->transformOptions . "\"";   
             } else {
                 $_tempBody = $request->transformOptions;
             }
@@ -20607,8 +20416,10 @@ class ViewerApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
+
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
+
             } else {
                 // for HTTP post (form)
                 $httpBody = $formParams["data"];
@@ -20653,7 +20464,7 @@ class ViewerApi
      * @throws \RuntimeException on file opening failure
      * @return array of http client options
      */
-    private function _createHttpClientOption()
+    private function _createHttpClientOption() 
     {
         $options = [];
         if ($this->config->getDebug()) {
@@ -20674,7 +20485,7 @@ class ViewerApi
         $logInfo = "\nResponse: $statusCode \n";
         echo $logInfo . $this->_writeHeadersAndBody($logInfo, $headers, $body);
     }
-    
+	
     /*
      * Executes request logging
      */
@@ -20683,7 +20494,7 @@ class ViewerApi
         $logInfo = "\n$method: $url \n";
         echo $logInfo . $this->_writeHeadersAndBody($logInfo, $headers, $body);
     }
-    
+	
     /*
      * Executes header and boy formatting
      */
@@ -20699,7 +20510,7 @@ class ViewerApi
     /*
      * Executes url parsing
      */
-    private function _parseURL($url, $queryParams)
+    private function _parseURL($url, $queryParams) 
     {
         // parse the url
         $urlPath = trim($url, '/');
@@ -20713,7 +20524,7 @@ class ViewerApi
     /*
      * Gets a request token from server
      */
-    private function _requestToken()
+    private function _requestToken() 
     {
         $requestUrl = $this->config->getHost() . "/oauth2/token";
         $postData = "grant_type=client_credentials" . "&client_id=" . $this->config->getAppSid() . "&client_secret=" . $this->config->getAppKey();
@@ -20726,7 +20537,7 @@ class ViewerApi
     /*
      * Refresh token
      */
-    private function _refreshToken()
+    private function _refreshToken() 
     {
         $requestUrl = $this->config->getHost() . "/oauth2/token";
         $postData = "grant_type=refresh_token&refresh_token=" . $this->config->getRefreshToken();

@@ -57,10 +57,7 @@ abstract class BaseApiTest extends \PHPUnit_Framework_TestCase
     private static function _deleteFolder($folder)
     {
         $request = new \GroupDocs\Storage\Model\Requests\DeleteFolderRequest(
-            $folder,
-            null,
-            true
-        );
+            $folder, null, true);
 
         self::$storageApi->DeleteFolder($request);
     }
@@ -77,7 +74,7 @@ abstract class BaseApiTest extends \PHPUnit_Framework_TestCase
     {
         $config = self::_getConfig();
 
-        //TODO: Get your AppSID and AppKey at https://dashboard.groupdocs.cloud
+        //TODO: Get your AppSID and AppKey at https://dashboard.groupdocs.cloud 
         //      (free registration is required).
         $appSid = $config["AppSID"];
         $appKey = $config["AppKey"];

@@ -11,10 +11,10 @@
  *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  *  copies of the Software, and to permit persons to whom the Software is
  *  furnished to do so, subject to the following conditions:
- *
+ * 
  *  The above copyright notice and this permission notice shall be included in all
  *  copies or substantial portions of the Software.
- *
+ * 
  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -34,17 +34,17 @@ class ImageGetDocumentInfoFromUrlRequest
 {
     /*
      * Initializes a new instance of the ImageGetDocumentInfoFromUrlRequest class.
-     *
+     *  
      * @param string $url The URL to retrieve document.
      * @param string $fileName The file name.
      * @param string $password The document password.
      * @param bool $extractText When this options is set to true text contained in document will be extracted and returned along with other information.
      * @param bool $renderComments Allows to render document comments. Not required if PDF document was created before.
-     * @param bool $renderHiddenPages Enables rendering of document hidden pages, sheets or slides.
+     * @param bool $renderHiddenPages Enables document hidden pages, sheets or slides rendering.
      * @param string $folder The folder which contains specified file in storage.
      * @param string $storage The file storage which have to be used.
      */
-    public function __construct($url, $fileName = null, $password = null, $extractText = null, $renderComments = null, $renderHiddenPages = null, $folder = null, $storage = null)
+    public function __construct($url, $fileName = null, $password = null, $extractText = null, $renderComments = null, $renderHiddenPages = null, $folder = null, $storage = null)             
     {
         $this->url = $url;
         $this->fileName = $fileName;
@@ -60,37 +60,37 @@ class ImageGetDocumentInfoFromUrlRequest
      * The URL to retrieve document.
      */
     public $url;
-    
+	
     /*
      * The file name.
      */
     public $fileName;
-    
+	
     /*
      * The document password.
      */
     public $password;
-    
+	
     /*
      * When this options is set to true text contained in document will be extracted and returned along with other information.
      */
     public $extractText;
-    
+	
     /*
      * Allows to render document comments. Not required if PDF document was created before.
      */
     public $renderComments;
-    
+	
     /*
-     * Enables rendering of document hidden pages, sheets or slides.
+     * Enables document hidden pages, sheets or slides rendering.
      */
     public $renderHiddenPages;
-    
+	
     /*
      * The folder which contains specified file in storage.
      */
     public $folder;
-    
+	
     /*
      * The file storage which have to be used.
      */

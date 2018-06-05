@@ -11,10 +11,10 @@
  *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  *  copies of the Software, and to permit persons to whom the Software is
  *  furnished to do so, subject to the following conditions:
- *
+ * 
  *  The above copyright notice and this permission notice shall be included in all
  *  copies or substantial portions of the Software.
- *
+ * 
  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -34,18 +34,17 @@ class HtmlGetAttachmentPageRequest
 {
     /*
      * Initializes a new instance of the HtmlGetAttachmentPageRequest class.
-     *
+     *  
      * @param string $fileName The document name.
      * @param string $attachmentName Name of the attachment.
      * @param int $pageNumber The attachment page number.
      * @param string $resourcePath The attachment page HTML resource path.
      * @param bool $ignoreResourcePathInResources When this option enabled ResourcePath won't be added to resource reference in *.css and *.svg files.
      * @param bool $embedResources Whether to embed HTML resources or save them separate.
-     * @param bool $enableMinification Enables content (HTML, CSS and SVG) minification.
+     * @param bool $enableMinification Enables content (HTML and SVG) minification.
      * @param bool $enableResponsiveRendering Indicates whether rendering will provide responsive web pages, that look well on different device types.
-     * @param bool $excludeFonts Prevents adding fonts to the output HTML document.
      * @param bool $renderComments Allows to render document comments.
-     * @param bool $renderHiddenPages Enables rendering of document hidden pages, sheets or slides.
+     * @param bool $renderHiddenPages Enables document hidden pages, sheets or slides rendering.
      * @param string $password The document password.
      * @param string $attachmentPassword The attachment password.
      * @param string $defaultFontName The name of the default font.
@@ -53,7 +52,7 @@ class HtmlGetAttachmentPageRequest
      * @param string $folder The folder which contains specified file in storage.
      * @param string $storage The file storage which have to be used.
      */
-    public function __construct($fileName, $attachmentName, $pageNumber, $resourcePath = null, $ignoreResourcePathInResources = null, $embedResources = null, $enableMinification = null, $enableResponsiveRendering = null, $excludeFonts = null, $renderComments = null, $renderHiddenPages = null, $password = null, $attachmentPassword = null, $defaultFontName = null, $fontsFolder = null, $folder = null, $storage = null)
+    public function __construct($fileName, $attachmentName, $pageNumber, $resourcePath = null, $ignoreResourcePathInResources = null, $embedResources = null, $enableMinification = null, $enableResponsiveRendering = null, $renderComments = null, $renderHiddenPages = null, $password = null, $attachmentPassword = null, $defaultFontName = null, $fontsFolder = null, $folder = null, $storage = null)             
     {
         $this->fileName = $fileName;
         $this->attachmentName = $attachmentName;
@@ -63,7 +62,6 @@ class HtmlGetAttachmentPageRequest
         $this->embedResources = $embedResources;
         $this->enableMinification = $enableMinification;
         $this->enableResponsiveRendering = $enableResponsiveRendering;
-        $this->excludeFonts = $excludeFonts;
         $this->renderComments = $renderComments;
         $this->renderHiddenPages = $renderHiddenPages;
         $this->password = $password;
@@ -78,82 +76,77 @@ class HtmlGetAttachmentPageRequest
      * The document name.
      */
     public $fileName;
-    
+	
     /*
      * Name of the attachment.
      */
     public $attachmentName;
-    
+	
     /*
      * The attachment page number.
      */
     public $pageNumber;
-    
+	
     /*
      * The attachment page HTML resource path.
      */
     public $resourcePath;
-    
+	
     /*
      * When this option enabled ResourcePath won't be added to resource reference in *.css and *.svg files.
      */
     public $ignoreResourcePathInResources;
-    
+	
     /*
      * Whether to embed HTML resources or save them separate.
      */
     public $embedResources;
-    
+	
     /*
-     * Enables content (HTML, CSS and SVG) minification.
+     * Enables content (HTML and SVG) minification.
      */
     public $enableMinification;
-    
+	
     /*
      * Indicates whether rendering will provide responsive web pages, that look well on different device types.
      */
     public $enableResponsiveRendering;
-    
-    /*
-     * Prevents adding fonts to the output HTML document.
-     */
-    public $excludeFonts;
-    
+	
     /*
      * Allows to render document comments.
      */
     public $renderComments;
-    
+	
     /*
-     * Enables rendering of document hidden pages, sheets or slides.
+     * Enables document hidden pages, sheets or slides rendering.
      */
     public $renderHiddenPages;
-    
+	
     /*
      * The document password.
      */
     public $password;
-    
+	
     /*
      * The attachment password.
      */
     public $attachmentPassword;
-    
+	
     /*
      * The name of the default font.
      */
     public $defaultFontName;
-    
+	
     /*
      * The folder with custom fonts in storage.
      */
     public $fontsFolder;
-    
+	
     /*
      * The folder which contains specified file in storage.
      */
     public $folder;
-    
+	
     /*
      * The file storage which have to be used.
      */

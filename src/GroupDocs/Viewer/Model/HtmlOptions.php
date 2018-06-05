@@ -11,10 +11,10 @@
  *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  *  copies of the Software, and to permit persons to whom the Software is
  *  furnished to do so, subject to the following conditions:
- *
+ * 
  *  The above copyright notice and this permission notice shall be included in all
  *  copies or substantial portions of the Software.
- *
+ * 
  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,7 +30,6 @@
  */
 
 namespace GroupDocs\Viewer\Model;
-
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
@@ -38,7 +37,7 @@ use \GroupDocs\Viewer\ObjectSerializer;
  *
  * @description Provides options for rendering document pages as HTML.
  */
-class HtmlOptions extends RenderOptions
+class HtmlOptions extends RenderOptions 
 {
     const DISCRIMINATOR = null;
 
@@ -59,8 +58,7 @@ class HtmlOptions extends RenderOptions
         'ignoreResourcePathInResources' => 'bool',
         'embedResources' => 'bool',
         'enableMinification' => 'bool',
-        'enableResponsiveRendering' => 'bool',
-        'excludeFonts' => 'bool'
+        'enableResponsiveRendering' => 'bool'
     ];
 
     /*
@@ -73,8 +71,7 @@ class HtmlOptions extends RenderOptions
         'ignoreResourcePathInResources' => null,
         'embedResources' => null,
         'enableMinification' => null,
-        'enableResponsiveRendering' => null,
-        'excludeFonts' => null
+        'enableResponsiveRendering' => null
     ];
 
     /*
@@ -108,8 +105,7 @@ class HtmlOptions extends RenderOptions
         'ignoreResourcePathInResources' => 'IgnoreResourcePathInResources',
         'embedResources' => 'EmbedResources',
         'enableMinification' => 'EnableMinification',
-        'enableResponsiveRendering' => 'EnableResponsiveRendering',
-        'excludeFonts' => 'ExcludeFonts'
+        'enableResponsiveRendering' => 'EnableResponsiveRendering'
     ];
 
     /*
@@ -122,8 +118,7 @@ class HtmlOptions extends RenderOptions
         'ignoreResourcePathInResources' => 'setIgnoreResourcePathInResources',
         'embedResources' => 'setEmbedResources',
         'enableMinification' => 'setEnableMinification',
-        'enableResponsiveRendering' => 'setEnableResponsiveRendering',
-        'excludeFonts' => 'setExcludeFonts'
+        'enableResponsiveRendering' => 'setEnableResponsiveRendering'
     ];
 
     /*
@@ -136,8 +131,7 @@ class HtmlOptions extends RenderOptions
         'ignoreResourcePathInResources' => 'getIgnoreResourcePathInResources',
         'embedResources' => 'getEmbedResources',
         'enableMinification' => 'getEnableMinification',
-        'enableResponsiveRendering' => 'getEnableResponsiveRendering',
-        'excludeFonts' => 'getExcludeFonts'
+        'enableResponsiveRendering' => 'getEnableResponsiveRendering'
     ];
 
     /*
@@ -201,7 +195,6 @@ class HtmlOptions extends RenderOptions
         $this->container['embedResources'] = isset($data['embedResources']) ? $data['embedResources'] : null;
         $this->container['enableMinification'] = isset($data['enableMinification']) ? $data['enableMinification'] : null;
         $this->container['enableResponsiveRendering'] = isset($data['enableResponsiveRendering']) ? $data['enableResponsiveRendering'] : null;
-        $this->container['excludeFonts'] = isset($data['excludeFonts']) ? $data['excludeFonts'] : null;
     }
 
     /*
@@ -317,7 +310,7 @@ class HtmlOptions extends RenderOptions
     /*
      * Sets enableMinification
      *
-     * @param bool $enableMinification Enables content (HTML, CSS and SVG) minification.
+     * @param bool $enableMinification Enables content (HTML and SVG) minification.
      *
      * @return $this
      */
@@ -348,30 +341,6 @@ class HtmlOptions extends RenderOptions
     public function setEnableResponsiveRendering($enableResponsiveRendering)
     {
         $this->container['enableResponsiveRendering'] = $enableResponsiveRendering;
-
-        return $this;
-    }
-
-    /*
-     * Gets excludeFonts
-     *
-     * @return bool
-     */
-    public function getExcludeFonts()
-    {
-        return $this->container['excludeFonts'];
-    }
-
-    /*
-     * Sets excludeFonts
-     *
-     * @param bool $excludeFonts Prevents adding fonts to the output HTML document.
-     *
-     * @return $this
-     */
-    public function setExcludeFonts($excludeFonts)
-    {
-        $this->container['excludeFonts'] = $excludeFonts;
 
         return $this;
     }
@@ -445,3 +414,5 @@ class HtmlOptions extends RenderOptions
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
+
+

@@ -11,10 +11,10 @@
  *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  *  copies of the Software, and to permit persons to whom the Software is
  *  furnished to do so, subject to the following conditions:
- *
+ * 
  *  The above copyright notice and this permission notice shall be included in all
  *  copies or substantial portions of the Software.
- *
+ * 
  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -62,8 +62,7 @@ class DocumentInfo implements ArrayAccess
         'size' => 'int',
         'dateModified' => '\DateTime',
         'pages' => '\GroupDocs\Viewer\Model\PageInfo[]',
-        'attachments' => '\GroupDocs\Viewer\Model\AttachmentInfo[]',
-        'layers' => 'string[]'
+        'attachments' => '\GroupDocs\Viewer\Model\AttachmentInfo[]'
     ];
 
     /*
@@ -78,8 +77,7 @@ class DocumentInfo implements ArrayAccess
         'size' => 'int64',
         'dateModified' => 'date-time',
         'pages' => null,
-        'attachments' => null,
-        'layers' => null
+        'attachments' => null
     ];
 
     /*
@@ -115,8 +113,7 @@ class DocumentInfo implements ArrayAccess
         'size' => 'Size',
         'dateModified' => 'DateModified',
         'pages' => 'Pages',
-        'attachments' => 'Attachments',
-        'layers' => 'Layers'
+        'attachments' => 'Attachments'
     ];
 
     /*
@@ -131,8 +128,7 @@ class DocumentInfo implements ArrayAccess
         'size' => 'setSize',
         'dateModified' => 'setDateModified',
         'pages' => 'setPages',
-        'attachments' => 'setAttachments',
-        'layers' => 'setLayers'
+        'attachments' => 'setAttachments'
     ];
 
     /*
@@ -147,8 +143,7 @@ class DocumentInfo implements ArrayAccess
         'size' => 'getSize',
         'dateModified' => 'getDateModified',
         'pages' => 'getPages',
-        'attachments' => 'getAttachments',
-        'layers' => 'getLayers'
+        'attachments' => 'getAttachments'
     ];
 
     /*
@@ -218,7 +213,6 @@ class DocumentInfo implements ArrayAccess
         $this->container['dateModified'] = isset($data['dateModified']) ? $data['dateModified'] : null;
         $this->container['pages'] = isset($data['pages']) ? $data['pages'] : null;
         $this->container['attachments'] = isset($data['attachments']) ? $data['attachments'] : null;
-        $this->container['layers'] = isset($data['layers']) ? $data['layers'] : null;
     }
 
     /*
@@ -247,6 +241,7 @@ class DocumentInfo implements ArrayAccess
      */
     public function valid()
     {
+
         if ($this->container['size'] === null) {
             return false;
         }
@@ -424,30 +419,6 @@ class DocumentInfo implements ArrayAccess
 
         return $this;
     }
-
-    /*
-     * Gets layers
-     *
-     * @return string[]
-     */
-    public function getLayers()
-    {
-        return $this->container['layers'];
-    }
-
-    /*
-     * Sets layers
-     *
-     * @param string[] $layers The list of layers contained in a CAD document.
-     *
-     * @return $this
-     */
-    public function setLayers($layers)
-    {
-        $this->container['layers'] = $layers;
-
-        return $this;
-    }
     /*
      * Returns true if offset exists. False otherwise.
      *
@@ -518,3 +489,5 @@ class DocumentInfo implements ArrayAccess
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
+
+

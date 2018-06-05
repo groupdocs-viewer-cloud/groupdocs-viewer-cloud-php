@@ -11,10 +11,10 @@
  *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  *  copies of the Software, and to permit persons to whom the Software is
  *  furnished to do so, subject to the following conditions:
- *
+ * 
  *  The above copyright notice and this permission notice shall be included in all
  *  copies or substantial portions of the Software.
- *
+ * 
  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -34,13 +34,13 @@ class ImageTransformPagesRequest
 {
     /*
      * Initializes a new instance of the ImageTransformPagesRequest class.
-     *
+     *  
      * @param string $fileName The file name.
      * @param \GroupDocs\Viewer\Model\TransformOptionsBase $transformOptions The transformation options.
      * @param string $folder The folder which contains specified file in storage.
      * @param string $storage The file storage which have to be used.
      */
-    public function __construct($fileName, $transformOptions = null, $folder = null, $storage = null)
+    public function __construct($fileName, $transformOptions = null, $folder = null, $storage = null)             
     {
         $this->fileName = $fileName;
         $this->transformOptions = $transformOptions;
@@ -52,17 +52,17 @@ class ImageTransformPagesRequest
      * The file name.
      */
     public $fileName;
-    
+	
     /*
      * The transformation options.
      */
     public $transformOptions;
-    
+	
     /*
      * The folder which contains specified file in storage.
      */
     public $folder;
-    
+	
     /*
      * The file storage which have to be used.
      */

@@ -11,10 +11,10 @@
  *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  *  copies of the Software, and to permit persons to whom the Software is
  *  furnished to do so, subject to the following conditions:
- *
+ * 
  *  The above copyright notice and this permission notice shall be included in all
  *  copies or substantial portions of the Software.
- *
+ * 
  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -60,8 +60,7 @@ class CadOptions implements ArrayAccess
         'width' => 'int',
         'height' => 'int',
         'renderLayouts' => 'bool',
-        'layoutName' => 'string',
-        'layers' => 'string[]'
+        'layoutName' => 'string'
     ];
 
     /*
@@ -74,8 +73,7 @@ class CadOptions implements ArrayAccess
         'width' => 'int32',
         'height' => 'int32',
         'renderLayouts' => null,
-        'layoutName' => null,
-        'layers' => null
+        'layoutName' => null
     ];
 
     /*
@@ -109,8 +107,7 @@ class CadOptions implements ArrayAccess
         'width' => 'Width',
         'height' => 'Height',
         'renderLayouts' => 'RenderLayouts',
-        'layoutName' => 'LayoutName',
-        'layers' => 'Layers'
+        'layoutName' => 'LayoutName'
     ];
 
     /*
@@ -123,8 +120,7 @@ class CadOptions implements ArrayAccess
         'width' => 'setWidth',
         'height' => 'setHeight',
         'renderLayouts' => 'setRenderLayouts',
-        'layoutName' => 'setLayoutName',
-        'layers' => 'setLayers'
+        'layoutName' => 'setLayoutName'
     ];
 
     /*
@@ -137,8 +133,7 @@ class CadOptions implements ArrayAccess
         'width' => 'getWidth',
         'height' => 'getHeight',
         'renderLayouts' => 'getRenderLayouts',
-        'layoutName' => 'getLayoutName',
-        'layers' => 'getLayers'
+        'layoutName' => 'getLayoutName'
     ];
 
     /*
@@ -206,7 +201,6 @@ class CadOptions implements ArrayAccess
         $this->container['height'] = isset($data['height']) ? $data['height'] : null;
         $this->container['renderLayouts'] = isset($data['renderLayouts']) ? $data['renderLayouts'] : null;
         $this->container['layoutName'] = isset($data['layoutName']) ? $data['layoutName'] : null;
-        $this->container['layers'] = isset($data['layers']) ? $data['layers'] : null;
     }
 
     /*
@@ -241,6 +235,7 @@ class CadOptions implements ArrayAccess
      */
     public function valid()
     {
+
         if ($this->container['scaleFactor'] === null) {
             return false;
         }
@@ -376,30 +371,6 @@ class CadOptions implements ArrayAccess
 
         return $this;
     }
-
-    /*
-     * Gets layers
-     *
-     * @return string[]
-     */
-    public function getLayers()
-    {
-        return $this->container['layers'];
-    }
-
-    /*
-     * Sets layers
-     *
-     * @param string[] $layers The list of document layers to render. By default all layers will be rendered. Layer names are case sensitive.
-     *
-     * @return $this
-     */
-    public function setLayers($layers)
-    {
-        $this->container['layers'] = $layers;
-
-        return $this;
-    }
     /*
      * Returns true if offset exists. False otherwise.
      *
@@ -470,3 +441,5 @@ class CadOptions implements ArrayAccess
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
+
+
