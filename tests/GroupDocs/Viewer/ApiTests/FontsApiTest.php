@@ -41,9 +41,7 @@ class FontsApiTest extends BaseApiTest
      */
     public function testGetFonts()
     {
-        $request = new Requests\GetFontsRequest();
-        
-        $response = self::$viewerApi->getFonts($request);
+        $response = self::$viewerApi->getFonts();
         
         $families = $response->getFamilies();
 
@@ -61,8 +59,6 @@ class FontsApiTest extends BaseApiTest
      */
     public function testDeleteFontsCache()
     {
-        $request = new Requests\DeleteFontsCacheRequest();
-        
-        self::$viewerApi->deleteFontsCache($request);
+        self::$viewerApi->deleteFontsCache();
     }
 }

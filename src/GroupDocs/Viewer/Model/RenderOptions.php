@@ -25,9 +25,6 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
-/*
- * RenderOptions
- */
 
 namespace GroupDocs\Viewer\Model;
 use \GroupDocs\Viewer\ObjectSerializer;

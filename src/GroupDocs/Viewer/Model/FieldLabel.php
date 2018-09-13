@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="HtmlAttachmentPageCollection.php">
+ * <copyright company="Aspose Pty Ltd" file="FieldLabel.php">
  *   Copyright (c) 2003-2018 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * HtmlAttachmentPageCollection
+ * FieldLabel
  *
- * @description Describes attachment pages.
+ * @description Represents field label
  */
-class HtmlAttachmentPageCollection implements ArrayAccess
+class FieldLabel implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class HtmlAttachmentPageCollection implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "HtmlAttachmentPageCollection";
+    protected static $swaggerModelName = "FieldLabel";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,10 +53,8 @@ class HtmlAttachmentPageCollection implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'fileName' => 'string',
-        'folder' => 'string',
-        'attachmentName' => 'string',
-        'pages' => '\GroupDocs\Viewer\Model\HtmlPage[]'
+        'field' => 'string',
+        'label' => 'string'
     ];
 
     /*
@@ -65,10 +63,8 @@ class HtmlAttachmentPageCollection implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'fileName' => null,
-        'folder' => null,
-        'attachmentName' => null,
-        'pages' => null
+        'field' => null,
+        'label' => null
     ];
 
     /*
@@ -98,10 +94,8 @@ class HtmlAttachmentPageCollection implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'fileName' => 'FileName',
-        'folder' => 'Folder',
-        'attachmentName' => 'AttachmentName',
-        'pages' => 'Pages'
+        'field' => 'Field',
+        'label' => 'Label'
     ];
 
     /*
@@ -110,10 +104,8 @@ class HtmlAttachmentPageCollection implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'fileName' => 'setFileName',
-        'folder' => 'setFolder',
-        'attachmentName' => 'setAttachmentName',
-        'pages' => 'setPages'
+        'field' => 'setField',
+        'label' => 'setLabel'
     ];
 
     /*
@@ -122,10 +114,8 @@ class HtmlAttachmentPageCollection implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'fileName' => 'getFileName',
-        'folder' => 'getFolder',
-        'attachmentName' => 'getAttachmentName',
-        'pages' => 'getPages'
+        'field' => 'getField',
+        'label' => 'getLabel'
     ];
 
     /*
@@ -188,10 +178,8 @@ class HtmlAttachmentPageCollection implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['fileName'] = isset($data['fileName']) ? $data['fileName'] : null;
-        $this->container['folder'] = isset($data['folder']) ? $data['folder'] : null;
-        $this->container['attachmentName'] = isset($data['attachmentName']) ? $data['attachmentName'] : null;
-        $this->container['pages'] = isset($data['pages']) ? $data['pages'] : null;
+        $this->container['field'] = isset($data['field']) ? $data['field'] : null;
+        $this->container['label'] = isset($data['label']) ? $data['label'] : null;
     }
 
     /*
@@ -220,97 +208,49 @@ class HtmlAttachmentPageCollection implements ArrayAccess
 
 
     /*
-     * Gets fileName
+     * Gets field
      *
      * @return string
      */
-    public function getFileName()
+    public function getField()
     {
-        return $this->container['fileName'];
+        return $this->container['field'];
     }
 
     /*
-     * Sets fileName
+     * Sets field
      *
-     * @param string $fileName The file name.
+     * @param string $field The field name e.g. \"From\"
      *
      * @return $this
      */
-    public function setFileName($fileName)
+    public function setField($field)
     {
-        $this->container['fileName'] = $fileName;
+        $this->container['field'] = $field;
 
         return $this;
     }
 
     /*
-     * Gets folder
+     * Gets label
      *
      * @return string
      */
-    public function getFolder()
+    public function getLabel()
     {
-        return $this->container['folder'];
+        return $this->container['label'];
     }
 
     /*
-     * Sets folder
+     * Sets label
      *
-     * @param string $folder File folder.
+     * @param string $label The label e.g. \"Sender\"
      *
      * @return $this
      */
-    public function setFolder($folder)
+    public function setLabel($label)
     {
-        $this->container['folder'] = $folder;
-
-        return $this;
-    }
-
-    /*
-     * Gets attachmentName
-     *
-     * @return string
-     */
-    public function getAttachmentName()
-    {
-        return $this->container['attachmentName'];
-    }
-
-    /*
-     * Sets attachmentName
-     *
-     * @param string $attachmentName Attachment name.
-     *
-     * @return $this
-     */
-    public function setAttachmentName($attachmentName)
-    {
-        $this->container['attachmentName'] = $attachmentName;
-
-        return $this;
-    }
-
-    /*
-     * Gets pages
-     *
-     * @return \GroupDocs\Viewer\Model\HtmlPage[]
-     */
-    public function getPages()
-    {
-        return $this->container['pages'];
-    }
-
-    /*
-     * Sets pages
-     *
-     * @param \GroupDocs\Viewer\Model\HtmlPage[] $pages Pages list.
-     *
-     * @return $this
-     */
-    public function setPages($pages)
-    {
-        $this->container['pages'] = $pages;
+        $this->container['label'] = $label;
 
         return $this;
     }

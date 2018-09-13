@@ -25,10 +25,11 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
+
 namespace GroupDocs\Viewer\Model\Requests;
 
 /*
- * Request model for imageTransformPages" operation.
+ * Request model for imageTransformPages operation.
  */
 class ImageTransformPagesRequest
 {

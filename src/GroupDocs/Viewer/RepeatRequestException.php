@@ -1,8 +1,8 @@
 <?php
 /**
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose" file="RepeatRequestException.php">
- *   Copyright (c) 2017 Aspose.Words for Cloud
+ * <copyright company="Aspose Pty Ltd" file="RepeatRequestException.php">
+ *   Copyright (c) 2003-2018 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy

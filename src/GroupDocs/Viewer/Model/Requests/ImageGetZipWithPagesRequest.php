@@ -25,10 +25,11 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
+
 namespace GroupDocs\Viewer\Model\Requests;
 
 /*
- * Request model for imageGetZipWithPages" operation.
+ * Request model for imageGetZipWithPages operation.
  */
 class ImageGetZipWithPagesRequest
 {
@@ -45,7 +46,7 @@ class ImageGetZipWithPagesRequest
      * @param string $password The document password.
      * @param bool $extractText When this options is set to true text contained in document will be extracted and returned along with other information.
      * @param bool $renderComments Allows to render document comments.
-     * @param bool $renderHiddenPages Enables document hidden pages, sheets or slides rendering.
+     * @param bool $renderHiddenPages Enables rendering of document hidden pages, sheets or slides.
      * @param string $defaultFontName The name of the default font.
      * @param string $fontsFolder The folder with custom fonts in storage.
      * @param string $folder The folder which contains specified file in storage.
@@ -121,7 +122,7 @@ class ImageGetZipWithPagesRequest
     public $renderComments;
 	
     /*
-     * Enables document hidden pages, sheets or slides rendering.
+     * Enables rendering of document hidden pages, sheets or slides.
      */
     public $renderHiddenPages;
 	

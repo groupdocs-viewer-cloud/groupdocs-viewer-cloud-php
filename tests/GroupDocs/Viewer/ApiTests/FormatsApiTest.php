@@ -41,9 +41,7 @@ class FormatsApiTest extends BaseApiTest
      */
     public function testGetSupportedFileFormats()
     {
-        $request = new Requests\GetSupportedFileFormatsRequest();
-
-        $response = self::$viewerApi->getSupportedFileFormats($request);
+        $response = self::$viewerApi->getSupportedFileFormats();
        
         $formats = $response->getFormats();
         

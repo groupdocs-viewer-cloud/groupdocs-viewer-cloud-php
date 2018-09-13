@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="HtmlAttachmentPageCollection.php">
+ * <copyright company="Aspose Pty Ltd" file="Tile.php">
  *   Copyright (c) 2003-2018 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * HtmlAttachmentPageCollection
+ * Tile
  *
- * @description Describes attachment pages.
+ * @description The tile represents the region on the CAD drawing, that should be rendered.
  */
-class HtmlAttachmentPageCollection implements ArrayAccess
+class Tile implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class HtmlAttachmentPageCollection implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "HtmlAttachmentPageCollection";
+    protected static $swaggerModelName = "Tile";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,10 +53,10 @@ class HtmlAttachmentPageCollection implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'fileName' => 'string',
-        'folder' => 'string',
-        'attachmentName' => 'string',
-        'pages' => '\GroupDocs\Viewer\Model\HtmlPage[]'
+        'startPointX' => 'int',
+        'startPointY' => 'int',
+        'width' => 'int',
+        'height' => 'int'
     ];
 
     /*
@@ -65,10 +65,10 @@ class HtmlAttachmentPageCollection implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'fileName' => null,
-        'folder' => null,
-        'attachmentName' => null,
-        'pages' => null
+        'startPointX' => 'int32',
+        'startPointY' => 'int32',
+        'width' => 'int32',
+        'height' => 'int32'
     ];
 
     /*
@@ -98,10 +98,10 @@ class HtmlAttachmentPageCollection implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'fileName' => 'FileName',
-        'folder' => 'Folder',
-        'attachmentName' => 'AttachmentName',
-        'pages' => 'Pages'
+        'startPointX' => 'StartPointX',
+        'startPointY' => 'StartPointY',
+        'width' => 'Width',
+        'height' => 'Height'
     ];
 
     /*
@@ -110,10 +110,10 @@ class HtmlAttachmentPageCollection implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'fileName' => 'setFileName',
-        'folder' => 'setFolder',
-        'attachmentName' => 'setAttachmentName',
-        'pages' => 'setPages'
+        'startPointX' => 'setStartPointX',
+        'startPointY' => 'setStartPointY',
+        'width' => 'setWidth',
+        'height' => 'setHeight'
     ];
 
     /*
@@ -122,10 +122,10 @@ class HtmlAttachmentPageCollection implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'fileName' => 'getFileName',
-        'folder' => 'getFolder',
-        'attachmentName' => 'getAttachmentName',
-        'pages' => 'getPages'
+        'startPointX' => 'getStartPointX',
+        'startPointY' => 'getStartPointY',
+        'width' => 'getWidth',
+        'height' => 'getHeight'
     ];
 
     /*
@@ -188,10 +188,10 @@ class HtmlAttachmentPageCollection implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['fileName'] = isset($data['fileName']) ? $data['fileName'] : null;
-        $this->container['folder'] = isset($data['folder']) ? $data['folder'] : null;
-        $this->container['attachmentName'] = isset($data['attachmentName']) ? $data['attachmentName'] : null;
-        $this->container['pages'] = isset($data['pages']) ? $data['pages'] : null;
+        $this->container['startPointX'] = isset($data['startPointX']) ? $data['startPointX'] : null;
+        $this->container['startPointY'] = isset($data['startPointY']) ? $data['startPointY'] : null;
+        $this->container['width'] = isset($data['width']) ? $data['width'] : null;
+        $this->container['height'] = isset($data['height']) ? $data['height'] : null;
     }
 
     /*
@@ -203,6 +203,18 @@ class HtmlAttachmentPageCollection implements ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['startPointX'] === null) {
+            $invalidProperties[] = "'startPointX' can't be null";
+        }
+        if ($this->container['startPointY'] === null) {
+            $invalidProperties[] = "'startPointY' can't be null";
+        }
+        if ($this->container['width'] === null) {
+            $invalidProperties[] = "'width' can't be null";
+        }
+        if ($this->container['height'] === null) {
+            $invalidProperties[] = "'height' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -215,102 +227,114 @@ class HtmlAttachmentPageCollection implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['startPointX'] === null) {
+            return false;
+        }
+        if ($this->container['startPointY'] === null) {
+            return false;
+        }
+        if ($this->container['width'] === null) {
+            return false;
+        }
+        if ($this->container['height'] === null) {
+            return false;
+        }
         return true;
     }
 
 
     /*
-     * Gets fileName
+     * Gets startPointX
      *
-     * @return string
+     * @return int
      */
-    public function getFileName()
+    public function getStartPointX()
     {
-        return $this->container['fileName'];
+        return $this->container['startPointX'];
     }
 
     /*
-     * Sets fileName
+     * Sets startPointX
      *
-     * @param string $fileName The file name.
+     * @param int $startPointX The X coordinate of the lowest left point on the drawing where the tile begins.
      *
      * @return $this
      */
-    public function setFileName($fileName)
+    public function setStartPointX($startPointX)
     {
-        $this->container['fileName'] = $fileName;
+        $this->container['startPointX'] = $startPointX;
 
         return $this;
     }
 
     /*
-     * Gets folder
+     * Gets startPointY
      *
-     * @return string
+     * @return int
      */
-    public function getFolder()
+    public function getStartPointY()
     {
-        return $this->container['folder'];
+        return $this->container['startPointY'];
     }
 
     /*
-     * Sets folder
+     * Sets startPointY
      *
-     * @param string $folder File folder.
+     * @param int $startPointY The Y coordinate of the lowest left point on the drawing where the tile begins.
      *
      * @return $this
      */
-    public function setFolder($folder)
+    public function setStartPointY($startPointY)
     {
-        $this->container['folder'] = $folder;
+        $this->container['startPointY'] = $startPointY;
 
         return $this;
     }
 
     /*
-     * Gets attachmentName
+     * Gets width
      *
-     * @return string
+     * @return int
      */
-    public function getAttachmentName()
+    public function getWidth()
     {
-        return $this->container['attachmentName'];
+        return $this->container['width'];
     }
 
     /*
-     * Sets attachmentName
+     * Sets width
      *
-     * @param string $attachmentName Attachment name.
+     * @param int $width The width of the tile.
      *
      * @return $this
      */
-    public function setAttachmentName($attachmentName)
+    public function setWidth($width)
     {
-        $this->container['attachmentName'] = $attachmentName;
+        $this->container['width'] = $width;
 
         return $this;
     }
 
     /*
-     * Gets pages
+     * Gets height
      *
-     * @return \GroupDocs\Viewer\Model\HtmlPage[]
+     * @return int
      */
-    public function getPages()
+    public function getHeight()
     {
-        return $this->container['pages'];
+        return $this->container['height'];
     }
 
     /*
-     * Sets pages
+     * Sets height
      *
-     * @param \GroupDocs\Viewer\Model\HtmlPage[] $pages Pages list.
+     * @param int $height The height of the tile.
      *
      * @return $this
      */
-    public function setPages($pages)
+    public function setHeight($height)
     {
-        $this->container['pages'] = $pages;
+        $this->container['height'] = $height;
 
         return $this;
     }

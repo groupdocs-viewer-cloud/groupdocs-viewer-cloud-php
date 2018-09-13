@@ -25,9 +25,6 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
-/*
- * DocumentInfo
- */
 
 namespace GroupDocs\Viewer\Model;
 
@@ -62,7 +59,8 @@ class DocumentInfo implements ArrayAccess
         'size' => 'int',
         'dateModified' => '\DateTime',
         'pages' => '\GroupDocs\Viewer\Model\PageInfo[]',
-        'attachments' => '\GroupDocs\Viewer\Model\AttachmentInfo[]'
+        'attachments' => '\GroupDocs\Viewer\Model\AttachmentInfo[]',
+        'layers' => 'string[]'
     ];
 
     /*
@@ -77,7 +75,8 @@ class DocumentInfo implements ArrayAccess
         'size' => 'int64',
         'dateModified' => 'date-time',
         'pages' => null,
-        'attachments' => null
+        'attachments' => null,
+        'layers' => null
     ];
 
     /*
@@ -113,7 +112,8 @@ class DocumentInfo implements ArrayAccess
         'size' => 'Size',
         'dateModified' => 'DateModified',
         'pages' => 'Pages',
-        'attachments' => 'Attachments'
+        'attachments' => 'Attachments',
+        'layers' => 'Layers'
     ];
 
     /*
@@ -128,7 +128,8 @@ class DocumentInfo implements ArrayAccess
         'size' => 'setSize',
         'dateModified' => 'setDateModified',
         'pages' => 'setPages',
-        'attachments' => 'setAttachments'
+        'attachments' => 'setAttachments',
+        'layers' => 'setLayers'
     ];
 
     /*
@@ -143,7 +144,8 @@ class DocumentInfo implements ArrayAccess
         'size' => 'getSize',
         'dateModified' => 'getDateModified',
         'pages' => 'getPages',
-        'attachments' => 'getAttachments'
+        'attachments' => 'getAttachments',
+        'layers' => 'getLayers'
     ];
 
     /*
@@ -213,6 +215,7 @@ class DocumentInfo implements ArrayAccess
         $this->container['dateModified'] = isset($data['dateModified']) ? $data['dateModified'] : null;
         $this->container['pages'] = isset($data['pages']) ? $data['pages'] : null;
         $this->container['attachments'] = isset($data['attachments']) ? $data['attachments'] : null;
+        $this->container['layers'] = isset($data['layers']) ? $data['layers'] : null;
     }
 
     /*
@@ -416,6 +419,30 @@ class DocumentInfo implements ArrayAccess
     public function setAttachments($attachments)
     {
         $this->container['attachments'] = $attachments;
+
+        return $this;
+    }
+
+    /*
+     * Gets layers
+     *
+     * @return string[]
+     */
+    public function getLayers()
+    {
+        return $this->container['layers'];
+    }
+
+    /*
+     * Sets layers
+     *
+     * @param string[] $layers The list of layers contained in a CAD document.
+     *
+     * @return $this
+     */
+    public function setLayers($layers)
+    {
+        $this->container['layers'] = $layers;
 
         return $this;
     }

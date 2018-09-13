@@ -25,9 +25,6 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
-/*
- * RenderOptionsBase
- */
 
 namespace GroupDocs\Viewer\Model;
 
@@ -419,7 +416,7 @@ class RenderOptionsBase implements ArrayAccess
     /*
      * Sets renderHiddenPages
      *
-     * @param bool $renderHiddenPages Enables document hidden pages, sheets or slides rendering.
+     * @param bool $renderHiddenPages Enables rendering of document hidden pages, sheets or slides.
      *
      * @return $this
      */

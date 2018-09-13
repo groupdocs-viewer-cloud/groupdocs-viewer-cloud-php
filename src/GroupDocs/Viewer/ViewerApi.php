@@ -37,7 +37,7 @@ use GuzzleHttp\RequestOptions;
 use GroupDocs\Viewer\Model\Requests;
 
 /*
- * GroupDocs.Viewer for Cloud API
+ * GroupDocs.Viewer Cloud API
  */
 class ViewerApi
 {
@@ -58,6 +58,18 @@ class ViewerApi
      * HeaderSelector class for header selection
      */
     protected $headerSelector;
+
+    /*
+     * Stores access token
+     * @var accessToken Access token
+     */
+    protected $accessToken;
+
+    /*
+     * Stores refresh token
+     * @var refreshToken Refresh token
+     */
+    protected $refreshToken;
 
     /*
      * Initialize a new instance of ViewerApi
@@ -86,19 +98,17 @@ class ViewerApi
      *
      * Removes fonts cache.
      *
-     * @param Requests\DeleteFontsCacheRequest $request is a request object for operation
-     *
      * @throws \GroupDocs\Viewer\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function deleteFontsCache(Requests\DeleteFontsCacheRequest $request)
+    public function deleteFontsCache()
     {
         try {
-             $this->deleteFontsCacheWithHttpInfo($request);
+             $this->deleteFontsCacheWithHttpInfo();
         }
         catch(RepeatRequestException $e) {
-             $this->deleteFontsCacheWithHttpInfo($request);
+             $this->deleteFontsCacheWithHttpInfo();
         } 
     }
 
@@ -107,16 +117,14 @@ class ViewerApi
      *
      * Removes fonts cache.
      *
-     * @param Requests\DeleteFontsCacheRequest $request is a request object for operation
-     *
      * @throws \GroupDocs\Viewer\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function deleteFontsCacheWithHttpInfo(Requests\DeleteFontsCacheRequest $request)
+    public function deleteFontsCacheWithHttpInfo()
     {
         $returnType = '';
-        $request = $this->DeleteFontsCacheRequest($request);
+        $request = $this->deleteFontsCacheRequest();
 
         try {
             $options = $this->_createHttpClientOption();
@@ -151,14 +159,12 @@ class ViewerApi
      *
      * Removes fonts cache.
      *
-     * @param Requests\DeleteFontsCacheRequest $request is a request object for operation
-     *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteFontsCacheAsync(Requests\DeleteFontsCacheRequest $request) 
+    public function deleteFontsCacheAsync() 
     {
-        return $this->deleteFontsCacheAsyncWithHttpInfo($request)
+        return $this->deleteFontsCacheAsyncWithHttpInfo()
             ->then(
                 function ($response) {
                     return $response[0];
@@ -171,15 +177,15 @@ class ViewerApi
      *
      * Removes fonts cache.
      *
-     * @param Requests\DeleteFontsCacheRequest $request is a request object for operation
+     * @param Requests\deleteFontsCacheRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteFontsCacheAsyncWithHttpInfo(Requests\DeleteFontsCacheRequest $request) 
+    public function deleteFontsCacheAsyncWithHttpInfo() 
     {
         $returnType = '';
-        $request = $this->DeleteFontsCacheRequest($request);
+        $request = $this->deleteFontsCacheRequest();
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -206,12 +212,12 @@ class ViewerApi
     /*
      * Create request for operation 'deleteFontsCache'
      *
-     * @param Requests\DeleteFontsCacheRequest $request is a request object for operation
+     * @param Requests\deleteFontsCacheRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function DeleteFontsCacheRequest(Requests\DeleteFontsCacheRequest $request)
+    protected function deleteFontsCacheRequest()
     {
 
         $resourcePath = '/viewer/fonts/cache';
@@ -224,7 +230,7 @@ class ViewerApi
 
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -271,16 +277,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -290,12 +299,12 @@ class ViewerApi
     
         $req = new Request(
             'DELETE',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('DELETE', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('DELETE', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -306,20 +315,18 @@ class ViewerApi
      *
      * List installed fonts.
      *
-     * @param Requests\GetFontsRequest $request is a request object for operation
-     *
      * @throws \GroupDocs\Viewer\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \GroupDocs\Viewer\Model\FontCollection
      */
-    public function getFonts(Requests\GetFontsRequest $request)
+    public function getFonts()
     {
         try {
-             list($response) = $this->getFontsWithHttpInfo($request);
+             list($response) = $this->getFontsWithHttpInfo();
              return $response;
         }
         catch(RepeatRequestException $e) {
-             list($response) = $this->getFontsWithHttpInfo($request);
+             list($response) = $this->getFontsWithHttpInfo();
              return $response;
         } 
     }
@@ -329,16 +336,14 @@ class ViewerApi
      *
      * List installed fonts.
      *
-     * @param Requests\GetFontsRequest $request is a request object for operation
-     *
      * @throws \GroupDocs\Viewer\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \GroupDocs\Viewer\Model\FontCollection, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getFontsWithHttpInfo(Requests\GetFontsRequest $request)
+    public function getFontsWithHttpInfo()
     {
         $returnType = '\GroupDocs\Viewer\Model\FontCollection';
-        $request = $this->GetFontsRequest($request);
+        $request = $this->getFontsRequest();
 
         try {
             $options = $this->_createHttpClientOption();
@@ -395,14 +400,12 @@ class ViewerApi
      *
      * List installed fonts.
      *
-     * @param Requests\GetFontsRequest $request is a request object for operation
-     *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getFontsAsync(Requests\GetFontsRequest $request) 
+    public function getFontsAsync() 
     {
-        return $this->getFontsAsyncWithHttpInfo($request)
+        return $this->getFontsAsyncWithHttpInfo()
             ->then(
                 function ($response) {
                     return $response[0];
@@ -415,15 +418,15 @@ class ViewerApi
      *
      * List installed fonts.
      *
-     * @param Requests\GetFontsRequest $request is a request object for operation
+     * @param Requests\getFontsRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getFontsAsyncWithHttpInfo(Requests\GetFontsRequest $request) 
+    public function getFontsAsyncWithHttpInfo() 
     {
         $returnType = '\GroupDocs\Viewer\Model\FontCollection';
-        $request = $this->GetFontsRequest($request);
+        $request = $this->getFontsRequest();
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -468,12 +471,12 @@ class ViewerApi
     /*
      * Create request for operation 'getFonts'
      *
-     * @param Requests\GetFontsRequest $request is a request object for operation
+     * @param Requests\getFontsRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function GetFontsRequest(Requests\GetFontsRequest $request)
+    protected function getFontsRequest()
     {
 
         $resourcePath = '/viewer/fonts';
@@ -486,7 +489,7 @@ class ViewerApi
 
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -533,16 +536,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -552,12 +558,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -568,20 +574,18 @@ class ViewerApi
      *
      * Retrieves list of supported file formats.
      *
-     * @param Requests\GetSupportedFileFormatsRequest $request is a request object for operation
-     *
      * @throws \GroupDocs\Viewer\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \GroupDocs\Viewer\Model\FormatCollection
      */
-    public function getSupportedFileFormats(Requests\GetSupportedFileFormatsRequest $request)
+    public function getSupportedFileFormats()
     {
         try {
-             list($response) = $this->getSupportedFileFormatsWithHttpInfo($request);
+             list($response) = $this->getSupportedFileFormatsWithHttpInfo();
              return $response;
         }
         catch(RepeatRequestException $e) {
-             list($response) = $this->getSupportedFileFormatsWithHttpInfo($request);
+             list($response) = $this->getSupportedFileFormatsWithHttpInfo();
              return $response;
         } 
     }
@@ -591,16 +595,14 @@ class ViewerApi
      *
      * Retrieves list of supported file formats.
      *
-     * @param Requests\GetSupportedFileFormatsRequest $request is a request object for operation
-     *
      * @throws \GroupDocs\Viewer\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \GroupDocs\Viewer\Model\FormatCollection, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getSupportedFileFormatsWithHttpInfo(Requests\GetSupportedFileFormatsRequest $request)
+    public function getSupportedFileFormatsWithHttpInfo()
     {
         $returnType = '\GroupDocs\Viewer\Model\FormatCollection';
-        $request = $this->GetSupportedFileFormatsRequest($request);
+        $request = $this->getSupportedFileFormatsRequest();
 
         try {
             $options = $this->_createHttpClientOption();
@@ -657,14 +659,12 @@ class ViewerApi
      *
      * Retrieves list of supported file formats.
      *
-     * @param Requests\GetSupportedFileFormatsRequest $request is a request object for operation
-     *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getSupportedFileFormatsAsync(Requests\GetSupportedFileFormatsRequest $request) 
+    public function getSupportedFileFormatsAsync() 
     {
-        return $this->getSupportedFileFormatsAsyncWithHttpInfo($request)
+        return $this->getSupportedFileFormatsAsyncWithHttpInfo()
             ->then(
                 function ($response) {
                     return $response[0];
@@ -677,15 +677,15 @@ class ViewerApi
      *
      * Retrieves list of supported file formats.
      *
-     * @param Requests\GetSupportedFileFormatsRequest $request is a request object for operation
+     * @param Requests\getSupportedFileFormatsRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getSupportedFileFormatsAsyncWithHttpInfo(Requests\GetSupportedFileFormatsRequest $request) 
+    public function getSupportedFileFormatsAsyncWithHttpInfo() 
     {
         $returnType = '\GroupDocs\Viewer\Model\FormatCollection';
-        $request = $this->GetSupportedFileFormatsRequest($request);
+        $request = $this->getSupportedFileFormatsRequest();
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -730,12 +730,12 @@ class ViewerApi
     /*
      * Create request for operation 'getSupportedFileFormats'
      *
-     * @param Requests\GetSupportedFileFormatsRequest $request is a request object for operation
+     * @param Requests\getSupportedFileFormatsRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function GetSupportedFileFormatsRequest(Requests\GetSupportedFileFormatsRequest $request)
+    protected function getSupportedFileFormatsRequest()
     {
 
         $resourcePath = '/viewer/formats';
@@ -748,7 +748,7 @@ class ViewerApi
 
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -795,16 +795,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -814,12 +817,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -1058,7 +1061,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -1112,16 +1115,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -1131,12 +1137,12 @@ class ViewerApi
     
         $req = new Request(
             'POST',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -1366,7 +1372,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -1420,16 +1426,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -1439,12 +1448,12 @@ class ViewerApi
     
         $req = new Request(
             'POST',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -1683,7 +1692,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // form params
         if ($request->file !== null) {
@@ -1748,16 +1757,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -1767,12 +1779,12 @@ class ViewerApi
     
         $req = new Request(
             'POST',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -2017,7 +2029,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -2071,16 +2083,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -2090,12 +2105,12 @@ class ViewerApi
     
         $req = new Request(
             'PUT',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('PUT', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('PUT', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -2325,7 +2340,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -2379,16 +2394,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -2398,12 +2416,12 @@ class ViewerApi
     
         $req = new Request(
             'POST',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -2642,7 +2660,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // form params
         if ($request->file !== null) {
@@ -2707,16 +2725,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -2726,12 +2747,12 @@ class ViewerApi
     
         $req = new Request(
             'POST',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -2740,7 +2761,7 @@ class ViewerApi
     /*
      * Operation htmlCreatePdfFileFromUrl
      *
-     * Creates PDF document for document at provided URL and saves it in cache.  Retrieves file from specified URL and tries to detect file type when fileName parameter is not specified. Saves retrieved file in storage. Use fileName and folder parameters to specify desired file name and folder to save file. When file with specified name already exists in storage new unique file name will be used for file. Expects PdfFileOptions﻿ object data in request body.
+     * Creates PDF document for document at provided URL and saves it in cache.  Retrieves file from specified URL and tries to detect file type when fileName parameter is not specified. Saves retrieved file in storage. Use fileName and folder parameters to specify desired file name and folder to save file. When file with specified name already exists in storage new unique file name will be used for file. Expects PdfFileOptions object data in request body.
      *
      * @param Requests\HtmlCreatePdfFileFromUrlRequest $request is a request object for operation
      *
@@ -2763,7 +2784,7 @@ class ViewerApi
     /*
      * Operation htmlCreatePdfFileFromUrlWithHttpInfo
      *
-     * Creates PDF document for document at provided URL and saves it in cache.  Retrieves file from specified URL and tries to detect file type when fileName parameter is not specified. Saves retrieved file in storage. Use fileName and folder parameters to specify desired file name and folder to save file. When file with specified name already exists in storage new unique file name will be used for file. Expects PdfFileOptions﻿ object data in request body.
+     * Creates PDF document for document at provided URL and saves it in cache.  Retrieves file from specified URL and tries to detect file type when fileName parameter is not specified. Saves retrieved file in storage. Use fileName and folder parameters to specify desired file name and folder to save file. When file with specified name already exists in storage new unique file name will be used for file. Expects PdfFileOptions object data in request body.
      *
      * @param Requests\HtmlCreatePdfFileFromUrlRequest $request is a request object for operation
      *
@@ -2829,7 +2850,7 @@ class ViewerApi
     /*
      * Operation htmlCreatePdfFileFromUrlAsync
      *
-     * Creates PDF document for document at provided URL and saves it in cache.  Retrieves file from specified URL and tries to detect file type when fileName parameter is not specified. Saves retrieved file in storage. Use fileName and folder parameters to specify desired file name and folder to save file. When file with specified name already exists in storage new unique file name will be used for file. Expects PdfFileOptions﻿ object data in request body.
+     * Creates PDF document for document at provided URL and saves it in cache.  Retrieves file from specified URL and tries to detect file type when fileName parameter is not specified. Saves retrieved file in storage. Use fileName and folder parameters to specify desired file name and folder to save file. When file with specified name already exists in storage new unique file name will be used for file. Expects PdfFileOptions object data in request body.
      *
      * @param Requests\HtmlCreatePdfFileFromUrlRequest $request is a request object for operation
      *
@@ -2849,7 +2870,7 @@ class ViewerApi
     /*
      * Operation htmlCreatePdfFileFromUrlAsyncWithHttpInfo
      *
-     * Creates PDF document for document at provided URL and saves it in cache.  Retrieves file from specified URL and tries to detect file type when fileName parameter is not specified. Saves retrieved file in storage. Use fileName and folder parameters to specify desired file name and folder to save file. When file with specified name already exists in storage new unique file name will be used for file. Expects PdfFileOptions﻿ object data in request body.
+     * Creates PDF document for document at provided URL and saves it in cache.  Retrieves file from specified URL and tries to detect file type when fileName parameter is not specified. Saves retrieved file in storage. Use fileName and folder parameters to specify desired file name and folder to save file. When file with specified name already exists in storage new unique file name will be used for file. Expects PdfFileOptions object data in request body.
      *
      * @param Requests\HtmlCreatePdfFileFromUrlRequest $request is a request object for operation
      *
@@ -2976,7 +2997,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -3030,16 +3051,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -3049,12 +3073,12 @@ class ViewerApi
     
         $req = new Request(
             'PUT',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('PUT', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('PUT', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -3241,7 +3265,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -3288,16 +3312,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -3307,12 +3334,12 @@ class ViewerApi
     
         $req = new Request(
             'DELETE',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('DELETE', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('DELETE', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -3490,7 +3517,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -3537,16 +3564,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -3556,12 +3586,12 @@ class ViewerApi
     
         $req = new Request(
             'DELETE',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('DELETE', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('DELETE', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -3800,7 +3830,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -3847,16 +3877,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -3866,12 +3899,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -4120,7 +4153,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -4167,16 +4200,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -4186,12 +4222,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -4420,7 +4456,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -4474,16 +4510,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -4493,12 +4532,12 @@ class ViewerApi
     
         $req = new Request(
             'POST',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -4765,6 +4804,16 @@ class ViewerApi
             }
         }
         // query params
+        if ($request->excludeFonts !== null) {
+            $localName = lcfirst('ExcludeFonts');
+            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
         if ($request->renderComments !== null) {
             $localName = lcfirst('RenderComments');
             $localValue = is_bool($request->renderComments) ? ($request->renderComments ? 'true' : 'false') : $request->renderComments;
@@ -4846,7 +4895,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -4893,16 +4942,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -4912,12 +4964,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -5164,7 +5216,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -5211,16 +5263,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -5230,12 +5285,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -5493,6 +5548,16 @@ class ViewerApi
             }
         }
         // query params
+        if ($request->excludeFonts !== null) {
+            $localName = lcfirst('ExcludeFonts');
+            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
         if ($request->startPageNumber !== null) {
             $localName = lcfirst('StartPageNumber');
             $localValue = is_bool($request->startPageNumber) ? ($request->startPageNumber ? 'true' : 'false') : $request->startPageNumber;
@@ -5594,7 +5659,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -5641,16 +5706,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -5660,12 +5728,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -5895,7 +5963,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -5942,16 +6010,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -5961,12 +6032,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -6216,7 +6287,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -6263,16 +6334,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -6282,12 +6356,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -6516,7 +6590,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // form params
         if ($request->file !== null) {
@@ -6581,16 +6655,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -6600,12 +6677,12 @@ class ViewerApi
     
         $req = new Request(
             'POST',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -6870,7 +6947,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -6917,16 +6994,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -6936,12 +7016,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -7176,7 +7256,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -7230,16 +7310,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -7249,12 +7332,12 @@ class ViewerApi
     
         $req = new Request(
             'PUT',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('PUT', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('PUT', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -7474,7 +7557,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -7528,16 +7611,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -7547,12 +7633,12 @@ class ViewerApi
     
         $req = new Request(
             'POST',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -7810,6 +7896,16 @@ class ViewerApi
             }
         }
         // query params
+        if ($request->excludeFonts !== null) {
+            $localName = lcfirst('ExcludeFonts');
+            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
         if ($request->password !== null) {
             $localName = lcfirst('Password');
             $localValue = is_bool($request->password) ? ($request->password ? 'true' : 'false') : $request->password;
@@ -7881,7 +7977,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -7928,16 +8024,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -7947,12 +8046,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -8190,7 +8289,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -8237,16 +8336,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -8256,12 +8358,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -8510,6 +8612,16 @@ class ViewerApi
             }
         }
         // query params
+        if ($request->excludeFonts !== null) {
+            $localName = lcfirst('ExcludeFonts');
+            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
         if ($request->startPageNumber !== null) {
             $localName = lcfirst('StartPageNumber');
             $localValue = is_bool($request->startPageNumber) ? ($request->startPageNumber ? 'true' : 'false') : $request->startPageNumber;
@@ -8601,7 +8713,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -8648,16 +8760,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -8667,12 +8782,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -8936,6 +9051,16 @@ class ViewerApi
             }
         }
         // query params
+        if ($request->excludeFonts !== null) {
+            $localName = lcfirst('ExcludeFonts');
+            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
         if ($request->startPageNumber !== null) {
             $localName = lcfirst('StartPageNumber');
             $localValue = is_bool($request->startPageNumber) ? ($request->startPageNumber ? 'true' : 'false') : $request->startPageNumber;
@@ -9027,7 +9152,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -9074,16 +9199,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -9093,12 +9221,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -9368,7 +9496,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -9415,16 +9543,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -9434,12 +9565,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -9724,7 +9855,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -9771,16 +9902,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -9790,12 +9924,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -10053,6 +10187,16 @@ class ViewerApi
             }
         }
         // query params
+        if ($request->excludeFonts !== null) {
+            $localName = lcfirst('ExcludeFonts');
+            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
         if ($request->startPageNumber !== null) {
             $localName = lcfirst('StartPageNumber');
             $localValue = is_bool($request->startPageNumber) ? ($request->startPageNumber ? 'true' : 'false') : $request->startPageNumber;
@@ -10154,7 +10298,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -10201,16 +10345,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -10220,12 +10367,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -10474,6 +10621,16 @@ class ViewerApi
             }
         }
         // query params
+        if ($request->excludeFonts !== null) {
+            $localName = lcfirst('ExcludeFonts');
+            $localValue = is_bool($request->excludeFonts) ? ($request->excludeFonts ? 'true' : 'false') : $request->excludeFonts;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
         if ($request->startPageNumber !== null) {
             $localName = lcfirst('StartPageNumber');
             $localValue = is_bool($request->startPageNumber) ? ($request->startPageNumber ? 'true' : 'false') : $request->startPageNumber;
@@ -10565,7 +10722,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -10612,16 +10769,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -10631,12 +10791,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -10856,7 +11016,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -10910,16 +11070,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -10929,12 +11092,12 @@ class ViewerApi
     
         $req = new Request(
             'PUT',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('PUT', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('PUT', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -11173,7 +11336,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -11227,16 +11390,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -11246,12 +11412,12 @@ class ViewerApi
     
         $req = new Request(
             'POST',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -11481,7 +11647,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -11535,16 +11701,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -11554,12 +11723,12 @@ class ViewerApi
     
         $req = new Request(
             'POST',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -11798,7 +11967,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // form params
         if ($request->file !== null) {
@@ -11863,16 +12032,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -11882,12 +12054,12 @@ class ViewerApi
     
         $req = new Request(
             'POST',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -12132,7 +12304,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -12186,16 +12358,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -12205,12 +12380,12 @@ class ViewerApi
     
         $req = new Request(
             'PUT',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('PUT', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('PUT', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -12440,7 +12615,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -12494,16 +12669,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -12513,12 +12691,12 @@ class ViewerApi
     
         $req = new Request(
             'POST',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -12757,7 +12935,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // form params
         if ($request->file !== null) {
@@ -12822,16 +13000,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -12841,12 +13022,12 @@ class ViewerApi
     
         $req = new Request(
             'POST',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -12855,7 +13036,7 @@ class ViewerApi
     /*
      * Operation imageCreatePdfFileFromUrl
      *
-     * Creates PDF document for document at provided URL and saves it in cache.  Retrieves file from specified URL and tries to detect file type when fileName parameter is not specified. Saves retrieved file in storage. Use fileName and folder parameters to specify desired file name and folder to save file. When file with specified name already exists in storage new unique file name will be used for file. Expects PdfFileOptions﻿ object data in request body.
+     * Creates PDF document for document at provided URL and saves it in cache.  Retrieves file from specified URL and tries to detect file type when fileName parameter is not specified. Saves retrieved file in storage. Use fileName and folder parameters to specify desired file name and folder to save file. When file with specified name already exists in storage new unique file name will be used for file. Expects PdfFileOptions object data in request body.
      *
      * @param Requests\ImageCreatePdfFileFromUrlRequest $request is a request object for operation
      *
@@ -12878,7 +13059,7 @@ class ViewerApi
     /*
      * Operation imageCreatePdfFileFromUrlWithHttpInfo
      *
-     * Creates PDF document for document at provided URL and saves it in cache.  Retrieves file from specified URL and tries to detect file type when fileName parameter is not specified. Saves retrieved file in storage. Use fileName and folder parameters to specify desired file name and folder to save file. When file with specified name already exists in storage new unique file name will be used for file. Expects PdfFileOptions﻿ object data in request body.
+     * Creates PDF document for document at provided URL and saves it in cache.  Retrieves file from specified URL and tries to detect file type when fileName parameter is not specified. Saves retrieved file in storage. Use fileName and folder parameters to specify desired file name and folder to save file. When file with specified name already exists in storage new unique file name will be used for file. Expects PdfFileOptions object data in request body.
      *
      * @param Requests\ImageCreatePdfFileFromUrlRequest $request is a request object for operation
      *
@@ -12944,7 +13125,7 @@ class ViewerApi
     /*
      * Operation imageCreatePdfFileFromUrlAsync
      *
-     * Creates PDF document for document at provided URL and saves it in cache.  Retrieves file from specified URL and tries to detect file type when fileName parameter is not specified. Saves retrieved file in storage. Use fileName and folder parameters to specify desired file name and folder to save file. When file with specified name already exists in storage new unique file name will be used for file. Expects PdfFileOptions﻿ object data in request body.
+     * Creates PDF document for document at provided URL and saves it in cache.  Retrieves file from specified URL and tries to detect file type when fileName parameter is not specified. Saves retrieved file in storage. Use fileName and folder parameters to specify desired file name and folder to save file. When file with specified name already exists in storage new unique file name will be used for file. Expects PdfFileOptions object data in request body.
      *
      * @param Requests\ImageCreatePdfFileFromUrlRequest $request is a request object for operation
      *
@@ -12964,7 +13145,7 @@ class ViewerApi
     /*
      * Operation imageCreatePdfFileFromUrlAsyncWithHttpInfo
      *
-     * Creates PDF document for document at provided URL and saves it in cache.  Retrieves file from specified URL and tries to detect file type when fileName parameter is not specified. Saves retrieved file in storage. Use fileName and folder parameters to specify desired file name and folder to save file. When file with specified name already exists in storage new unique file name will be used for file. Expects PdfFileOptions﻿ object data in request body.
+     * Creates PDF document for document at provided URL and saves it in cache.  Retrieves file from specified URL and tries to detect file type when fileName parameter is not specified. Saves retrieved file in storage. Use fileName and folder parameters to specify desired file name and folder to save file. When file with specified name already exists in storage new unique file name will be used for file. Expects PdfFileOptions object data in request body.
      *
      * @param Requests\ImageCreatePdfFileFromUrlRequest $request is a request object for operation
      *
@@ -13091,7 +13272,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -13145,16 +13326,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -13164,12 +13348,12 @@ class ViewerApi
     
         $req = new Request(
             'PUT',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('PUT', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('PUT', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -13356,7 +13540,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -13403,16 +13587,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -13422,12 +13609,12 @@ class ViewerApi
     
         $req = new Request(
             'DELETE',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('DELETE', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('DELETE', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -13605,7 +13792,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -13652,16 +13839,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -13671,12 +13861,12 @@ class ViewerApi
     
         $req = new Request(
             'DELETE',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('DELETE', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('DELETE', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -13915,7 +14105,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -13962,16 +14152,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -13981,12 +14174,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -14245,7 +14438,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -14292,16 +14485,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -14311,12 +14507,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -14545,7 +14741,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -14599,16 +14795,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -14618,12 +14817,12 @@ class ViewerApi
     
         $req = new Request(
             'POST',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -14971,7 +15170,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -15018,16 +15217,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -15037,12 +15239,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -15401,7 +15603,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -15448,16 +15650,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -15467,12 +15672,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -15702,7 +15907,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -15749,16 +15954,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -15768,12 +15976,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -16033,7 +16241,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -16080,16 +16288,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -16099,12 +16310,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -16333,7 +16544,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // form params
         if ($request->file !== null) {
@@ -16398,16 +16609,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -16417,12 +16631,12 @@ class ViewerApi
     
         $req = new Request(
             'POST',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -16697,7 +16911,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -16744,16 +16958,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -16763,12 +16980,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -17003,7 +17220,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -17057,16 +17274,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -17076,12 +17296,12 @@ class ViewerApi
     
         $req = new Request(
             'PUT',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('PUT', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('PUT', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -17301,7 +17521,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -17355,16 +17575,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -17374,12 +17597,12 @@ class ViewerApi
     
         $req = new Request(
             'POST',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -17708,7 +17931,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -17755,16 +17978,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -17774,12 +18000,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -18119,7 +18345,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -18166,16 +18392,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -18185,12 +18414,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -18545,7 +18774,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -18592,16 +18821,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -18611,12 +18843,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -18886,7 +19118,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -18933,16 +19165,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -18952,12 +19187,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -19242,7 +19477,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -19289,16 +19524,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -19308,12 +19546,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -19672,7 +19910,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -19719,16 +19957,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -19738,12 +19979,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -20083,7 +20324,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -20130,16 +20371,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -20149,12 +20393,12 @@ class ViewerApi
     
         $req = new Request(
             'GET',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('GET', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -20374,7 +20618,7 @@ class ViewerApi
         }
     
     
-        $resourcePath = $this->_parseURL($resourcePath, $queryParams);
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
@@ -20428,16 +20672,19 @@ class ViewerApi
     
         $this->_requestToken();
 
-        if ($this->config->getAccessToken() !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getUserAgent();
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
         }
-    
-        $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
 
         $headers = array_merge(
             $defaultHeaders,
@@ -20447,12 +20694,12 @@ class ViewerApi
     
         $req = new Request(
             'PUT',
-            $this->config->getHost() . $resourcePath,
+            $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('PUT', $this->config->getHost() . $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('PUT', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -20510,15 +20757,14 @@ class ViewerApi
     /*
      * Executes url parsing
      */
-    private function _parseURL($url, $queryParams) 
+    private function _buildUrl($url, $queryParams) 
     {
-        // parse the url
         $urlPath = trim($url, '/');
         $urlQuery = http_build_query($queryParams);
  
-        $urlToSign = $this->config->getBasePath() . '/' . $urlPath . "?" . $urlQuery;
+        $url = $this->config->getServerUrl() . '/' . $urlPath . "?" . $urlQuery;
         
-        return $urlToSign;
+        return $url;
     }
   
     /*
@@ -20526,12 +20772,16 @@ class ViewerApi
      */
     private function _requestToken() 
     {
-        $requestUrl = $this->config->getHost() . "/oauth2/token";
-        $postData = "grant_type=client_credentials" . "&client_id=" . $this->config->getAppSid() . "&client_secret=" . $this->config->getAppKey();
-        $response = $this->client->send(new Request('POST', $requestUrl, [], $postData));
-        $result = json_decode($response->getBody()->getContents(), true);
-        $this->config->setAccessToken($result["access_token"]);
-        $this->config->setRefreshToken($result["refresh_token"]);
+        if($this->accessToken == null) 
+        {
+            $requestUrl = $this->config->getApiBaseUrl() . "/oauth2/token";
+            $postData = "grant_type=client_credentials" . "&client_id=" . $this->config->getAppSid() . "&client_secret=" . $this->config->getAppKey();
+            $response = $this->client->send(new Request('POST', $requestUrl, [], $postData));
+            $result = json_decode($response->getBody()->getContents(), true);
+            
+            $this->accessToken = $result["access_token"];
+            $this->refreshToken = $result["refresh_token"];
+        }
     }
   
     /*
@@ -20539,11 +20789,14 @@ class ViewerApi
      */
     private function _refreshToken() 
     {
-        $requestUrl = $this->config->getHost() . "/oauth2/token";
+        $url = parse_url($this->config->getServerUrl());
+
+        $requestUrl = $this->config->getApiBaseUrl() . "/oauth2/token";
         $postData = "grant_type=refresh_token&refresh_token=" . $this->config->getRefreshToken();
         $response = $this->client->send(new Request('POST', $requestUrl, [], $postData));
         $result = json_decode($response->getBody()->getContents(), true);
-        $this->config->setAccessToken($result["access_token"]);
-        $this->config->setRefreshToken($result["refresh_token"]);
+       
+        $this->accessToken = $result["access_token"];
+        $this->refreshToken = $result["refresh_token"];
     }
 }

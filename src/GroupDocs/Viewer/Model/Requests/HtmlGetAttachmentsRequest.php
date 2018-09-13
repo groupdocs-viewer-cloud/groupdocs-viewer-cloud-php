@@ -25,10 +25,11 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
+
 namespace GroupDocs\Viewer\Model\Requests;
 
 /*
- * Request model for htmlGetAttachments" operation.
+ * Request model for htmlGetAttachments operation.
  */
 class HtmlGetAttachmentsRequest
 {

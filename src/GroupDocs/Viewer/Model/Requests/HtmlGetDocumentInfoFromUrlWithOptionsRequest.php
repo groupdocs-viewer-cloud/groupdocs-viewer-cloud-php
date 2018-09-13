@@ -25,10 +25,11 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
+
 namespace GroupDocs\Viewer\Model\Requests;
 
 /*
- * Request model for htmlGetDocumentInfoFromUrlWithOptions" operation.
+ * Request model for htmlGetDocumentInfoFromUrlWithOptions operation.
  */
 class HtmlGetDocumentInfoFromUrlWithOptionsRequest
 {

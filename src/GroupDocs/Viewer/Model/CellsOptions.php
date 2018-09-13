@@ -25,9 +25,6 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
-/*
- * CellsOptions
- */
 
 namespace GroupDocs\Viewer\Model;
 
@@ -62,7 +59,10 @@ class CellsOptions implements ArrayAccess
         'ignoreEmptyRows' => 'bool',
         'encoding' => 'string',
         'internalHyperlinkPrefix' => 'string',
-        'textOverflowMode' => 'string'
+        'textOverflowMode' => 'string',
+        'renderHiddenRows' => 'bool',
+        'renderHiddenColumns' => 'bool',
+        'renderPrintAreaOnly' => 'bool'
     ];
 
     /*
@@ -77,7 +77,10 @@ class CellsOptions implements ArrayAccess
         'ignoreEmptyRows' => null,
         'encoding' => null,
         'internalHyperlinkPrefix' => null,
-        'textOverflowMode' => null
+        'textOverflowMode' => null,
+        'renderHiddenRows' => null,
+        'renderHiddenColumns' => null,
+        'renderPrintAreaOnly' => null
     ];
 
     /*
@@ -113,7 +116,10 @@ class CellsOptions implements ArrayAccess
         'ignoreEmptyRows' => 'IgnoreEmptyRows',
         'encoding' => 'Encoding',
         'internalHyperlinkPrefix' => 'InternalHyperlinkPrefix',
-        'textOverflowMode' => 'TextOverflowMode'
+        'textOverflowMode' => 'TextOverflowMode',
+        'renderHiddenRows' => 'RenderHiddenRows',
+        'renderHiddenColumns' => 'RenderHiddenColumns',
+        'renderPrintAreaOnly' => 'RenderPrintAreaOnly'
     ];
 
     /*
@@ -128,7 +134,10 @@ class CellsOptions implements ArrayAccess
         'ignoreEmptyRows' => 'setIgnoreEmptyRows',
         'encoding' => 'setEncoding',
         'internalHyperlinkPrefix' => 'setInternalHyperlinkPrefix',
-        'textOverflowMode' => 'setTextOverflowMode'
+        'textOverflowMode' => 'setTextOverflowMode',
+        'renderHiddenRows' => 'setRenderHiddenRows',
+        'renderHiddenColumns' => 'setRenderHiddenColumns',
+        'renderPrintAreaOnly' => 'setRenderPrintAreaOnly'
     ];
 
     /*
@@ -143,7 +152,10 @@ class CellsOptions implements ArrayAccess
         'ignoreEmptyRows' => 'getIgnoreEmptyRows',
         'encoding' => 'getEncoding',
         'internalHyperlinkPrefix' => 'getInternalHyperlinkPrefix',
-        'textOverflowMode' => 'getTextOverflowMode'
+        'textOverflowMode' => 'getTextOverflowMode',
+        'renderHiddenRows' => 'getRenderHiddenRows',
+        'renderHiddenColumns' => 'getRenderHiddenColumns',
+        'renderPrintAreaOnly' => 'getRenderPrintAreaOnly'
     ];
 
     /*
@@ -213,6 +225,9 @@ class CellsOptions implements ArrayAccess
         $this->container['encoding'] = isset($data['encoding']) ? $data['encoding'] : null;
         $this->container['internalHyperlinkPrefix'] = isset($data['internalHyperlinkPrefix']) ? $data['internalHyperlinkPrefix'] : null;
         $this->container['textOverflowMode'] = isset($data['textOverflowMode']) ? $data['textOverflowMode'] : null;
+        $this->container['renderHiddenRows'] = isset($data['renderHiddenRows']) ? $data['renderHiddenRows'] : null;
+        $this->container['renderHiddenColumns'] = isset($data['renderHiddenColumns']) ? $data['renderHiddenColumns'] : null;
+        $this->container['renderPrintAreaOnly'] = isset($data['renderPrintAreaOnly']) ? $data['renderPrintAreaOnly'] : null;
     }
 
     /*
@@ -236,6 +251,15 @@ class CellsOptions implements ArrayAccess
         if ($this->container['ignoreEmptyRows'] === null) {
             $invalidProperties[] = "'ignoreEmptyRows' can't be null";
         }
+        if ($this->container['renderHiddenRows'] === null) {
+            $invalidProperties[] = "'renderHiddenRows' can't be null";
+        }
+        if ($this->container['renderHiddenColumns'] === null) {
+            $invalidProperties[] = "'renderHiddenColumns' can't be null";
+        }
+        if ($this->container['renderPrintAreaOnly'] === null) {
+            $invalidProperties[] = "'renderPrintAreaOnly' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -258,6 +282,15 @@ class CellsOptions implements ArrayAccess
             return false;
         }
         if ($this->container['ignoreEmptyRows'] === null) {
+            return false;
+        }
+        if ($this->container['renderHiddenRows'] === null) {
+            return false;
+        }
+        if ($this->container['renderHiddenColumns'] === null) {
+            return false;
+        }
+        if ($this->container['renderPrintAreaOnly'] === null) {
             return false;
         }
         return true;
@@ -421,13 +454,85 @@ class CellsOptions implements ArrayAccess
     /*
      * Sets textOverflowMode
      *
-     * @param string $textOverflowMode Text overflow mode applied when the text is too big to fit into the cell. Supported values {Overlay|OverlayIfNextIsEmpty|HideText}: 1. Overlay - overlay next cells even they are not empty. 2. OverlayIfNextIsEmpty - overlay next cells only if they are not empty (default). 3. HideText - hide overflow text.
+     * @param string $textOverflowMode Text overflow mode applied when the text is too big to fit into the cell. Supported values {Overlay|OverlayIfNextIsEmpty|HideText|AutoFitColumn}: 1. Overlay - overlay next cells even they are not empty. 2. OverlayIfNextIsEmpty - overlay next cells only if they are not empty (default). 3. HideText - hide overflow text. 4. AutoFitColumn - expand cell width to fit overflowed text.
      *
      * @return $this
      */
     public function setTextOverflowMode($textOverflowMode)
     {
         $this->container['textOverflowMode'] = $textOverflowMode;
+
+        return $this;
+    }
+
+    /*
+     * Gets renderHiddenRows
+     *
+     * @return bool
+     */
+    public function getRenderHiddenRows()
+    {
+        return $this->container['renderHiddenRows'];
+    }
+
+    /*
+     * Sets renderHiddenRows
+     *
+     * @param bool $renderHiddenRows Enables rendering of hidden rows.
+     *
+     * @return $this
+     */
+    public function setRenderHiddenRows($renderHiddenRows)
+    {
+        $this->container['renderHiddenRows'] = $renderHiddenRows;
+
+        return $this;
+    }
+
+    /*
+     * Gets renderHiddenColumns
+     *
+     * @return bool
+     */
+    public function getRenderHiddenColumns()
+    {
+        return $this->container['renderHiddenColumns'];
+    }
+
+    /*
+     * Sets renderHiddenColumns
+     *
+     * @param bool $renderHiddenColumns Enables rendering of hidden columns.
+     *
+     * @return $this
+     */
+    public function setRenderHiddenColumns($renderHiddenColumns)
+    {
+        $this->container['renderHiddenColumns'] = $renderHiddenColumns;
+
+        return $this;
+    }
+
+    /*
+     * Gets renderPrintAreaOnly
+     *
+     * @return bool
+     */
+    public function getRenderPrintAreaOnly()
+    {
+        return $this->container['renderPrintAreaOnly'];
+    }
+
+    /*
+     * Sets renderPrintAreaOnly
+     *
+     * @param bool $renderPrintAreaOnly Enables rendering worksheet(s) sections which is defined as print area. Renders each print area in a worksheet as a separate page.
+     *
+     * @return $this
+     */
+    public function setRenderPrintAreaOnly($renderPrintAreaOnly)
+    {
+        $this->container['renderPrintAreaOnly'] = $renderPrintAreaOnly;
 
         return $this;
     }

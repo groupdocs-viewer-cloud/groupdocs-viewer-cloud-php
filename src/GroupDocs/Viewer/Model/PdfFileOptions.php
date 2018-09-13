@@ -25,9 +25,6 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
-/*
- * PdfFileOptions
- */
 
 namespace GroupDocs\Viewer\Model;
 use \GroupDocs\Viewer\ObjectSerializer;

@@ -25,10 +25,11 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
+
 namespace GroupDocs\Viewer\Model\Requests;
 
 /*
- * Request model for htmlGetPageResource" operation.
+ * Request model for htmlGetPageResource operation.
  */
 class HtmlGetPageResourceRequest
 {

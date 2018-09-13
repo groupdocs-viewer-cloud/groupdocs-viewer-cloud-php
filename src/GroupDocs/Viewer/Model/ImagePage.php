@@ -25,9 +25,6 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
-/*
- * ImagePage
- */
 
 namespace GroupDocs\Viewer\Model;
 use \GroupDocs\Viewer\ObjectSerializer;

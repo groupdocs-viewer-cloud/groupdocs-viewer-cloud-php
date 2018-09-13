@@ -43,7 +43,7 @@ abstract class BaseApiTest extends \PHPUnit_Framework_TestCase
     protected static $fromUrlFolder = "tests\\from_url";
     protected static $fromContentFolder = "tests\\from_content";
 
-    protected static $testFilesUploaded = true;
+    protected static $testFilesUploaded = false;
 
     /**
      * Cleanup after each test case
@@ -89,7 +89,7 @@ abstract class BaseApiTest extends \PHPUnit_Framework_TestCase
         self::$viewerConfig = new Configuration();
         self::$viewerConfig->setAppSid($appSid);
         self::$viewerConfig->setAppKey($appKey);
-        self::$viewerConfig->setHost($apiBaseUrl);
+        self::$viewerConfig->setApiBaseUrl($apiBaseUrl);
         self::$viewerApi = new ViewerApi(self::$viewerConfig);
 
         self::_uploadTestFiles();

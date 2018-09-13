@@ -25,10 +25,11 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
+
 namespace GroupDocs\Viewer\Model\Requests;
 
 /*
- * Request model for htmlCreateAttachmentPagesCache" operation.
+ * Request model for htmlCreateAttachmentPagesCache operation.
  */
 class HtmlCreateAttachmentPagesCacheRequest
 {

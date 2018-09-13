@@ -25,10 +25,11 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
+
 namespace GroupDocs\Viewer\Model\Requests;
 
 /*
- * Request model for htmlDeletePagesCache" operation.
+ * Request model for htmlDeletePagesCache operation.
  */
 class HtmlDeletePagesCacheRequest
 {

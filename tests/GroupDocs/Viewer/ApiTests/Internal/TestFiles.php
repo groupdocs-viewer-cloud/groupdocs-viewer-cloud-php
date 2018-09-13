@@ -26,6 +26,7 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
+
 namespace GroupDocs\Viewer\ApiTests\Internal;
 
 require_once "TestFile.php";

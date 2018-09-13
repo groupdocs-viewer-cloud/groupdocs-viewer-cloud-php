@@ -25,10 +25,11 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
+
 namespace GroupDocs\Viewer\Model\Requests;
 
 /*
- * Request model for imageGetDocumentInfoWithOptions" operation.
+ * Request model for imageGetDocumentInfoWithOptions operation.
  */
 class ImageGetDocumentInfoWithOptionsRequest
 {

@@ -25,10 +25,11 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
+
 namespace GroupDocs\Viewer\Model\Requests;
 
 /*
- * Request model for htmlGetPdfFile" operation.
+ * Request model for htmlGetPdfFile operation.
  */
 class HtmlGetPdfFileRequest
 {
@@ -37,7 +38,7 @@ class HtmlGetPdfFileRequest
      *  
      * @param string $fileName The file name.
      * @param bool $renderComments Allows to render document comments. Not required if PDF document was created before.
-     * @param bool $renderHiddenPages Enables document hidden pages, sheets or slides rendering.
+     * @param bool $renderHiddenPages Enables rendering of document hidden pages, sheets or slides.
      * @param string $password The document password. Not required if PDF document was created before.
      * @param string $defaultFontName The name of the default font.
      * @param string $fontsFolder The folder with custom fonts in storage.
@@ -67,7 +68,7 @@ class HtmlGetPdfFileRequest
     public $renderComments;
 	
     /*
-     * Enables document hidden pages, sheets or slides rendering.
+     * Enables rendering of document hidden pages, sheets or slides.
      */
     public $renderHiddenPages;
 	

@@ -25,10 +25,11 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
+
 namespace GroupDocs\Viewer\Model\Requests;
 
 /*
- * Request model for imageCreatePdfFileFromContent" operation.
+ * Request model for imageCreatePdfFileFromContent operation.
  */
 class ImageCreatePdfFileFromContentRequest
 {

@@ -66,8 +66,7 @@ $configuration->setAppKey("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 $viewerApi = new GroupDocs\Viewer\ViewerApi($configuration); 
 
 try {
-    $request = new GroupDocs\Viewer\Model\Requests\GetSupportedFileFormatsRequest();
-    $response = $viewerApi->getSupportedFileFormats($request);
+    $response = $viewerApi->getSupportedFileFormats();
 
     foreach ($response->getFormats() as $key => $format) {
         echo $format->getFileFormat() . " - " .  $format->getExtension(), "\n";
@@ -81,7 +80,7 @@ try {
 ```
 
 ## Licensing
-GroupDocs.Viewer for Cloud SDK for PHP is licensed under [MIT License](LICENSE).
+GroupDocs.Viewer Cloud SDK for PHP is licensed under [MIT License](LICENSE).
 
 ## Resources
 + [**Website**](https://www.groupdocs.cloud)

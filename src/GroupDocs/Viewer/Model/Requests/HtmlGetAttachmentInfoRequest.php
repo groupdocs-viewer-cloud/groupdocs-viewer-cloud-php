@@ -25,10 +25,11 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
+
 namespace GroupDocs\Viewer\Model\Requests;
 
 /*
- * Request model for htmlGetAttachmentInfo" operation.
+ * Request model for htmlGetAttachmentInfo operation.
  */
 class HtmlGetAttachmentInfoRequest
 {

@@ -25,9 +25,6 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
-/*
- * ImageAttachmentPageCollection
- */
 
 namespace GroupDocs\Viewer\Model;
 

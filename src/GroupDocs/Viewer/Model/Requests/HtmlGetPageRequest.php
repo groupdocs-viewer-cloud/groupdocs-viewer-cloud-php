@@ -25,10 +25,11 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
+
 namespace GroupDocs\Viewer\Model\Requests;
 
 /*
- * Request model for htmlGetPage" operation.
+ * Request model for htmlGetPage operation.
  */
 class HtmlGetPageRequest
 {
@@ -40,17 +41,18 @@ class HtmlGetPageRequest
      * @param string $resourcePath The HTML resource path.
      * @param bool $ignoreResourcePathInResources When this option enabled ResourcePath won't be added to resource reference in *.css and *.svg files.
      * @param bool $embedResources Whether to embed HTML resources or save them separate.
-     * @param bool $enableMinification Enables content (HTML and SVG) minification.
+     * @param bool $enableMinification Enables content (HTML, CSS and SVG) minification.
      * @param bool $enableResponsiveRendering Indicates whether rendering will provide responsive web pages, that look well on different device types.
+     * @param bool $excludeFonts Prevents adding fonts to the output HTML document.
      * @param string $password The document password.
      * @param bool $renderComments Allows to render document comments.
-     * @param bool $renderHiddenPages Enables document hidden pages, sheets or slides rendering.
+     * @param bool $renderHiddenPages Enables rendering of document hidden pages, sheets or slides.
      * @param string $defaultFontName The name of the default font.
      * @param string $fontsFolder The folder with custom fonts in storage.
      * @param string $folder The folder which contains specified file in storage.
      * @param string $storage The file storage which have to be used.
      */
-    public function __construct($fileName, $pageNumber, $resourcePath = null, $ignoreResourcePathInResources = null, $embedResources = null, $enableMinification = null, $enableResponsiveRendering = null, $password = null, $renderComments = null, $renderHiddenPages = null, $defaultFontName = null, $fontsFolder = null, $folder = null, $storage = null)             
+    public function __construct($fileName, $pageNumber, $resourcePath = null, $ignoreResourcePathInResources = null, $embedResources = null, $enableMinification = null, $enableResponsiveRendering = null, $excludeFonts = null, $password = null, $renderComments = null, $renderHiddenPages = null, $defaultFontName = null, $fontsFolder = null, $folder = null, $storage = null)             
     {
         $this->fileName = $fileName;
         $this->pageNumber = $pageNumber;
@@ -59,6 +61,7 @@ class HtmlGetPageRequest
         $this->embedResources = $embedResources;
         $this->enableMinification = $enableMinification;
         $this->enableResponsiveRendering = $enableResponsiveRendering;
+        $this->excludeFonts = $excludeFonts;
         $this->password = $password;
         $this->renderComments = $renderComments;
         $this->renderHiddenPages = $renderHiddenPages;
@@ -94,7 +97,7 @@ class HtmlGetPageRequest
     public $embedResources;
 	
     /*
-     * Enables content (HTML and SVG) minification.
+     * Enables content (HTML, CSS and SVG) minification.
      */
     public $enableMinification;
 	
@@ -102,6 +105,11 @@ class HtmlGetPageRequest
      * Indicates whether rendering will provide responsive web pages, that look well on different device types.
      */
     public $enableResponsiveRendering;
+	
+    /*
+     * Prevents adding fonts to the output HTML document.
+     */
+    public $excludeFonts;
 	
     /*
      * The document password.
@@ -114,7 +122,7 @@ class HtmlGetPageRequest
     public $renderComments;
 	
     /*
-     * Enables document hidden pages, sheets or slides rendering.
+     * Enables rendering of document hidden pages, sheets or slides.
      */
     public $renderHiddenPages;
 	

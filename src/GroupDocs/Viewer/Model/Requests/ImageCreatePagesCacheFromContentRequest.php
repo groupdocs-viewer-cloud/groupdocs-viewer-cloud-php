@@ -25,10 +25,11 @@
  * </summary>
  * --------------------------------------------------------------------------------------------------------------------
  */
+
 namespace GroupDocs\Viewer\Model\Requests;
 
 /*
- * Request model for imageCreatePagesCacheFromContent" operation.
+ * Request model for imageCreatePagesCacheFromContent operation.
  */
 class ImageCreatePagesCacheFromContentRequest
 {
