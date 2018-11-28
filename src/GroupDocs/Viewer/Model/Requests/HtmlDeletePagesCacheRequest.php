@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlDeletePagesCacheRequest
 {
     /*
-     * Initializes a new instance of the HtmlDeletePagesCacheRequest class.
+     * Initializes a new instance of the htmlDeletePagesCacheRequest class.
      *  
      * @param string $fileName The file name.
      * @param string $folder The folder which contains specified file in storage.

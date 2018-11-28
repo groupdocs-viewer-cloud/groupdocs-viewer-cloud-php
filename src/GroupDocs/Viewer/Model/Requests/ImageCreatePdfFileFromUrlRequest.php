@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class ImageCreatePdfFileFromUrlRequest
 {
     /*
-     * Initializes a new instance of the ImageCreatePdfFileFromUrlRequest class.
+     * Initializes a new instance of the imageCreatePdfFileFromUrlRequest class.
      *  
      * @param string $url The URL to retrieve document.
      * @param \GroupDocs\Viewer\Model\PdfFileOptions $pdfFileOptions The PDF file rendering options.

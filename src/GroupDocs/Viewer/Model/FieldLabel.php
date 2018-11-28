@@ -94,8 +94,8 @@ class FieldLabel implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'field' => 'Field',
-        'label' => 'Label'
+        'field' => 'field',
+        'label' => 'label'
     ];
 
     /*

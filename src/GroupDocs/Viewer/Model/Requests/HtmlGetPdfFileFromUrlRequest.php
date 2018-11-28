@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlGetPdfFileFromUrlRequest
 {
     /*
-     * Initializes a new instance of the HtmlGetPdfFileFromUrlRequest class.
+     * Initializes a new instance of the htmlGetPdfFileFromUrlRequest class.
      *  
      * @param string $url The URL to retrieve document.
      * @param string $fileName The file name.

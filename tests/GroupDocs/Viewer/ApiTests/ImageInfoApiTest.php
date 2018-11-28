@@ -117,7 +117,8 @@ class ImageInfoApiTest extends BaseApiTest
     */
     public function testImageGetDocumentInfoReturnsFileNotFound()
     {
-        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, "/FileNotFound/");
+        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, 
+            "/Can't find file with given name 'file-not-found.docx' and folder ''./");
 
         $request = new Requests\ImageGetDocumentInfoRequest("file-not-found.docx");
         
@@ -132,7 +133,8 @@ class ImageInfoApiTest extends BaseApiTest
     */
     public function testImageGetDocumentInfoReturnsMissingPassword()
     {
-        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, "/MissingPassword/");
+        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, 
+            "/The password was not provided. The specified file 'password-protected.docx' is password-protected./");
 
         $file = Internal\TestFiles::getFilePasswordProtectedDocx();
 
@@ -150,7 +152,8 @@ class ImageInfoApiTest extends BaseApiTest
       */
     public function testImageGetDocumentInfoReturnsIncorrectPassword()
     {
-        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, "/IncorrectPassword/");
+        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, 
+            "/Password provided for file with name 'password-protected.docx' is incorrect./");
 
         $file = Internal\TestFiles::getFilePasswordProtectedDocx();
 
@@ -169,7 +172,8 @@ class ImageInfoApiTest extends BaseApiTest
      */
     public function testImageGetDocumentInfoReturnsFailedToReadFile()
     {
-        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, "/FailedToReadFile/");
+        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, 
+            "/Failed to read specified file 'corrupted.pdf'. File can be corrupted or damaged./");
 
         $file = Internal\TestFiles::getFileCorruptedPdf();
 
@@ -208,7 +212,8 @@ class ImageInfoApiTest extends BaseApiTest
      */
     public function testImageGetDocumentInfoFromUrlReturnsFailedToParseUrl()
     {
-        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, "/FailedToParseUrl/");
+        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, 
+            "/Can't parse specified URL 'invalid-url'./");
 
         $request = new Requests\ImageGetDocumentInfoFromUrlRequest("invalid-url");
         

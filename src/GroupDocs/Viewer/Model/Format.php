@@ -94,8 +94,8 @@ class Format implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'fileFormat' => 'FileFormat',
-        'extension' => 'Extension'
+        'fileFormat' => 'fileFormat',
+        'extension' => 'extension'
     ];
 
     /*

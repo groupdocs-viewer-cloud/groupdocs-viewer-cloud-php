@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class ImageCreatePagesCacheFromContentRequest
 {
     /*
-     * Initializes a new instance of the ImageCreatePagesCacheFromContentRequest class.
+     * Initializes a new instance of the imageCreatePagesCacheFromContentRequest class.
      *  
      * @param \SplFileObject $file File contents.
      * @param \SplFileObject $imageOptions Image rendering options 'ImageOptions' as JSON or XML.

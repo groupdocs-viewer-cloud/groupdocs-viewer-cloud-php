@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlTransformPagesRequest
 {
     /*
-     * Initializes a new instance of the HtmlTransformPagesRequest class.
+     * Initializes a new instance of the htmlTransformPagesRequest class.
      *  
      * @param string $fileName The file name.
      * @param \GroupDocs\Viewer\Model\TransformOptionsBase $transformOptions The transformation options.

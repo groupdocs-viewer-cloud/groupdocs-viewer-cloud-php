@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlGetDocumentInfoRequest
 {
     /*
-     * Initializes a new instance of the HtmlGetDocumentInfoRequest class.
+     * Initializes a new instance of the htmlGetDocumentInfoRequest class.
      *  
      * @param string $fileName The file name.
      * @param string $password The document password.

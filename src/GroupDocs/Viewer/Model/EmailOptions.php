@@ -96,9 +96,9 @@ class EmailOptions implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'encoding' => 'Encoding',
-        'pageSize' => 'PageSize',
-        'fieldLabels' => 'FieldLabels'
+        'encoding' => 'encoding',
+        'pageSize' => 'pageSize',
+        'fieldLabels' => 'fieldLabels'
     ];
 
     /*

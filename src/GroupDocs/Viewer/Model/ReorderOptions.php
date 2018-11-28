@@ -90,7 +90,7 @@ class ReorderOptions extends TransformOptionsBase
      * @var string[]
      */
     protected static $attributeMap = [
-        'newPosition' => 'NewPosition'
+        'newPosition' => 'newPosition'
     ];
 
     /*

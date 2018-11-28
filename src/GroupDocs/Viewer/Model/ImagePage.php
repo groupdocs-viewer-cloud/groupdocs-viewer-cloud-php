@@ -90,7 +90,7 @@ class ImagePage extends ResourceUrl
      * @var string[]
      */
     protected static $attributeMap = [
-        'number' => 'Number'
+        'number' => 'number'
     ];
 
     /*

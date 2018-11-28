@@ -110,16 +110,16 @@ class CellsOptions implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'renderGridLines' => 'RenderGridLines',
-        'paginateSheets' => 'PaginateSheets',
-        'countRowsPerPage' => 'CountRowsPerPage',
-        'ignoreEmptyRows' => 'IgnoreEmptyRows',
-        'encoding' => 'Encoding',
-        'internalHyperlinkPrefix' => 'InternalHyperlinkPrefix',
-        'textOverflowMode' => 'TextOverflowMode',
-        'renderHiddenRows' => 'RenderHiddenRows',
-        'renderHiddenColumns' => 'RenderHiddenColumns',
-        'renderPrintAreaOnly' => 'RenderPrintAreaOnly'
+        'renderGridLines' => 'renderGridLines',
+        'paginateSheets' => 'paginateSheets',
+        'countRowsPerPage' => 'countRowsPerPage',
+        'ignoreEmptyRows' => 'ignoreEmptyRows',
+        'encoding' => 'encoding',
+        'internalHyperlinkPrefix' => 'internalHyperlinkPrefix',
+        'textOverflowMode' => 'textOverflowMode',
+        'renderHiddenRows' => 'renderHiddenRows',
+        'renderHiddenColumns' => 'renderHiddenColumns',
+        'renderPrintAreaOnly' => 'renderPrintAreaOnly'
     ];
 
     /*
@@ -239,27 +239,6 @@ class CellsOptions implements ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['renderGridLines'] === null) {
-            $invalidProperties[] = "'renderGridLines' can't be null";
-        }
-        if ($this->container['paginateSheets'] === null) {
-            $invalidProperties[] = "'paginateSheets' can't be null";
-        }
-        if ($this->container['countRowsPerPage'] === null) {
-            $invalidProperties[] = "'countRowsPerPage' can't be null";
-        }
-        if ($this->container['ignoreEmptyRows'] === null) {
-            $invalidProperties[] = "'ignoreEmptyRows' can't be null";
-        }
-        if ($this->container['renderHiddenRows'] === null) {
-            $invalidProperties[] = "'renderHiddenRows' can't be null";
-        }
-        if ($this->container['renderHiddenColumns'] === null) {
-            $invalidProperties[] = "'renderHiddenColumns' can't be null";
-        }
-        if ($this->container['renderPrintAreaOnly'] === null) {
-            $invalidProperties[] = "'renderPrintAreaOnly' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -272,27 +251,6 @@ class CellsOptions implements ArrayAccess
     public function valid()
     {
 
-        if ($this->container['renderGridLines'] === null) {
-            return false;
-        }
-        if ($this->container['paginateSheets'] === null) {
-            return false;
-        }
-        if ($this->container['countRowsPerPage'] === null) {
-            return false;
-        }
-        if ($this->container['ignoreEmptyRows'] === null) {
-            return false;
-        }
-        if ($this->container['renderHiddenRows'] === null) {
-            return false;
-        }
-        if ($this->container['renderHiddenColumns'] === null) {
-            return false;
-        }
-        if ($this->container['renderPrintAreaOnly'] === null) {
-            return false;
-        }
         return true;
     }
 

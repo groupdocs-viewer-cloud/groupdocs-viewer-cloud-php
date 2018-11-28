@@ -94,8 +94,8 @@ class WordsOptions implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'encoding' => 'Encoding',
-        'renderTrackedChanges' => 'RenderTrackedChanges'
+        'encoding' => 'encoding',
+        'renderTrackedChanges' => 'renderTrackedChanges'
     ];
 
     /*
@@ -191,9 +191,6 @@ class WordsOptions implements ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['renderTrackedChanges'] === null) {
-            $invalidProperties[] = "'renderTrackedChanges' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -206,9 +203,6 @@ class WordsOptions implements ArrayAccess
     public function valid()
     {
 
-        if ($this->container['renderTrackedChanges'] === null) {
-            return false;
-        }
         return true;
     }
 

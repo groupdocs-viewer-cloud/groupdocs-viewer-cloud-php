@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class ImageGetPageRequest
 {
     /*
-     * Initializes a new instance of the ImageGetPageRequest class.
+     * Initializes a new instance of the imageGetPageRequest class.
      *  
      * @param string $fileName The file name.
      * @param int $pageNumber The page number.

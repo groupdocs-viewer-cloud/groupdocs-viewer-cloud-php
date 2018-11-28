@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlGetAttachmentInfoWithOptionsRequest
 {
     /*
-     * Initializes a new instance of the HtmlGetAttachmentInfoWithOptionsRequest class.
+     * Initializes a new instance of the htmlGetAttachmentInfoWithOptionsRequest class.
      *  
      * @param string $fileName The file name.
      * @param string $attachmentName The attachment name.

@@ -256,4 +256,60 @@ class HtmlPagesApiTest extends BaseApiTest
             
         self::$viewerApi->htmlDeletePagesCache($request);
     }
+
+    /**
+     * Test case for htmlCreatePagesCache
+     *
+     * Creates document cache with project options.
+     *
+     */
+    public function testHtmlCreatePagesCacheWithProjectOptions()
+    {
+        $file = Internal\TestFiles::getFileProjectMpp();
+        
+        $htmlOptions = new \GroupDocs\Viewer\Model\HtmlOptions();
+        $htmlOptions->setEmbedResources(true);
+        $projectOptions = new \GroupDocs\Viewer\Model\ProjectOptions();
+        $projectOptions->setTimeUnit("Days");
+        $projectOptions->setStartDate("2008/07/01");
+        $projectOptions->setEndDate("2008/07/31");
+        $htmlOptions->setProjectOptions($projectOptions);
+
+        $request = new Requests\HtmlCreatePagesCacheRequest($file->fileName);
+        $request->folder = $file->folder;
+        $request->htmlOptions = $htmlOptions;
+            
+        $response = self::$viewerApi->htmlCreatePagesCache($request);
+
+        $this->assertEquals(1, count($response->getPages()));
+        $this->assertEquals($file->fileName, $response->getFileName());
+        $this->assertEquals($file->folder, $response->getFolder());
+    }    
+
+    /**
+     * Test case for htmlCreatePagesCache
+     *
+     * Creates document cache with outlook options.
+     *
+     */
+    public function testHtmlCreatePagesCacheWithOutlookOptions()
+    {
+        $file = Internal\TestFiles::getFileOutlookPst();
+        
+        $htmlOptions = new \GroupDocs\Viewer\Model\HtmlOptions();
+        $htmlOptions->setEmbedResources(true);
+        $outlookOptions = new \GroupDocs\Viewer\Model\OutlookOptions();
+        $outlookOptions->setMaxItemsInFolder(5);
+        $htmlOptions->setOutlookOptions($outlookOptions);
+
+        $request = new Requests\HtmlCreatePagesCacheRequest($file->fileName);
+        $request->folder = $file->folder;
+        $request->htmlOptions = $htmlOptions;
+            
+        $response = self::$viewerApi->htmlCreatePagesCache($request);
+
+        $this->assertGreaterThan(0, count($response->getPages()));
+        $this->assertEquals($file->fileName, $response->getFileName());
+        $this->assertEquals($file->folder, $response->getFolder());
+    }     
 }

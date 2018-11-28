@@ -67,7 +67,8 @@ class RenderOptionsBase implements ArrayAccess
         'wordsOptions' => '\GroupDocs\Viewer\Model\WordsOptions',
         'pdfOptions' => '\GroupDocs\Viewer\Model\PdfOptions',
         'slidesOptions' => '\GroupDocs\Viewer\Model\SlidesOptions',
-        'projectOptions' => '\GroupDocs\Viewer\Model\ProjectOptions'
+        'projectOptions' => '\GroupDocs\Viewer\Model\ProjectOptions',
+        'outlookOptions' => '\GroupDocs\Viewer\Model\OutlookOptions'
     ];
 
     /*
@@ -90,7 +91,8 @@ class RenderOptionsBase implements ArrayAccess
         'wordsOptions' => null,
         'pdfOptions' => null,
         'slidesOptions' => null,
-        'projectOptions' => null
+        'projectOptions' => null,
+        'outlookOptions' => null
     ];
 
     /*
@@ -120,21 +122,22 @@ class RenderOptionsBase implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'password' => 'Password',
-        'attachmentPassword' => 'AttachmentPassword',
-        'extractText' => 'ExtractText',
-        'renderComments' => 'RenderComments',
-        'renderHiddenPages' => 'RenderHiddenPages',
-        'transforms' => 'Transforms',
-        'defaultFontName' => 'DefaultFontName',
-        'watermark' => 'Watermark',
-        'cellsOptions' => 'CellsOptions',
-        'cadOptions' => 'CadOptions',
-        'emailOptions' => 'EmailOptions',
-        'wordsOptions' => 'WordsOptions',
-        'pdfOptions' => 'PdfOptions',
-        'slidesOptions' => 'SlidesOptions',
-        'projectOptions' => 'ProjectOptions'
+        'password' => 'password',
+        'attachmentPassword' => 'attachmentPassword',
+        'extractText' => 'extractText',
+        'renderComments' => 'renderComments',
+        'renderHiddenPages' => 'renderHiddenPages',
+        'transforms' => 'transforms',
+        'defaultFontName' => 'defaultFontName',
+        'watermark' => 'watermark',
+        'cellsOptions' => 'cellsOptions',
+        'cadOptions' => 'cadOptions',
+        'emailOptions' => 'emailOptions',
+        'wordsOptions' => 'wordsOptions',
+        'pdfOptions' => 'pdfOptions',
+        'slidesOptions' => 'slidesOptions',
+        'projectOptions' => 'projectOptions',
+        'outlookOptions' => 'outlookOptions'
     ];
 
     /*
@@ -157,7 +160,8 @@ class RenderOptionsBase implements ArrayAccess
         'wordsOptions' => 'setWordsOptions',
         'pdfOptions' => 'setPdfOptions',
         'slidesOptions' => 'setSlidesOptions',
-        'projectOptions' => 'setProjectOptions'
+        'projectOptions' => 'setProjectOptions',
+        'outlookOptions' => 'setOutlookOptions'
     ];
 
     /*
@@ -180,7 +184,8 @@ class RenderOptionsBase implements ArrayAccess
         'wordsOptions' => 'getWordsOptions',
         'pdfOptions' => 'getPdfOptions',
         'slidesOptions' => 'getSlidesOptions',
-        'projectOptions' => 'getProjectOptions'
+        'projectOptions' => 'getProjectOptions',
+        'outlookOptions' => 'getOutlookOptions'
     ];
 
     /*
@@ -258,6 +263,7 @@ class RenderOptionsBase implements ArrayAccess
         $this->container['pdfOptions'] = isset($data['pdfOptions']) ? $data['pdfOptions'] : null;
         $this->container['slidesOptions'] = isset($data['slidesOptions']) ? $data['slidesOptions'] : null;
         $this->container['projectOptions'] = isset($data['projectOptions']) ? $data['projectOptions'] : null;
+        $this->container['outlookOptions'] = isset($data['outlookOptions']) ? $data['outlookOptions'] : null;
 
         // Initialize discriminator property with the model name.
         $discriminator = array_search('Type', self::$attributeMap);
@@ -273,15 +279,6 @@ class RenderOptionsBase implements ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['extractText'] === null) {
-            $invalidProperties[] = "'extractText' can't be null";
-        }
-        if ($this->container['renderComments'] === null) {
-            $invalidProperties[] = "'renderComments' can't be null";
-        }
-        if ($this->container['renderHiddenPages'] === null) {
-            $invalidProperties[] = "'renderHiddenPages' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -294,15 +291,6 @@ class RenderOptionsBase implements ArrayAccess
     public function valid()
     {
 
-        if ($this->container['extractText'] === null) {
-            return false;
-        }
-        if ($this->container['renderComments'] === null) {
-            return false;
-        }
-        if ($this->container['renderHiddenPages'] === null) {
-            return false;
-        }
         return true;
     }
 
@@ -663,6 +651,30 @@ class RenderOptionsBase implements ArrayAccess
     public function setProjectOptions($projectOptions)
     {
         $this->container['projectOptions'] = $projectOptions;
+
+        return $this;
+    }
+
+    /*
+     * Gets outlookOptions
+     *
+     * @return \GroupDocs\Viewer\Model\OutlookOptions
+     */
+    public function getOutlookOptions()
+    {
+        return $this->container['outlookOptions'];
+    }
+
+    /*
+     * Sets outlookOptions
+     *
+     * @param \GroupDocs\Viewer\Model\OutlookOptions $outlookOptions The Outlook Data File document (PST/OST) rendering options.
+     *
+     * @return $this
+     */
+    public function setOutlookOptions($outlookOptions)
+    {
+        $this->container['outlookOptions'] = $outlookOptions;
 
         return $this;
     }

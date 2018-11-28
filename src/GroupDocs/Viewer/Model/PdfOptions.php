@@ -98,10 +98,10 @@ class PdfOptions implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'enablePreciseRendering' => 'EnablePreciseRendering',
-        'enableInitialContentOrdering' => 'EnableInitialContentOrdering',
-        'renderLayersSeparately' => 'RenderLayersSeparately',
-        'imageQuality' => 'ImageQuality'
+        'enablePreciseRendering' => 'enablePreciseRendering',
+        'enableInitialContentOrdering' => 'enableInitialContentOrdering',
+        'renderLayersSeparately' => 'renderLayersSeparately',
+        'imageQuality' => 'imageQuality'
     ];
 
     /*
@@ -203,15 +203,6 @@ class PdfOptions implements ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['enablePreciseRendering'] === null) {
-            $invalidProperties[] = "'enablePreciseRendering' can't be null";
-        }
-        if ($this->container['enableInitialContentOrdering'] === null) {
-            $invalidProperties[] = "'enableInitialContentOrdering' can't be null";
-        }
-        if ($this->container['renderLayersSeparately'] === null) {
-            $invalidProperties[] = "'renderLayersSeparately' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -224,15 +215,6 @@ class PdfOptions implements ArrayAccess
     public function valid()
     {
 
-        if ($this->container['enablePreciseRendering'] === null) {
-            return false;
-        }
-        if ($this->container['enableInitialContentOrdering'] === null) {
-            return false;
-        }
-        if ($this->container['renderLayersSeparately'] === null) {
-            return false;
-        }
         return true;
     }
 

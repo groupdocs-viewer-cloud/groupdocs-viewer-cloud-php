@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class ImageTransformPagesRequest
 {
     /*
-     * Initializes a new instance of the ImageTransformPagesRequest class.
+     * Initializes a new instance of the imageTransformPagesRequest class.
      *  
      * @param string $fileName The file name.
      * @param \GroupDocs\Viewer\Model\TransformOptionsBase $transformOptions The transformation options.

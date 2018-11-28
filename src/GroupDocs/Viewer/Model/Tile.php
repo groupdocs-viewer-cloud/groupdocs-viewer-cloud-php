@@ -98,10 +98,10 @@ class Tile implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'startPointX' => 'StartPointX',
-        'startPointY' => 'StartPointY',
-        'width' => 'Width',
-        'height' => 'Height'
+        'startPointX' => 'startPointX',
+        'startPointY' => 'startPointY',
+        'width' => 'width',
+        'height' => 'height'
     ];
 
     /*
@@ -203,18 +203,6 @@ class Tile implements ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['startPointX'] === null) {
-            $invalidProperties[] = "'startPointX' can't be null";
-        }
-        if ($this->container['startPointY'] === null) {
-            $invalidProperties[] = "'startPointY' can't be null";
-        }
-        if ($this->container['width'] === null) {
-            $invalidProperties[] = "'width' can't be null";
-        }
-        if ($this->container['height'] === null) {
-            $invalidProperties[] = "'height' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -227,18 +215,6 @@ class Tile implements ArrayAccess
     public function valid()
     {
 
-        if ($this->container['startPointX'] === null) {
-            return false;
-        }
-        if ($this->container['startPointY'] === null) {
-            return false;
-        }
-        if ($this->container['width'] === null) {
-            return false;
-        }
-        if ($this->container['height'] === null) {
-            return false;
-        }
         return true;
     }
 

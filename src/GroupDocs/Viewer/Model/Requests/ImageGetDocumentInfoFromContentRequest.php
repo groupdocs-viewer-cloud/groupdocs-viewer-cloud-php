@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class ImageGetDocumentInfoFromContentRequest
 {
     /*
-     * Initializes a new instance of the ImageGetDocumentInfoFromContentRequest class.
+     * Initializes a new instance of the imageGetDocumentInfoFromContentRequest class.
      *  
      * @param \SplFileObject $file File contents.
      * @param \SplFileObject $documentInfoOptions Document info options 'DocumentInfoOptions' as JSON or XML.

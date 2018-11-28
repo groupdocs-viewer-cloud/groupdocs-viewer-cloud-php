@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class ImageGetPdfFileFromUrlRequest
 {
     /*
-     * Initializes a new instance of the ImageGetPdfFileFromUrlRequest class.
+     * Initializes a new instance of the imageGetPdfFileFromUrlRequest class.
      *  
      * @param string $url The URL to retrieve document.
      * @param string $fileName The file name.

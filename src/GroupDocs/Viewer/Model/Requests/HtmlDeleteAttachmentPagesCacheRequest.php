@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlDeleteAttachmentPagesCacheRequest
 {
     /*
-     * Initializes a new instance of the HtmlDeleteAttachmentPagesCacheRequest class.
+     * Initializes a new instance of the htmlDeleteAttachmentPagesCacheRequest class.
      *  
      * @param string $fileName The file name.
      * @param string $attachmentName Name of the attachment.

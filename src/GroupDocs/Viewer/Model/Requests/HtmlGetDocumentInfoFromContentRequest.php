@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlGetDocumentInfoFromContentRequest
 {
     /*
-     * Initializes a new instance of the HtmlGetDocumentInfoFromContentRequest class.
+     * Initializes a new instance of the htmlGetDocumentInfoFromContentRequest class.
      *  
      * @param \SplFileObject $file File contents.
      * @param \SplFileObject $documentInfoOptions Document info options 'DocumentInfoOptions' as JSON or XML.

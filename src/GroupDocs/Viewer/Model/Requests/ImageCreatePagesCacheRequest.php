@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class ImageCreatePagesCacheRequest
 {
     /*
-     * Initializes a new instance of the ImageCreatePagesCacheRequest class.
+     * Initializes a new instance of the imageCreatePagesCacheRequest class.
      *  
      * @param string $fileName The file name.
      * @param \GroupDocs\Viewer\Model\ImageOptions $imageOptions The image render options.

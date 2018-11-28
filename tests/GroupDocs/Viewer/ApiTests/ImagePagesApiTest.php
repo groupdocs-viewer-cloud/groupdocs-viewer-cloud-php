@@ -333,4 +333,27 @@ class ImagePagesApiTest extends BaseApiTest
             
         self::$viewerApi->imageDeletePagesCache($request);
     }
+
+    /**
+     * Test case for imageCreatePagesCache
+     *
+     * Creates document cache for all formats.
+     * @group tmp
+     */
+    public function testImageCreatePagesCacheForFileFormats()
+    {
+        $files = Internal\TestFiles::getSupported();
+        foreach ($files as $file) {
+            $request = new Requests\ImageCreatePagesCacheRequest($file->fileName);
+            $request->folder = $file->folder;
+            $request->imageOptions = new \GroupDocs\Viewer\Model\ImageOptions();
+            $request->imageOptions->setFormat("jpg");
+                
+            $response = self::$viewerApi->imageCreatePagesCache($request);
+
+            $this->assertGreaterThan(0, count($response->getPages()));
+            $this->assertEquals($file->fileName, $response->getFileName());
+            $this->assertEquals($file->folder, $response->getFolder());
+        }
+    }    
 }

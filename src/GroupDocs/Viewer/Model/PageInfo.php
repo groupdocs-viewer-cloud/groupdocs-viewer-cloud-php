@@ -104,13 +104,13 @@ class PageInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'number' => 'Number',
-        'name' => 'Name',
-        'width' => 'Width',
-        'height' => 'Height',
-        'angle' => 'Angle',
-        'visible' => 'Visible',
-        'rows' => 'Rows'
+        'number' => 'number',
+        'name' => 'name',
+        'width' => 'width',
+        'height' => 'height',
+        'angle' => 'angle',
+        'visible' => 'visible',
+        'rows' => 'rows'
     ];
 
     /*
@@ -221,21 +221,6 @@ class PageInfo implements ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['number'] === null) {
-            $invalidProperties[] = "'number' can't be null";
-        }
-        if ($this->container['width'] === null) {
-            $invalidProperties[] = "'width' can't be null";
-        }
-        if ($this->container['height'] === null) {
-            $invalidProperties[] = "'height' can't be null";
-        }
-        if ($this->container['angle'] === null) {
-            $invalidProperties[] = "'angle' can't be null";
-        }
-        if ($this->container['visible'] === null) {
-            $invalidProperties[] = "'visible' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -248,21 +233,6 @@ class PageInfo implements ArrayAccess
     public function valid()
     {
 
-        if ($this->container['number'] === null) {
-            return false;
-        }
-        if ($this->container['width'] === null) {
-            return false;
-        }
-        if ($this->container['height'] === null) {
-            return false;
-        }
-        if ($this->container['angle'] === null) {
-            return false;
-        }
-        if ($this->container['visible'] === null) {
-            return false;
-        }
         return true;
     }
 

@@ -94,8 +94,8 @@ class TransformOptionsBase implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'pageNumber' => 'PageNumber',
-        'password' => 'Password'
+        'pageNumber' => 'pageNumber',
+        'password' => 'password'
     ];
 
     /*
@@ -195,9 +195,6 @@ class TransformOptionsBase implements ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['pageNumber'] === null) {
-            $invalidProperties[] = "'pageNumber' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -210,9 +207,6 @@ class TransformOptionsBase implements ArrayAccess
     public function valid()
     {
 
-        if ($this->container['pageNumber'] === null) {
-            return false;
-        }
         return true;
     }
 

@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class ImageGetPdfFileRequest
 {
     /*
-     * Initializes a new instance of the ImageGetPdfFileRequest class.
+     * Initializes a new instance of the imageGetPdfFileRequest class.
      *  
      * @param string $fileName The file name.
      * @param bool $renderComments Allows to render document comments. Not required if PDF document was created before.

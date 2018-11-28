@@ -98,10 +98,10 @@ class Watermark implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'text' => 'Text',
-        'color' => 'Color',
-        'position' => 'Position',
-        'size' => 'Size'
+        'text' => 'text',
+        'color' => 'color',
+        'position' => 'position',
+        'size' => 'size'
     ];
 
     /*
@@ -203,9 +203,6 @@ class Watermark implements ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['size'] === null) {
-            $invalidProperties[] = "'size' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -218,9 +215,6 @@ class Watermark implements ArrayAccess
     public function valid()
     {
 
-        if ($this->container['size'] === null) {
-            return false;
-        }
         return true;
     }
 

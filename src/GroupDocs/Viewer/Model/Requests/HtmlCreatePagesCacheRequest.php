@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlCreatePagesCacheRequest
 {
     /*
-     * Initializes a new instance of the HtmlCreatePagesCacheRequest class.
+     * Initializes a new instance of the htmlCreatePagesCacheRequest class.
      *  
      * @param string $fileName The file name.
      * @param \GroupDocs\Viewer\Model\HtmlOptions $htmlOptions The HTML rendering options.

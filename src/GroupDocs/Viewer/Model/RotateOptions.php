@@ -90,7 +90,7 @@ class RotateOptions extends TransformOptionsBase
      * @var string[]
      */
     protected static $attributeMap = [
-        'angle' => 'Angle'
+        'angle' => 'angle'
     ];
 
     /*

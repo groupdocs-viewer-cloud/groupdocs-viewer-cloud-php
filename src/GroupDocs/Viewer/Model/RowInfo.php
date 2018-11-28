@@ -104,13 +104,13 @@ class RowInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'text' => 'Text',
-        'rowLeft' => 'RowLeft',
-        'rowTop' => 'RowTop',
-        'rowWidth' => 'RowWidth',
-        'rowHeight' => 'RowHeight',
-        'textCoordinates' => 'TextCoordinates',
-        'characterCoordinates' => 'CharacterCoordinates'
+        'text' => 'text',
+        'rowLeft' => 'rowLeft',
+        'rowTop' => 'rowTop',
+        'rowWidth' => 'rowWidth',
+        'rowHeight' => 'rowHeight',
+        'textCoordinates' => 'textCoordinates',
+        'characterCoordinates' => 'characterCoordinates'
     ];
 
     /*
@@ -221,18 +221,6 @@ class RowInfo implements ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['rowLeft'] === null) {
-            $invalidProperties[] = "'rowLeft' can't be null";
-        }
-        if ($this->container['rowTop'] === null) {
-            $invalidProperties[] = "'rowTop' can't be null";
-        }
-        if ($this->container['rowWidth'] === null) {
-            $invalidProperties[] = "'rowWidth' can't be null";
-        }
-        if ($this->container['rowHeight'] === null) {
-            $invalidProperties[] = "'rowHeight' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -245,18 +233,6 @@ class RowInfo implements ArrayAccess
     public function valid()
     {
 
-        if ($this->container['rowLeft'] === null) {
-            return false;
-        }
-        if ($this->container['rowTop'] === null) {
-            return false;
-        }
-        if ($this->container['rowWidth'] === null) {
-            return false;
-        }
-        if ($this->container['rowHeight'] === null) {
-            return false;
-        }
         return true;
     }
 

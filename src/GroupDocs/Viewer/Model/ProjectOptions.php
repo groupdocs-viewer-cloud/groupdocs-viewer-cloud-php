@@ -54,7 +54,9 @@ class ProjectOptions implements ArrayAccess
      */
     protected static $swaggerTypes = [
         'pageSize' => 'string',
-        'timeUnit' => 'string'
+        'timeUnit' => 'string',
+        'startDate' => '\DateTime',
+        'endDate' => '\DateTime'
     ];
 
     /*
@@ -64,7 +66,9 @@ class ProjectOptions implements ArrayAccess
      */
     protected static $swaggerFormats = [
         'pageSize' => null,
-        'timeUnit' => null
+        'timeUnit' => null,
+        'startDate' => 'date-time',
+        'endDate' => 'date-time'
     ];
 
     /*
@@ -94,8 +98,10 @@ class ProjectOptions implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'pageSize' => 'PageSize',
-        'timeUnit' => 'TimeUnit'
+        'pageSize' => 'pageSize',
+        'timeUnit' => 'timeUnit',
+        'startDate' => 'startDate',
+        'endDate' => 'endDate'
     ];
 
     /*
@@ -105,7 +111,9 @@ class ProjectOptions implements ArrayAccess
      */
     protected static $setters = [
         'pageSize' => 'setPageSize',
-        'timeUnit' => 'setTimeUnit'
+        'timeUnit' => 'setTimeUnit',
+        'startDate' => 'setStartDate',
+        'endDate' => 'setEndDate'
     ];
 
     /*
@@ -115,7 +123,9 @@ class ProjectOptions implements ArrayAccess
      */
     protected static $getters = [
         'pageSize' => 'getPageSize',
-        'timeUnit' => 'getTimeUnit'
+        'timeUnit' => 'getTimeUnit',
+        'startDate' => 'getStartDate',
+        'endDate' => 'getEndDate'
     ];
 
     /*
@@ -180,6 +190,8 @@ class ProjectOptions implements ArrayAccess
     {
         $this->container['pageSize'] = isset($data['pageSize']) ? $data['pageSize'] : null;
         $this->container['timeUnit'] = isset($data['timeUnit']) ? $data['timeUnit'] : null;
+        $this->container['startDate'] = isset($data['startDate']) ? $data['startDate'] : null;
+        $this->container['endDate'] = isset($data['endDate']) ? $data['endDate'] : null;
     }
 
     /*
@@ -251,6 +263,54 @@ class ProjectOptions implements ArrayAccess
     public function setTimeUnit($timeUnit)
     {
         $this->container['timeUnit'] = $timeUnit;
+
+        return $this;
+    }
+
+    /*
+     * Gets startDate
+     *
+     * @return \DateTime
+     */
+    public function getStartDate()
+    {
+        return $this->container['startDate'];
+    }
+
+    /*
+     * Sets startDate
+     *
+     * @param \DateTime $startDate The start date of a Gantt Chart View to render.
+     *
+     * @return $this
+     */
+    public function setStartDate($startDate)
+    {
+        $this->container['startDate'] = $startDate;
+
+        return $this;
+    }
+
+    /*
+     * Gets endDate
+     *
+     * @return \DateTime
+     */
+    public function getEndDate()
+    {
+        return $this->container['endDate'];
+    }
+
+    /*
+     * Sets endDate
+     *
+     * @param \DateTime $endDate The end date of a Gantt Chart View to render.
+     *
+     * @return $this
+     */
+    public function setEndDate($endDate)
+    {
+        $this->container['endDate'] = $endDate;
 
         return $this;
     }

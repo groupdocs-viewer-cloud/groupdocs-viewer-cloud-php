@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class ImageCreatePdfFileFromContentRequest
 {
     /*
-     * Initializes a new instance of the ImageCreatePdfFileFromContentRequest class.
+     * Initializes a new instance of the imageCreatePdfFileFromContentRequest class.
      *  
      * @param \SplFileObject $file File contents.
      * @param \SplFileObject $pdfFileOptions PDF rendering options 'PdfFileOptions' as JSON or XML.

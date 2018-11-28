@@ -131,7 +131,16 @@ class ViewerApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -142,7 +151,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             return [null, $statusCode, $response->getHeaders()];
@@ -199,11 +208,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -350,7 +359,16 @@ class ViewerApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -361,7 +379,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -458,11 +476,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -609,7 +627,16 @@ class ViewerApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -620,7 +647,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -717,11 +744,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -865,14 +892,23 @@ class ViewerApi
     public function htmlCreateAttachmentPagesCacheWithHttpInfo(Requests\HtmlCreateAttachmentPagesCacheRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlAttachmentPageCollection';
-        $request = $this->HtmlCreateAttachmentPagesCacheRequest($request);
+        $request = $this->htmlCreateAttachmentPagesCacheRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -883,7 +919,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -950,7 +986,7 @@ class ViewerApi
     public function htmlCreateAttachmentPagesCacheAsyncWithHttpInfo(Requests\HtmlCreateAttachmentPagesCacheRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlAttachmentPageCollection';
-        $request = $this->HtmlCreateAttachmentPagesCacheRequest($request);
+        $request = $this->htmlCreateAttachmentPagesCacheRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -982,11 +1018,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -1000,7 +1036,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlCreateAttachmentPagesCacheRequest(Requests\HtmlCreateAttachmentPagesCacheRequest $request)
+    protected function htmlCreateAttachmentPagesCacheRequest(Requests\HtmlCreateAttachmentPagesCacheRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -1185,14 +1221,23 @@ class ViewerApi
     public function htmlCreatePagesCacheWithHttpInfo(Requests\HtmlCreatePagesCacheRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlPageCollection';
-        $request = $this->HtmlCreatePagesCacheRequest($request);
+        $request = $this->htmlCreatePagesCacheRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -1203,7 +1248,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -1270,7 +1315,7 @@ class ViewerApi
     public function htmlCreatePagesCacheAsyncWithHttpInfo(Requests\HtmlCreatePagesCacheRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlPageCollection';
-        $request = $this->HtmlCreatePagesCacheRequest($request);
+        $request = $this->htmlCreatePagesCacheRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -1302,11 +1347,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -1320,7 +1365,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlCreatePagesCacheRequest(Requests\HtmlCreatePagesCacheRequest $request)
+    protected function htmlCreatePagesCacheRequest(Requests\HtmlCreatePagesCacheRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -1496,14 +1541,23 @@ class ViewerApi
     public function htmlCreatePagesCacheFromContentWithHttpInfo(Requests\HtmlCreatePagesCacheFromContentRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlPageCollection';
-        $request = $this->HtmlCreatePagesCacheFromContentRequest($request);
+        $request = $this->htmlCreatePagesCacheFromContentRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -1514,7 +1568,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -1581,7 +1635,7 @@ class ViewerApi
     public function htmlCreatePagesCacheFromContentAsyncWithHttpInfo(Requests\HtmlCreatePagesCacheFromContentRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlPageCollection';
-        $request = $this->HtmlCreatePagesCacheFromContentRequest($request);
+        $request = $this->htmlCreatePagesCacheFromContentRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -1613,11 +1667,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -1631,7 +1685,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlCreatePagesCacheFromContentRequest(Requests\HtmlCreatePagesCacheFromContentRequest $request)
+    protected function htmlCreatePagesCacheFromContentRequest(Requests\HtmlCreatePagesCacheFromContentRequest $request)
     {
         // verify the required parameter 'file' is set
         if ($request->file === null) {
@@ -1827,14 +1881,23 @@ class ViewerApi
     public function htmlCreatePagesCacheFromUrlWithHttpInfo(Requests\HtmlCreatePagesCacheFromUrlRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlPageCollection';
-        $request = $this->HtmlCreatePagesCacheFromUrlRequest($request);
+        $request = $this->htmlCreatePagesCacheFromUrlRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -1845,7 +1908,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -1912,7 +1975,7 @@ class ViewerApi
     public function htmlCreatePagesCacheFromUrlAsyncWithHttpInfo(Requests\HtmlCreatePagesCacheFromUrlRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlPageCollection';
-        $request = $this->HtmlCreatePagesCacheFromUrlRequest($request);
+        $request = $this->htmlCreatePagesCacheFromUrlRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -1944,11 +2007,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -1962,7 +2025,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlCreatePagesCacheFromUrlRequest(Requests\HtmlCreatePagesCacheFromUrlRequest $request)
+    protected function htmlCreatePagesCacheFromUrlRequest(Requests\HtmlCreatePagesCacheFromUrlRequest $request)
     {
         // verify the required parameter 'url' is set
         if ($request->url === null) {
@@ -2153,14 +2216,23 @@ class ViewerApi
     public function htmlCreatePdfFileWithHttpInfo(Requests\HtmlCreatePdfFileRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\PdfFileInfo';
-        $request = $this->HtmlCreatePdfFileRequest($request);
+        $request = $this->htmlCreatePdfFileRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -2171,7 +2243,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -2238,7 +2310,7 @@ class ViewerApi
     public function htmlCreatePdfFileAsyncWithHttpInfo(Requests\HtmlCreatePdfFileRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\PdfFileInfo';
-        $request = $this->HtmlCreatePdfFileRequest($request);
+        $request = $this->htmlCreatePdfFileRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -2270,11 +2342,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -2288,7 +2360,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlCreatePdfFileRequest(Requests\HtmlCreatePdfFileRequest $request)
+    protected function htmlCreatePdfFileRequest(Requests\HtmlCreatePdfFileRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -2464,14 +2536,23 @@ class ViewerApi
     public function htmlCreatePdfFileFromContentWithHttpInfo(Requests\HtmlCreatePdfFileFromContentRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\PdfFileInfo';
-        $request = $this->HtmlCreatePdfFileFromContentRequest($request);
+        $request = $this->htmlCreatePdfFileFromContentRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -2482,7 +2563,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -2549,7 +2630,7 @@ class ViewerApi
     public function htmlCreatePdfFileFromContentAsyncWithHttpInfo(Requests\HtmlCreatePdfFileFromContentRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\PdfFileInfo';
-        $request = $this->HtmlCreatePdfFileFromContentRequest($request);
+        $request = $this->htmlCreatePdfFileFromContentRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -2581,11 +2662,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -2599,7 +2680,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlCreatePdfFileFromContentRequest(Requests\HtmlCreatePdfFileFromContentRequest $request)
+    protected function htmlCreatePdfFileFromContentRequest(Requests\HtmlCreatePdfFileFromContentRequest $request)
     {
         // verify the required parameter 'file' is set
         if ($request->file === null) {
@@ -2795,14 +2876,23 @@ class ViewerApi
     public function htmlCreatePdfFileFromUrlWithHttpInfo(Requests\HtmlCreatePdfFileFromUrlRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\PdfFileInfo';
-        $request = $this->HtmlCreatePdfFileFromUrlRequest($request);
+        $request = $this->htmlCreatePdfFileFromUrlRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -2813,7 +2903,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -2880,7 +2970,7 @@ class ViewerApi
     public function htmlCreatePdfFileFromUrlAsyncWithHttpInfo(Requests\HtmlCreatePdfFileFromUrlRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\PdfFileInfo';
-        $request = $this->HtmlCreatePdfFileFromUrlRequest($request);
+        $request = $this->htmlCreatePdfFileFromUrlRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -2912,11 +3002,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -2930,7 +3020,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlCreatePdfFileFromUrlRequest(Requests\HtmlCreatePdfFileFromUrlRequest $request)
+    protected function htmlCreatePdfFileFromUrlRequest(Requests\HtmlCreatePdfFileFromUrlRequest $request)
     {
         // verify the required parameter 'url' is set
         if ($request->url === null) {
@@ -3119,14 +3209,23 @@ class ViewerApi
     public function htmlDeleteAttachmentPagesCacheWithHttpInfo(Requests\HtmlDeleteAttachmentPagesCacheRequest $request)
     {
         $returnType = '';
-        $request = $this->HtmlDeleteAttachmentPagesCacheRequest($request);
+        $request = $this->htmlDeleteAttachmentPagesCacheRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -3137,7 +3236,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             return [null, $statusCode, $response->getHeaders()];
@@ -3182,7 +3281,7 @@ class ViewerApi
     public function htmlDeleteAttachmentPagesCacheAsyncWithHttpInfo(Requests\HtmlDeleteAttachmentPagesCacheRequest $request) 
     {
         $returnType = '';
-        $request = $this->HtmlDeleteAttachmentPagesCacheRequest($request);
+        $request = $this->htmlDeleteAttachmentPagesCacheRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -3196,11 +3295,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -3214,7 +3313,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlDeleteAttachmentPagesCacheRequest(Requests\HtmlDeleteAttachmentPagesCacheRequest $request)
+    protected function htmlDeleteAttachmentPagesCacheRequest(Requests\HtmlDeleteAttachmentPagesCacheRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -3380,14 +3479,23 @@ class ViewerApi
     public function htmlDeletePagesCacheWithHttpInfo(Requests\HtmlDeletePagesCacheRequest $request)
     {
         $returnType = '';
-        $request = $this->HtmlDeletePagesCacheRequest($request);
+        $request = $this->htmlDeletePagesCacheRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -3398,7 +3506,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             return [null, $statusCode, $response->getHeaders()];
@@ -3443,7 +3551,7 @@ class ViewerApi
     public function htmlDeletePagesCacheAsyncWithHttpInfo(Requests\HtmlDeletePagesCacheRequest $request) 
     {
         $returnType = '';
-        $request = $this->HtmlDeletePagesCacheRequest($request);
+        $request = $this->htmlDeletePagesCacheRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -3457,11 +3565,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -3475,7 +3583,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlDeletePagesCacheRequest(Requests\HtmlDeletePagesCacheRequest $request)
+    protected function htmlDeletePagesCacheRequest(Requests\HtmlDeletePagesCacheRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -3634,14 +3742,23 @@ class ViewerApi
     public function htmlGetAttachmentWithHttpInfo(Requests\HtmlGetAttachmentRequest $request)
     {
         $returnType = '\SplFileObject';
-        $request = $this->HtmlGetAttachmentRequest($request);
+        $request = $this->htmlGetAttachmentRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -3652,7 +3769,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -3719,7 +3836,7 @@ class ViewerApi
     public function htmlGetAttachmentAsyncWithHttpInfo(Requests\HtmlGetAttachmentRequest $request) 
     {
         $returnType = '\SplFileObject';
-        $request = $this->HtmlGetAttachmentRequest($request);
+        $request = $this->htmlGetAttachmentRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -3751,11 +3868,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -3769,7 +3886,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlGetAttachmentRequest(Requests\HtmlGetAttachmentRequest $request)
+    protected function htmlGetAttachmentRequest(Requests\HtmlGetAttachmentRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -3947,14 +4064,23 @@ class ViewerApi
     public function htmlGetAttachmentInfoWithHttpInfo(Requests\HtmlGetAttachmentInfoRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->HtmlGetAttachmentInfoRequest($request);
+        $request = $this->htmlGetAttachmentInfoRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -3965,7 +4091,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -4032,7 +4158,7 @@ class ViewerApi
     public function htmlGetAttachmentInfoAsyncWithHttpInfo(Requests\HtmlGetAttachmentInfoRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->HtmlGetAttachmentInfoRequest($request);
+        $request = $this->htmlGetAttachmentInfoRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -4064,11 +4190,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -4082,7 +4208,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlGetAttachmentInfoRequest(Requests\HtmlGetAttachmentInfoRequest $request)
+    protected function htmlGetAttachmentInfoRequest(Requests\HtmlGetAttachmentInfoRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -4270,14 +4396,23 @@ class ViewerApi
     public function htmlGetAttachmentInfoWithOptionsWithHttpInfo(Requests\HtmlGetAttachmentInfoWithOptionsRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->HtmlGetAttachmentInfoWithOptionsRequest($request);
+        $request = $this->htmlGetAttachmentInfoWithOptionsRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -4288,7 +4423,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -4355,7 +4490,7 @@ class ViewerApi
     public function htmlGetAttachmentInfoWithOptionsAsyncWithHttpInfo(Requests\HtmlGetAttachmentInfoWithOptionsRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->HtmlGetAttachmentInfoWithOptionsRequest($request);
+        $request = $this->htmlGetAttachmentInfoWithOptionsRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -4387,11 +4522,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -4405,7 +4540,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlGetAttachmentInfoWithOptionsRequest(Requests\HtmlGetAttachmentInfoWithOptionsRequest $request)
+    protected function htmlGetAttachmentInfoWithOptionsRequest(Requests\HtmlGetAttachmentInfoWithOptionsRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -4580,14 +4715,23 @@ class ViewerApi
     public function htmlGetAttachmentPageWithHttpInfo(Requests\HtmlGetAttachmentPageRequest $request)
     {
         $returnType = '\SplFileObject';
-        $request = $this->HtmlGetAttachmentPageRequest($request);
+        $request = $this->htmlGetAttachmentPageRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -4598,7 +4742,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -4665,7 +4809,7 @@ class ViewerApi
     public function htmlGetAttachmentPageAsyncWithHttpInfo(Requests\HtmlGetAttachmentPageRequest $request) 
     {
         $returnType = '\SplFileObject';
-        $request = $this->HtmlGetAttachmentPageRequest($request);
+        $request = $this->htmlGetAttachmentPageRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -4697,11 +4841,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -4715,7 +4859,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlGetAttachmentPageRequest(Requests\HtmlGetAttachmentPageRequest $request)
+    protected function htmlGetAttachmentPageRequest(Requests\HtmlGetAttachmentPageRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -5012,14 +5156,23 @@ class ViewerApi
     public function htmlGetAttachmentPageResourceWithHttpInfo(Requests\HtmlGetAttachmentPageResourceRequest $request)
     {
         $returnType = '\SplFileObject';
-        $request = $this->HtmlGetAttachmentPageResourceRequest($request);
+        $request = $this->htmlGetAttachmentPageResourceRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -5030,7 +5183,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -5097,7 +5250,7 @@ class ViewerApi
     public function htmlGetAttachmentPageResourceAsyncWithHttpInfo(Requests\HtmlGetAttachmentPageResourceRequest $request) 
     {
         $returnType = '\SplFileObject';
-        $request = $this->HtmlGetAttachmentPageResourceRequest($request);
+        $request = $this->htmlGetAttachmentPageResourceRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -5129,11 +5282,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -5147,7 +5300,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlGetAttachmentPageResourceRequest(Requests\HtmlGetAttachmentPageResourceRequest $request)
+    protected function htmlGetAttachmentPageResourceRequest(Requests\HtmlGetAttachmentPageResourceRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -5333,14 +5486,23 @@ class ViewerApi
     public function htmlGetAttachmentPagesWithHttpInfo(Requests\HtmlGetAttachmentPagesRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlAttachmentPageCollection';
-        $request = $this->HtmlGetAttachmentPagesRequest($request);
+        $request = $this->htmlGetAttachmentPagesRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -5351,7 +5513,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -5418,7 +5580,7 @@ class ViewerApi
     public function htmlGetAttachmentPagesAsyncWithHttpInfo(Requests\HtmlGetAttachmentPagesRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlAttachmentPageCollection';
-        $request = $this->HtmlGetAttachmentPagesRequest($request);
+        $request = $this->htmlGetAttachmentPagesRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -5450,11 +5612,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -5468,7 +5630,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlGetAttachmentPagesRequest(Requests\HtmlGetAttachmentPagesRequest $request)
+    protected function htmlGetAttachmentPagesRequest(Requests\HtmlGetAttachmentPagesRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -5776,14 +5938,23 @@ class ViewerApi
     public function htmlGetAttachmentsWithHttpInfo(Requests\HtmlGetAttachmentsRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\AttachmentCollection';
-        $request = $this->HtmlGetAttachmentsRequest($request);
+        $request = $this->htmlGetAttachmentsRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -5794,7 +5965,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -5861,7 +6032,7 @@ class ViewerApi
     public function htmlGetAttachmentsAsyncWithHttpInfo(Requests\HtmlGetAttachmentsRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\AttachmentCollection';
-        $request = $this->HtmlGetAttachmentsRequest($request);
+        $request = $this->htmlGetAttachmentsRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -5893,11 +6064,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -5911,7 +6082,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlGetAttachmentsRequest(Requests\HtmlGetAttachmentsRequest $request)
+    protected function htmlGetAttachmentsRequest(Requests\HtmlGetAttachmentsRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -6080,14 +6251,23 @@ class ViewerApi
     public function htmlGetDocumentInfoWithHttpInfo(Requests\HtmlGetDocumentInfoRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->HtmlGetDocumentInfoRequest($request);
+        $request = $this->htmlGetDocumentInfoRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -6098,7 +6278,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -6165,7 +6345,7 @@ class ViewerApi
     public function htmlGetDocumentInfoAsyncWithHttpInfo(Requests\HtmlGetDocumentInfoRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->HtmlGetDocumentInfoRequest($request);
+        $request = $this->htmlGetDocumentInfoRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -6197,11 +6377,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -6215,7 +6395,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlGetDocumentInfoRequest(Requests\HtmlGetDocumentInfoRequest $request)
+    protected function htmlGetDocumentInfoRequest(Requests\HtmlGetDocumentInfoRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -6404,14 +6584,23 @@ class ViewerApi
     public function htmlGetDocumentInfoFromContentWithHttpInfo(Requests\HtmlGetDocumentInfoFromContentRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->HtmlGetDocumentInfoFromContentRequest($request);
+        $request = $this->htmlGetDocumentInfoFromContentRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -6422,7 +6611,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -6489,7 +6678,7 @@ class ViewerApi
     public function htmlGetDocumentInfoFromContentAsyncWithHttpInfo(Requests\HtmlGetDocumentInfoFromContentRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->HtmlGetDocumentInfoFromContentRequest($request);
+        $request = $this->htmlGetDocumentInfoFromContentRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -6521,11 +6710,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -6539,7 +6728,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlGetDocumentInfoFromContentRequest(Requests\HtmlGetDocumentInfoFromContentRequest $request)
+    protected function htmlGetDocumentInfoFromContentRequest(Requests\HtmlGetDocumentInfoFromContentRequest $request)
     {
         // verify the required parameter 'file' is set
         if ($request->file === null) {
@@ -6725,14 +6914,23 @@ class ViewerApi
     public function htmlGetDocumentInfoFromUrlWithHttpInfo(Requests\HtmlGetDocumentInfoFromUrlRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->HtmlGetDocumentInfoFromUrlRequest($request);
+        $request = $this->htmlGetDocumentInfoFromUrlRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -6743,7 +6941,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -6810,7 +7008,7 @@ class ViewerApi
     public function htmlGetDocumentInfoFromUrlAsyncWithHttpInfo(Requests\HtmlGetDocumentInfoFromUrlRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->HtmlGetDocumentInfoFromUrlRequest($request);
+        $request = $this->htmlGetDocumentInfoFromUrlRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -6842,11 +7040,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -6860,7 +7058,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlGetDocumentInfoFromUrlRequest(Requests\HtmlGetDocumentInfoFromUrlRequest $request)
+    protected function htmlGetDocumentInfoFromUrlRequest(Requests\HtmlGetDocumentInfoFromUrlRequest $request)
     {
         // verify the required parameter 'url' is set
         if ($request->url === null) {
@@ -7064,14 +7262,23 @@ class ViewerApi
     public function htmlGetDocumentInfoFromUrlWithOptionsWithHttpInfo(Requests\HtmlGetDocumentInfoFromUrlWithOptionsRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->HtmlGetDocumentInfoFromUrlWithOptionsRequest($request);
+        $request = $this->htmlGetDocumentInfoFromUrlWithOptionsRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -7082,7 +7289,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -7149,7 +7356,7 @@ class ViewerApi
     public function htmlGetDocumentInfoFromUrlWithOptionsAsyncWithHttpInfo(Requests\HtmlGetDocumentInfoFromUrlWithOptionsRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->HtmlGetDocumentInfoFromUrlWithOptionsRequest($request);
+        $request = $this->htmlGetDocumentInfoFromUrlWithOptionsRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -7181,11 +7388,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -7199,7 +7406,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlGetDocumentInfoFromUrlWithOptionsRequest(Requests\HtmlGetDocumentInfoFromUrlWithOptionsRequest $request)
+    protected function htmlGetDocumentInfoFromUrlWithOptionsRequest(Requests\HtmlGetDocumentInfoFromUrlWithOptionsRequest $request)
     {
         // verify the required parameter 'url' is set
         if ($request->url === null) {
@@ -7380,14 +7587,23 @@ class ViewerApi
     public function htmlGetDocumentInfoWithOptionsWithHttpInfo(Requests\HtmlGetDocumentInfoWithOptionsRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->HtmlGetDocumentInfoWithOptionsRequest($request);
+        $request = $this->htmlGetDocumentInfoWithOptionsRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -7398,7 +7614,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -7465,7 +7681,7 @@ class ViewerApi
     public function htmlGetDocumentInfoWithOptionsAsyncWithHttpInfo(Requests\HtmlGetDocumentInfoWithOptionsRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->HtmlGetDocumentInfoWithOptionsRequest($request);
+        $request = $this->htmlGetDocumentInfoWithOptionsRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -7497,11 +7713,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -7515,7 +7731,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlGetDocumentInfoWithOptionsRequest(Requests\HtmlGetDocumentInfoWithOptionsRequest $request)
+    protected function htmlGetDocumentInfoWithOptionsRequest(Requests\HtmlGetDocumentInfoWithOptionsRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -7681,14 +7897,23 @@ class ViewerApi
     public function htmlGetPageWithHttpInfo(Requests\HtmlGetPageRequest $request)
     {
         $returnType = '\SplFileObject';
-        $request = $this->HtmlGetPageRequest($request);
+        $request = $this->htmlGetPageRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -7699,7 +7924,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -7766,7 +7991,7 @@ class ViewerApi
     public function htmlGetPageAsyncWithHttpInfo(Requests\HtmlGetPageRequest $request) 
     {
         $returnType = '\SplFileObject';
-        $request = $this->HtmlGetPageRequest($request);
+        $request = $this->htmlGetPageRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -7798,11 +8023,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -7816,7 +8041,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlGetPageRequest(Requests\HtmlGetPageRequest $request)
+    protected function htmlGetPageRequest(Requests\HtmlGetPageRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -8094,14 +8319,23 @@ class ViewerApi
     public function htmlGetPageResourceWithHttpInfo(Requests\HtmlGetPageResourceRequest $request)
     {
         $returnType = '\SplFileObject';
-        $request = $this->HtmlGetPageResourceRequest($request);
+        $request = $this->htmlGetPageResourceRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -8112,7 +8346,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -8179,7 +8413,7 @@ class ViewerApi
     public function htmlGetPageResourceAsyncWithHttpInfo(Requests\HtmlGetPageResourceRequest $request) 
     {
         $returnType = '\SplFileObject';
-        $request = $this->HtmlGetPageResourceRequest($request);
+        $request = $this->htmlGetPageResourceRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -8211,11 +8445,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -8229,7 +8463,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlGetPageResourceRequest(Requests\HtmlGetPageResourceRequest $request)
+    protected function htmlGetPageResourceRequest(Requests\HtmlGetPageResourceRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -8406,14 +8640,23 @@ class ViewerApi
     public function htmlGetPagesWithHttpInfo(Requests\HtmlGetPagesRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlPageCollection';
-        $request = $this->HtmlGetPagesRequest($request);
+        $request = $this->htmlGetPagesRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -8424,7 +8667,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -8491,7 +8734,7 @@ class ViewerApi
     public function htmlGetPagesAsyncWithHttpInfo(Requests\HtmlGetPagesRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlPageCollection';
-        $request = $this->HtmlGetPagesRequest($request);
+        $request = $this->htmlGetPagesRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -8523,11 +8766,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -8541,7 +8784,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlGetPagesRequest(Requests\HtmlGetPagesRequest $request)
+    protected function htmlGetPagesRequest(Requests\HtmlGetPagesRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -8830,14 +9073,23 @@ class ViewerApi
     public function htmlGetPagesFromUrlWithHttpInfo(Requests\HtmlGetPagesFromUrlRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlPageCollection';
-        $request = $this->HtmlGetPagesFromUrlRequest($request);
+        $request = $this->htmlGetPagesFromUrlRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -8848,7 +9100,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -8915,7 +9167,7 @@ class ViewerApi
     public function htmlGetPagesFromUrlAsyncWithHttpInfo(Requests\HtmlGetPagesFromUrlRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\HtmlPageCollection';
-        $request = $this->HtmlGetPagesFromUrlRequest($request);
+        $request = $this->htmlGetPagesFromUrlRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -8947,11 +9199,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -8965,7 +9217,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlGetPagesFromUrlRequest(Requests\HtmlGetPagesFromUrlRequest $request)
+    protected function htmlGetPagesFromUrlRequest(Requests\HtmlGetPagesFromUrlRequest $request)
     {
         // verify the required parameter 'url' is set
         if ($request->url === null) {
@@ -9269,14 +9521,23 @@ class ViewerApi
     public function htmlGetPdfFileWithHttpInfo(Requests\HtmlGetPdfFileRequest $request)
     {
         $returnType = '\SplFileObject';
-        $request = $this->HtmlGetPdfFileRequest($request);
+        $request = $this->htmlGetPdfFileRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -9287,7 +9548,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -9354,7 +9615,7 @@ class ViewerApi
     public function htmlGetPdfFileAsyncWithHttpInfo(Requests\HtmlGetPdfFileRequest $request) 
     {
         $returnType = '\SplFileObject';
-        $request = $this->HtmlGetPdfFileRequest($request);
+        $request = $this->htmlGetPdfFileRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -9386,11 +9647,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -9404,7 +9665,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlGetPdfFileRequest(Requests\HtmlGetPdfFileRequest $request)
+    protected function htmlGetPdfFileRequest(Requests\HtmlGetPdfFileRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -9613,14 +9874,23 @@ class ViewerApi
     public function htmlGetPdfFileFromUrlWithHttpInfo(Requests\HtmlGetPdfFileFromUrlRequest $request)
     {
         $returnType = '\SplFileObject';
-        $request = $this->HtmlGetPdfFileFromUrlRequest($request);
+        $request = $this->htmlGetPdfFileFromUrlRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -9631,7 +9901,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -9698,7 +9968,7 @@ class ViewerApi
     public function htmlGetPdfFileFromUrlAsyncWithHttpInfo(Requests\HtmlGetPdfFileFromUrlRequest $request) 
     {
         $returnType = '\SplFileObject';
-        $request = $this->HtmlGetPdfFileFromUrlRequest($request);
+        $request = $this->htmlGetPdfFileFromUrlRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -9730,11 +10000,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -9748,7 +10018,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlGetPdfFileFromUrlRequest(Requests\HtmlGetPdfFileFromUrlRequest $request)
+    protected function htmlGetPdfFileFromUrlRequest(Requests\HtmlGetPdfFileFromUrlRequest $request)
     {
         // verify the required parameter 'url' is set
         if ($request->url === null) {
@@ -9972,14 +10242,23 @@ class ViewerApi
     public function htmlGetZipWithAttachmentPagesWithHttpInfo(Requests\HtmlGetZipWithAttachmentPagesRequest $request)
     {
         $returnType = '\SplFileObject';
-        $request = $this->HtmlGetZipWithAttachmentPagesRequest($request);
+        $request = $this->htmlGetZipWithAttachmentPagesRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -9990,7 +10269,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -10057,7 +10336,7 @@ class ViewerApi
     public function htmlGetZipWithAttachmentPagesAsyncWithHttpInfo(Requests\HtmlGetZipWithAttachmentPagesRequest $request) 
     {
         $returnType = '\SplFileObject';
-        $request = $this->HtmlGetZipWithAttachmentPagesRequest($request);
+        $request = $this->htmlGetZipWithAttachmentPagesRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -10089,11 +10368,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -10107,7 +10386,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlGetZipWithAttachmentPagesRequest(Requests\HtmlGetZipWithAttachmentPagesRequest $request)
+    protected function htmlGetZipWithAttachmentPagesRequest(Requests\HtmlGetZipWithAttachmentPagesRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -10415,14 +10694,23 @@ class ViewerApi
     public function htmlGetZipWithPagesWithHttpInfo(Requests\HtmlGetZipWithPagesRequest $request)
     {
         $returnType = '\SplFileObject';
-        $request = $this->HtmlGetZipWithPagesRequest($request);
+        $request = $this->htmlGetZipWithPagesRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -10433,7 +10721,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -10500,7 +10788,7 @@ class ViewerApi
     public function htmlGetZipWithPagesAsyncWithHttpInfo(Requests\HtmlGetZipWithPagesRequest $request) 
     {
         $returnType = '\SplFileObject';
-        $request = $this->HtmlGetZipWithPagesRequest($request);
+        $request = $this->htmlGetZipWithPagesRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -10532,11 +10820,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -10550,7 +10838,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlGetZipWithPagesRequest(Requests\HtmlGetZipWithPagesRequest $request)
+    protected function htmlGetZipWithPagesRequest(Requests\HtmlGetZipWithPagesRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -10839,14 +11127,23 @@ class ViewerApi
     public function htmlTransformPagesWithHttpInfo(Requests\HtmlTransformPagesRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\PageInfoCollection';
-        $request = $this->HtmlTransformPagesRequest($request);
+        $request = $this->htmlTransformPagesRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -10857,7 +11154,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -10924,7 +11221,7 @@ class ViewerApi
     public function htmlTransformPagesAsyncWithHttpInfo(Requests\HtmlTransformPagesRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\PageInfoCollection';
-        $request = $this->HtmlTransformPagesRequest($request);
+        $request = $this->htmlTransformPagesRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -10956,11 +11253,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -10974,7 +11271,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function HtmlTransformPagesRequest(Requests\HtmlTransformPagesRequest $request)
+    protected function htmlTransformPagesRequest(Requests\HtmlTransformPagesRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -11140,14 +11437,23 @@ class ViewerApi
     public function imageCreateAttachmentPagesCacheWithHttpInfo(Requests\ImageCreateAttachmentPagesCacheRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\ImageAttachmentPageCollection';
-        $request = $this->ImageCreateAttachmentPagesCacheRequest($request);
+        $request = $this->imageCreateAttachmentPagesCacheRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -11158,7 +11464,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -11225,7 +11531,7 @@ class ViewerApi
     public function imageCreateAttachmentPagesCacheAsyncWithHttpInfo(Requests\ImageCreateAttachmentPagesCacheRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\ImageAttachmentPageCollection';
-        $request = $this->ImageCreateAttachmentPagesCacheRequest($request);
+        $request = $this->imageCreateAttachmentPagesCacheRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -11257,11 +11563,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -11275,7 +11581,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageCreateAttachmentPagesCacheRequest(Requests\ImageCreateAttachmentPagesCacheRequest $request)
+    protected function imageCreateAttachmentPagesCacheRequest(Requests\ImageCreateAttachmentPagesCacheRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -11460,14 +11766,23 @@ class ViewerApi
     public function imageCreatePagesCacheWithHttpInfo(Requests\ImageCreatePagesCacheRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\ImagePageCollection';
-        $request = $this->ImageCreatePagesCacheRequest($request);
+        $request = $this->imageCreatePagesCacheRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -11478,7 +11793,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -11545,7 +11860,7 @@ class ViewerApi
     public function imageCreatePagesCacheAsyncWithHttpInfo(Requests\ImageCreatePagesCacheRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\ImagePageCollection';
-        $request = $this->ImageCreatePagesCacheRequest($request);
+        $request = $this->imageCreatePagesCacheRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -11577,11 +11892,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -11595,7 +11910,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageCreatePagesCacheRequest(Requests\ImageCreatePagesCacheRequest $request)
+    protected function imageCreatePagesCacheRequest(Requests\ImageCreatePagesCacheRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -11771,14 +12086,23 @@ class ViewerApi
     public function imageCreatePagesCacheFromContentWithHttpInfo(Requests\ImageCreatePagesCacheFromContentRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\ImagePageCollection';
-        $request = $this->ImageCreatePagesCacheFromContentRequest($request);
+        $request = $this->imageCreatePagesCacheFromContentRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -11789,7 +12113,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -11856,7 +12180,7 @@ class ViewerApi
     public function imageCreatePagesCacheFromContentAsyncWithHttpInfo(Requests\ImageCreatePagesCacheFromContentRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\ImagePageCollection';
-        $request = $this->ImageCreatePagesCacheFromContentRequest($request);
+        $request = $this->imageCreatePagesCacheFromContentRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -11888,11 +12212,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -11906,7 +12230,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageCreatePagesCacheFromContentRequest(Requests\ImageCreatePagesCacheFromContentRequest $request)
+    protected function imageCreatePagesCacheFromContentRequest(Requests\ImageCreatePagesCacheFromContentRequest $request)
     {
         // verify the required parameter 'file' is set
         if ($request->file === null) {
@@ -12102,14 +12426,23 @@ class ViewerApi
     public function imageCreatePagesCacheFromUrlWithHttpInfo(Requests\ImageCreatePagesCacheFromUrlRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\ImagePageCollection';
-        $request = $this->ImageCreatePagesCacheFromUrlRequest($request);
+        $request = $this->imageCreatePagesCacheFromUrlRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -12120,7 +12453,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -12187,7 +12520,7 @@ class ViewerApi
     public function imageCreatePagesCacheFromUrlAsyncWithHttpInfo(Requests\ImageCreatePagesCacheFromUrlRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\ImagePageCollection';
-        $request = $this->ImageCreatePagesCacheFromUrlRequest($request);
+        $request = $this->imageCreatePagesCacheFromUrlRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -12219,11 +12552,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -12237,7 +12570,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageCreatePagesCacheFromUrlRequest(Requests\ImageCreatePagesCacheFromUrlRequest $request)
+    protected function imageCreatePagesCacheFromUrlRequest(Requests\ImageCreatePagesCacheFromUrlRequest $request)
     {
         // verify the required parameter 'url' is set
         if ($request->url === null) {
@@ -12428,14 +12761,23 @@ class ViewerApi
     public function imageCreatePdfFileWithHttpInfo(Requests\ImageCreatePdfFileRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\PdfFileInfo';
-        $request = $this->ImageCreatePdfFileRequest($request);
+        $request = $this->imageCreatePdfFileRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -12446,7 +12788,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -12513,7 +12855,7 @@ class ViewerApi
     public function imageCreatePdfFileAsyncWithHttpInfo(Requests\ImageCreatePdfFileRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\PdfFileInfo';
-        $request = $this->ImageCreatePdfFileRequest($request);
+        $request = $this->imageCreatePdfFileRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -12545,11 +12887,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -12563,7 +12905,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageCreatePdfFileRequest(Requests\ImageCreatePdfFileRequest $request)
+    protected function imageCreatePdfFileRequest(Requests\ImageCreatePdfFileRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -12739,14 +13081,23 @@ class ViewerApi
     public function imageCreatePdfFileFromContentWithHttpInfo(Requests\ImageCreatePdfFileFromContentRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\PdfFileInfo';
-        $request = $this->ImageCreatePdfFileFromContentRequest($request);
+        $request = $this->imageCreatePdfFileFromContentRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -12757,7 +13108,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -12824,7 +13175,7 @@ class ViewerApi
     public function imageCreatePdfFileFromContentAsyncWithHttpInfo(Requests\ImageCreatePdfFileFromContentRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\PdfFileInfo';
-        $request = $this->ImageCreatePdfFileFromContentRequest($request);
+        $request = $this->imageCreatePdfFileFromContentRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -12856,11 +13207,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -12874,7 +13225,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageCreatePdfFileFromContentRequest(Requests\ImageCreatePdfFileFromContentRequest $request)
+    protected function imageCreatePdfFileFromContentRequest(Requests\ImageCreatePdfFileFromContentRequest $request)
     {
         // verify the required parameter 'file' is set
         if ($request->file === null) {
@@ -13070,14 +13421,23 @@ class ViewerApi
     public function imageCreatePdfFileFromUrlWithHttpInfo(Requests\ImageCreatePdfFileFromUrlRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\PdfFileInfo';
-        $request = $this->ImageCreatePdfFileFromUrlRequest($request);
+        $request = $this->imageCreatePdfFileFromUrlRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -13088,7 +13448,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -13155,7 +13515,7 @@ class ViewerApi
     public function imageCreatePdfFileFromUrlAsyncWithHttpInfo(Requests\ImageCreatePdfFileFromUrlRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\PdfFileInfo';
-        $request = $this->ImageCreatePdfFileFromUrlRequest($request);
+        $request = $this->imageCreatePdfFileFromUrlRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -13187,11 +13547,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -13205,7 +13565,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageCreatePdfFileFromUrlRequest(Requests\ImageCreatePdfFileFromUrlRequest $request)
+    protected function imageCreatePdfFileFromUrlRequest(Requests\ImageCreatePdfFileFromUrlRequest $request)
     {
         // verify the required parameter 'url' is set
         if ($request->url === null) {
@@ -13394,14 +13754,23 @@ class ViewerApi
     public function imageDeleteAttachmentPagesCacheWithHttpInfo(Requests\ImageDeleteAttachmentPagesCacheRequest $request)
     {
         $returnType = '';
-        $request = $this->ImageDeleteAttachmentPagesCacheRequest($request);
+        $request = $this->imageDeleteAttachmentPagesCacheRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -13412,7 +13781,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             return [null, $statusCode, $response->getHeaders()];
@@ -13457,7 +13826,7 @@ class ViewerApi
     public function imageDeleteAttachmentPagesCacheAsyncWithHttpInfo(Requests\ImageDeleteAttachmentPagesCacheRequest $request) 
     {
         $returnType = '';
-        $request = $this->ImageDeleteAttachmentPagesCacheRequest($request);
+        $request = $this->imageDeleteAttachmentPagesCacheRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -13471,11 +13840,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -13489,7 +13858,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageDeleteAttachmentPagesCacheRequest(Requests\ImageDeleteAttachmentPagesCacheRequest $request)
+    protected function imageDeleteAttachmentPagesCacheRequest(Requests\ImageDeleteAttachmentPagesCacheRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -13655,14 +14024,23 @@ class ViewerApi
     public function imageDeletePagesCacheWithHttpInfo(Requests\ImageDeletePagesCacheRequest $request)
     {
         $returnType = '';
-        $request = $this->ImageDeletePagesCacheRequest($request);
+        $request = $this->imageDeletePagesCacheRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -13673,7 +14051,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             return [null, $statusCode, $response->getHeaders()];
@@ -13718,7 +14096,7 @@ class ViewerApi
     public function imageDeletePagesCacheAsyncWithHttpInfo(Requests\ImageDeletePagesCacheRequest $request) 
     {
         $returnType = '';
-        $request = $this->ImageDeletePagesCacheRequest($request);
+        $request = $this->imageDeletePagesCacheRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -13732,11 +14110,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -13750,7 +14128,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageDeletePagesCacheRequest(Requests\ImageDeletePagesCacheRequest $request)
+    protected function imageDeletePagesCacheRequest(Requests\ImageDeletePagesCacheRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -13909,14 +14287,23 @@ class ViewerApi
     public function imageGetAttachmentWithHttpInfo(Requests\ImageGetAttachmentRequest $request)
     {
         $returnType = '\SplFileObject';
-        $request = $this->ImageGetAttachmentRequest($request);
+        $request = $this->imageGetAttachmentRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -13927,7 +14314,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -13994,7 +14381,7 @@ class ViewerApi
     public function imageGetAttachmentAsyncWithHttpInfo(Requests\ImageGetAttachmentRequest $request) 
     {
         $returnType = '\SplFileObject';
-        $request = $this->ImageGetAttachmentRequest($request);
+        $request = $this->imageGetAttachmentRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -14026,11 +14413,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -14044,7 +14431,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageGetAttachmentRequest(Requests\ImageGetAttachmentRequest $request)
+    protected function imageGetAttachmentRequest(Requests\ImageGetAttachmentRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -14222,14 +14609,23 @@ class ViewerApi
     public function imageGetAttachmentInfoWithHttpInfo(Requests\ImageGetAttachmentInfoRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->ImageGetAttachmentInfoRequest($request);
+        $request = $this->imageGetAttachmentInfoRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -14240,7 +14636,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -14307,7 +14703,7 @@ class ViewerApi
     public function imageGetAttachmentInfoAsyncWithHttpInfo(Requests\ImageGetAttachmentInfoRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->ImageGetAttachmentInfoRequest($request);
+        $request = $this->imageGetAttachmentInfoRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -14339,11 +14735,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -14357,7 +14753,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageGetAttachmentInfoRequest(Requests\ImageGetAttachmentInfoRequest $request)
+    protected function imageGetAttachmentInfoRequest(Requests\ImageGetAttachmentInfoRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -14555,14 +14951,23 @@ class ViewerApi
     public function imageGetAttachmentInfoWithOptionsWithHttpInfo(Requests\ImageGetAttachmentInfoWithOptionsRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->ImageGetAttachmentInfoWithOptionsRequest($request);
+        $request = $this->imageGetAttachmentInfoWithOptionsRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -14573,7 +14978,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -14640,7 +15045,7 @@ class ViewerApi
     public function imageGetAttachmentInfoWithOptionsAsyncWithHttpInfo(Requests\ImageGetAttachmentInfoWithOptionsRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->ImageGetAttachmentInfoWithOptionsRequest($request);
+        $request = $this->imageGetAttachmentInfoWithOptionsRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -14672,11 +15077,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -14690,7 +15095,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageGetAttachmentInfoWithOptionsRequest(Requests\ImageGetAttachmentInfoWithOptionsRequest $request)
+    protected function imageGetAttachmentInfoWithOptionsRequest(Requests\ImageGetAttachmentInfoWithOptionsRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -14865,14 +15270,23 @@ class ViewerApi
     public function imageGetAttachmentPageWithHttpInfo(Requests\ImageGetAttachmentPageRequest $request)
     {
         $returnType = '\SplFileObject';
-        $request = $this->ImageGetAttachmentPageRequest($request);
+        $request = $this->imageGetAttachmentPageRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -14883,7 +15297,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -14950,7 +15364,7 @@ class ViewerApi
     public function imageGetAttachmentPageAsyncWithHttpInfo(Requests\ImageGetAttachmentPageRequest $request) 
     {
         $returnType = '\SplFileObject';
-        $request = $this->ImageGetAttachmentPageRequest($request);
+        $request = $this->imageGetAttachmentPageRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -14982,11 +15396,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -15000,7 +15414,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageGetAttachmentPageRequest(Requests\ImageGetAttachmentPageRequest $request)
+    protected function imageGetAttachmentPageRequest(Requests\ImageGetAttachmentPageRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -15287,14 +15701,23 @@ class ViewerApi
     public function imageGetAttachmentPagesWithHttpInfo(Requests\ImageGetAttachmentPagesRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\ImageAttachmentPageCollection';
-        $request = $this->ImageGetAttachmentPagesRequest($request);
+        $request = $this->imageGetAttachmentPagesRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -15305,7 +15728,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -15372,7 +15795,7 @@ class ViewerApi
     public function imageGetAttachmentPagesAsyncWithHttpInfo(Requests\ImageGetAttachmentPagesRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\ImageAttachmentPageCollection';
-        $request = $this->ImageGetAttachmentPagesRequest($request);
+        $request = $this->imageGetAttachmentPagesRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -15404,11 +15827,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -15422,7 +15845,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageGetAttachmentPagesRequest(Requests\ImageGetAttachmentPagesRequest $request)
+    protected function imageGetAttachmentPagesRequest(Requests\ImageGetAttachmentPagesRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -15720,14 +16143,23 @@ class ViewerApi
     public function imageGetAttachmentsWithHttpInfo(Requests\ImageGetAttachmentsRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\AttachmentCollection';
-        $request = $this->ImageGetAttachmentsRequest($request);
+        $request = $this->imageGetAttachmentsRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -15738,7 +16170,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -15805,7 +16237,7 @@ class ViewerApi
     public function imageGetAttachmentsAsyncWithHttpInfo(Requests\ImageGetAttachmentsRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\AttachmentCollection';
-        $request = $this->ImageGetAttachmentsRequest($request);
+        $request = $this->imageGetAttachmentsRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -15837,11 +16269,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -15855,7 +16287,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageGetAttachmentsRequest(Requests\ImageGetAttachmentsRequest $request)
+    protected function imageGetAttachmentsRequest(Requests\ImageGetAttachmentsRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -16024,14 +16456,23 @@ class ViewerApi
     public function imageGetDocumentInfoWithHttpInfo(Requests\ImageGetDocumentInfoRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->ImageGetDocumentInfoRequest($request);
+        $request = $this->imageGetDocumentInfoRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -16042,7 +16483,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -16109,7 +16550,7 @@ class ViewerApi
     public function imageGetDocumentInfoAsyncWithHttpInfo(Requests\ImageGetDocumentInfoRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->ImageGetDocumentInfoRequest($request);
+        $request = $this->imageGetDocumentInfoRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -16141,11 +16582,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -16159,7 +16600,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageGetDocumentInfoRequest(Requests\ImageGetDocumentInfoRequest $request)
+    protected function imageGetDocumentInfoRequest(Requests\ImageGetDocumentInfoRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -16358,14 +16799,23 @@ class ViewerApi
     public function imageGetDocumentInfoFromContentWithHttpInfo(Requests\ImageGetDocumentInfoFromContentRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->ImageGetDocumentInfoFromContentRequest($request);
+        $request = $this->imageGetDocumentInfoFromContentRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -16376,7 +16826,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -16443,7 +16893,7 @@ class ViewerApi
     public function imageGetDocumentInfoFromContentAsyncWithHttpInfo(Requests\ImageGetDocumentInfoFromContentRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->ImageGetDocumentInfoFromContentRequest($request);
+        $request = $this->imageGetDocumentInfoFromContentRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -16475,11 +16925,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -16493,7 +16943,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageGetDocumentInfoFromContentRequest(Requests\ImageGetDocumentInfoFromContentRequest $request)
+    protected function imageGetDocumentInfoFromContentRequest(Requests\ImageGetDocumentInfoFromContentRequest $request)
     {
         // verify the required parameter 'file' is set
         if ($request->file === null) {
@@ -16679,14 +17129,23 @@ class ViewerApi
     public function imageGetDocumentInfoFromUrlWithHttpInfo(Requests\ImageGetDocumentInfoFromUrlRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->ImageGetDocumentInfoFromUrlRequest($request);
+        $request = $this->imageGetDocumentInfoFromUrlRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -16697,7 +17156,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -16764,7 +17223,7 @@ class ViewerApi
     public function imageGetDocumentInfoFromUrlAsyncWithHttpInfo(Requests\ImageGetDocumentInfoFromUrlRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->ImageGetDocumentInfoFromUrlRequest($request);
+        $request = $this->imageGetDocumentInfoFromUrlRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -16796,11 +17255,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -16814,7 +17273,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageGetDocumentInfoFromUrlRequest(Requests\ImageGetDocumentInfoFromUrlRequest $request)
+    protected function imageGetDocumentInfoFromUrlRequest(Requests\ImageGetDocumentInfoFromUrlRequest $request)
     {
         // verify the required parameter 'url' is set
         if ($request->url === null) {
@@ -17028,14 +17487,23 @@ class ViewerApi
     public function imageGetDocumentInfoFromUrlWithOptionsWithHttpInfo(Requests\ImageGetDocumentInfoFromUrlWithOptionsRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->ImageGetDocumentInfoFromUrlWithOptionsRequest($request);
+        $request = $this->imageGetDocumentInfoFromUrlWithOptionsRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -17046,7 +17514,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -17113,7 +17581,7 @@ class ViewerApi
     public function imageGetDocumentInfoFromUrlWithOptionsAsyncWithHttpInfo(Requests\ImageGetDocumentInfoFromUrlWithOptionsRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->ImageGetDocumentInfoFromUrlWithOptionsRequest($request);
+        $request = $this->imageGetDocumentInfoFromUrlWithOptionsRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -17145,11 +17613,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -17163,7 +17631,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageGetDocumentInfoFromUrlWithOptionsRequest(Requests\ImageGetDocumentInfoFromUrlWithOptionsRequest $request)
+    protected function imageGetDocumentInfoFromUrlWithOptionsRequest(Requests\ImageGetDocumentInfoFromUrlWithOptionsRequest $request)
     {
         // verify the required parameter 'url' is set
         if ($request->url === null) {
@@ -17344,14 +17812,23 @@ class ViewerApi
     public function imageGetDocumentInfoWithOptionsWithHttpInfo(Requests\ImageGetDocumentInfoWithOptionsRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->ImageGetDocumentInfoWithOptionsRequest($request);
+        $request = $this->imageGetDocumentInfoWithOptionsRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -17362,7 +17839,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -17429,7 +17906,7 @@ class ViewerApi
     public function imageGetDocumentInfoWithOptionsAsyncWithHttpInfo(Requests\ImageGetDocumentInfoWithOptionsRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\DocumentInfo';
-        $request = $this->ImageGetDocumentInfoWithOptionsRequest($request);
+        $request = $this->imageGetDocumentInfoWithOptionsRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -17461,11 +17938,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -17479,7 +17956,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageGetDocumentInfoWithOptionsRequest(Requests\ImageGetDocumentInfoWithOptionsRequest $request)
+    protected function imageGetDocumentInfoWithOptionsRequest(Requests\ImageGetDocumentInfoWithOptionsRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -17645,14 +18122,23 @@ class ViewerApi
     public function imageGetPageWithHttpInfo(Requests\ImageGetPageRequest $request)
     {
         $returnType = '\SplFileObject';
-        $request = $this->ImageGetPageRequest($request);
+        $request = $this->imageGetPageRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -17663,7 +18149,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -17730,7 +18216,7 @@ class ViewerApi
     public function imageGetPageAsyncWithHttpInfo(Requests\ImageGetPageRequest $request) 
     {
         $returnType = '\SplFileObject';
-        $request = $this->ImageGetPageRequest($request);
+        $request = $this->imageGetPageRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -17762,11 +18248,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -17780,7 +18266,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageGetPageRequest(Requests\ImageGetPageRequest $request)
+    protected function imageGetPageRequest(Requests\ImageGetPageRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -18048,14 +18534,23 @@ class ViewerApi
     public function imageGetPagesWithHttpInfo(Requests\ImageGetPagesRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\ImagePageCollection';
-        $request = $this->ImageGetPagesRequest($request);
+        $request = $this->imageGetPagesRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -18066,7 +18561,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -18133,7 +18628,7 @@ class ViewerApi
     public function imageGetPagesAsyncWithHttpInfo(Requests\ImageGetPagesRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\ImagePageCollection';
-        $request = $this->ImageGetPagesRequest($request);
+        $request = $this->imageGetPagesRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -18165,11 +18660,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -18183,7 +18678,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageGetPagesRequest(Requests\ImageGetPagesRequest $request)
+    protected function imageGetPagesRequest(Requests\ImageGetPagesRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -18462,14 +18957,23 @@ class ViewerApi
     public function imageGetPagesFromUrlWithHttpInfo(Requests\ImageGetPagesFromUrlRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\ImagePageCollection';
-        $request = $this->ImageGetPagesFromUrlRequest($request);
+        $request = $this->imageGetPagesFromUrlRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -18480,7 +18984,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -18547,7 +19051,7 @@ class ViewerApi
     public function imageGetPagesFromUrlAsyncWithHttpInfo(Requests\ImageGetPagesFromUrlRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\ImagePageCollection';
-        $request = $this->ImageGetPagesFromUrlRequest($request);
+        $request = $this->imageGetPagesFromUrlRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -18579,11 +19083,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -18597,7 +19101,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageGetPagesFromUrlRequest(Requests\ImageGetPagesFromUrlRequest $request)
+    protected function imageGetPagesFromUrlRequest(Requests\ImageGetPagesFromUrlRequest $request)
     {
         // verify the required parameter 'url' is set
         if ($request->url === null) {
@@ -18891,14 +19395,23 @@ class ViewerApi
     public function imageGetPdfFileWithHttpInfo(Requests\ImageGetPdfFileRequest $request)
     {
         $returnType = '\SplFileObject';
-        $request = $this->ImageGetPdfFileRequest($request);
+        $request = $this->imageGetPdfFileRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -18909,7 +19422,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -18976,7 +19489,7 @@ class ViewerApi
     public function imageGetPdfFileAsyncWithHttpInfo(Requests\ImageGetPdfFileRequest $request) 
     {
         $returnType = '\SplFileObject';
-        $request = $this->ImageGetPdfFileRequest($request);
+        $request = $this->imageGetPdfFileRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -19008,11 +19521,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -19026,7 +19539,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageGetPdfFileRequest(Requests\ImageGetPdfFileRequest $request)
+    protected function imageGetPdfFileRequest(Requests\ImageGetPdfFileRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -19235,14 +19748,23 @@ class ViewerApi
     public function imageGetPdfFileFromUrlWithHttpInfo(Requests\ImageGetPdfFileFromUrlRequest $request)
     {
         $returnType = '\SplFileObject';
-        $request = $this->ImageGetPdfFileFromUrlRequest($request);
+        $request = $this->imageGetPdfFileFromUrlRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -19253,7 +19775,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -19320,7 +19842,7 @@ class ViewerApi
     public function imageGetPdfFileFromUrlAsyncWithHttpInfo(Requests\ImageGetPdfFileFromUrlRequest $request) 
     {
         $returnType = '\SplFileObject';
-        $request = $this->ImageGetPdfFileFromUrlRequest($request);
+        $request = $this->imageGetPdfFileFromUrlRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -19352,11 +19874,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -19370,7 +19892,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageGetPdfFileFromUrlRequest(Requests\ImageGetPdfFileFromUrlRequest $request)
+    protected function imageGetPdfFileFromUrlRequest(Requests\ImageGetPdfFileFromUrlRequest $request)
     {
         // verify the required parameter 'url' is set
         if ($request->url === null) {
@@ -19594,14 +20116,23 @@ class ViewerApi
     public function imageGetZipWithAttachmentPagesWithHttpInfo(Requests\ImageGetZipWithAttachmentPagesRequest $request)
     {
         $returnType = '\SplFileObject';
-        $request = $this->ImageGetZipWithAttachmentPagesRequest($request);
+        $request = $this->imageGetZipWithAttachmentPagesRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -19612,7 +20143,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -19679,7 +20210,7 @@ class ViewerApi
     public function imageGetZipWithAttachmentPagesAsyncWithHttpInfo(Requests\ImageGetZipWithAttachmentPagesRequest $request) 
     {
         $returnType = '\SplFileObject';
-        $request = $this->ImageGetZipWithAttachmentPagesRequest($request);
+        $request = $this->imageGetZipWithAttachmentPagesRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -19711,11 +20242,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -19729,7 +20260,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageGetZipWithAttachmentPagesRequest(Requests\ImageGetZipWithAttachmentPagesRequest $request)
+    protected function imageGetZipWithAttachmentPagesRequest(Requests\ImageGetZipWithAttachmentPagesRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -20027,14 +20558,23 @@ class ViewerApi
     public function imageGetZipWithPagesWithHttpInfo(Requests\ImageGetZipWithPagesRequest $request)
     {
         $returnType = '\SplFileObject';
-        $request = $this->ImageGetZipWithPagesRequest($request);
+        $request = $this->imageGetZipWithPagesRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -20045,7 +20585,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -20112,7 +20652,7 @@ class ViewerApi
     public function imageGetZipWithPagesAsyncWithHttpInfo(Requests\ImageGetZipWithPagesRequest $request) 
     {
         $returnType = '\SplFileObject';
-        $request = $this->ImageGetZipWithPagesRequest($request);
+        $request = $this->imageGetZipWithPagesRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -20144,11 +20684,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -20162,7 +20702,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageGetZipWithPagesRequest(Requests\ImageGetZipWithPagesRequest $request)
+    protected function imageGetZipWithPagesRequest(Requests\ImageGetZipWithPagesRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -20441,14 +20981,23 @@ class ViewerApi
     public function imageTransformPagesWithHttpInfo(Requests\ImageTransformPagesRequest $request)
     {
         $returnType = '\GroupDocs\Viewer\Model\PageInfoCollection';
-        $request = $this->ImageTransformPagesRequest($request);
+        $request = $this->imageTransformPagesRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException("[{$e->getCode()}] {$e->getMessage()}", $e->getCode(), $e->getResponse() ? $e->getResponse()->getHeaders() : null);
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
             }
 
             $statusCode = $response->getStatusCode();
@@ -20459,7 +21008,7 @@ class ViewerApi
                     throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
                 }
           
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode, $response->getHeaders(), $response->getBody());
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
             $responseBody = $response->getBody();
@@ -20526,7 +21075,7 @@ class ViewerApi
     public function imageTransformPagesAsyncWithHttpInfo(Requests\ImageTransformPagesRequest $request) 
     {
         $returnType = '\GroupDocs\Viewer\Model\PageInfoCollection';
-        $request = $this->ImageTransformPagesRequest($request);
+        $request = $this->imageTransformPagesRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -20558,11 +21107,11 @@ class ViewerApi
           
                     if ($exception instanceof RepeatRequestException) {
                         $this->_refreshToken();
-                        throw new RepeatRequestException("Request must be retried", $statusCode, $response->getHeaders(), $response->getBody());
+                        throw new RepeatRequestException("Request must be retried", $statusCode);
                     }
           
                     throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode, $response->getHeaders(), $response->getBody()
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
                     );
                 }
             );
@@ -20576,7 +21125,7 @@ class ViewerApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function ImageTransformPagesRequest(Requests\ImageTransformPagesRequest $request)
+    protected function imageTransformPagesRequest(Requests\ImageTransformPagesRequest $request)
     {
         // verify the required parameter 'fileName' is set
         if ($request->fileName === null) {
@@ -20776,11 +21325,24 @@ class ViewerApi
         {
             $requestUrl = $this->config->getApiBaseUrl() . "/oauth2/token";
             $postData = "grant_type=client_credentials" . "&client_id=" . $this->config->getAppSid() . "&client_secret=" . $this->config->getAppKey();
-            $response = $this->client->send(new Request('POST', $requestUrl, [], $postData));
-            $result = json_decode($response->getBody()->getContents(), true);
+            try {
+                $response = $this->client->send(new Request('POST', $requestUrl, [], $postData));
+                $result = json_decode($response->getBody()->getContents(), true);
             
-            $this->accessToken = $result["access_token"];
-            $this->refreshToken = $result["refresh_token"];
+                $this->accessToken = $result["access_token"];
+                $this->refreshToken = $result["refresh_token"];
+            } catch (RequestException $e) {
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->error_description != null 
+                    ? $error->error_description
+                    : $e->getMessage();
+                    
+                throw new ApiException($errorMessage, $errorCode);
+            }
         }
     }
   
@@ -20793,10 +21355,24 @@ class ViewerApi
 
         $requestUrl = $this->config->getApiBaseUrl() . "/oauth2/token";
         $postData = "grant_type=refresh_token&refresh_token=" . $this->config->getRefreshToken();
-        $response = $this->client->send(new Request('POST', $requestUrl, [], $postData));
-        $result = json_decode($response->getBody()->getContents(), true);
+        
+        try {
+            $response = $this->client->send(new Request('POST', $requestUrl, [], $postData));
+            $result = json_decode($response->getBody()->getContents(), true);
        
-        $this->accessToken = $result["access_token"];
-        $this->refreshToken = $result["refresh_token"];
+            $this->accessToken = $result["access_token"];
+            $this->refreshToken = $result["refresh_token"];
+        } catch (RequestException $e) {
+            $responseBody = $e->getResponse()->getBody();
+            $content = $responseBody->getContents();
+            $error = json_decode($content);
+
+            $errorCode = $e->getCode();
+            $errorMessage = $error->error_description != null 
+                ? $error->error_description
+                : $e->getMessage();
+                
+            throw new ApiException($errorMessage, $errorCode);
+        }
     }
 }

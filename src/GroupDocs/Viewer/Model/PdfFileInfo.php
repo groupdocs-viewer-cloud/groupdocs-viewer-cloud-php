@@ -94,9 +94,9 @@ class PdfFileInfo extends ResourceUrl
      * @var string[]
      */
     protected static $attributeMap = [
-        'fileName' => 'FileName',
-        'folder' => 'Folder',
-        'pdfFileName' => 'PdfFileName'
+        'fileName' => 'fileName',
+        'folder' => 'folder',
+        'pdfFileName' => 'pdfFileName'
     ];
 
     /*

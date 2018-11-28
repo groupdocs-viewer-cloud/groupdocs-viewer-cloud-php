@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class ImageDeletePagesCacheRequest
 {
     /*
-     * Initializes a new instance of the ImageDeletePagesCacheRequest class.
+     * Initializes a new instance of the imageDeletePagesCacheRequest class.
      *  
      * @param string $fileName The file name.
      * @param string $folder The folder which contains specified file in storage.

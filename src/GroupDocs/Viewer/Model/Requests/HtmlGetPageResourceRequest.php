@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlGetPageResourceRequest
 {
     /*
-     * Initializes a new instance of the HtmlGetPageResourceRequest class.
+     * Initializes a new instance of the htmlGetPageResourceRequest class.
      *  
      * @param string $fileName The file name.
      * @param int $pageNumber The page number.

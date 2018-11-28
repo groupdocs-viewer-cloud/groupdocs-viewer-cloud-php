@@ -92,8 +92,8 @@ class HtmlPage extends ResourceUrl
      * @var string[]
      */
     protected static $attributeMap = [
-        'number' => 'Number',
-        'resources' => 'Resources'
+        'number' => 'number',
+        'resources' => 'resources'
     ];
 
     /*

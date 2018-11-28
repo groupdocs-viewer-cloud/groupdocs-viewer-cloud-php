@@ -96,9 +96,9 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name',
-        'extension' => 'Extension',
-        'fileFormat' => 'FileFormat'
+        'name' => 'name',
+        'extension' => 'extension',
+        'fileFormat' => 'fileFormat'
     ];
 
     /*

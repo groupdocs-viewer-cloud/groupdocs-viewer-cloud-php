@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlGetZipWithPagesRequest
 {
     /*
-     * Initializes a new instance of the HtmlGetZipWithPagesRequest class.
+     * Initializes a new instance of the htmlGetZipWithPagesRequest class.
      *  
      * @param string $fileName The file name.
      * @param string $resourcePath The HTML resource path.

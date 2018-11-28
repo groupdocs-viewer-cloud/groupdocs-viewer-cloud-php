@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlGetDocumentInfoFromUrlRequest
 {
     /*
-     * Initializes a new instance of the HtmlGetDocumentInfoFromUrlRequest class.
+     * Initializes a new instance of the htmlGetDocumentInfoFromUrlRequest class.
      *  
      * @param string $url The URL to retrieve document.
      * @param string $fileName The file name.

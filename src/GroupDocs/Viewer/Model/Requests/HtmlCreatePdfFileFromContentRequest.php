@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlCreatePdfFileFromContentRequest
 {
     /*
-     * Initializes a new instance of the HtmlCreatePdfFileFromContentRequest class.
+     * Initializes a new instance of the htmlCreatePdfFileFromContentRequest class.
      *  
      * @param \SplFileObject $file File contents.
      * @param \SplFileObject $pdfFileOptions PDF rendering options 'PdfFileOptions' as JSON or XML.

@@ -60,7 +60,9 @@ class DocumentInfo implements ArrayAccess
         'dateModified' => '\DateTime',
         'pages' => '\GroupDocs\Viewer\Model\PageInfo[]',
         'attachments' => '\GroupDocs\Viewer\Model\AttachmentInfo[]',
-        'layers' => 'string[]'
+        'layers' => 'string[]',
+        'startDate' => '\DateTime',
+        'endDate' => '\DateTime'
     ];
 
     /*
@@ -76,7 +78,9 @@ class DocumentInfo implements ArrayAccess
         'dateModified' => 'date-time',
         'pages' => null,
         'attachments' => null,
-        'layers' => null
+        'layers' => null,
+        'startDate' => 'date-time',
+        'endDate' => 'date-time'
     ];
 
     /*
@@ -106,14 +110,16 @@ class DocumentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'fileName' => 'FileName',
-        'extension' => 'Extension',
-        'fileFormat' => 'FileFormat',
-        'size' => 'Size',
-        'dateModified' => 'DateModified',
-        'pages' => 'Pages',
-        'attachments' => 'Attachments',
-        'layers' => 'Layers'
+        'fileName' => 'fileName',
+        'extension' => 'extension',
+        'fileFormat' => 'fileFormat',
+        'size' => 'size',
+        'dateModified' => 'dateModified',
+        'pages' => 'pages',
+        'attachments' => 'attachments',
+        'layers' => 'layers',
+        'startDate' => 'startDate',
+        'endDate' => 'endDate'
     ];
 
     /*
@@ -129,7 +135,9 @@ class DocumentInfo implements ArrayAccess
         'dateModified' => 'setDateModified',
         'pages' => 'setPages',
         'attachments' => 'setAttachments',
-        'layers' => 'setLayers'
+        'layers' => 'setLayers',
+        'startDate' => 'setStartDate',
+        'endDate' => 'setEndDate'
     ];
 
     /*
@@ -145,7 +153,9 @@ class DocumentInfo implements ArrayAccess
         'dateModified' => 'getDateModified',
         'pages' => 'getPages',
         'attachments' => 'getAttachments',
-        'layers' => 'getLayers'
+        'layers' => 'getLayers',
+        'startDate' => 'getStartDate',
+        'endDate' => 'getEndDate'
     ];
 
     /*
@@ -216,6 +226,8 @@ class DocumentInfo implements ArrayAccess
         $this->container['pages'] = isset($data['pages']) ? $data['pages'] : null;
         $this->container['attachments'] = isset($data['attachments']) ? $data['attachments'] : null;
         $this->container['layers'] = isset($data['layers']) ? $data['layers'] : null;
+        $this->container['startDate'] = isset($data['startDate']) ? $data['startDate'] : null;
+        $this->container['endDate'] = isset($data['endDate']) ? $data['endDate'] : null;
     }
 
     /*
@@ -227,12 +239,6 @@ class DocumentInfo implements ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['size'] === null) {
-            $invalidProperties[] = "'size' can't be null";
-        }
-        if ($this->container['dateModified'] === null) {
-            $invalidProperties[] = "'dateModified' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -245,12 +251,6 @@ class DocumentInfo implements ArrayAccess
     public function valid()
     {
 
-        if ($this->container['size'] === null) {
-            return false;
-        }
-        if ($this->container['dateModified'] === null) {
-            return false;
-        }
         return true;
     }
 
@@ -443,6 +443,54 @@ class DocumentInfo implements ArrayAccess
     public function setLayers($layers)
     {
         $this->container['layers'] = $layers;
+
+        return $this;
+    }
+
+    /*
+     * Gets startDate
+     *
+     * @return \DateTime
+     */
+    public function getStartDate()
+    {
+        return $this->container['startDate'];
+    }
+
+    /*
+     * Sets startDate
+     *
+     * @param \DateTime $startDate For MS Project documents, The date time from which the project started.
+     *
+     * @return $this
+     */
+    public function setStartDate($startDate)
+    {
+        $this->container['startDate'] = $startDate;
+
+        return $this;
+    }
+
+    /*
+     * Gets endDate
+     *
+     * @return \DateTime
+     */
+    public function getEndDate()
+    {
+        return $this->container['endDate'];
+    }
+
+    /*
+     * Sets endDate
+     *
+     * @param \DateTime $endDate For MS Project documents, the date time when the project is to be completed.
+     *
+     * @return $this
+     */
+    public function setEndDate($endDate)
+    {
+        $this->container['endDate'] = $endDate;
 
         return $this;
     }

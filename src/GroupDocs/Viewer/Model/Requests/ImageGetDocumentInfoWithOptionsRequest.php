@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class ImageGetDocumentInfoWithOptionsRequest
 {
     /*
-     * Initializes a new instance of the ImageGetDocumentInfoWithOptionsRequest class.
+     * Initializes a new instance of the imageGetDocumentInfoWithOptionsRequest class.
      *  
      * @param string $fileName The file name.
      * @param \GroupDocs\Viewer\Model\DocumentInfoOptions $documentInfoOptions The rendering options.

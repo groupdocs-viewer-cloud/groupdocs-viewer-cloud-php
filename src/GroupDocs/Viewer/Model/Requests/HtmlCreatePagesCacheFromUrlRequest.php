@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlCreatePagesCacheFromUrlRequest
 {
     /*
-     * Initializes a new instance of the HtmlCreatePagesCacheFromUrlRequest class.
+     * Initializes a new instance of the htmlCreatePagesCacheFromUrlRequest class.
      *  
      * @param string $url The URL to retrieve document.
      * @param \GroupDocs\Viewer\Model\HtmlOptions $htmlOptions The HTML rendering options.

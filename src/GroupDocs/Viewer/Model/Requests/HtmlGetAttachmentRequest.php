@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlGetAttachmentRequest
 {
     /*
-     * Initializes a new instance of the HtmlGetAttachmentRequest class.
+     * Initializes a new instance of the htmlGetAttachmentRequest class.
      *  
      * @param string $fileName The file name.
      * @param string $attachmentName Name of the attachment.

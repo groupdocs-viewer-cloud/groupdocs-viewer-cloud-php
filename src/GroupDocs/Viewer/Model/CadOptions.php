@@ -34,7 +34,7 @@ use \GroupDocs\Viewer\ObjectSerializer;
 /*
  * CadOptions
  *
- * @description The CAD documents rendering options.
+ * @description The CAD documents rendering options. Rendering of CAD file formats is not supported at the moment.
  */
 class CadOptions implements ArrayAccess
 {
@@ -104,13 +104,13 @@ class CadOptions implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'scaleFactor' => 'ScaleFactor',
-        'width' => 'Width',
-        'height' => 'Height',
-        'renderLayouts' => 'RenderLayouts',
-        'layoutName' => 'LayoutName',
-        'layers' => 'Layers',
-        'tiles' => 'Tiles'
+        'scaleFactor' => 'scaleFactor',
+        'width' => 'width',
+        'height' => 'height',
+        'renderLayouts' => 'renderLayouts',
+        'layoutName' => 'layoutName',
+        'layers' => 'layers',
+        'tiles' => 'tiles'
     ];
 
     /*
@@ -221,18 +221,6 @@ class CadOptions implements ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['scaleFactor'] === null) {
-            $invalidProperties[] = "'scaleFactor' can't be null";
-        }
-        if ($this->container['width'] === null) {
-            $invalidProperties[] = "'width' can't be null";
-        }
-        if ($this->container['height'] === null) {
-            $invalidProperties[] = "'height' can't be null";
-        }
-        if ($this->container['renderLayouts'] === null) {
-            $invalidProperties[] = "'renderLayouts' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -245,18 +233,6 @@ class CadOptions implements ArrayAccess
     public function valid()
     {
 
-        if ($this->container['scaleFactor'] === null) {
-            return false;
-        }
-        if ($this->container['width'] === null) {
-            return false;
-        }
-        if ($this->container['height'] === null) {
-            return false;
-        }
-        if ($this->container['renderLayouts'] === null) {
-            return false;
-        }
         return true;
     }
 

@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class ImageCreatePagesCacheFromUrlRequest
 {
     /*
-     * Initializes a new instance of the ImageCreatePagesCacheFromUrlRequest class.
+     * Initializes a new instance of the imageCreatePagesCacheFromUrlRequest class.
      *  
      * @param string $url The URL to retrieve document.
      * @param \GroupDocs\Viewer\Model\ImageOptions $imageOptions The image rendering options.

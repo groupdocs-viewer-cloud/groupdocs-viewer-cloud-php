@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class ImageGetDocumentInfoRequest
 {
     /*
-     * Initializes a new instance of the ImageGetDocumentInfoRequest class.
+     * Initializes a new instance of the imageGetDocumentInfoRequest class.
      *  
      * @param string $fileName The file name.
      * @param string $password The document password.

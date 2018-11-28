@@ -96,9 +96,9 @@ class AttachmentCollection implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'fileName' => 'FileName',
-        'folder' => 'Folder',
-        'attachments' => 'Attachments'
+        'fileName' => 'fileName',
+        'folder' => 'folder',
+        'attachments' => 'attachments'
     ];
 
     /*

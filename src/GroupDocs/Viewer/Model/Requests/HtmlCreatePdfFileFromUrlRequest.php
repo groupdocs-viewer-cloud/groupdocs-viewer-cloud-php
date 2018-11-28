@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlCreatePdfFileFromUrlRequest
 {
     /*
-     * Initializes a new instance of the HtmlCreatePdfFileFromUrlRequest class.
+     * Initializes a new instance of the htmlCreatePdfFileFromUrlRequest class.
      *  
      * @param string $url The URL to retrieve document.
      * @param \GroupDocs\Viewer\Model\PdfFileOptions $pdfFileOptions The PDF file rendering.

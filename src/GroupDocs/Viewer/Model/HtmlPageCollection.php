@@ -96,9 +96,9 @@ class HtmlPageCollection implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'fileName' => 'FileName',
-        'folder' => 'Folder',
-        'pages' => 'Pages'
+        'fileName' => 'fileName',
+        'folder' => 'folder',
+        'pages' => 'pages'
     ];
 
     /*

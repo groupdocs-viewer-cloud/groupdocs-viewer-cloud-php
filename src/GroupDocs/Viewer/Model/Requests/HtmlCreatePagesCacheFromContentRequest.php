@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlCreatePagesCacheFromContentRequest
 {
     /*
-     * Initializes a new instance of the HtmlCreatePagesCacheFromContentRequest class.
+     * Initializes a new instance of the htmlCreatePagesCacheFromContentRequest class.
      *  
      * @param \SplFileObject $file File contents.
      * @param \SplFileObject $htmlOptions HTML rendering options 'HtmlOptions' as JSON or XML.

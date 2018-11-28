@@ -92,8 +92,8 @@ class RenderOptions extends RenderOptionsBase
      * @var string[]
      */
     protected static $attributeMap = [
-        'startPageNumber' => 'StartPageNumber',
-        'countPages' => 'CountPages'
+        'startPageNumber' => 'startPageNumber',
+        'countPages' => 'countPages'
     ];
 
     /*

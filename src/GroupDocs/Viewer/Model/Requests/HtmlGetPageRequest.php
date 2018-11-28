@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlGetPageRequest
 {
     /*
-     * Initializes a new instance of the HtmlGetPageRequest class.
+     * Initializes a new instance of the htmlGetPageRequest class.
      *  
      * @param string $fileName The file name.
      * @param int $pageNumber The page number.

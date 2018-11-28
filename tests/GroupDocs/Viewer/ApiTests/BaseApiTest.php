@@ -72,7 +72,7 @@ abstract class BaseApiTest extends \PHPUnit_Framework_TestCase
 
     private static function _initTests()
     {
-        $config = self::_getConfig();
+        $config = self::getConfig();
 
         //TODO: Get your AppSID and AppKey at https://dashboard.groupdocs.cloud 
         //      (free registration is required).
@@ -95,7 +95,7 @@ abstract class BaseApiTest extends \PHPUnit_Framework_TestCase
         self::_uploadTestFiles();
     }
 
-    private static function _getConfig()
+    protected static function getConfig()
     {
         $contents = file_get_contents(realpath(__DIR__ . "/../config.json"));
         $config = \GuzzleHttp\json_decode($contents, true);

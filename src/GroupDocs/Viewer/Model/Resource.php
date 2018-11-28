@@ -90,7 +90,7 @@ class Resource extends ResourceUrl
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name'
+        'name' => 'name'
     ];
 
     /*

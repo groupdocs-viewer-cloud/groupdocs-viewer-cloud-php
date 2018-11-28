@@ -67,7 +67,8 @@ class HtmlAttachmentInfoApiTest extends BaseApiTest
      */
     public function testHtmlGetAttachmentInfoReturnsAttachmentNotFound()
     {
-        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, "/AttachmentNotFound/");
+        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, 
+            "/Can't find attachment with given name 'not-found.pdf'./");
 
         $file = Internal\TestFiles::getFileWithAttachmentMsg();
         $request = new Requests\HtmlGetAttachmentInfoRequest(
@@ -89,7 +90,8 @@ class HtmlAttachmentInfoApiTest extends BaseApiTest
     */
     public function testHtmlGetAttachmentInfoReturnsMissingPassword()
     {
-        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, "/MissingPassword/");
+        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, 
+            "/The password was not provided. The specified file 'password-protected.docx' is password-protected./");
 
         $file = Internal\TestFiles::getFileWithAttachmentMsg();
         $request = new Requests\HtmlGetAttachmentInfoRequest(
@@ -111,7 +113,8 @@ class HtmlAttachmentInfoApiTest extends BaseApiTest
      */
     public function testHtmlGetAttachmentInfoReturnsIncorrectPassword()
     {
-        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, "/IncorrectPassword/");
+        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, 
+            "/Password provided for file with name 'password-protected.docx' is incorrect./");
 
         $file = Internal\TestFiles::getFileWithAttachmentMsg();
         $request = new Requests\HtmlGetAttachmentInfoRequest(

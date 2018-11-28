@@ -92,7 +92,7 @@ class PageInfoCollection implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'pages' => 'Pages'
+        'pages' => 'pages'
     ];
 
     /*

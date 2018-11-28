@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class ImageGetAttachmentRequest
 {
     /*
-     * Initializes a new instance of the ImageGetAttachmentRequest class.
+     * Initializes a new instance of the imageGetAttachmentRequest class.
      *  
      * @param string $fileName The file name.
      * @param string $attachmentName Name of the attachment.

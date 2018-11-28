@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlGetDocumentInfoWithOptionsRequest
 {
     /*
-     * Initializes a new instance of the HtmlGetDocumentInfoWithOptionsRequest class.
+     * Initializes a new instance of the htmlGetDocumentInfoWithOptionsRequest class.
      *  
      * @param string $fileName The file name.
      * @param \GroupDocs\Viewer\Model\DocumentInfoOptions $documentInfoOptions The rendering options.

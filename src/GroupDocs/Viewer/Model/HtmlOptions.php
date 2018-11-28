@@ -56,7 +56,8 @@ class HtmlOptions extends RenderOptions
         'embedResources' => 'bool',
         'enableMinification' => 'bool',
         'enableResponsiveRendering' => 'bool',
-        'excludeFonts' => 'bool'
+        'excludeFonts' => 'bool',
+        'excludeFontsList' => 'string[]'
     ];
 
     /*
@@ -70,7 +71,8 @@ class HtmlOptions extends RenderOptions
         'embedResources' => null,
         'enableMinification' => null,
         'enableResponsiveRendering' => null,
-        'excludeFonts' => null
+        'excludeFonts' => null,
+        'excludeFontsList' => null
     ];
 
     /*
@@ -100,12 +102,13 @@ class HtmlOptions extends RenderOptions
      * @var string[]
      */
     protected static $attributeMap = [
-        'resourcePath' => 'ResourcePath',
-        'ignoreResourcePathInResources' => 'IgnoreResourcePathInResources',
-        'embedResources' => 'EmbedResources',
-        'enableMinification' => 'EnableMinification',
-        'enableResponsiveRendering' => 'EnableResponsiveRendering',
-        'excludeFonts' => 'ExcludeFonts'
+        'resourcePath' => 'resourcePath',
+        'ignoreResourcePathInResources' => 'ignoreResourcePathInResources',
+        'embedResources' => 'embedResources',
+        'enableMinification' => 'enableMinification',
+        'enableResponsiveRendering' => 'enableResponsiveRendering',
+        'excludeFonts' => 'excludeFonts',
+        'excludeFontsList' => 'excludeFontsList'
     ];
 
     /*
@@ -119,7 +122,8 @@ class HtmlOptions extends RenderOptions
         'embedResources' => 'setEmbedResources',
         'enableMinification' => 'setEnableMinification',
         'enableResponsiveRendering' => 'setEnableResponsiveRendering',
-        'excludeFonts' => 'setExcludeFonts'
+        'excludeFonts' => 'setExcludeFonts',
+        'excludeFontsList' => 'setExcludeFontsList'
     ];
 
     /*
@@ -133,7 +137,8 @@ class HtmlOptions extends RenderOptions
         'embedResources' => 'getEmbedResources',
         'enableMinification' => 'getEnableMinification',
         'enableResponsiveRendering' => 'getEnableResponsiveRendering',
-        'excludeFonts' => 'getExcludeFonts'
+        'excludeFonts' => 'getExcludeFonts',
+        'excludeFontsList' => 'getExcludeFontsList'
     ];
 
     /*
@@ -198,6 +203,7 @@ class HtmlOptions extends RenderOptions
         $this->container['enableMinification'] = isset($data['enableMinification']) ? $data['enableMinification'] : null;
         $this->container['enableResponsiveRendering'] = isset($data['enableResponsiveRendering']) ? $data['enableResponsiveRendering'] : null;
         $this->container['excludeFonts'] = isset($data['excludeFonts']) ? $data['excludeFonts'] : null;
+        $this->container['excludeFontsList'] = isset($data['excludeFontsList']) ? $data['excludeFontsList'] : null;
     }
 
     /*
@@ -368,6 +374,30 @@ class HtmlOptions extends RenderOptions
     public function setExcludeFonts($excludeFonts)
     {
         $this->container['excludeFonts'] = $excludeFonts;
+
+        return $this;
+    }
+
+    /*
+     * Gets excludeFontsList
+     *
+     * @return string[]
+     */
+    public function getExcludeFontsList()
+    {
+        return $this->container['excludeFontsList'];
+    }
+
+    /*
+     * Sets excludeFontsList
+     *
+     * @param string[] $excludeFontsList The list of font names, that will be excluded from HTML.
+     *
+     * @return $this
+     */
+    public function setExcludeFontsList($excludeFontsList)
+    {
+        $this->container['excludeFontsList'] = $excludeFontsList;
 
         return $this;
     }

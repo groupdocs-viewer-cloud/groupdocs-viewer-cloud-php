@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class ImageCreateAttachmentPagesCacheRequest
 {
     /*
-     * Initializes a new instance of the ImageCreateAttachmentPagesCacheRequest class.
+     * Initializes a new instance of the imageCreateAttachmentPagesCacheRequest class.
      *  
      * @param string $fileName The file name.
      * @param string $attachmentName The attachment name.

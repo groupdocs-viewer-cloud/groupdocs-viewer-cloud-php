@@ -84,7 +84,8 @@ class HtmlInfoApiTest extends BaseApiTest
     */
     public function testHtmlGetDocumentInfoReturnsFileNotFound()
     {
-        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, "/FileNotFound/");
+        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, 
+            "/Can't find file with given name 'file-not-found.docx' and folder ''./");
 
         $request = new Requests\HtmlGetDocumentInfoRequest("file-not-found.docx");
         
@@ -99,7 +100,8 @@ class HtmlInfoApiTest extends BaseApiTest
     */
     public function testHtmlGetDocumentInfoReturnsMissingPassword()
     {
-        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, "/MissingPassword/");
+        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, 
+            "/The password was not provided. The specified file 'password-protected.docx' is password-protected./");
 
         $file = Internal\TestFiles::getFilePasswordProtectedDocx();
 
@@ -117,7 +119,8 @@ class HtmlInfoApiTest extends BaseApiTest
       */
     public function testHtmlGetDocumentInfoReturnsIncorrectPassword()
     {
-        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, "/IncorrectPassword/");
+        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, 
+            "/Password provided for file with name 'password-protected.docx' is incorrect./");
 
         $file = Internal\TestFiles::getFilePasswordProtectedDocx();
 
@@ -136,7 +139,8 @@ class HtmlInfoApiTest extends BaseApiTest
      */
     public function testHtmlGetDocumentInfoReturnsFailedToReadFile()
     {
-        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, "/FailedToReadFile/");
+        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, 
+            "/Failed to read specified file 'corrupted.pdf'. File can be corrupted or damaged./");
 
         $file = Internal\TestFiles::getFileCorruptedPdf();
 
@@ -175,7 +179,8 @@ class HtmlInfoApiTest extends BaseApiTest
      */
     public function testHtmlGetDocumentInfoFromUrlReturnsFailedToParseUrl()
     {
-        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, "/FailedToParseUrl/");
+        $this->setExpectedExceptionRegExp(\GroupDocs\Viewer\ApiException::class, 
+            "/Can't parse specified URL 'invalid-url'./");
 
         $request = new Requests\HtmlGetDocumentInfoFromUrlRequest("invalid-url");
         
@@ -259,4 +264,36 @@ class HtmlInfoApiTest extends BaseApiTest
         $this->assertEquals(".pptx", $response->getExtension());
         $this->assertEquals("with-notes.pptx", $response->getFileName());
     }
+
+    /**
+     * Test case for htmlGetDocumentInfoWithOptions
+     *
+     * Retrieves document information with specified DocumentInfoOptions and ProjectOptions.
+     * Expects DocumentInfoOptions object data in request body.
+     *
+     */
+    public function testHtmlGetDocumentInfoWithProjectOptions()
+    {
+        $file = Internal\TestFiles::getFileProjectMpp();
+
+        $documentInfoOptions = new \GroupDocs\Viewer\Model\DocumentInfoOptions();
+        $projectOptions = new \GroupDocs\Viewer\Model\ProjectOptions();
+        $projectOptions->setPageSize("Unknown");
+        $projectOptions->setTimeUnit("Months");
+        $projectOptions->setStartDate("2008/07/01");
+        $projectOptions->setEndDate("2008/07/31");
+        $documentInfoOptions->setProjectOptions($projectOptions);
+
+        $request = new Requests\HtmlGetDocumentInfoWithOptionsRequest($file->fileName);
+        $request->folder = $file->folder;
+        $request->documentInfoOptions = $documentInfoOptions;
+        
+        $response = self::$viewerApi->htmlGetDocumentInfoWithOptions($request);
+
+        $this->assertEquals(2, count($response->getPages()));
+        $this->assertEquals(".mpp", $response->getExtension());
+        $this->assertEquals($file->fileName, $response->getFileName());
+        $this->assertEquals(new \DateTime("2008-06-01"), $response->getStartDate());
+        $this->assertEquals(new \DateTime("2008-09-03"), $response->getEndDate());
+    }    
 }

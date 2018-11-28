@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlGetDocumentInfoFromUrlWithOptionsRequest
 {
     /*
-     * Initializes a new instance of the HtmlGetDocumentInfoFromUrlWithOptionsRequest class.
+     * Initializes a new instance of the htmlGetDocumentInfoFromUrlWithOptionsRequest class.
      *  
      * @param string $url The URL to retrieve document.
      * @param \GroupDocs\Viewer\Model\DocumentInfoOptions $documentInfoOptions The rendering options.

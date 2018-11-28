@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class ImageCreatePdfFileRequest
 {
     /*
-     * Initializes a new instance of the ImageCreatePdfFileRequest class.
+     * Initializes a new instance of the imageCreatePdfFileRequest class.
      *  
      * @param string $fileName The file name.
      * @param \GroupDocs\Viewer\Model\PdfFileOptions $pdfFileOptions The PDF file rendering options.

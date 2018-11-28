@@ -94,9 +94,9 @@ class ImagePageCollection extends ResourceUrl
      * @var string[]
      */
     protected static $attributeMap = [
-        'fileName' => 'FileName',
-        'folder' => 'Folder',
-        'pages' => 'Pages'
+        'fileName' => 'fileName',
+        'folder' => 'folder',
+        'pages' => 'pages'
     ];
 
     /*

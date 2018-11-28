@@ -92,7 +92,7 @@ class SlidesOptions implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'renderNotes' => 'RenderNotes'
+        'renderNotes' => 'renderNotes'
     ];
 
     /*
@@ -185,9 +185,6 @@ class SlidesOptions implements ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['renderNotes'] === null) {
-            $invalidProperties[] = "'renderNotes' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -200,9 +197,6 @@ class SlidesOptions implements ArrayAccess
     public function valid()
     {
 
-        if ($this->container['renderNotes'] === null) {
-            return false;
-        }
         return true;
     }
 

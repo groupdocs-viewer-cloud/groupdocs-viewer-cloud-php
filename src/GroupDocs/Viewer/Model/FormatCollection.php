@@ -92,7 +92,7 @@ class FormatCollection implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'formats' => 'Formats'
+        'formats' => 'formats'
     ];
 
     /*

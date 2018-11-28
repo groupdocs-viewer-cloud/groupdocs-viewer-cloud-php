@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlGetPagesFromUrlRequest
 {
     /*
-     * Initializes a new instance of the HtmlGetPagesFromUrlRequest class.
+     * Initializes a new instance of the htmlGetPagesFromUrlRequest class.
      *  
      * @param string $url The URL to retrieve document.
      * @param string $fileName The file name.

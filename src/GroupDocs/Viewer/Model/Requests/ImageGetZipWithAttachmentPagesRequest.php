@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class ImageGetZipWithAttachmentPagesRequest
 {
     /*
-     * Initializes a new instance of the ImageGetZipWithAttachmentPagesRequest class.
+     * Initializes a new instance of the imageGetZipWithAttachmentPagesRequest class.
      *  
      * @param string $fileName The file name.
      * @param string $attachmentName The attachment name.

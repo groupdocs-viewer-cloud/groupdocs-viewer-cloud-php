@@ -92,7 +92,7 @@ class FontFamily implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name'
+        'name' => 'name'
     ];
 
     /*

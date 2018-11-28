@@ -143,4 +143,65 @@ class TestFiles
 
         return $file;
     }
+
+    public static function getFileProjectMpp()
+    {
+        $file = new TestFile();
+        $file->fileName = "sample.mpp";
+        $file->folder = "project\\mpp";
+
+        return $file;
+    }
+    
+    public static function getFileOutlookPst()
+    {
+        $file = new TestFile();
+        $file->fileName = "sample.pst";
+        $file->folder = "email\\outlook";
+
+        return $file;
+    }
+    
+    public static function getFileImageCgm()
+    {
+        $file = new TestFile();
+        $file->fileName = "nasa.cgm";
+        $file->folder = "image";
+
+        return $file;
+    }
+    
+    public static function getFilePrintPs()
+    {
+        $file = new TestFile();
+        $file->fileName = "sample.ps";
+        $file->folder = "print";
+
+        return $file;
+    }
+    
+    public static function getFilePrintPcl()
+    {
+        $file = new TestFile();
+        $file->fileName = "print.pcl";
+        $file->folder = "print";
+
+        return $file;
+    }    
+
+    public static function getSupported()
+    {        
+        return array(
+            self::getFileFourPagesDocx(),
+            self::getFileTwoHiddenPagesVsd(),
+            self::getFileOnePageDocx(),
+            self::getFileUsesCustomFontPptx(),
+            self::getFileThreeSheetsXlsx(),
+            self::getFileProjectMpp(),
+            self::getFileOutlookPst(),
+            self::getFileImageCgm(),
+            self::getFilePrintPs(),
+            self::getFilePrintPcl()
+        );
+    }      
 }

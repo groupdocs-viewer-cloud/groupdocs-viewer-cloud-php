@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class ImageGetPagesRequest
 {
     /*
-     * Initializes a new instance of the ImageGetPagesRequest class.
+     * Initializes a new instance of the imageGetPagesRequest class.
      *  
      * @param string $fileName The file name.
      * @param string $format The image format (jpg, png or bmp). Default value is png.

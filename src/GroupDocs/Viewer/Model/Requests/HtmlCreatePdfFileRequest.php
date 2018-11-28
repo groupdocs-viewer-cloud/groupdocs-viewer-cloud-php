@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class HtmlCreatePdfFileRequest
 {
     /*
-     * Initializes a new instance of the HtmlCreatePdfFileRequest class.
+     * Initializes a new instance of the htmlCreatePdfFileRequest class.
      *  
      * @param string $fileName The document name.
      * @param \GroupDocs\Viewer\Model\PdfFileOptions $pdfFileOptions The PDF file rendering options.

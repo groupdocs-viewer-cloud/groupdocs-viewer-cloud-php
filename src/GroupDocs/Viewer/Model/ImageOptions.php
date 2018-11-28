@@ -96,10 +96,10 @@ class ImageOptions extends RenderOptions
      * @var string[]
      */
     protected static $attributeMap = [
-        'format' => 'Format',
-        'quality' => 'Quality',
-        'width' => 'Width',
-        'height' => 'Height'
+        'format' => 'format',
+        'quality' => 'quality',
+        'width' => 'width',
+        'height' => 'height'
     ];
 
     /*

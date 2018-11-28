@@ -34,7 +34,7 @@ namespace GroupDocs\Viewer\Model\Requests;
 class ImageGetDocumentInfoFromUrlRequest
 {
     /*
-     * Initializes a new instance of the ImageGetDocumentInfoFromUrlRequest class.
+     * Initializes a new instance of the imageGetDocumentInfoFromUrlRequest class.
      *  
      * @param string $url The URL to retrieve document.
      * @param string $fileName The file name.

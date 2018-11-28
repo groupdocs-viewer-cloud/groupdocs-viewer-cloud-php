@@ -98,10 +98,10 @@ class ImageAttachmentPageCollection implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'fileName' => 'FileName',
-        'folder' => 'Folder',
-        'attachmentName' => 'AttachmentName',
-        'pages' => 'Pages'
+        'fileName' => 'fileName',
+        'folder' => 'folder',
+        'attachmentName' => 'attachmentName',
+        'pages' => 'pages'
     ];
 
     /*
