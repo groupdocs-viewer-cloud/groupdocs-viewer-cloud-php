@@ -5,7 +5,7 @@ This repository contains GroupDocs.Viewer Cloud SDK for PHP source code. This SD
 - PHP 5.5 or later
 
 ## Authorization
-To use SDK you need AppSID and AppKey authorization keys. You can your AppSID and AppKey at https://dashboard.groupdocs.cloud (free registration is required).  
+To use SDK you need AppSID and AppKey authorization keys. You can get your AppSID and AppKey at https://dashboard.groupdocs.cloud (free registration is required).  
 
 ## Installation & Usage
 ### Composer
