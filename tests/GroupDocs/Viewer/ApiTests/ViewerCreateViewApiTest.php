@@ -181,7 +181,7 @@ class ViewerCreateViewApiTest extends BaseApiTest
     {
         $testFile = Internal\TestFiles::getFileThreeLayoutsDwf();
         $cadOptions = new \GroupDocs\Viewer\Model\CadOptions();
-        $cadOptions->setScaleFactor(5.0);
+        $cadOptions->setWidth(800);
         $renderOptions = new RenderOptions();
         $renderOptions->setCadOptions($cadOptions);
         $viewOptions = new ViewOptions();
