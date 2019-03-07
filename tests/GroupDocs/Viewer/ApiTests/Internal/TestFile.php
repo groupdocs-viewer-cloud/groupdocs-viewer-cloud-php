@@ -3,7 +3,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="TestFile.php">
- *   Copyright (c) 2003-2018 Aspose Pty Ltd
+ *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -44,9 +44,11 @@ class TestFile
     
     public $password;
     
-    public $url;
-    
-    public $attachmentName;
-
-    public $attachmentPassword;
+    public function ToFileInfo()
+    {
+        $fileInfo = new \GroupDocs\Viewer\Model\FileInfo();
+        $fileInfo->setFilePath($this->folder . $this->fileName);
+        $fileInfo->setPassword($this->password);
+        return $fileInfo;
+    }    
 }

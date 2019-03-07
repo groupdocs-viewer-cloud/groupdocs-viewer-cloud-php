@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="AttachmentInfo.php">
+ * <copyright company="Aspose Pty Ltd" file="ViewResult.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * AttachmentInfo
+ * ViewResult
  *
- * @description Attachment information
+ * @description View result information
  */
-class AttachmentInfo implements ArrayAccess
+class ViewResult implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class AttachmentInfo implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "AttachmentInfo";
+    protected static $swaggerModelName = "ViewResult";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,7 +53,9 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'name' => 'string'
+        'pages' => '\GroupDocs\Viewer\Model\PageView[]',
+        'attachments' => '\GroupDocs\Viewer\Model\AttachmentView[]',
+        'file' => '\GroupDocs\Viewer\Model\Resource'
     ];
 
     /*
@@ -62,7 +64,9 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'name' => null
+        'pages' => null,
+        'attachments' => null,
+        'file' => null
     ];
 
     /*
@@ -92,7 +96,9 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name'
+        'pages' => 'Pages',
+        'attachments' => 'Attachments',
+        'file' => 'File'
     ];
 
     /*
@@ -101,7 +107,9 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName'
+        'pages' => 'setPages',
+        'attachments' => 'setAttachments',
+        'file' => 'setFile'
     ];
 
     /*
@@ -110,7 +118,9 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName'
+        'pages' => 'getPages',
+        'attachments' => 'getAttachments',
+        'file' => 'getFile'
     ];
 
     /*
@@ -173,7 +183,9 @@ class AttachmentInfo implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['pages'] = isset($data['pages']) ? $data['pages'] : null;
+        $this->container['attachments'] = isset($data['attachments']) ? $data['attachments'] : null;
+        $this->container['file'] = isset($data['file']) ? $data['file'] : null;
     }
 
     /*
@@ -202,25 +214,73 @@ class AttachmentInfo implements ArrayAccess
 
 
     /*
-     * Gets name
+     * Gets pages
      *
-     * @return string
+     * @return \GroupDocs\Viewer\Model\PageView[]
      */
-    public function getName()
+    public function getPages()
     {
-        return $this->container['name'];
+        return $this->container['pages'];
     }
 
     /*
-     * Sets name
+     * Sets pages
      *
-     * @param string $name Attachment name
+     * @param \GroupDocs\Viewer\Model\PageView[] $pages View result pages
      *
      * @return $this
      */
-    public function setName($name)
+    public function setPages($pages)
     {
-        $this->container['name'] = $name;
+        $this->container['pages'] = $pages;
+
+        return $this;
+    }
+
+    /*
+     * Gets attachments
+     *
+     * @return \GroupDocs\Viewer\Model\AttachmentView[]
+     */
+    public function getAttachments()
+    {
+        return $this->container['attachments'];
+    }
+
+    /*
+     * Sets attachments
+     *
+     * @param \GroupDocs\Viewer\Model\AttachmentView[] $attachments Attachments
+     *
+     * @return $this
+     */
+    public function setAttachments($attachments)
+    {
+        $this->container['attachments'] = $attachments;
+
+        return $this;
+    }
+
+    /*
+     * Gets file
+     *
+     * @return \GroupDocs\Viewer\Model\Resource
+     */
+    public function getFile()
+    {
+        return $this->container['file'];
+    }
+
+    /*
+     * Sets file
+     *
+     * @param \GroupDocs\Viewer\Model\Resource $file ULR to retrieve file.
+     *
+     * @return $this
+     */
+    public function setFile($file)
+    {
+        $this->container['file'] = $file;
 
         return $this;
     }

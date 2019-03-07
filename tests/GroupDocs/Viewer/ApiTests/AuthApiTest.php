@@ -2,7 +2,7 @@
 /**
 * --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose Pty Ltd" file="AuthApiTest.php">
-*   Copyright (c) 2003-2018 Aspose Pty Ltd
+*   Copyright (c) 2003-2019 Aspose Pty Ltd
 * </copyright>
 * <summary>
 *  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,9 +30,7 @@ namespace GroupDocs\Viewer\ApiTests;
 use GroupDocs\Viewer\Configuration;
 use GroupDocs\Viewer\ViewerApi;
 
-require_once "BaseApiTest.php";
-
-class AuthApiTest extends BaseApiTest
+class AuthApiTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Throws error when AppSid not found
@@ -40,7 +38,7 @@ class AuthApiTest extends BaseApiTest
     public function testErrorWhenAppSidNotFound()
     {
         $this->setExpectedExceptionRegExp(
-            \GroupDocs\Viewer\ApiException::class, "/Client 'test' is not registered in the system./");
+            \GroupDocs\Viewer\ApiException::class, "/invalid_client/");
 
         $config = self::getConfig();
         $apiBaseUrl = $config["ApiBaseUrl"];
@@ -61,7 +59,7 @@ class AuthApiTest extends BaseApiTest
     public function testErrorWhenAppKeyNotFound()
     {
         $this->setExpectedExceptionRegExp(
-            \GroupDocs\Viewer\ApiException::class, "/Client secret is invalid./");
+            \GroupDocs\Viewer\ApiException::class, "/invalid_client/");
 
         $config = self::getConfig();
         $apiBaseUrl = $config["ApiBaseUrl"];
@@ -75,4 +73,12 @@ class AuthApiTest extends BaseApiTest
 
         $response = $viewerApi->getSupportedFileFormats();
     }
+
+    protected static function getConfig()
+    {
+        $contents = file_get_contents(realpath(__DIR__ . "/../config.json"));
+        $config = \GuzzleHttp\json_decode($contents, true);
+
+        return $config;
+    }    
 }

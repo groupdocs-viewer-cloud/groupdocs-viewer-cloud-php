@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="HtmlOptions.php">
- *   Copyright (c) 2003-2018 Aspose Pty Ltd
+ *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,7 +32,7 @@ use \GroupDocs\Viewer\ObjectSerializer;
 /*
  * HtmlOptions
  *
- * @description Provides options for rendering document pages as HTML.
+ * @description Options for rendering document into HTML
  */
 class HtmlOptions extends RenderOptions 
 {
@@ -51,13 +51,8 @@ class HtmlOptions extends RenderOptions
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'resourcePath' => 'string',
-        'ignoreResourcePathInResources' => 'bool',
-        'embedResources' => 'bool',
-        'enableMinification' => 'bool',
-        'enableResponsiveRendering' => 'bool',
-        'excludeFonts' => 'bool',
-        'excludeFontsList' => 'string[]'
+        'externalResources' => 'bool',
+        'resourcePath' => 'string'
     ];
 
     /*
@@ -66,13 +61,8 @@ class HtmlOptions extends RenderOptions
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'resourcePath' => null,
-        'ignoreResourcePathInResources' => null,
-        'embedResources' => null,
-        'enableMinification' => null,
-        'enableResponsiveRendering' => null,
-        'excludeFonts' => null,
-        'excludeFontsList' => null
+        'externalResources' => null,
+        'resourcePath' => null
     ];
 
     /*
@@ -102,13 +92,8 @@ class HtmlOptions extends RenderOptions
      * @var string[]
      */
     protected static $attributeMap = [
-        'resourcePath' => 'resourcePath',
-        'ignoreResourcePathInResources' => 'ignoreResourcePathInResources',
-        'embedResources' => 'embedResources',
-        'enableMinification' => 'enableMinification',
-        'enableResponsiveRendering' => 'enableResponsiveRendering',
-        'excludeFonts' => 'excludeFonts',
-        'excludeFontsList' => 'excludeFontsList'
+        'externalResources' => 'ExternalResources',
+        'resourcePath' => 'ResourcePath'
     ];
 
     /*
@@ -117,13 +102,8 @@ class HtmlOptions extends RenderOptions
      * @var string[]
      */
     protected static $setters = [
-        'resourcePath' => 'setResourcePath',
-        'ignoreResourcePathInResources' => 'setIgnoreResourcePathInResources',
-        'embedResources' => 'setEmbedResources',
-        'enableMinification' => 'setEnableMinification',
-        'enableResponsiveRendering' => 'setEnableResponsiveRendering',
-        'excludeFonts' => 'setExcludeFonts',
-        'excludeFontsList' => 'setExcludeFontsList'
+        'externalResources' => 'setExternalResources',
+        'resourcePath' => 'setResourcePath'
     ];
 
     /*
@@ -132,13 +112,8 @@ class HtmlOptions extends RenderOptions
      * @var string[]
      */
     protected static $getters = [
-        'resourcePath' => 'getResourcePath',
-        'ignoreResourcePathInResources' => 'getIgnoreResourcePathInResources',
-        'embedResources' => 'getEmbedResources',
-        'enableMinification' => 'getEnableMinification',
-        'enableResponsiveRendering' => 'getEnableResponsiveRendering',
-        'excludeFonts' => 'getExcludeFonts',
-        'excludeFontsList' => 'getExcludeFontsList'
+        'externalResources' => 'getExternalResources',
+        'resourcePath' => 'getResourcePath'
     ];
 
     /*
@@ -197,13 +172,8 @@ class HtmlOptions extends RenderOptions
     {
         parent::__construct($data);
 
+        $this->container['externalResources'] = isset($data['externalResources']) ? $data['externalResources'] : null;
         $this->container['resourcePath'] = isset($data['resourcePath']) ? $data['resourcePath'] : null;
-        $this->container['ignoreResourcePathInResources'] = isset($data['ignoreResourcePathInResources']) ? $data['ignoreResourcePathInResources'] : null;
-        $this->container['embedResources'] = isset($data['embedResources']) ? $data['embedResources'] : null;
-        $this->container['enableMinification'] = isset($data['enableMinification']) ? $data['enableMinification'] : null;
-        $this->container['enableResponsiveRendering'] = isset($data['enableResponsiveRendering']) ? $data['enableResponsiveRendering'] : null;
-        $this->container['excludeFonts'] = isset($data['excludeFonts']) ? $data['excludeFonts'] : null;
-        $this->container['excludeFontsList'] = isset($data['excludeFontsList']) ? $data['excludeFontsList'] : null;
     }
 
     /*
@@ -215,6 +185,9 @@ class HtmlOptions extends RenderOptions
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['externalResources'] === null) {
+            $invalidProperties[] = "'externalResources' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -230,9 +203,36 @@ class HtmlOptions extends RenderOptions
             return false;
         }
 
+        if ($this->container['externalResources'] === null) {
+            return false;
+        }
         return true;
     }
 
+
+    /*
+     * Gets externalResources
+     *
+     * @return bool
+     */
+    public function getExternalResources()
+    {
+        return $this->container['externalResources'];
+    }
+
+    /*
+     * Sets externalResources
+     *
+     * @param bool $externalResources Controls output HTML document resources (styles, images and fonts) linking. By default this option is disabled and all the resources are embedded into HTML document.
+     *
+     * @return $this
+     */
+    public function setExternalResources($externalResources)
+    {
+        $this->container['externalResources'] = $externalResources;
+
+        return $this;
+    }
 
     /*
      * Gets resourcePath
@@ -247,157 +247,13 @@ class HtmlOptions extends RenderOptions
     /*
      * Sets resourcePath
      *
-     * @param string $resourcePath Allows to specify HTML resources (styles, images and fonts) path. For example when resource path is http://example.com/api/pages/{page-number}/resources/{resource-name} the {page-number} and {resource-name} templates will be replaced with page number and resource name accordingly. Ignored when EmbedResources option is set to true.
+     * @param string $resourcePath Path for the HTML resources (styles, images and fonts). For example when resource path is http://example.com/api/pages/{page-number}/resources/{resource-name} the {page-number} and {resource-name} templates will be replaced with page number and resource name accordingly. This option is ignored when ExternalResources option is disabled.
      *
      * @return $this
      */
     public function setResourcePath($resourcePath)
     {
         $this->container['resourcePath'] = $resourcePath;
-
-        return $this;
-    }
-
-    /*
-     * Gets ignoreResourcePathInResources
-     *
-     * @return bool
-     */
-    public function getIgnoreResourcePathInResources()
-    {
-        return $this->container['ignoreResourcePathInResources'];
-    }
-
-    /*
-     * Sets ignoreResourcePathInResources
-     *
-     * @param bool $ignoreResourcePathInResources Allows to ignore ResourcePath when processing *.css files.  When this options is enabled ResourcePath won't be added to resource references in *.css file.
-     *
-     * @return $this
-     */
-    public function setIgnoreResourcePathInResources($ignoreResourcePathInResources)
-    {
-        $this->container['ignoreResourcePathInResources'] = $ignoreResourcePathInResources;
-
-        return $this;
-    }
-
-    /*
-     * Gets embedResources
-     *
-     * @return bool
-     */
-    public function getEmbedResources()
-    {
-        return $this->container['embedResources'];
-    }
-
-    /*
-     * Sets embedResources
-     *
-     * @param bool $embedResources Controls output HTML document resources (styles, images and fonts) saving. When this options set to true all resources will be embedded into HTML document and ResourcePath option value will be ignored.
-     *
-     * @return $this
-     */
-    public function setEmbedResources($embedResources)
-    {
-        $this->container['embedResources'] = $embedResources;
-
-        return $this;
-    }
-
-    /*
-     * Gets enableMinification
-     *
-     * @return bool
-     */
-    public function getEnableMinification()
-    {
-        return $this->container['enableMinification'];
-    }
-
-    /*
-     * Sets enableMinification
-     *
-     * @param bool $enableMinification Enables content (HTML, CSS and SVG) minification.
-     *
-     * @return $this
-     */
-    public function setEnableMinification($enableMinification)
-    {
-        $this->container['enableMinification'] = $enableMinification;
-
-        return $this;
-    }
-
-    /*
-     * Gets enableResponsiveRendering
-     *
-     * @return bool
-     */
-    public function getEnableResponsiveRendering()
-    {
-        return $this->container['enableResponsiveRendering'];
-    }
-
-    /*
-     * Sets enableResponsiveRendering
-     *
-     * @param bool $enableResponsiveRendering Indicates whether rendering will provide responsive web pages, that look well on different device types.
-     *
-     * @return $this
-     */
-    public function setEnableResponsiveRendering($enableResponsiveRendering)
-    {
-        $this->container['enableResponsiveRendering'] = $enableResponsiveRendering;
-
-        return $this;
-    }
-
-    /*
-     * Gets excludeFonts
-     *
-     * @return bool
-     */
-    public function getExcludeFonts()
-    {
-        return $this->container['excludeFonts'];
-    }
-
-    /*
-     * Sets excludeFonts
-     *
-     * @param bool $excludeFonts Prevents adding fonts to the output HTML document.
-     *
-     * @return $this
-     */
-    public function setExcludeFonts($excludeFonts)
-    {
-        $this->container['excludeFonts'] = $excludeFonts;
-
-        return $this;
-    }
-
-    /*
-     * Gets excludeFontsList
-     *
-     * @return string[]
-     */
-    public function getExcludeFontsList()
-    {
-        return $this->container['excludeFontsList'];
-    }
-
-    /*
-     * Sets excludeFontsList
-     *
-     * @param string[] $excludeFontsList The list of font names, that will be excluded from HTML.
-     *
-     * @return $this
-     */
-    public function setExcludeFontsList($excludeFontsList)
-    {
-        $this->container['excludeFontsList'] = $excludeFontsList;
 
         return $this;
     }

@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="ImageOptions.php">
- *   Copyright (c) 2003-2018 Aspose Pty Ltd
+ *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,7 +32,7 @@ use \GroupDocs\Viewer\ObjectSerializer;
 /*
  * ImageOptions
  *
- * @description Provides options for rendering document as image.
+ * @description Options for rendering document into image
  */
 class ImageOptions extends RenderOptions 
 {
@@ -51,10 +51,10 @@ class ImageOptions extends RenderOptions
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'format' => 'string',
-        'quality' => 'int',
         'width' => 'int',
-        'height' => 'int'
+        'height' => 'int',
+        'extractText' => 'bool',
+        'jpegQuality' => 'int'
     ];
 
     /*
@@ -63,10 +63,10 @@ class ImageOptions extends RenderOptions
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'format' => null,
-        'quality' => 'int32',
         'width' => 'int32',
-        'height' => 'int32'
+        'height' => 'int32',
+        'extractText' => null,
+        'jpegQuality' => 'int32'
     ];
 
     /*
@@ -96,10 +96,10 @@ class ImageOptions extends RenderOptions
      * @var string[]
      */
     protected static $attributeMap = [
-        'format' => 'format',
-        'quality' => 'quality',
-        'width' => 'width',
-        'height' => 'height'
+        'width' => 'Width',
+        'height' => 'Height',
+        'extractText' => 'ExtractText',
+        'jpegQuality' => 'JpegQuality'
     ];
 
     /*
@@ -108,10 +108,10 @@ class ImageOptions extends RenderOptions
      * @var string[]
      */
     protected static $setters = [
-        'format' => 'setFormat',
-        'quality' => 'setQuality',
         'width' => 'setWidth',
-        'height' => 'setHeight'
+        'height' => 'setHeight',
+        'extractText' => 'setExtractText',
+        'jpegQuality' => 'setJpegQuality'
     ];
 
     /*
@@ -120,10 +120,10 @@ class ImageOptions extends RenderOptions
      * @var string[]
      */
     protected static $getters = [
-        'format' => 'getFormat',
-        'quality' => 'getQuality',
         'width' => 'getWidth',
-        'height' => 'getHeight'
+        'height' => 'getHeight',
+        'extractText' => 'getExtractText',
+        'jpegQuality' => 'getJpegQuality'
     ];
 
     /*
@@ -182,10 +182,10 @@ class ImageOptions extends RenderOptions
     {
         parent::__construct($data);
 
-        $this->container['format'] = isset($data['format']) ? $data['format'] : null;
-        $this->container['quality'] = isset($data['quality']) ? $data['quality'] : null;
         $this->container['width'] = isset($data['width']) ? $data['width'] : null;
         $this->container['height'] = isset($data['height']) ? $data['height'] : null;
+        $this->container['extractText'] = isset($data['extractText']) ? $data['extractText'] : null;
+        $this->container['jpegQuality'] = isset($data['jpegQuality']) ? $data['jpegQuality'] : null;
     }
 
     /*
@@ -197,6 +197,18 @@ class ImageOptions extends RenderOptions
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['width'] === null) {
+            $invalidProperties[] = "'width' can't be null";
+        }
+        if ($this->container['height'] === null) {
+            $invalidProperties[] = "'height' can't be null";
+        }
+        if ($this->container['extractText'] === null) {
+            $invalidProperties[] = "'extractText' can't be null";
+        }
+        if ($this->container['jpegQuality'] === null) {
+            $invalidProperties[] = "'jpegQuality' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -212,57 +224,21 @@ class ImageOptions extends RenderOptions
             return false;
         }
 
+        if ($this->container['width'] === null) {
+            return false;
+        }
+        if ($this->container['height'] === null) {
+            return false;
+        }
+        if ($this->container['extractText'] === null) {
+            return false;
+        }
+        if ($this->container['jpegQuality'] === null) {
+            return false;
+        }
         return true;
     }
 
-
-    /*
-     * Gets format
-     *
-     * @return string
-     */
-    public function getFormat()
-    {
-        return $this->container['format'];
-    }
-
-    /*
-     * Sets format
-     *
-     * @param string $format Allows to set image format (png, jpg, bmp). Default value is png.
-     *
-     * @return $this
-     */
-    public function setFormat($format)
-    {
-        $this->container['format'] = $format;
-
-        return $this;
-    }
-
-    /*
-     * Gets quality
-     *
-     * @return int
-     */
-    public function getQuality()
-    {
-        return $this->container['quality'];
-    }
-
-    /*
-     * Sets quality
-     *
-     * @param int $quality Allows to specify quality when rendering as JPG. Valid values are between 1 and 100.  Default value is 90.
-     *
-     * @return $this
-     */
-    public function setQuality($quality)
-    {
-        $this->container['quality'] = $quality;
-
-        return $this;
-    }
 
     /*
      * Gets width
@@ -308,6 +284,54 @@ class ImageOptions extends RenderOptions
     public function setHeight($height)
     {
         $this->container['height'] = $height;
+
+        return $this;
+    }
+
+    /*
+     * Gets extractText
+     *
+     * @return bool
+     */
+    public function getExtractText()
+    {
+        return $this->container['extractText'];
+    }
+
+    /*
+     * Sets extractText
+     *
+     * @param bool $extractText When enabled Viewer will extract text when it's possible (e.g. raster formats don't have text layer) and return it in the viewing result. This option might be useful when you want to add selectable text layer over the image.
+     *
+     * @return $this
+     */
+    public function setExtractText($extractText)
+    {
+        $this->container['extractText'] = $extractText;
+
+        return $this;
+    }
+
+    /*
+     * Gets jpegQuality
+     *
+     * @return int
+     */
+    public function getJpegQuality()
+    {
+        return $this->container['jpegQuality'];
+    }
+
+    /*
+     * Sets jpegQuality
+     *
+     * @param int $jpegQuality Allows to specify quality when rendering as JPG. Valid values are between 1 and 100.  Default value is 90.
+     *
+     * @return $this
+     */
+    public function setJpegQuality($jpegQuality)
+    {
+        $this->container['jpegQuality'] = $jpegQuality;
 
         return $this;
     }

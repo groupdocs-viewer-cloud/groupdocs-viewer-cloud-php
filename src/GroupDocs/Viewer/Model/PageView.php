@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="AttachmentInfo.php">
+ * <copyright company="Aspose Pty Ltd" file="PageView.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -27,16 +27,14 @@
  */
 
 namespace GroupDocs\Viewer\Model;
-
-use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * AttachmentInfo
+ * PageView
  *
- * @description Attachment information
+ * @description Page information
  */
-class AttachmentInfo implements ArrayAccess
+class PageView extends Resource 
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +43,7 @@ class AttachmentInfo implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "AttachmentInfo";
+    protected static $swaggerModelName = "PageView";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,7 +51,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'name' => 'string'
+        'number' => 'int',
+        'resources' => '\GroupDocs\Viewer\Model\HtmlResource[]'
     ];
 
     /*
@@ -62,7 +61,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'name' => null
+        'number' => 'int32',
+        'resources' => null
     ];
 
     /*
@@ -72,7 +72,7 @@ class AttachmentInfo implements ArrayAccess
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes;
+        return self::$swaggerTypes + parent::swaggerTypes();
     }
 
     /*
@@ -82,7 +82,7 @@ class AttachmentInfo implements ArrayAccess
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats;
+        return self::$swaggerFormats + parent::swaggerFormats();
     }
 
     /*
@@ -92,7 +92,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name'
+        'number' => 'Number',
+        'resources' => 'Resources'
     ];
 
     /*
@@ -101,7 +102,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName'
+        'number' => 'setNumber',
+        'resources' => 'setResources'
     ];
 
     /*
@@ -110,7 +112,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName'
+        'number' => 'getNumber',
+        'resources' => 'getResources'
     ];
 
     /*
@@ -121,7 +124,7 @@ class AttachmentInfo implements ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /*
@@ -131,7 +134,7 @@ class AttachmentInfo implements ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /*
@@ -141,7 +144,7 @@ class AttachmentInfo implements ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /*
@@ -158,12 +161,6 @@ class AttachmentInfo implements ArrayAccess
 
     
 
-    /*
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /*
      * Constructor
@@ -173,7 +170,10 @@ class AttachmentInfo implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        parent::__construct($data);
+
+        $this->container['number'] = isset($data['number']) ? $data['number'] : null;
+        $this->container['resources'] = isset($data['resources']) ? $data['resources'] : null;
     }
 
     /*
@@ -183,8 +183,11 @@ class AttachmentInfo implements ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['number'] === null) {
+            $invalidProperties[] = "'number' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -196,31 +199,61 @@ class AttachmentInfo implements ArrayAccess
      */
     public function valid()
     {
+        if (!parent::valid()) {
+            return false;
+        }
 
+        if ($this->container['number'] === null) {
+            return false;
+        }
         return true;
     }
 
 
     /*
-     * Gets name
+     * Gets number
      *
-     * @return string
+     * @return int
      */
-    public function getName()
+    public function getNumber()
     {
-        return $this->container['name'];
+        return $this->container['number'];
     }
 
     /*
-     * Sets name
+     * Sets number
      *
-     * @param string $name Attachment name
+     * @param int $number Page number
      *
      * @return $this
      */
-    public function setName($name)
+    public function setNumber($number)
     {
-        $this->container['name'] = $name;
+        $this->container['number'] = $number;
+
+        return $this;
+    }
+
+    /*
+     * Gets resources
+     *
+     * @return \GroupDocs\Viewer\Model\HtmlResource[]
+     */
+    public function getResources()
+    {
+        return $this->container['resources'];
+    }
+
+    /*
+     * Sets resources
+     *
+     * @param \GroupDocs\Viewer\Model\HtmlResource[] $resources HTML resources.
+     *
+     * @return $this
+     */
+    public function setResources($resources)
+    {
+        $this->container['resources'] = $resources;
 
         return $this;
     }

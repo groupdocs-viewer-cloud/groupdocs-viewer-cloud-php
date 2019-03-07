@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="AttachmentInfo.php">
+ * <copyright company="Aspose Pty Ltd" file="ProjectManagementOptions.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * AttachmentInfo
+ * ProjectManagementOptions
  *
- * @description Attachment information
+ * @description Rendering options for Project file formats. Project file formats include files with extensions: .mpt, .mpp
  */
-class AttachmentInfo implements ArrayAccess
+class ProjectManagementOptions implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class AttachmentInfo implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "AttachmentInfo";
+    protected static $swaggerModelName = "ProjectManagementOptions";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,7 +53,10 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'name' => 'string'
+        'pageSize' => 'string',
+        'timeUnit' => 'string',
+        'startDate' => '\DateTime',
+        'endDate' => '\DateTime'
     ];
 
     /*
@@ -62,7 +65,10 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'name' => null
+        'pageSize' => null,
+        'timeUnit' => null,
+        'startDate' => 'date-time',
+        'endDate' => 'date-time'
     ];
 
     /*
@@ -92,7 +98,10 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name'
+        'pageSize' => 'PageSize',
+        'timeUnit' => 'TimeUnit',
+        'startDate' => 'StartDate',
+        'endDate' => 'EndDate'
     ];
 
     /*
@@ -101,7 +110,10 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName'
+        'pageSize' => 'setPageSize',
+        'timeUnit' => 'setTimeUnit',
+        'startDate' => 'setStartDate',
+        'endDate' => 'setEndDate'
     ];
 
     /*
@@ -110,7 +122,10 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName'
+        'pageSize' => 'getPageSize',
+        'timeUnit' => 'getTimeUnit',
+        'startDate' => 'getStartDate',
+        'endDate' => 'getEndDate'
     ];
 
     /*
@@ -173,7 +188,10 @@ class AttachmentInfo implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['pageSize'] = isset($data['pageSize']) ? $data['pageSize'] : null;
+        $this->container['timeUnit'] = isset($data['timeUnit']) ? $data['timeUnit'] : null;
+        $this->container['startDate'] = isset($data['startDate']) ? $data['startDate'] : null;
+        $this->container['endDate'] = isset($data['endDate']) ? $data['endDate'] : null;
     }
 
     /*
@@ -185,6 +203,12 @@ class AttachmentInfo implements ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['startDate'] === null) {
+            $invalidProperties[] = "'startDate' can't be null";
+        }
+        if ($this->container['endDate'] === null) {
+            $invalidProperties[] = "'endDate' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -197,30 +221,108 @@ class AttachmentInfo implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['startDate'] === null) {
+            return false;
+        }
+        if ($this->container['endDate'] === null) {
+            return false;
+        }
         return true;
     }
 
 
     /*
-     * Gets name
+     * Gets pageSize
      *
      * @return string
      */
-    public function getName()
+    public function getPageSize()
     {
-        return $this->container['name'];
+        return $this->container['pageSize'];
     }
 
     /*
-     * Sets name
+     * Sets pageSize
      *
-     * @param string $name Attachment name
+     * @param string $pageSize The size of the page. Supported values {Unknown|Letter|Ledger|A0|A1|A2|A3}: 1. Unknown - the default, unspecified page size. 2. Letter - the size of the Letter page in points is 792x612. 3. Ledger - the size of the Letter page in points is 1224x792. 4. A0 - the size of the A0 page in points is 3371x2384. 5. A1 - the size of the A1 page in points is 2384x1685. 6. A2 - the size of the A2 page in points is 1684x1190. 7. A3 - the size of the A3 page in points is 1190x842. 8. A4 - the size of the A4 page in points is 842x595.
      *
      * @return $this
      */
-    public function setName($name)
+    public function setPageSize($pageSize)
     {
-        $this->container['name'] = $name;
+        $this->container['pageSize'] = $pageSize;
+
+        return $this;
+    }
+
+    /*
+     * Gets timeUnit
+     *
+     * @return string
+     */
+    public function getTimeUnit()
+    {
+        return $this->container['timeUnit'];
+    }
+
+    /*
+     * Sets timeUnit
+     *
+     * @param string $timeUnit The time unit to use as minimal point. Supported values {Unknown|Days|ThirdsOfMonths|Months}: 1. Unknown - unknown, unspecified time scale. 2. Days - one day interval. 3. ThirdsOfMonths - one third of the month. 4. Months - one month interval.
+     *
+     * @return $this
+     */
+    public function setTimeUnit($timeUnit)
+    {
+        $this->container['timeUnit'] = $timeUnit;
+
+        return $this;
+    }
+
+    /*
+     * Gets startDate
+     *
+     * @return \DateTime
+     */
+    public function getStartDate()
+    {
+        return $this->container['startDate'];
+    }
+
+    /*
+     * Sets startDate
+     *
+     * @param \DateTime $startDate The start date of a Gantt Chart View to render.
+     *
+     * @return $this
+     */
+    public function setStartDate($startDate)
+    {
+        $this->container['startDate'] = $startDate;
+
+        return $this;
+    }
+
+    /*
+     * Gets endDate
+     *
+     * @return \DateTime
+     */
+    public function getEndDate()
+    {
+        return $this->container['endDate'];
+    }
+
+    /*
+     * Sets endDate
+     *
+     * @param \DateTime $endDate The end date of a Gantt Chart View to render.
+     *
+     * @return $this
+     */
+    public function setEndDate($endDate)
+    {
+        $this->container['endDate'] = $endDate;
 
         return $this;
     }

@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="AttachmentInfo.php">
+ * <copyright company="Aspose Pty Ltd" file="FileInfo.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * AttachmentInfo
+ * FileInfo
  *
- * @description Attachment information
+ * @description File info
  */
-class AttachmentInfo implements ArrayAccess
+class FileInfo implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class AttachmentInfo implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "AttachmentInfo";
+    protected static $swaggerModelName = "FileInfo";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,7 +53,10 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'name' => 'string'
+        'filePath' => 'string',
+        'storageName' => 'string',
+        'versionId' => 'string',
+        'password' => 'string'
     ];
 
     /*
@@ -62,7 +65,10 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'name' => null
+        'filePath' => null,
+        'storageName' => null,
+        'versionId' => null,
+        'password' => null
     ];
 
     /*
@@ -92,7 +98,10 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name'
+        'filePath' => 'FilePath',
+        'storageName' => 'StorageName',
+        'versionId' => 'VersionId',
+        'password' => 'Password'
     ];
 
     /*
@@ -101,7 +110,10 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName'
+        'filePath' => 'setFilePath',
+        'storageName' => 'setStorageName',
+        'versionId' => 'setVersionId',
+        'password' => 'setPassword'
     ];
 
     /*
@@ -110,7 +122,10 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName'
+        'filePath' => 'getFilePath',
+        'storageName' => 'getStorageName',
+        'versionId' => 'getVersionId',
+        'password' => 'getPassword'
     ];
 
     /*
@@ -173,7 +188,10 @@ class AttachmentInfo implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['filePath'] = isset($data['filePath']) ? $data['filePath'] : null;
+        $this->container['storageName'] = isset($data['storageName']) ? $data['storageName'] : null;
+        $this->container['versionId'] = isset($data['versionId']) ? $data['versionId'] : null;
+        $this->container['password'] = isset($data['password']) ? $data['password'] : null;
     }
 
     /*
@@ -202,25 +220,97 @@ class AttachmentInfo implements ArrayAccess
 
 
     /*
-     * Gets name
+     * Gets filePath
      *
      * @return string
      */
-    public function getName()
+    public function getFilePath()
     {
-        return $this->container['name'];
+        return $this->container['filePath'];
     }
 
     /*
-     * Sets name
+     * Sets filePath
      *
-     * @param string $name Attachment name
+     * @param string $filePath File path in storage
      *
      * @return $this
      */
-    public function setName($name)
+    public function setFilePath($filePath)
     {
-        $this->container['name'] = $name;
+        $this->container['filePath'] = $filePath;
+
+        return $this;
+    }
+
+    /*
+     * Gets storageName
+     *
+     * @return string
+     */
+    public function getStorageName()
+    {
+        return $this->container['storageName'];
+    }
+
+    /*
+     * Sets storageName
+     *
+     * @param string $storageName Storage name
+     *
+     * @return $this
+     */
+    public function setStorageName($storageName)
+    {
+        $this->container['storageName'] = $storageName;
+
+        return $this;
+    }
+
+    /*
+     * Gets versionId
+     *
+     * @return string
+     */
+    public function getVersionId()
+    {
+        return $this->container['versionId'];
+    }
+
+    /*
+     * Sets versionId
+     *
+     * @param string $versionId Version ID
+     *
+     * @return $this
+     */
+    public function setVersionId($versionId)
+    {
+        $this->container['versionId'] = $versionId;
+
+        return $this;
+    }
+
+    /*
+     * Gets password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->container['password'];
+    }
+
+    /*
+     * Sets password
+     *
+     * @param string $password Password to open file
+     *
+     * @return $this
+     */
+    public function setPassword($password)
+    {
+        $this->container['password'] = $password;
 
         return $this;
     }

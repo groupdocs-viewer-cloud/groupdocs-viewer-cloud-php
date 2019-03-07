@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="Configuration.php">
- *   Copyright (c) 2003-2018 Aspose Pty Ltd
+ *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -55,11 +55,11 @@ class Configuration
     protected $apiBaseUrl = 'https://api.groupdocs.cloud';
 
      /*
-     * API version, default value is '/v1' 
+     * API version, default value is '/v2.0' 
      *
      * @var string
      */
-    protected $apiVersion = '/v1';
+    protected $apiVersion = '/v2.0';
 
    
 
@@ -95,7 +95,7 @@ class Configuration
      * Version of client SDK
      *
      */
-    protected $clientVersion = '18.11';
+    protected $clientVersion = '19.3';
 
     /*
      * Constructor
@@ -246,7 +246,7 @@ class Configuration
     /*
      * Gets server URL
      *
-     * @return string Server URL e.g. 'https://api.groupdocs.cloud/v1'
+     * @return string Server URL e.g. 'https://api.groupdocs.cloud/v2.0'
      */
     public function getServerUrl()
     {
@@ -290,7 +290,7 @@ class Configuration
     }
 
     /*
-     * Gets client version, default value is '18.11'
+     * Gets client version, default value is '19.3'
      *
      */
     public function getClientVersion()
@@ -308,7 +308,7 @@ class Configuration
         $report  = 'PHP SDK (GroupDocs\Viewer) Debug Report:' . PHP_EOL;
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
-        $report .= '    SDK Package Version: 18.11' . PHP_EOL;
+        $report .= '    SDK Package Version: 19.3' . PHP_EOL;
         $report .= '    Temp Folder Path: ' . self::getDefaultConfiguration()->getTempFolderPath() . PHP_EOL;
 
         return $report;

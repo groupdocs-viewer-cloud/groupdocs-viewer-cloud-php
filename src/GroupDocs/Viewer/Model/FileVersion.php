@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="AttachmentInfo.php">
+ * <copyright company="Aspose Pty Ltd" file="FileVersion.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -27,16 +27,14 @@
  */
 
 namespace GroupDocs\Viewer\Model;
-
-use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * AttachmentInfo
+ * FileVersion
  *
- * @description Attachment information
+ * @description File Version
  */
-class AttachmentInfo implements ArrayAccess
+class FileVersion extends StorageFile 
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +43,7 @@ class AttachmentInfo implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "AttachmentInfo";
+    protected static $swaggerModelName = "FileVersion";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,7 +51,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'name' => 'string'
+        'versionId' => 'string',
+        'isLatest' => 'bool'
     ];
 
     /*
@@ -62,7 +61,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'name' => null
+        'versionId' => null,
+        'isLatest' => null
     ];
 
     /*
@@ -72,7 +72,7 @@ class AttachmentInfo implements ArrayAccess
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes;
+        return self::$swaggerTypes + parent::swaggerTypes();
     }
 
     /*
@@ -82,7 +82,7 @@ class AttachmentInfo implements ArrayAccess
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats;
+        return self::$swaggerFormats + parent::swaggerFormats();
     }
 
     /*
@@ -92,7 +92,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name'
+        'versionId' => 'VersionId',
+        'isLatest' => 'IsLatest'
     ];
 
     /*
@@ -101,7 +102,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName'
+        'versionId' => 'setVersionId',
+        'isLatest' => 'setIsLatest'
     ];
 
     /*
@@ -110,7 +112,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName'
+        'versionId' => 'getVersionId',
+        'isLatest' => 'getIsLatest'
     ];
 
     /*
@@ -121,7 +124,7 @@ class AttachmentInfo implements ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /*
@@ -131,7 +134,7 @@ class AttachmentInfo implements ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /*
@@ -141,7 +144,7 @@ class AttachmentInfo implements ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /*
@@ -158,12 +161,6 @@ class AttachmentInfo implements ArrayAccess
 
     
 
-    /*
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /*
      * Constructor
@@ -173,7 +170,10 @@ class AttachmentInfo implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        parent::__construct($data);
+
+        $this->container['versionId'] = isset($data['versionId']) ? $data['versionId'] : null;
+        $this->container['isLatest'] = isset($data['isLatest']) ? $data['isLatest'] : null;
     }
 
     /*
@@ -183,8 +183,11 @@ class AttachmentInfo implements ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['isLatest'] === null) {
+            $invalidProperties[] = "'isLatest' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -196,31 +199,61 @@ class AttachmentInfo implements ArrayAccess
      */
     public function valid()
     {
+        if (!parent::valid()) {
+            return false;
+        }
 
+        if ($this->container['isLatest'] === null) {
+            return false;
+        }
         return true;
     }
 
 
     /*
-     * Gets name
+     * Gets versionId
      *
      * @return string
      */
-    public function getName()
+    public function getVersionId()
     {
-        return $this->container['name'];
+        return $this->container['versionId'];
     }
 
     /*
-     * Sets name
+     * Sets versionId
      *
-     * @param string $name Attachment name
+     * @param string $versionId File Version ID.
      *
      * @return $this
      */
-    public function setName($name)
+    public function setVersionId($versionId)
     {
-        $this->container['name'] = $name;
+        $this->container['versionId'] = $versionId;
+
+        return $this;
+    }
+
+    /*
+     * Gets isLatest
+     *
+     * @return bool
+     */
+    public function getIsLatest()
+    {
+        return $this->container['isLatest'];
+    }
+
+    /*
+     * Sets isLatest
+     *
+     * @param bool $isLatest Specifies whether the file is (true) or is not (false) the latest version of an file.
+     *
+     * @return $this
+     */
+    public function setIsLatest($isLatest)
+    {
+        $this->container['isLatest'] = $isLatest;
 
         return $this;
     }

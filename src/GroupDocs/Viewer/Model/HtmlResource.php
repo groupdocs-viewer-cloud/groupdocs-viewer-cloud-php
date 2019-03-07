@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="AttachmentInfo.php">
+ * <copyright company="Aspose Pty Ltd" file="HtmlResource.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -27,16 +27,14 @@
  */
 
 namespace GroupDocs\Viewer\Model;
-
-use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * AttachmentInfo
+ * HtmlResource
  *
- * @description Attachment information
+ * @description HTML page resource (images, css)
  */
-class AttachmentInfo implements ArrayAccess
+class HtmlResource extends Resource 
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +43,7 @@ class AttachmentInfo implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "AttachmentInfo";
+    protected static $swaggerModelName = "HtmlResource";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -72,7 +70,7 @@ class AttachmentInfo implements ArrayAccess
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes;
+        return self::$swaggerTypes + parent::swaggerTypes();
     }
 
     /*
@@ -82,7 +80,7 @@ class AttachmentInfo implements ArrayAccess
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats;
+        return self::$swaggerFormats + parent::swaggerFormats();
     }
 
     /*
@@ -121,7 +119,7 @@ class AttachmentInfo implements ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /*
@@ -131,7 +129,7 @@ class AttachmentInfo implements ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /*
@@ -141,7 +139,7 @@ class AttachmentInfo implements ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /*
@@ -158,12 +156,6 @@ class AttachmentInfo implements ArrayAccess
 
     
 
-    /*
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /*
      * Constructor
@@ -173,6 +165,8 @@ class AttachmentInfo implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        parent::__construct($data);
+
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
     }
 
@@ -183,7 +177,7 @@ class AttachmentInfo implements ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
         return $invalidProperties;
     }
@@ -196,6 +190,9 @@ class AttachmentInfo implements ArrayAccess
      */
     public function valid()
     {
+        if (!parent::valid()) {
+            return false;
+        }
 
         return true;
     }
@@ -214,7 +211,7 @@ class AttachmentInfo implements ArrayAccess
     /*
      * Sets name
      *
-     * @param string $name Attachment name
+     * @param string $name HTML resource (image, style, graphics or font) file name.
      *
      * @return $this
      */

@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="Watermark.php">
- *   Copyright (c) 2003-2018 Aspose Pty Ltd
+ *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,7 +34,7 @@ use \GroupDocs\Viewer\ObjectSerializer;
 /*
  * Watermark
  *
- * @description Provides options to configure watermark appearance.
+ * @description Text watermark
  */
 class Watermark implements ArrayAccess
 {
@@ -98,10 +98,10 @@ class Watermark implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'text' => 'text',
-        'color' => 'color',
-        'position' => 'position',
-        'size' => 'size'
+        'text' => 'Text',
+        'color' => 'Color',
+        'position' => 'Position',
+        'size' => 'Size'
     ];
 
     /*
@@ -203,6 +203,9 @@ class Watermark implements ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['size'] === null) {
+            $invalidProperties[] = "'size' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -215,6 +218,9 @@ class Watermark implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['size'] === null) {
+            return false;
+        }
         return true;
     }
 
@@ -232,7 +238,7 @@ class Watermark implements ArrayAccess
     /*
      * Sets text
      *
-     * @param string $text The watermark text.
+     * @param string $text Watermark text.
      *
      * @return $this
      */
@@ -256,7 +262,7 @@ class Watermark implements ArrayAccess
     /*
      * Sets color
      *
-     * @param string $color The watermark color. Supported formats {Magenta|(112,222,11)|(50,112,222,11)}. Default value is \"Red\".
+     * @param string $color Watermark color. Supported formats {Magenta|(112,222,11)|(50,112,222,11)}. Default value is \"Red\".
      *
      * @return $this
      */
@@ -280,7 +286,7 @@ class Watermark implements ArrayAccess
     /*
      * Sets position
      *
-     * @param string $position The watermark position. Supported positions {Diagonal|TopLeft|TopCenter|TopRight|BottomLeft|BottomCenter|BottomRight}. Default value is \"Diagonal\".
+     * @param string $position Watermark position. Supported positions {Diagonal|TopLeft|TopCenter|TopRight|BottomLeft|BottomCenter|BottomRight}. Default value is \"Diagonal\".
      *
      * @return $this
      */

@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="Resource.php">
- *   Copyright (c) 2003-2018 Aspose Pty Ltd
+ *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,16 +27,18 @@
  */
 
 namespace GroupDocs\Viewer\Model;
+
+use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
  * Resource
  *
- * @description Describes resource.
+ * @description Reference to resource
  */
-class Resource extends ResourceUrl 
+class Resource implements ArrayAccess
 {
-    const DISCRIMINATOR = null;
+    const DISCRIMINATOR = 'Type';
 
     /*
      * The original name of the model.
@@ -51,7 +53,8 @@ class Resource extends ResourceUrl
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'name' => 'string'
+        'path' => 'string',
+        'downloadUrl' => 'string'
     ];
 
     /*
@@ -60,7 +63,8 @@ class Resource extends ResourceUrl
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'name' => null
+        'path' => null,
+        'downloadUrl' => null
     ];
 
     /*
@@ -70,7 +74,7 @@ class Resource extends ResourceUrl
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes + parent::swaggerTypes();
+        return self::$swaggerTypes;
     }
 
     /*
@@ -80,7 +84,7 @@ class Resource extends ResourceUrl
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats + parent::swaggerFormats();
+        return self::$swaggerFormats;
     }
 
     /*
@@ -90,7 +94,8 @@ class Resource extends ResourceUrl
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name'
+        'path' => 'Path',
+        'downloadUrl' => 'DownloadUrl'
     ];
 
     /*
@@ -99,7 +104,8 @@ class Resource extends ResourceUrl
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName'
+        'path' => 'setPath',
+        'downloadUrl' => 'setDownloadUrl'
     ];
 
     /*
@@ -108,7 +114,8 @@ class Resource extends ResourceUrl
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName'
+        'path' => 'getPath',
+        'downloadUrl' => 'getDownloadUrl'
     ];
 
     /*
@@ -119,7 +126,7 @@ class Resource extends ResourceUrl
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /*
@@ -129,7 +136,7 @@ class Resource extends ResourceUrl
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /*
@@ -139,7 +146,7 @@ class Resource extends ResourceUrl
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /*
@@ -156,6 +163,12 @@ class Resource extends ResourceUrl
 
     
 
+    /*
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /*
      * Constructor
@@ -165,9 +178,12 @@ class Resource extends ResourceUrl
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
+        $this->container['path'] = isset($data['path']) ? $data['path'] : null;
+        $this->container['downloadUrl'] = isset($data['downloadUrl']) ? $data['downloadUrl'] : null;
 
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        // Initialize discriminator property with the model name.
+        $discriminator = array_search('Type', self::$attributeMap);
+        $this->container[$discriminator] = static::$swaggerModelName;
     }
 
     /*
@@ -177,7 +193,7 @@ class Resource extends ResourceUrl
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
         return $invalidProperties;
     }
@@ -190,34 +206,55 @@ class Resource extends ResourceUrl
      */
     public function valid()
     {
-        if (!parent::valid()) {
-            return false;
-        }
 
         return true;
     }
 
 
     /*
-     * Gets name
+     * Gets path
      *
      * @return string
      */
-    public function getName()
+    public function getPath()
     {
-        return $this->container['name'];
+        return $this->container['path'];
     }
 
     /*
-     * Sets name
+     * Sets path
      *
-     * @param string $name HTML resource (image, style, graphics or font) file name.
+     * @param string $path Path of resource file in storage
      *
      * @return $this
      */
-    public function setName($name)
+    public function setPath($path)
     {
-        $this->container['name'] = $name;
+        $this->container['path'] = $path;
+
+        return $this;
+    }
+
+    /*
+     * Gets downloadUrl
+     *
+     * @return string
+     */
+    public function getDownloadUrl()
+    {
+        return $this->container['downloadUrl'];
+    }
+
+    /*
+     * Sets downloadUrl
+     *
+     * @param string $downloadUrl ULR to retrieve resource.
+     *
+     * @return $this
+     */
+    public function setDownloadUrl($downloadUrl)
+    {
+        $this->container['downloadUrl'] = $downloadUrl;
 
         return $this;
     }

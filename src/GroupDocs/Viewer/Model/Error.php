@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="AttachmentInfo.php">
+ * <copyright company="Aspose Pty Ltd" file="Error.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * AttachmentInfo
+ * Error
  *
- * @description Attachment information
+ * @description Error
  */
-class AttachmentInfo implements ArrayAccess
+class Error implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class AttachmentInfo implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "AttachmentInfo";
+    protected static $swaggerModelName = "Error";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,7 +53,10 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'name' => 'string'
+        'code' => 'string',
+        'message' => 'string',
+        'description' => 'string',
+        'innerError' => '\GroupDocs\Viewer\Model\ErrorDetails'
     ];
 
     /*
@@ -62,7 +65,10 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'name' => null
+        'code' => null,
+        'message' => null,
+        'description' => null,
+        'innerError' => null
     ];
 
     /*
@@ -92,7 +98,10 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name'
+        'code' => 'Code',
+        'message' => 'Message',
+        'description' => 'Description',
+        'innerError' => 'InnerError'
     ];
 
     /*
@@ -101,7 +110,10 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName'
+        'code' => 'setCode',
+        'message' => 'setMessage',
+        'description' => 'setDescription',
+        'innerError' => 'setInnerError'
     ];
 
     /*
@@ -110,7 +122,10 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName'
+        'code' => 'getCode',
+        'message' => 'getMessage',
+        'description' => 'getDescription',
+        'innerError' => 'getInnerError'
     ];
 
     /*
@@ -173,7 +188,10 @@ class AttachmentInfo implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['code'] = isset($data['code']) ? $data['code'] : null;
+        $this->container['message'] = isset($data['message']) ? $data['message'] : null;
+        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
+        $this->container['innerError'] = isset($data['innerError']) ? $data['innerError'] : null;
     }
 
     /*
@@ -202,25 +220,97 @@ class AttachmentInfo implements ArrayAccess
 
 
     /*
-     * Gets name
+     * Gets code
      *
      * @return string
      */
-    public function getName()
+    public function getCode()
     {
-        return $this->container['name'];
+        return $this->container['code'];
     }
 
     /*
-     * Sets name
+     * Sets code
      *
-     * @param string $name Attachment name
+     * @param string $code Code
      *
      * @return $this
      */
-    public function setName($name)
+    public function setCode($code)
     {
-        $this->container['name'] = $name;
+        $this->container['code'] = $code;
+
+        return $this;
+    }
+
+    /*
+     * Gets message
+     *
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->container['message'];
+    }
+
+    /*
+     * Sets message
+     *
+     * @param string $message Message
+     *
+     * @return $this
+     */
+    public function setMessage($message)
+    {
+        $this->container['message'] = $message;
+
+        return $this;
+    }
+
+    /*
+     * Gets description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /*
+     * Sets description
+     *
+     * @param string $description Description
+     *
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /*
+     * Gets innerError
+     *
+     * @return \GroupDocs\Viewer\Model\ErrorDetails
+     */
+    public function getInnerError()
+    {
+        return $this->container['innerError'];
+    }
+
+    /*
+     * Sets innerError
+     *
+     * @param \GroupDocs\Viewer\Model\ErrorDetails $innerError Inner Error
+     *
+     * @return $this
+     */
+    public function setInnerError($innerError)
+    {
+        $this->container['innerError'] = $innerError;
 
         return $this;
     }

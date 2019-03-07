@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="AttachmentInfo.php">
+ * <copyright company="Aspose Pty Ltd" file="DiscUsage.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * AttachmentInfo
+ * DiscUsage
  *
- * @description Attachment information
+ * @description Class for disc space information.
  */
-class AttachmentInfo implements ArrayAccess
+class DiscUsage implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class AttachmentInfo implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "AttachmentInfo";
+    protected static $swaggerModelName = "DiscUsage";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,7 +53,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'name' => 'string'
+        'usedSize' => 'int',
+        'totalSize' => 'int'
     ];
 
     /*
@@ -62,7 +63,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'name' => null
+        'usedSize' => 'int64',
+        'totalSize' => 'int64'
     ];
 
     /*
@@ -92,7 +94,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name'
+        'usedSize' => 'UsedSize',
+        'totalSize' => 'TotalSize'
     ];
 
     /*
@@ -101,7 +104,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName'
+        'usedSize' => 'setUsedSize',
+        'totalSize' => 'setTotalSize'
     ];
 
     /*
@@ -110,7 +114,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName'
+        'usedSize' => 'getUsedSize',
+        'totalSize' => 'getTotalSize'
     ];
 
     /*
@@ -173,7 +178,8 @@ class AttachmentInfo implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['usedSize'] = isset($data['usedSize']) ? $data['usedSize'] : null;
+        $this->container['totalSize'] = isset($data['totalSize']) ? $data['totalSize'] : null;
     }
 
     /*
@@ -185,6 +191,12 @@ class AttachmentInfo implements ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['usedSize'] === null) {
+            $invalidProperties[] = "'usedSize' can't be null";
+        }
+        if ($this->container['totalSize'] === null) {
+            $invalidProperties[] = "'totalSize' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -197,30 +209,60 @@ class AttachmentInfo implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['usedSize'] === null) {
+            return false;
+        }
+        if ($this->container['totalSize'] === null) {
+            return false;
+        }
         return true;
     }
 
 
     /*
-     * Gets name
+     * Gets usedSize
      *
-     * @return string
+     * @return int
      */
-    public function getName()
+    public function getUsedSize()
     {
-        return $this->container['name'];
+        return $this->container['usedSize'];
     }
 
     /*
-     * Sets name
+     * Sets usedSize
      *
-     * @param string $name Attachment name
+     * @param int $usedSize Application used disc space.
      *
      * @return $this
      */
-    public function setName($name)
+    public function setUsedSize($usedSize)
     {
-        $this->container['name'] = $name;
+        $this->container['usedSize'] = $usedSize;
+
+        return $this;
+    }
+
+    /*
+     * Gets totalSize
+     *
+     * @return int
+     */
+    public function getTotalSize()
+    {
+        return $this->container['totalSize'];
+    }
+
+    /*
+     * Sets totalSize
+     *
+     * @param int $totalSize Total disc space.
+     *
+     * @return $this
+     */
+    public function setTotalSize($totalSize)
+    {
+        $this->container['totalSize'] = $totalSize;
 
         return $this;
     }

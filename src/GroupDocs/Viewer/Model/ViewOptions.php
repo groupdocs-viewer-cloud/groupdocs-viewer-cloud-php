@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="AttachmentInfo.php">
+ * <copyright company="Aspose Pty Ltd" file="ViewOptions.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * AttachmentInfo
+ * ViewOptions
  *
- * @description Attachment information
+ * @description View options
  */
-class AttachmentInfo implements ArrayAccess
+class ViewOptions implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class AttachmentInfo implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "AttachmentInfo";
+    protected static $swaggerModelName = "ViewOptions";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,7 +53,11 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'name' => 'string'
+        'fileInfo' => '\GroupDocs\Viewer\Model\FileInfo',
+        'viewFormat' => 'string',
+        'fontsPath' => 'string',
+        'watermark' => '\GroupDocs\Viewer\Model\Watermark',
+        'renderOptions' => '\GroupDocs\Viewer\Model\RenderOptions'
     ];
 
     /*
@@ -62,7 +66,11 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'name' => null
+        'fileInfo' => null,
+        'viewFormat' => null,
+        'fontsPath' => null,
+        'watermark' => null,
+        'renderOptions' => null
     ];
 
     /*
@@ -92,7 +100,11 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name'
+        'fileInfo' => 'FileInfo',
+        'viewFormat' => 'ViewFormat',
+        'fontsPath' => 'FontsPath',
+        'watermark' => 'Watermark',
+        'renderOptions' => 'RenderOptions'
     ];
 
     /*
@@ -101,7 +113,11 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName'
+        'fileInfo' => 'setFileInfo',
+        'viewFormat' => 'setViewFormat',
+        'fontsPath' => 'setFontsPath',
+        'watermark' => 'setWatermark',
+        'renderOptions' => 'setRenderOptions'
     ];
 
     /*
@@ -110,7 +126,11 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName'
+        'fileInfo' => 'getFileInfo',
+        'viewFormat' => 'getViewFormat',
+        'fontsPath' => 'getFontsPath',
+        'watermark' => 'getWatermark',
+        'renderOptions' => 'getRenderOptions'
     ];
 
     /*
@@ -154,8 +174,29 @@ class AttachmentInfo implements ArrayAccess
         return self::$swaggerModelName;
     }
 
+    const VIEW_FORMAT_HTML = 'HTML';
+    const VIEW_FORMAT_PNG = 'PNG';
+    const VIEW_FORMAT_JPG = 'JPG';
+    const VIEW_FORMAT_BMP = 'BMP';
+    const VIEW_FORMAT_PDF = 'PDF';
     
 
+    
+    /*
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getViewFormatAllowableValues()
+    {
+        return [
+            self::VIEW_FORMAT_HTML,
+            self::VIEW_FORMAT_PNG,
+            self::VIEW_FORMAT_JPG,
+            self::VIEW_FORMAT_BMP,
+            self::VIEW_FORMAT_PDF,
+        ];
+    }
     
 
     /*
@@ -173,7 +214,11 @@ class AttachmentInfo implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['fileInfo'] = isset($data['fileInfo']) ? $data['fileInfo'] : null;
+        $this->container['viewFormat'] = isset($data['viewFormat']) ? $data['viewFormat'] : null;
+        $this->container['fontsPath'] = isset($data['fontsPath']) ? $data['fontsPath'] : null;
+        $this->container['watermark'] = isset($data['watermark']) ? $data['watermark'] : null;
+        $this->container['renderOptions'] = isset($data['renderOptions']) ? $data['renderOptions'] : null;
     }
 
     /*
@@ -184,6 +229,17 @@ class AttachmentInfo implements ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if ($this->container['viewFormat'] === null) {
+            $invalidProperties[] = "'viewFormat' can't be null";
+        }
+        $allowedValues = $this->getViewFormatAllowableValues();
+        if (!in_array($this->container['viewFormat'], $allowedValues)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'viewFormat', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
 
         return $invalidProperties;
     }
@@ -197,30 +253,138 @@ class AttachmentInfo implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['viewFormat'] === null) {
+            return false;
+        }
+        $allowedValues = $this->getViewFormatAllowableValues();
+        if (!in_array($this->container['viewFormat'], $allowedValues)) {
+            return false;
+        }
         return true;
     }
 
 
     /*
-     * Gets name
+     * Gets fileInfo
      *
-     * @return string
+     * @return \GroupDocs\Viewer\Model\FileInfo
      */
-    public function getName()
+    public function getFileInfo()
     {
-        return $this->container['name'];
+        return $this->container['fileInfo'];
     }
 
     /*
-     * Sets name
+     * Sets fileInfo
      *
-     * @param string $name Attachment name
+     * @param \GroupDocs\Viewer\Model\FileInfo $fileInfo File info
      *
      * @return $this
      */
-    public function setName($name)
+    public function setFileInfo($fileInfo)
     {
-        $this->container['name'] = $name;
+        $this->container['fileInfo'] = $fileInfo;
+
+        return $this;
+    }
+
+    /*
+     * Gets viewFormat
+     *
+     * @return string
+     */
+    public function getViewFormat()
+    {
+        return $this->container['viewFormat'];
+    }
+
+    /*
+     * Sets viewFormat
+     *
+     * @param string $viewFormat View format (HTML, PNG, JPG, BMP or PDF) Default value is HTML.
+     *
+     * @return $this
+     */
+    public function setViewFormat($viewFormat)
+    {
+        $allowedValues = $this->getViewFormatAllowableValues();
+        if ((!is_numeric($viewFormat) && !in_array($viewFormat, $allowedValues)) || (is_numeric($viewFormat) && !in_array($allowedValues[$viewFormat], $allowedValues))) {
+            throw new \InvalidArgumentException(sprintf("Invalid value for 'viewFormat', must be one of '%s'", implode("', '", $allowedValues)));
+        }
+			
+        $this->container['viewFormat'] = $viewFormat;
+
+        return $this;
+    }
+
+    /*
+     * Gets fontsPath
+     *
+     * @return string
+     */
+    public function getFontsPath()
+    {
+        return $this->container['fontsPath'];
+    }
+
+    /*
+     * Sets fontsPath
+     *
+     * @param string $fontsPath The path to directory containing custom fonts in storage
+     *
+     * @return $this
+     */
+    public function setFontsPath($fontsPath)
+    {
+        $this->container['fontsPath'] = $fontsPath;
+
+        return $this;
+    }
+
+    /*
+     * Gets watermark
+     *
+     * @return \GroupDocs\Viewer\Model\Watermark
+     */
+    public function getWatermark()
+    {
+        return $this->container['watermark'];
+    }
+
+    /*
+     * Sets watermark
+     *
+     * @param \GroupDocs\Viewer\Model\Watermark $watermark Text watermark
+     *
+     * @return $this
+     */
+    public function setWatermark($watermark)
+    {
+        $this->container['watermark'] = $watermark;
+
+        return $this;
+    }
+
+    /*
+     * Gets renderOptions
+     *
+     * @return \GroupDocs\Viewer\Model\RenderOptions
+     */
+    public function getRenderOptions()
+    {
+        return $this->container['renderOptions'];
+    }
+
+    /*
+     * Sets renderOptions
+     *
+     * @param \GroupDocs\Viewer\Model\RenderOptions $renderOptions Rendering options
+     *
+     * @return $this
+     */
+    public function setRenderOptions($renderOptions)
+    {
+        $this->container['renderOptions'] = $renderOptions;
 
         return $this;
     }

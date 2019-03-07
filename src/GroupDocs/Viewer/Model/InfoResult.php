@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="AttachmentInfo.php">
+ * <copyright company="Aspose Pty Ltd" file="InfoResult.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * AttachmentInfo
+ * InfoResult
  *
- * @description Attachment information
+ * @description View result information
  */
-class AttachmentInfo implements ArrayAccess
+class InfoResult implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class AttachmentInfo implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "AttachmentInfo";
+    protected static $swaggerModelName = "InfoResult";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,7 +53,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'name' => 'string'
+        'pages' => '\GroupDocs\Viewer\Model\PageInfo[]',
+        'attachments' => '\GroupDocs\Viewer\Model\AttachmentInfo[]'
     ];
 
     /*
@@ -62,7 +63,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'name' => null
+        'pages' => null,
+        'attachments' => null
     ];
 
     /*
@@ -92,7 +94,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name'
+        'pages' => 'Pages',
+        'attachments' => 'Attachments'
     ];
 
     /*
@@ -101,7 +104,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName'
+        'pages' => 'setPages',
+        'attachments' => 'setAttachments'
     ];
 
     /*
@@ -110,7 +114,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName'
+        'pages' => 'getPages',
+        'attachments' => 'getAttachments'
     ];
 
     /*
@@ -173,7 +178,8 @@ class AttachmentInfo implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['pages'] = isset($data['pages']) ? $data['pages'] : null;
+        $this->container['attachments'] = isset($data['attachments']) ? $data['attachments'] : null;
     }
 
     /*
@@ -202,25 +208,49 @@ class AttachmentInfo implements ArrayAccess
 
 
     /*
-     * Gets name
+     * Gets pages
      *
-     * @return string
+     * @return \GroupDocs\Viewer\Model\PageInfo[]
      */
-    public function getName()
+    public function getPages()
     {
-        return $this->container['name'];
+        return $this->container['pages'];
     }
 
     /*
-     * Sets name
+     * Sets pages
      *
-     * @param string $name Attachment name
+     * @param \GroupDocs\Viewer\Model\PageInfo[] $pages View result pages
      *
      * @return $this
      */
-    public function setName($name)
+    public function setPages($pages)
     {
-        $this->container['name'] = $name;
+        $this->container['pages'] = $pages;
+
+        return $this;
+    }
+
+    /*
+     * Gets attachments
+     *
+     * @return \GroupDocs\Viewer\Model\AttachmentInfo[]
+     */
+    public function getAttachments()
+    {
+        return $this->container['attachments'];
+    }
+
+    /*
+     * Sets attachments
+     *
+     * @param \GroupDocs\Viewer\Model\AttachmentInfo[] $attachments Attachments
+     *
+     * @return $this
+     */
+    public function setAttachments($attachments)
+    {
+        $this->container['attachments'] = $attachments;
 
         return $this;
     }

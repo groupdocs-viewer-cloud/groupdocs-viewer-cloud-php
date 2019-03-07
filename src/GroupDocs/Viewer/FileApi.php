@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="ViewerApi.php">
+ * <copyright company="Aspose Pty Ltd" file="FileApi.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -39,7 +39,7 @@ use GroupDocs\Viewer\Model\Requests;
 /*
  * GroupDocs.Viewer Cloud API Reference
  */
-class ViewerApi
+class FileApi
 {
     /*
      * Stores client instance
@@ -66,7 +66,7 @@ class ViewerApi
     protected $accessToken;
 
     /*
-     * Initialize a new instance of ViewerApi
+     * Initialize a new instance of FileApi
      * @param Configuration   $config configuration info
      * @param ClientInterface   $client client for calling api
      * @param HeaderSelector   $selector class for header selection
@@ -88,37 +88,36 @@ class ViewerApi
     }
 
     /*
-     * Operation createView
+     * Operation copyFile
      *
-     * Create new view if it not exists
+     * Copy file
      *
-     * @param Requests\createViewRequest $request is a request object for operation
+     * @param Requests\copyFileRequest $request is a request object for operation
      *
      * @throws \GroupDocs\Viewer\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \GroupDocs\Viewer\Model\ViewResult
+     * @return void
      */
-    public function createView(Requests\createViewRequest $request)
+    public function copyFile(Requests\copyFileRequest $request)
     {
-        list($response) = $this->createViewWithHttpInfo($request);
-        return $response;
+        $this->copyFileWithHttpInfo($request);
     }
 
     /*
-     * Operation createViewWithHttpInfo
+     * Operation copyFileWithHttpInfo
      *
-     * Create new view if it not exists
+     * Copy file
      *
-     * @param Requests\createViewRequest $request is a request object for operation
+     * @param Requests\copyFileRequest $request is a request object for operation
      *
      * @throws \GroupDocs\Viewer\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \GroupDocs\Viewer\Model\ViewResult, HTTP status code, HTTP response headers (array of strings)
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function createViewWithHttpInfo(Requests\createViewRequest $request)
+    public function copyFileWithHttpInfo(Requests\copyFileRequest $request)
     {
-        $returnType = '\GroupDocs\Viewer\Model\ViewResult';
-        $request = $this->createViewRequest($request);
+        $returnType = '';
+        $request = $this->copyFileRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
@@ -143,50 +142,28 @@ class ViewerApi
                 throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
             }
 
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-            
-            if ($this->config->getDebug()) {
-                $this->_writeResponseLog($statusCode, $response->getHeaders(), ObjectSerializer::deserialize($content, $returnType, []));
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
+            return [null, $statusCode, $response->getHeaders()];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-            case 201:
-                    $data = ObjectSerializer::deserialize($e->getResponseBody(), '\GroupDocs\Viewer\Model\ViewResult', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                break;
             }
             throw $e;
         }
     }
 
     /*
-     * Operation createViewAsync
+     * Operation copyFileAsync
      *
-     * Create new view if it not exists
+     * Copy file
      *
-     * @param Requests\createViewRequest $request is a request object for operation
+     * @param Requests\copyFileRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createViewAsync(Requests\createViewRequest $request) 
+    public function copyFileAsync(Requests\copyFileRequest $request) 
     {
-        return $this->createViewAsyncWithHttpInfo($request)
+        return $this->copyFileAsyncWithHttpInfo($request)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -195,43 +172,25 @@ class ViewerApi
     }
 
     /*
-     * Operation createViewAsyncWithHttpInfo
+     * Operation copyFileAsyncWithHttpInfo
      *
-     * Create new view if it not exists
+     * Copy file
      *
-     * @param Requests\createViewRequest $request is a request object for operation
+     * @param Requests\copyFileRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createViewAsyncWithHttpInfo(Requests\createViewRequest $request) 
+    public function copyFileAsyncWithHttpInfo(Requests\copyFileRequest $request) 
     {
-        $returnType = '\GroupDocs\Viewer\Model\ViewResult';
-        $request = $this->createViewRequest($request);
+        $returnType = '';
+        $request = $this->copyFileRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    $responseBody = $response->getBody();
-                    if ($returnType === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = $responseBody->getContents();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-                    
-                    if ($this->config->getDebug()) {
-                        $this->_writeResponseLog($response->getStatusCode(), $response->getHeaders(), ObjectSerializer::deserialize($content, $returnType, []));
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
                 },
                 function ($exception) {        
                     $response = $exception->getResponse();
@@ -245,41 +204,83 @@ class ViewerApi
     }
 
     /*
-     * Create request for operation 'createView'
+     * Create request for operation 'copyFile'
      *
-     * @param Requests\createViewRequest $request is a request object for operation
+     * @param Requests\copyFileRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function createViewRequest(Requests\createViewRequest $request)
+    protected function copyFileRequest(Requests\copyFileRequest $request)
     {
-        // verify the required parameter 'viewOptions' is set
-        if ($request->viewOptions === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $viewOptions when calling createView');
+        // verify the required parameter 'srcPath' is set
+        if ($request->srcPath === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $srcPath when calling copyFile');
+        }
+        // verify the required parameter 'destPath' is set
+        if ($request->destPath === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $destPath when calling copyFile');
         }
 
-        $resourcePath = '/viewer/view';
+        $resourcePath = '/viewer/storage/file/copy/{srcPath}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = "";
         $multipart = false;
     
+        // path params
+        if ($request->srcPath !== null) {
+            $localName = lcfirst('srcPath');
+            $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($request->srcPath), $resourcePath);
+        }
 
+        // query params
+        if ($request->destPath !== null) {
+            $localName = lcfirst('destPath');
+            $localValue = is_bool($request->destPath) ? ($request->destPath ? 'true' : 'false') : $request->destPath;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
+        if ($request->srcStorageName !== null) {
+            $localName = lcfirst('srcStorageName');
+            $localValue = is_bool($request->srcStorageName) ? ($request->srcStorageName ? 'true' : 'false') : $request->srcStorageName;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
+        if ($request->destStorageName !== null) {
+            $localName = lcfirst('destStorageName');
+            $localValue = is_bool($request->destStorageName) ? ($request->destStorageName ? 'true' : 'false') : $request->destStorageName;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
+        if ($request->versionId !== null) {
+            $localName = lcfirst('versionId');
+            $localValue = is_bool($request->versionId) ? ($request->versionId ? 'true' : 'false') : $request->versionId;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
     
     
         $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
-        if (isset($request->viewOptions)) {
-            if (is_string($request->viewOptions)) {
-                $_tempBody = "\"" . $request->viewOptions . "\"";   
-            } else {
-                $_tempBody = $request->viewOptions;
-            }
-        }
 
         if ($multipart) {
             $headers= $this->headerSelector->selectHeadersForMultipart(
@@ -345,49 +346,49 @@ class ViewerApi
         );
     
         $req = new Request(
-            'POST',
+            'PUT',
             $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('PUT', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
     }
 
     /*
-     * Operation deleteView
+     * Operation deleteFile
      *
-     * Delete view
+     * Delete file
      *
-     * @param Requests\deleteViewRequest $request is a request object for operation
+     * @param Requests\deleteFileRequest $request is a request object for operation
      *
      * @throws \GroupDocs\Viewer\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function deleteView(Requests\deleteViewRequest $request)
+    public function deleteFile(Requests\deleteFileRequest $request)
     {
-        $this->deleteViewWithHttpInfo($request);
+        $this->deleteFileWithHttpInfo($request);
     }
 
     /*
-     * Operation deleteViewWithHttpInfo
+     * Operation deleteFileWithHttpInfo
      *
-     * Delete view
+     * Delete file
      *
-     * @param Requests\deleteViewRequest $request is a request object for operation
+     * @param Requests\deleteFileRequest $request is a request object for operation
      *
      * @throws \GroupDocs\Viewer\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function deleteViewWithHttpInfo(Requests\deleteViewRequest $request)
+    public function deleteFileWithHttpInfo(Requests\deleteFileRequest $request)
     {
         $returnType = '';
-        $request = $this->deleteViewRequest($request);
+        $request = $this->deleteFileRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
@@ -422,18 +423,18 @@ class ViewerApi
     }
 
     /*
-     * Operation deleteViewAsync
+     * Operation deleteFileAsync
      *
-     * Delete view
+     * Delete file
      *
-     * @param Requests\deleteViewRequest $request is a request object for operation
+     * @param Requests\deleteFileRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteViewAsync(Requests\deleteViewRequest $request) 
+    public function deleteFileAsync(Requests\deleteFileRequest $request) 
     {
-        return $this->deleteViewAsyncWithHttpInfo($request)
+        return $this->deleteFileAsyncWithHttpInfo($request)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -442,19 +443,19 @@ class ViewerApi
     }
 
     /*
-     * Operation deleteViewAsyncWithHttpInfo
+     * Operation deleteFileAsyncWithHttpInfo
      *
-     * Delete view
+     * Delete file
      *
-     * @param Requests\deleteViewRequest $request is a request object for operation
+     * @param Requests\deleteFileRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteViewAsyncWithHttpInfo(Requests\deleteViewRequest $request) 
+    public function deleteFileAsyncWithHttpInfo(Requests\deleteFileRequest $request) 
     {
         $returnType = '';
-        $request = $this->deleteViewRequest($request);
+        $request = $this->deleteFileRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -474,41 +475,59 @@ class ViewerApi
     }
 
     /*
-     * Create request for operation 'deleteView'
+     * Create request for operation 'deleteFile'
      *
-     * @param Requests\deleteViewRequest $request is a request object for operation
+     * @param Requests\deleteFileRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function deleteViewRequest(Requests\deleteViewRequest $request)
+    protected function deleteFileRequest(Requests\deleteFileRequest $request)
     {
-        // verify the required parameter 'deleteViewOptions' is set
-        if ($request->deleteViewOptions === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $deleteViewOptions when calling deleteView');
+        // verify the required parameter 'path' is set
+        if ($request->path === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $path when calling deleteFile');
         }
 
-        $resourcePath = '/viewer/view';
+        $resourcePath = '/viewer/storage/file/{path}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = "";
         $multipart = false;
     
+        // path params
+        if ($request->path !== null) {
+            $localName = lcfirst('path');
+            $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($request->path), $resourcePath);
+        }
 
+        // query params
+        if ($request->storageName !== null) {
+            $localName = lcfirst('storageName');
+            $localValue = is_bool($request->storageName) ? ($request->storageName ? 'true' : 'false') : $request->storageName;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
+        if ($request->versionId !== null) {
+            $localName = lcfirst('versionId');
+            $localValue = is_bool($request->versionId) ? ($request->versionId ? 'true' : 'false') : $request->versionId;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
     
     
         $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
-        if (isset($request->deleteViewOptions)) {
-            if (is_string($request->deleteViewOptions)) {
-                $_tempBody = "\"" . $request->deleteViewOptions . "\"";   
-            } else {
-                $_tempBody = $request->deleteViewOptions;
-            }
-        }
 
         if ($multipart) {
             $headers= $this->headerSelector->selectHeadersForMultipart(
@@ -587,37 +606,37 @@ class ViewerApi
     }
 
     /*
-     * Operation getInfo
+     * Operation downloadFile
      *
-     * Get information about view
+     * Download file
      *
-     * @param Requests\getInfoRequest $request is a request object for operation
+     * @param Requests\downloadFileRequest $request is a request object for operation
      *
      * @throws \GroupDocs\Viewer\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \GroupDocs\Viewer\Model\InfoResult
+     * @return \SplFileObject
      */
-    public function getInfo(Requests\getInfoRequest $request)
+    public function downloadFile(Requests\downloadFileRequest $request)
     {
-        list($response) = $this->getInfoWithHttpInfo($request);
+        list($response) = $this->downloadFileWithHttpInfo($request);
         return $response;
     }
 
     /*
-     * Operation getInfoWithHttpInfo
+     * Operation downloadFileWithHttpInfo
      *
-     * Get information about view
+     * Download file
      *
-     * @param Requests\getInfoRequest $request is a request object for operation
+     * @param Requests\downloadFileRequest $request is a request object for operation
      *
      * @throws \GroupDocs\Viewer\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \GroupDocs\Viewer\Model\InfoResult, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getInfoWithHttpInfo(Requests\getInfoRequest $request)
+    public function downloadFileWithHttpInfo(Requests\downloadFileRequest $request)
     {
-        $returnType = '\GroupDocs\Viewer\Model\InfoResult';
-        $request = $this->getInfoRequest($request);
+        $returnType = '\SplFileObject';
+        $request = $this->downloadFileRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
@@ -665,7 +684,7 @@ class ViewerApi
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
-                    $data = ObjectSerializer::deserialize($e->getResponseBody(), '\GroupDocs\Viewer\Model\InfoResult', $e->getResponseHeaders());
+                    $data = ObjectSerializer::deserialize($e->getResponseBody(), '\SplFileObject', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                 break;
             }
@@ -674,18 +693,18 @@ class ViewerApi
     }
 
     /*
-     * Operation getInfoAsync
+     * Operation downloadFileAsync
      *
-     * Get information about view
+     * Download file
      *
-     * @param Requests\getInfoRequest $request is a request object for operation
+     * @param Requests\downloadFileRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getInfoAsync(Requests\getInfoRequest $request) 
+    public function downloadFileAsync(Requests\downloadFileRequest $request) 
     {
-        return $this->getInfoAsyncWithHttpInfo($request)
+        return $this->downloadFileAsyncWithHttpInfo($request)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -694,19 +713,19 @@ class ViewerApi
     }
 
     /*
-     * Operation getInfoAsyncWithHttpInfo
+     * Operation downloadFileAsyncWithHttpInfo
      *
-     * Get information about view
+     * Download file
      *
-     * @param Requests\getInfoRequest $request is a request object for operation
+     * @param Requests\downloadFileRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getInfoAsyncWithHttpInfo(Requests\getInfoRequest $request) 
+    public function downloadFileAsyncWithHttpInfo(Requests\downloadFileRequest $request) 
     {
-        $returnType = '\GroupDocs\Viewer\Model\InfoResult';
-        $request = $this->getInfoRequest($request);
+        $returnType = '\SplFileObject';
+        $request = $this->downloadFileRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -744,288 +763,53 @@ class ViewerApi
     }
 
     /*
-     * Create request for operation 'getInfo'
+     * Create request for operation 'downloadFile'
      *
-     * @param Requests\getInfoRequest $request is a request object for operation
+     * @param Requests\downloadFileRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function getInfoRequest(Requests\getInfoRequest $request)
+    protected function downloadFileRequest(Requests\downloadFileRequest $request)
     {
-        // verify the required parameter 'viewOptions' is set
-        if ($request->viewOptions === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $viewOptions when calling getInfo');
+        // verify the required parameter 'path' is set
+        if ($request->path === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $path when calling downloadFile');
         }
 
-        $resourcePath = '/viewer/info';
+        $resourcePath = '/viewer/storage/file/{path}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = "";
         $multipart = false;
     
+        // path params
+        if ($request->path !== null) {
+            $localName = lcfirst('path');
+            $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($request->path), $resourcePath);
+        }
 
-    
-    
-        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
-
-        // body params
-        $_tempBody = null;
-        if (isset($request->viewOptions)) {
-            if (is_string($request->viewOptions)) {
-                $_tempBody = "\"" . $request->viewOptions . "\"";   
+        // query params
+        if ($request->storageName !== null) {
+            $localName = lcfirst('storageName');
+            $localValue = is_bool($request->storageName) ? ($request->storageName ? 'true' : 'false') : $request->storageName;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
             } else {
-                $_tempBody = $request->viewOptions;
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
             }
         }
-
-        if ($multipart) {
-            $headers= $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                ['application/json']
-            );
-        }
-
-        // for model (json/xml)
-        if (isset($_tempBody)) {
-            // $_tempBody is the method argument, if present
-            $httpBody = $_tempBody;
-            // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $multipartContents[] = [
-                        'name' => $formParamName,
-                        'filename' => $formParamName,
-                        'contents' => $formParamValue
-                    ];
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
-
+        // query params
+        if ($request->versionId !== null) {
+            $localName = lcfirst('versionId');
+            $localValue = is_bool($request->versionId) ? ($request->versionId ? 'true' : 'false') : $request->versionId;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
             } else {
-                // for HTTP post (form)
-                $httpBody = $formParams["data"];
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
             }
         }
-    
-        $this->_requestToken();
-
-        if ($this->accessToken !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
-        }
-
-        $defaultHeaders = [];
-        
-        if ($this->config->getClientName()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
-        }
-
-        if ($this->config->getClientVersion()) {
-            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-    
-        $req = new Request(
-            'POST',
-            $resourcePath,
-            $headers,
-            $httpBody
-        );
-        if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
-        }
-        
-        return $req;
-    }
-
-    /*
-     * Operation getSupportedFileFormats
-     *
-     * Get supported file formats
-     *
-     * @throws \GroupDocs\Viewer\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \GroupDocs\Viewer\Model\FormatsResult
-     */
-    public function getSupportedFileFormats()
-    {
-        list($response) = $this->getSupportedFileFormatsWithHttpInfo();
-        return $response;
-    }
-
-    /*
-     * Operation getSupportedFileFormatsWithHttpInfo
-     *
-     * Get supported file formats
-     *
-     * @throws \GroupDocs\Viewer\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \GroupDocs\Viewer\Model\FormatsResult, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function getSupportedFileFormatsWithHttpInfo()
-    {
-        $returnType = '\GroupDocs\Viewer\Model\FormatsResult';
-        $request = $this->getSupportedFileFormatsRequest();
-
-        try {
-            $options = $this->_createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                $responseBody = $e->getResponse()->getBody();
-                $content = $responseBody->getContents();
-                $error = json_decode($content);
-
-                $errorCode = $e->getCode();
-                $errorMessage = $error->Error != null && $error->Error->Message != null
-                    ? $error->Error->Message
-                    : $e->getMessage();
-                
-                throw new ApiException($errorMessage, $errorCode);
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {          
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
-            }
-
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-            
-            if ($this->config->getDebug()) {
-                $this->_writeResponseLog($statusCode, $response->getHeaders(), ObjectSerializer::deserialize($content, $returnType, []));
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-            case 200:
-                    $data = ObjectSerializer::deserialize($e->getResponseBody(), '\GroupDocs\Viewer\Model\FormatsResult', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                break;
-            }
-            throw $e;
-        }
-    }
-
-    /*
-     * Operation getSupportedFileFormatsAsync
-     *
-     * Get supported file formats
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function getSupportedFileFormatsAsync() 
-    {
-        return $this->getSupportedFileFormatsAsyncWithHttpInfo()
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /*
-     * Operation getSupportedFileFormatsAsyncWithHttpInfo
-     *
-     * Get supported file formats
-     *
-     * @param Requests\getSupportedFileFormatsRequest $request is a request object for operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function getSupportedFileFormatsAsyncWithHttpInfo() 
-    {
-        $returnType = '\GroupDocs\Viewer\Model\FormatsResult';
-        $request = $this->getSupportedFileFormatsRequest();
-
-        return $this->client
-            ->sendAsync($request, $this->_createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    $responseBody = $response->getBody();
-                    if ($returnType === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = $responseBody->getContents();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-                    
-                    if ($this->config->getDebug()) {
-                        $this->_writeResponseLog($response->getStatusCode(), $response->getHeaders(), ObjectSerializer::deserialize($content, $returnType, []));
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {        
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();        
-          
-                    throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
-                    );
-                }
-            );
-    }
-
-    /*
-     * Create request for operation 'getSupportedFileFormats'
-     *
-     * @param Requests\getSupportedFileFormatsRequest $request is a request object for operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    protected function getSupportedFileFormatsRequest()
-    {
-
-        $resourcePath = '/viewer/formats';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = "";
-        $multipart = false;
-    
-
     
     
         $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
@@ -1035,11 +819,11 @@ class ViewerApi
 
         if ($multipart) {
             $headers= $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
+                ['multipart/form-data']
             );
         } else {
             $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
+                ['multipart/form-data'],
                 ['application/json']
             );
         }
@@ -1104,6 +888,568 @@ class ViewerApi
         );
         if ($this->config->getDebug()) {
             $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
+        }
+        
+        return $req;
+    }
+
+    /*
+     * Operation moveFile
+     *
+     * Move file
+     *
+     * @param Requests\moveFileRequest $request is a request object for operation
+     *
+     * @throws \GroupDocs\Viewer\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function moveFile(Requests\moveFileRequest $request)
+    {
+        $this->moveFileWithHttpInfo($request);
+    }
+
+    /*
+     * Operation moveFileWithHttpInfo
+     *
+     * Move file
+     *
+     * @param Requests\moveFileRequest $request is a request object for operation
+     *
+     * @throws \GroupDocs\Viewer\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function moveFileWithHttpInfo(Requests\moveFileRequest $request)
+    {
+        $returnType = '';
+        $request = $this->moveFileRequest($request);
+
+        try {
+            $options = $this->_createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->Error != null && $error->Error->Message != null
+                    ? $error->Error->Message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {          
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
+            }
+
+            return [null, $statusCode, $response->getHeaders()];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            }
+            throw $e;
+        }
+    }
+
+    /*
+     * Operation moveFileAsync
+     *
+     * Move file
+     *
+     * @param Requests\moveFileRequest $request is a request object for operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function moveFileAsync(Requests\moveFileRequest $request) 
+    {
+        return $this->moveFileAsyncWithHttpInfo($request)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /*
+     * Operation moveFileAsyncWithHttpInfo
+     *
+     * Move file
+     *
+     * @param Requests\moveFileRequest $request is a request object for operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function moveFileAsyncWithHttpInfo(Requests\moveFileRequest $request) 
+    {
+        $returnType = '';
+        $request = $this->moveFileRequest($request);
+
+        return $this->client
+            ->sendAsync($request, $this->_createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {        
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();        
+          
+                    throw new ApiException(
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
+                    );
+                }
+            );
+    }
+
+    /*
+     * Create request for operation 'moveFile'
+     *
+     * @param Requests\moveFileRequest $request is a request object for operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function moveFileRequest(Requests\moveFileRequest $request)
+    {
+        // verify the required parameter 'srcPath' is set
+        if ($request->srcPath === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $srcPath when calling moveFile');
+        }
+        // verify the required parameter 'destPath' is set
+        if ($request->destPath === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $destPath when calling moveFile');
+        }
+
+        $resourcePath = '/viewer/storage/file/move/{srcPath}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = "";
+        $multipart = false;
+    
+        // path params
+        if ($request->srcPath !== null) {
+            $localName = lcfirst('srcPath');
+            $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($request->srcPath), $resourcePath);
+        }
+
+        // query params
+        if ($request->destPath !== null) {
+            $localName = lcfirst('destPath');
+            $localValue = is_bool($request->destPath) ? ($request->destPath ? 'true' : 'false') : $request->destPath;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
+        if ($request->srcStorageName !== null) {
+            $localName = lcfirst('srcStorageName');
+            $localValue = is_bool($request->srcStorageName) ? ($request->srcStorageName ? 'true' : 'false') : $request->srcStorageName;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
+        if ($request->destStorageName !== null) {
+            $localName = lcfirst('destStorageName');
+            $localValue = is_bool($request->destStorageName) ? ($request->destStorageName ? 'true' : 'false') : $request->destStorageName;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
+        if ($request->versionId !== null) {
+            $localName = lcfirst('versionId');
+            $localValue = is_bool($request->versionId) ? ($request->versionId ? 'true' : 'false') : $request->versionId;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+    
+    
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers= $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'filename' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = $formParams["data"];
+            }
+        }
+    
+        $this->_requestToken();
+
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
+        }
+
+        $defaultHeaders = [];
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
+        }
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+    
+        $req = new Request(
+            'PUT',
+            $resourcePath,
+            $headers,
+            $httpBody
+        );
+        if ($this->config->getDebug()) {
+            $this->_writeRequestLog('PUT', $resourcePath, $headers, $httpBody);
+        }
+        
+        return $req;
+    }
+
+    /*
+     * Operation uploadFile
+     *
+     * Upload file
+     *
+     * @param Requests\uploadFileRequest $request is a request object for operation
+     *
+     * @throws \GroupDocs\Viewer\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \GroupDocs\Viewer\Model\FilesUploadResult
+     */
+    public function uploadFile(Requests\uploadFileRequest $request)
+    {
+        list($response) = $this->uploadFileWithHttpInfo($request);
+        return $response;
+    }
+
+    /*
+     * Operation uploadFileWithHttpInfo
+     *
+     * Upload file
+     *
+     * @param Requests\uploadFileRequest $request is a request object for operation
+     *
+     * @throws \GroupDocs\Viewer\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \GroupDocs\Viewer\Model\FilesUploadResult, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function uploadFileWithHttpInfo(Requests\uploadFileRequest $request)
+    {
+        $returnType = '\GroupDocs\Viewer\Model\FilesUploadResult';
+        $request = $this->uploadFileRequest($request);
+
+        try {
+            $options = $this->_createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->Error != null && $error->Error->Message != null
+                    ? $error->Error->Message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {          
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+            
+            if ($this->config->getDebug()) {
+                $this->_writeResponseLog($statusCode, $response->getHeaders(), ObjectSerializer::deserialize($content, $returnType, []));
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            case 200:
+                    $data = ObjectSerializer::deserialize($e->getResponseBody(), '\GroupDocs\Viewer\Model\FilesUploadResult', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                break;
+            }
+            throw $e;
+        }
+    }
+
+    /*
+     * Operation uploadFileAsync
+     *
+     * Upload file
+     *
+     * @param Requests\uploadFileRequest $request is a request object for operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function uploadFileAsync(Requests\uploadFileRequest $request) 
+    {
+        return $this->uploadFileAsyncWithHttpInfo($request)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /*
+     * Operation uploadFileAsyncWithHttpInfo
+     *
+     * Upload file
+     *
+     * @param Requests\uploadFileRequest $request is a request object for operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function uploadFileAsyncWithHttpInfo(Requests\uploadFileRequest $request) 
+    {
+        $returnType = '\GroupDocs\Viewer\Model\FilesUploadResult';
+        $request = $this->uploadFileRequest($request);
+
+        return $this->client
+            ->sendAsync($request, $this->_createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+                    
+                    if ($this->config->getDebug()) {
+                        $this->_writeResponseLog($response->getStatusCode(), $response->getHeaders(), ObjectSerializer::deserialize($content, $returnType, []));
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {        
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();        
+          
+                    throw new ApiException(
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
+                    );
+                }
+            );
+    }
+
+    /*
+     * Create request for operation 'uploadFile'
+     *
+     * @param Requests\uploadFileRequest $request is a request object for operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function uploadFileRequest(Requests\uploadFileRequest $request)
+    {
+        // verify the required parameter 'path' is set
+        if ($request->path === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $path when calling uploadFile');
+        }
+        // verify the required parameter 'file' is set
+        if ($request->file === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $file when calling uploadFile');
+        }
+
+        $resourcePath = '/viewer/storage/file/{path}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = "";
+        $multipart = false;
+    
+        // path params
+        if ($request->path !== null) {
+            $localName = lcfirst('path');
+            $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($request->path), $resourcePath);
+        }
+
+        // query params
+        if ($request->storageName !== null) {
+            $localName = lcfirst('storageName');
+            $localValue = is_bool($request->storageName) ? ($request->storageName ? 'true' : 'false') : $request->storageName;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+    
+    
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
+
+        // form params
+        if ($request->file !== null) {
+            $multipart = true;
+            $filename = ObjectSerializer::toFormValue($request->file);
+            $handle = fopen($filename, "rb");
+            $fsize = filesize($filename);
+            $contents = fread($handle, $fsize);
+            $formParams['file'] = $contents;
+        }
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers= $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['multipart/form-data']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'filename' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = $formParams["data"];
+            }
+        }
+    
+        $this->_requestToken();
+
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
+        }
+
+        $defaultHeaders = [];
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
+        }
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+    
+        $req = new Request(
+            'POST',
+            $resourcePath,
+            $headers,
+            $httpBody
+        );
+        if ($this->config->getDebug()) {
+            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -1210,7 +1556,7 @@ class ViewerApi
 }
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="createViewRequest.php">
+ * <copyright company="Aspose Pty Ltd" file="copyFileRequest.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -1238,28 +1584,56 @@ class ViewerApi
 namespace GroupDocs\Viewer\Model\Requests;
 
 /*
- * Request model for createView operation.
+ * Request model for copyFile operation.
  */
-class createViewRequest
+class copyFileRequest
 {
     /*
-     * Initializes a new instance of the createViewRequest class.
+     * Initializes a new instance of the copyFileRequest class.
      *  
-     * @param \GroupDocs\Viewer\Model\ViewOptions $viewOptions View options
+     * @param string $srcPath Source file path e.g. '/folder/file.ext'
+     * @param string $destPath Destination file path
+     * @param string $srcStorageName Source storage name
+     * @param string $destStorageName Destination storage name
+     * @param string $versionId File version ID to copy
      */
-    public function __construct($viewOptions)             
+    public function __construct($srcPath, $destPath, $srcStorageName = null, $destStorageName = null, $versionId = null)             
     {
-        $this->viewOptions = $viewOptions;
+        $this->srcPath = $srcPath;
+        $this->destPath = $destPath;
+        $this->srcStorageName = $srcStorageName;
+        $this->destStorageName = $destStorageName;
+        $this->versionId = $versionId;
     }
 
     /*
-     * View options
+     * Source file path e.g. '/folder/file.ext'
      */
-    public $viewOptions;
+    public $srcPath;
+	
+    /*
+     * Destination file path
+     */
+    public $destPath;
+	
+    /*
+     * Source storage name
+     */
+    public $srcStorageName;
+	
+    /*
+     * Destination storage name
+     */
+    public $destStorageName;
+	
+    /*
+     * File version ID to copy
+     */
+    public $versionId;
 }
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="deleteViewRequest.php">
+ * <copyright company="Aspose Pty Ltd" file="deleteFileRequest.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -1287,28 +1661,42 @@ class createViewRequest
 namespace GroupDocs\Viewer\Model\Requests;
 
 /*
- * Request model for deleteView operation.
+ * Request model for deleteFile operation.
  */
-class deleteViewRequest
+class deleteFileRequest
 {
     /*
-     * Initializes a new instance of the deleteViewRequest class.
+     * Initializes a new instance of the deleteFileRequest class.
      *  
-     * @param \GroupDocs\Viewer\Model\DeleteViewOptions $deleteViewOptions Delete options
+     * @param string $path File path e.g. '/folder/file.ext'
+     * @param string $storageName Storage name
+     * @param string $versionId File version ID to delete
      */
-    public function __construct($deleteViewOptions)             
+    public function __construct($path, $storageName = null, $versionId = null)             
     {
-        $this->deleteViewOptions = $deleteViewOptions;
+        $this->path = $path;
+        $this->storageName = $storageName;
+        $this->versionId = $versionId;
     }
 
     /*
-     * Delete options
+     * File path e.g. '/folder/file.ext'
      */
-    public $deleteViewOptions;
+    public $path;
+	
+    /*
+     * Storage name
+     */
+    public $storageName;
+	
+    /*
+     * File version ID to delete
+     */
+    public $versionId;
 }
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="getInfoRequest.php">
+ * <copyright company="Aspose Pty Ltd" file="downloadFileRequest.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -1336,22 +1724,176 @@ class deleteViewRequest
 namespace GroupDocs\Viewer\Model\Requests;
 
 /*
- * Request model for getInfo operation.
+ * Request model for downloadFile operation.
  */
-class getInfoRequest
+class downloadFileRequest
 {
     /*
-     * Initializes a new instance of the getInfoRequest class.
+     * Initializes a new instance of the downloadFileRequest class.
      *  
-     * @param \GroupDocs\Viewer\Model\ViewOptions $viewOptions View options
+     * @param string $path File path e.g. '/folder/file.ext'
+     * @param string $storageName Storage name
+     * @param string $versionId File version ID to download
      */
-    public function __construct($viewOptions)             
+    public function __construct($path, $storageName = null, $versionId = null)             
     {
-        $this->viewOptions = $viewOptions;
+        $this->path = $path;
+        $this->storageName = $storageName;
+        $this->versionId = $versionId;
     }
 
     /*
-     * View options
+     * File path e.g. '/folder/file.ext'
      */
-    public $viewOptions;
+    public $path;
+	
+    /*
+     * Storage name
+     */
+    public $storageName;
+	
+    /*
+     * File version ID to download
+     */
+    public $versionId;
+}
+/*
+ * --------------------------------------------------------------------------------------------------------------------
+ * <copyright company="Aspose Pty Ltd" file="moveFileRequest.php">
+ *   Copyright (c) 2003-2019 Aspose Pty Ltd
+ * </copyright>
+ * <summary>
+ *   Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ * 
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ * 
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ * </summary>
+ * --------------------------------------------------------------------------------------------------------------------
+ */
+
+namespace GroupDocs\Viewer\Model\Requests;
+
+/*
+ * Request model for moveFile operation.
+ */
+class moveFileRequest
+{
+    /*
+     * Initializes a new instance of the moveFileRequest class.
+     *  
+     * @param string $srcPath Source file path e.g. '/src.ext'
+     * @param string $destPath Destination file path e.g. '/dest.ext'
+     * @param string $srcStorageName Source storage name
+     * @param string $destStorageName Destination storage name
+     * @param string $versionId File version ID to move
+     */
+    public function __construct($srcPath, $destPath, $srcStorageName = null, $destStorageName = null, $versionId = null)             
+    {
+        $this->srcPath = $srcPath;
+        $this->destPath = $destPath;
+        $this->srcStorageName = $srcStorageName;
+        $this->destStorageName = $destStorageName;
+        $this->versionId = $versionId;
+    }
+
+    /*
+     * Source file path e.g. '/src.ext'
+     */
+    public $srcPath;
+	
+    /*
+     * Destination file path e.g. '/dest.ext'
+     */
+    public $destPath;
+	
+    /*
+     * Source storage name
+     */
+    public $srcStorageName;
+	
+    /*
+     * Destination storage name
+     */
+    public $destStorageName;
+	
+    /*
+     * File version ID to move
+     */
+    public $versionId;
+}
+/*
+ * --------------------------------------------------------------------------------------------------------------------
+ * <copyright company="Aspose Pty Ltd" file="uploadFileRequest.php">
+ *   Copyright (c) 2003-2019 Aspose Pty Ltd
+ * </copyright>
+ * <summary>
+ *   Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ * 
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ * 
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ * </summary>
+ * --------------------------------------------------------------------------------------------------------------------
+ */
+
+namespace GroupDocs\Viewer\Model\Requests;
+
+/*
+ * Request model for uploadFile operation.
+ */
+class uploadFileRequest
+{
+    /*
+     * Initializes a new instance of the uploadFileRequest class.
+     *  
+     * @param string $path Path where to upload including filename and extension e.g. /file.ext or /Folder 1/file.ext             If the content is multipart and path does not contains the file name it tries to get them from filename parameter             from Content-Disposition header.
+     * @param \SplFileObject $file File to upload
+     * @param string $storageName Storage name
+     */
+    public function __construct($path, $file, $storageName = null)             
+    {
+        $this->path = $path;
+        $this->file = $file;
+        $this->storageName = $storageName;
+    }
+
+    /*
+     * Path where to upload including filename and extension e.g. /file.ext or /Folder 1/file.ext             If the content is multipart and path does not contains the file name it tries to get them from filename parameter             from Content-Disposition header.
+     */
+    public $path;
+	
+    /*
+     * File to upload
+     */
+    public $file;
+	
+    /*
+     * Storage name
+     */
+    public $storageName;
 }

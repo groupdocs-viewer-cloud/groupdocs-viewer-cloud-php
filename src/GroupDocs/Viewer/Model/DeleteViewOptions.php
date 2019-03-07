@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="AttachmentInfo.php">
+ * <copyright company="Aspose Pty Ltd" file="DeleteViewOptions.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * AttachmentInfo
+ * DeleteViewOptions
  *
- * @description Attachment information
+ * @description Delete view options
  */
-class AttachmentInfo implements ArrayAccess
+class DeleteViewOptions implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class AttachmentInfo implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "AttachmentInfo";
+    protected static $swaggerModelName = "DeleteViewOptions";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,7 +53,7 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'name' => 'string'
+        'fileInfo' => '\GroupDocs\Viewer\Model\FileInfo'
     ];
 
     /*
@@ -62,7 +62,7 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'name' => null
+        'fileInfo' => null
     ];
 
     /*
@@ -92,7 +92,7 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name'
+        'fileInfo' => 'FileInfo'
     ];
 
     /*
@@ -101,7 +101,7 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName'
+        'fileInfo' => 'setFileInfo'
     ];
 
     /*
@@ -110,7 +110,7 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName'
+        'fileInfo' => 'getFileInfo'
     ];
 
     /*
@@ -173,7 +173,7 @@ class AttachmentInfo implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['fileInfo'] = isset($data['fileInfo']) ? $data['fileInfo'] : null;
     }
 
     /*
@@ -202,25 +202,25 @@ class AttachmentInfo implements ArrayAccess
 
 
     /*
-     * Gets name
+     * Gets fileInfo
      *
-     * @return string
+     * @return \GroupDocs\Viewer\Model\FileInfo
      */
-    public function getName()
+    public function getFileInfo()
     {
-        return $this->container['name'];
+        return $this->container['fileInfo'];
     }
 
     /*
-     * Sets name
+     * Sets fileInfo
      *
-     * @param string $name Attachment name
+     * @param \GroupDocs\Viewer\Model\FileInfo $fileInfo File info
      *
      * @return $this
      */
-    public function setName($name)
+    public function setFileInfo($fileInfo)
     {
-        $this->container['name'] = $name;
+        $this->container['fileInfo'] = $fileInfo;
 
         return $this;
     }

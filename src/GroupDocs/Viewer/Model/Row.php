@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="AttachmentInfo.php">
+ * <copyright company="Aspose Pty Ltd" file="Row.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * AttachmentInfo
+ * Row
  *
- * @description Attachment information
+ * @description Page row with text
  */
-class AttachmentInfo implements ArrayAccess
+class Row implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class AttachmentInfo implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "AttachmentInfo";
+    protected static $swaggerModelName = "Row";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,7 +53,13 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'name' => 'string'
+        'text' => 'string',
+        'rowLeft' => 'double',
+        'rowTop' => 'double',
+        'rowWidth' => 'double',
+        'rowHeight' => 'double',
+        'textCoordinates' => 'double[]',
+        'characterCoordinates' => 'double[]'
     ];
 
     /*
@@ -62,7 +68,13 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'name' => null
+        'text' => null,
+        'rowLeft' => 'double',
+        'rowTop' => 'double',
+        'rowWidth' => 'double',
+        'rowHeight' => 'double',
+        'textCoordinates' => 'double',
+        'characterCoordinates' => 'double'
     ];
 
     /*
@@ -92,7 +104,13 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name'
+        'text' => 'Text',
+        'rowLeft' => 'RowLeft',
+        'rowTop' => 'RowTop',
+        'rowWidth' => 'RowWidth',
+        'rowHeight' => 'RowHeight',
+        'textCoordinates' => 'TextCoordinates',
+        'characterCoordinates' => 'CharacterCoordinates'
     ];
 
     /*
@@ -101,7 +119,13 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName'
+        'text' => 'setText',
+        'rowLeft' => 'setRowLeft',
+        'rowTop' => 'setRowTop',
+        'rowWidth' => 'setRowWidth',
+        'rowHeight' => 'setRowHeight',
+        'textCoordinates' => 'setTextCoordinates',
+        'characterCoordinates' => 'setCharacterCoordinates'
     ];
 
     /*
@@ -110,7 +134,13 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName'
+        'text' => 'getText',
+        'rowLeft' => 'getRowLeft',
+        'rowTop' => 'getRowTop',
+        'rowWidth' => 'getRowWidth',
+        'rowHeight' => 'getRowHeight',
+        'textCoordinates' => 'getTextCoordinates',
+        'characterCoordinates' => 'getCharacterCoordinates'
     ];
 
     /*
@@ -173,7 +203,13 @@ class AttachmentInfo implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['text'] = isset($data['text']) ? $data['text'] : null;
+        $this->container['rowLeft'] = isset($data['rowLeft']) ? $data['rowLeft'] : null;
+        $this->container['rowTop'] = isset($data['rowTop']) ? $data['rowTop'] : null;
+        $this->container['rowWidth'] = isset($data['rowWidth']) ? $data['rowWidth'] : null;
+        $this->container['rowHeight'] = isset($data['rowHeight']) ? $data['rowHeight'] : null;
+        $this->container['textCoordinates'] = isset($data['textCoordinates']) ? $data['textCoordinates'] : null;
+        $this->container['characterCoordinates'] = isset($data['characterCoordinates']) ? $data['characterCoordinates'] : null;
     }
 
     /*
@@ -185,6 +221,18 @@ class AttachmentInfo implements ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['rowLeft'] === null) {
+            $invalidProperties[] = "'rowLeft' can't be null";
+        }
+        if ($this->container['rowTop'] === null) {
+            $invalidProperties[] = "'rowTop' can't be null";
+        }
+        if ($this->container['rowWidth'] === null) {
+            $invalidProperties[] = "'rowWidth' can't be null";
+        }
+        if ($this->container['rowHeight'] === null) {
+            $invalidProperties[] = "'rowHeight' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -197,30 +245,186 @@ class AttachmentInfo implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['rowLeft'] === null) {
+            return false;
+        }
+        if ($this->container['rowTop'] === null) {
+            return false;
+        }
+        if ($this->container['rowWidth'] === null) {
+            return false;
+        }
+        if ($this->container['rowHeight'] === null) {
+            return false;
+        }
         return true;
     }
 
 
     /*
-     * Gets name
+     * Gets text
      *
      * @return string
      */
-    public function getName()
+    public function getText()
     {
-        return $this->container['name'];
+        return $this->container['text'];
     }
 
     /*
-     * Sets name
+     * Sets text
      *
-     * @param string $name Attachment name
+     * @param string $text Row text
      *
      * @return $this
      */
-    public function setName($name)
+    public function setText($text)
     {
-        $this->container['name'] = $name;
+        $this->container['text'] = $text;
+
+        return $this;
+    }
+
+    /*
+     * Gets rowLeft
+     *
+     * @return double
+     */
+    public function getRowLeft()
+    {
+        return $this->container['rowLeft'];
+    }
+
+    /*
+     * Sets rowLeft
+     *
+     * @param double $rowLeft Row left coordinate
+     *
+     * @return $this
+     */
+    public function setRowLeft($rowLeft)
+    {
+        $this->container['rowLeft'] = $rowLeft;
+
+        return $this;
+    }
+
+    /*
+     * Gets rowTop
+     *
+     * @return double
+     */
+    public function getRowTop()
+    {
+        return $this->container['rowTop'];
+    }
+
+    /*
+     * Sets rowTop
+     *
+     * @param double $rowTop Row top coordinate
+     *
+     * @return $this
+     */
+    public function setRowTop($rowTop)
+    {
+        $this->container['rowTop'] = $rowTop;
+
+        return $this;
+    }
+
+    /*
+     * Gets rowWidth
+     *
+     * @return double
+     */
+    public function getRowWidth()
+    {
+        return $this->container['rowWidth'];
+    }
+
+    /*
+     * Sets rowWidth
+     *
+     * @param double $rowWidth Row width
+     *
+     * @return $this
+     */
+    public function setRowWidth($rowWidth)
+    {
+        $this->container['rowWidth'] = $rowWidth;
+
+        return $this;
+    }
+
+    /*
+     * Gets rowHeight
+     *
+     * @return double
+     */
+    public function getRowHeight()
+    {
+        return $this->container['rowHeight'];
+    }
+
+    /*
+     * Sets rowHeight
+     *
+     * @param double $rowHeight Row height
+     *
+     * @return $this
+     */
+    public function setRowHeight($rowHeight)
+    {
+        $this->container['rowHeight'] = $rowHeight;
+
+        return $this;
+    }
+
+    /*
+     * Gets textCoordinates
+     *
+     * @return double[]
+     */
+    public function getTextCoordinates()
+    {
+        return $this->container['textCoordinates'];
+    }
+
+    /*
+     * Sets textCoordinates
+     *
+     * @param double[] $textCoordinates Text coordinates
+     *
+     * @return $this
+     */
+    public function setTextCoordinates($textCoordinates)
+    {
+        $this->container['textCoordinates'] = $textCoordinates;
+
+        return $this;
+    }
+
+    /*
+     * Gets characterCoordinates
+     *
+     * @return double[]
+     */
+    public function getCharacterCoordinates()
+    {
+        return $this->container['characterCoordinates'];
+    }
+
+    /*
+     * Sets characterCoordinates
+     *
+     * @param double[] $characterCoordinates Characters coordinates
+     *
+     * @return $this
+     */
+    public function setCharacterCoordinates($characterCoordinates)
+    {
+        $this->container['characterCoordinates'] = $characterCoordinates;
 
         return $this;
     }

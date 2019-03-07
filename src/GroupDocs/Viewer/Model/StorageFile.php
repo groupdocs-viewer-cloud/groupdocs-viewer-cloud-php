@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="AttachmentInfo.php">
+ * <copyright company="Aspose Pty Ltd" file="StorageFile.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,20 +32,20 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * AttachmentInfo
+ * StorageFile
  *
- * @description Attachment information
+ * @description File or folder information
  */
-class AttachmentInfo implements ArrayAccess
+class StorageFile implements ArrayAccess
 {
-    const DISCRIMINATOR = null;
+    const DISCRIMINATOR = 'Type';
 
     /*
      * The original name of the model.
      *
      * @var string
      */
-    protected static $swaggerModelName = "AttachmentInfo";
+    protected static $swaggerModelName = "StorageFile";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,7 +53,11 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'name' => 'string'
+        'name' => 'string',
+        'isFolder' => 'bool',
+        'modifiedDate' => '\DateTime',
+        'size' => 'int',
+        'path' => 'string'
     ];
 
     /*
@@ -62,7 +66,11 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'name' => null
+        'name' => null,
+        'isFolder' => null,
+        'modifiedDate' => 'date-time',
+        'size' => 'int64',
+        'path' => null
     ];
 
     /*
@@ -92,7 +100,11 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name'
+        'name' => 'Name',
+        'isFolder' => 'IsFolder',
+        'modifiedDate' => 'ModifiedDate',
+        'size' => 'Size',
+        'path' => 'Path'
     ];
 
     /*
@@ -101,7 +113,11 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName'
+        'name' => 'setName',
+        'isFolder' => 'setIsFolder',
+        'modifiedDate' => 'setModifiedDate',
+        'size' => 'setSize',
+        'path' => 'setPath'
     ];
 
     /*
@@ -110,7 +126,11 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName'
+        'name' => 'getName',
+        'isFolder' => 'getIsFolder',
+        'modifiedDate' => 'getModifiedDate',
+        'size' => 'getSize',
+        'path' => 'getPath'
     ];
 
     /*
@@ -174,6 +194,14 @@ class AttachmentInfo implements ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['isFolder'] = isset($data['isFolder']) ? $data['isFolder'] : null;
+        $this->container['modifiedDate'] = isset($data['modifiedDate']) ? $data['modifiedDate'] : null;
+        $this->container['size'] = isset($data['size']) ? $data['size'] : null;
+        $this->container['path'] = isset($data['path']) ? $data['path'] : null;
+
+        // Initialize discriminator property with the model name.
+        $discriminator = array_search('Type', self::$attributeMap);
+        $this->container[$discriminator] = static::$swaggerModelName;
     }
 
     /*
@@ -185,6 +213,12 @@ class AttachmentInfo implements ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['isFolder'] === null) {
+            $invalidProperties[] = "'isFolder' can't be null";
+        }
+        if ($this->container['size'] === null) {
+            $invalidProperties[] = "'size' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -197,6 +231,12 @@ class AttachmentInfo implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['isFolder'] === null) {
+            return false;
+        }
+        if ($this->container['size'] === null) {
+            return false;
+        }
         return true;
     }
 
@@ -214,13 +254,109 @@ class AttachmentInfo implements ArrayAccess
     /*
      * Sets name
      *
-     * @param string $name Attachment name
+     * @param string $name File or folder name.
      *
      * @return $this
      */
     public function setName($name)
     {
         $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /*
+     * Gets isFolder
+     *
+     * @return bool
+     */
+    public function getIsFolder()
+    {
+        return $this->container['isFolder'];
+    }
+
+    /*
+     * Sets isFolder
+     *
+     * @param bool $isFolder True if it is a folder.
+     *
+     * @return $this
+     */
+    public function setIsFolder($isFolder)
+    {
+        $this->container['isFolder'] = $isFolder;
+
+        return $this;
+    }
+
+    /*
+     * Gets modifiedDate
+     *
+     * @return \DateTime
+     */
+    public function getModifiedDate()
+    {
+        return $this->container['modifiedDate'];
+    }
+
+    /*
+     * Sets modifiedDate
+     *
+     * @param \DateTime $modifiedDate File or folder last modified DateTime.
+     *
+     * @return $this
+     */
+    public function setModifiedDate($modifiedDate)
+    {
+        $this->container['modifiedDate'] = $modifiedDate;
+
+        return $this;
+    }
+
+    /*
+     * Gets size
+     *
+     * @return int
+     */
+    public function getSize()
+    {
+        return $this->container['size'];
+    }
+
+    /*
+     * Sets size
+     *
+     * @param int $size File or folder size.
+     *
+     * @return $this
+     */
+    public function setSize($size)
+    {
+        $this->container['size'] = $size;
+
+        return $this;
+    }
+
+    /*
+     * Gets path
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->container['path'];
+    }
+
+    /*
+     * Sets path
+     *
+     * @param string $path File or folder path.
+     *
+     * @return $this
+     */
+    public function setPath($path)
+    {
+        $this->container['path'] = $path;
 
         return $this;
     }

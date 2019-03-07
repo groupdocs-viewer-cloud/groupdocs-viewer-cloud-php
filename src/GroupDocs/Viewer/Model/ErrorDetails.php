@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="AttachmentInfo.php">
+ * <copyright company="Aspose Pty Ltd" file="ErrorDetails.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * AttachmentInfo
+ * ErrorDetails
  *
- * @description Attachment information
+ * @description The error details
  */
-class AttachmentInfo implements ArrayAccess
+class ErrorDetails implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class AttachmentInfo implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "AttachmentInfo";
+    protected static $swaggerModelName = "ErrorDetails";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,7 +53,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'name' => 'string'
+        'requestId' => 'string',
+        'date' => '\DateTime'
     ];
 
     /*
@@ -62,7 +63,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'name' => null
+        'requestId' => null,
+        'date' => 'date-time'
     ];
 
     /*
@@ -92,7 +94,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name'
+        'requestId' => 'RequestId',
+        'date' => 'Date'
     ];
 
     /*
@@ -101,7 +104,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName'
+        'requestId' => 'setRequestId',
+        'date' => 'setDate'
     ];
 
     /*
@@ -110,7 +114,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName'
+        'requestId' => 'getRequestId',
+        'date' => 'getDate'
     ];
 
     /*
@@ -173,7 +178,8 @@ class AttachmentInfo implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['requestId'] = isset($data['requestId']) ? $data['requestId'] : null;
+        $this->container['date'] = isset($data['date']) ? $data['date'] : null;
     }
 
     /*
@@ -185,6 +191,9 @@ class AttachmentInfo implements ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['date'] === null) {
+            $invalidProperties[] = "'date' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -197,30 +206,57 @@ class AttachmentInfo implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['date'] === null) {
+            return false;
+        }
         return true;
     }
 
 
     /*
-     * Gets name
+     * Gets requestId
      *
      * @return string
      */
-    public function getName()
+    public function getRequestId()
     {
-        return $this->container['name'];
+        return $this->container['requestId'];
     }
 
     /*
-     * Sets name
+     * Sets requestId
      *
-     * @param string $name Attachment name
+     * @param string $requestId The request id
      *
      * @return $this
      */
-    public function setName($name)
+    public function setRequestId($requestId)
     {
-        $this->container['name'] = $name;
+        $this->container['requestId'] = $requestId;
+
+        return $this;
+    }
+
+    /*
+     * Gets date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->container['date'];
+    }
+
+    /*
+     * Sets date
+     *
+     * @param \DateTime $date Date
+     *
+     * @return $this
+     */
+    public function setDate($date)
+    {
+        $this->container['date'] = $date;
 
         return $this;
     }

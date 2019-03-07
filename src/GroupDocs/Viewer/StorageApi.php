@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="ViewerApi.php">
+ * <copyright company="Aspose Pty Ltd" file="StorageApi.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -39,7 +39,7 @@ use GroupDocs\Viewer\Model\Requests;
 /*
  * GroupDocs.Viewer Cloud API Reference
  */
-class ViewerApi
+class StorageApi
 {
     /*
      * Stores client instance
@@ -66,7 +66,7 @@ class ViewerApi
     protected $accessToken;
 
     /*
-     * Initialize a new instance of ViewerApi
+     * Initialize a new instance of StorageApi
      * @param Configuration   $config configuration info
      * @param ClientInterface   $client client for calling api
      * @param HeaderSelector   $selector class for header selection
@@ -88,536 +88,37 @@ class ViewerApi
     }
 
     /*
-     * Operation createView
+     * Operation getDiscUsage
      *
-     * Create new view if it not exists
+     * Get disc usage
      *
-     * @param Requests\createViewRequest $request is a request object for operation
+     * @param Requests\getDiscUsageRequest $request is a request object for operation
      *
      * @throws \GroupDocs\Viewer\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \GroupDocs\Viewer\Model\ViewResult
+     * @return \GroupDocs\Viewer\Model\DiscUsage
      */
-    public function createView(Requests\createViewRequest $request)
+    public function getDiscUsage(Requests\getDiscUsageRequest $request)
     {
-        list($response) = $this->createViewWithHttpInfo($request);
+        list($response) = $this->getDiscUsageWithHttpInfo($request);
         return $response;
     }
 
     /*
-     * Operation createViewWithHttpInfo
+     * Operation getDiscUsageWithHttpInfo
      *
-     * Create new view if it not exists
+     * Get disc usage
      *
-     * @param Requests\createViewRequest $request is a request object for operation
-     *
-     * @throws \GroupDocs\Viewer\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \GroupDocs\Viewer\Model\ViewResult, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function createViewWithHttpInfo(Requests\createViewRequest $request)
-    {
-        $returnType = '\GroupDocs\Viewer\Model\ViewResult';
-        $request = $this->createViewRequest($request);
-
-        try {
-            $options = $this->_createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                $responseBody = $e->getResponse()->getBody();
-                $content = $responseBody->getContents();
-                $error = json_decode($content);
-
-                $errorCode = $e->getCode();
-                $errorMessage = $error->Error != null && $error->Error->Message != null
-                    ? $error->Error->Message
-                    : $e->getMessage();
-                
-                throw new ApiException($errorMessage, $errorCode);
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {          
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
-            }
-
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-            
-            if ($this->config->getDebug()) {
-                $this->_writeResponseLog($statusCode, $response->getHeaders(), ObjectSerializer::deserialize($content, $returnType, []));
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-            case 201:
-                    $data = ObjectSerializer::deserialize($e->getResponseBody(), '\GroupDocs\Viewer\Model\ViewResult', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                break;
-            }
-            throw $e;
-        }
-    }
-
-    /*
-     * Operation createViewAsync
-     *
-     * Create new view if it not exists
-     *
-     * @param Requests\createViewRequest $request is a request object for operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function createViewAsync(Requests\createViewRequest $request) 
-    {
-        return $this->createViewAsyncWithHttpInfo($request)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /*
-     * Operation createViewAsyncWithHttpInfo
-     *
-     * Create new view if it not exists
-     *
-     * @param Requests\createViewRequest $request is a request object for operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function createViewAsyncWithHttpInfo(Requests\createViewRequest $request) 
-    {
-        $returnType = '\GroupDocs\Viewer\Model\ViewResult';
-        $request = $this->createViewRequest($request);
-
-        return $this->client
-            ->sendAsync($request, $this->_createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    $responseBody = $response->getBody();
-                    if ($returnType === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = $responseBody->getContents();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-                    
-                    if ($this->config->getDebug()) {
-                        $this->_writeResponseLog($response->getStatusCode(), $response->getHeaders(), ObjectSerializer::deserialize($content, $returnType, []));
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {        
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();        
-          
-                    throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
-                    );
-                }
-            );
-    }
-
-    /*
-     * Create request for operation 'createView'
-     *
-     * @param Requests\createViewRequest $request is a request object for operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    protected function createViewRequest(Requests\createViewRequest $request)
-    {
-        // verify the required parameter 'viewOptions' is set
-        if ($request->viewOptions === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $viewOptions when calling createView');
-        }
-
-        $resourcePath = '/viewer/view';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = "";
-        $multipart = false;
-    
-
-    
-    
-        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
-
-        // body params
-        $_tempBody = null;
-        if (isset($request->viewOptions)) {
-            if (is_string($request->viewOptions)) {
-                $_tempBody = "\"" . $request->viewOptions . "\"";   
-            } else {
-                $_tempBody = $request->viewOptions;
-            }
-        }
-
-        if ($multipart) {
-            $headers= $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                ['application/json']
-            );
-        }
-
-        // for model (json/xml)
-        if (isset($_tempBody)) {
-            // $_tempBody is the method argument, if present
-            $httpBody = $_tempBody;
-            // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $multipartContents[] = [
-                        'name' => $formParamName,
-                        'filename' => $formParamName,
-                        'contents' => $formParamValue
-                    ];
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
-
-            } else {
-                // for HTTP post (form)
-                $httpBody = $formParams["data"];
-            }
-        }
-    
-        $this->_requestToken();
-
-        if ($this->accessToken !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
-        }
-
-        $defaultHeaders = [];
-        
-        if ($this->config->getClientName()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
-        }
-
-        if ($this->config->getClientVersion()) {
-            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-    
-        $req = new Request(
-            'POST',
-            $resourcePath,
-            $headers,
-            $httpBody
-        );
-        if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
-        }
-        
-        return $req;
-    }
-
-    /*
-     * Operation deleteView
-     *
-     * Delete view
-     *
-     * @param Requests\deleteViewRequest $request is a request object for operation
+     * @param Requests\getDiscUsageRequest $request is a request object for operation
      *
      * @throws \GroupDocs\Viewer\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return void
+     * @return array of \GroupDocs\Viewer\Model\DiscUsage, HTTP status code, HTTP response headers (array of strings)
      */
-    public function deleteView(Requests\deleteViewRequest $request)
+    public function getDiscUsageWithHttpInfo(Requests\getDiscUsageRequest $request)
     {
-        $this->deleteViewWithHttpInfo($request);
-    }
-
-    /*
-     * Operation deleteViewWithHttpInfo
-     *
-     * Delete view
-     *
-     * @param Requests\deleteViewRequest $request is a request object for operation
-     *
-     * @throws \GroupDocs\Viewer\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function deleteViewWithHttpInfo(Requests\deleteViewRequest $request)
-    {
-        $returnType = '';
-        $request = $this->deleteViewRequest($request);
-
-        try {
-            $options = $this->_createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                $responseBody = $e->getResponse()->getBody();
-                $content = $responseBody->getContents();
-                $error = json_decode($content);
-
-                $errorCode = $e->getCode();
-                $errorMessage = $error->Error != null && $error->Error->Message != null
-                    ? $error->Error->Message
-                    : $e->getMessage();
-                
-                throw new ApiException($errorMessage, $errorCode);
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {          
-                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
-            }
-
-            return [null, $statusCode, $response->getHeaders()];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-            }
-            throw $e;
-        }
-    }
-
-    /*
-     * Operation deleteViewAsync
-     *
-     * Delete view
-     *
-     * @param Requests\deleteViewRequest $request is a request object for operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function deleteViewAsync(Requests\deleteViewRequest $request) 
-    {
-        return $this->deleteViewAsyncWithHttpInfo($request)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /*
-     * Operation deleteViewAsyncWithHttpInfo
-     *
-     * Delete view
-     *
-     * @param Requests\deleteViewRequest $request is a request object for operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function deleteViewAsyncWithHttpInfo(Requests\deleteViewRequest $request) 
-    {
-        $returnType = '';
-        $request = $this->deleteViewRequest($request);
-
-        return $this->client
-            ->sendAsync($request, $this->_createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
-                },
-                function ($exception) {        
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();        
-          
-                    throw new ApiException(
-                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
-                    );
-                }
-            );
-    }
-
-    /*
-     * Create request for operation 'deleteView'
-     *
-     * @param Requests\deleteViewRequest $request is a request object for operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    protected function deleteViewRequest(Requests\deleteViewRequest $request)
-    {
-        // verify the required parameter 'deleteViewOptions' is set
-        if ($request->deleteViewOptions === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $deleteViewOptions when calling deleteView');
-        }
-
-        $resourcePath = '/viewer/view';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = "";
-        $multipart = false;
-    
-
-    
-    
-        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
-
-        // body params
-        $_tempBody = null;
-        if (isset($request->deleteViewOptions)) {
-            if (is_string($request->deleteViewOptions)) {
-                $_tempBody = "\"" . $request->deleteViewOptions . "\"";   
-            } else {
-                $_tempBody = $request->deleteViewOptions;
-            }
-        }
-
-        if ($multipart) {
-            $headers= $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                ['application/json']
-            );
-        }
-
-        // for model (json/xml)
-        if (isset($_tempBody)) {
-            // $_tempBody is the method argument, if present
-            $httpBody = $_tempBody;
-            // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $multipartContents[] = [
-                        'name' => $formParamName,
-                        'filename' => $formParamName,
-                        'contents' => $formParamValue
-                    ];
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
-
-            } else {
-                // for HTTP post (form)
-                $httpBody = $formParams["data"];
-            }
-        }
-    
-        $this->_requestToken();
-
-        if ($this->accessToken !== null) {
-            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
-        }
-
-        $defaultHeaders = [];
-        
-        if ($this->config->getClientName()) {
-            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
-        }
-
-        if ($this->config->getClientVersion()) {
-            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-    
-        $req = new Request(
-            'DELETE',
-            $resourcePath,
-            $headers,
-            $httpBody
-        );
-        if ($this->config->getDebug()) {
-            $this->_writeRequestLog('DELETE', $resourcePath, $headers, $httpBody);
-        }
-        
-        return $req;
-    }
-
-    /*
-     * Operation getInfo
-     *
-     * Get information about view
-     *
-     * @param Requests\getInfoRequest $request is a request object for operation
-     *
-     * @throws \GroupDocs\Viewer\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \GroupDocs\Viewer\Model\InfoResult
-     */
-    public function getInfo(Requests\getInfoRequest $request)
-    {
-        list($response) = $this->getInfoWithHttpInfo($request);
-        return $response;
-    }
-
-    /*
-     * Operation getInfoWithHttpInfo
-     *
-     * Get information about view
-     *
-     * @param Requests\getInfoRequest $request is a request object for operation
-     *
-     * @throws \GroupDocs\Viewer\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \GroupDocs\Viewer\Model\InfoResult, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function getInfoWithHttpInfo(Requests\getInfoRequest $request)
-    {
-        $returnType = '\GroupDocs\Viewer\Model\InfoResult';
-        $request = $this->getInfoRequest($request);
+        $returnType = '\GroupDocs\Viewer\Model\DiscUsage';
+        $request = $this->getDiscUsageRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
@@ -665,7 +166,7 @@ class ViewerApi
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
-                    $data = ObjectSerializer::deserialize($e->getResponseBody(), '\GroupDocs\Viewer\Model\InfoResult', $e->getResponseHeaders());
+                    $data = ObjectSerializer::deserialize($e->getResponseBody(), '\GroupDocs\Viewer\Model\DiscUsage', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                 break;
             }
@@ -674,18 +175,18 @@ class ViewerApi
     }
 
     /*
-     * Operation getInfoAsync
+     * Operation getDiscUsageAsync
      *
-     * Get information about view
+     * Get disc usage
      *
-     * @param Requests\getInfoRequest $request is a request object for operation
+     * @param Requests\getDiscUsageRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getInfoAsync(Requests\getInfoRequest $request) 
+    public function getDiscUsageAsync(Requests\getDiscUsageRequest $request) 
     {
-        return $this->getInfoAsyncWithHttpInfo($request)
+        return $this->getDiscUsageAsyncWithHttpInfo($request)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -694,19 +195,19 @@ class ViewerApi
     }
 
     /*
-     * Operation getInfoAsyncWithHttpInfo
+     * Operation getDiscUsageAsyncWithHttpInfo
      *
-     * Get information about view
+     * Get disc usage
      *
-     * @param Requests\getInfoRequest $request is a request object for operation
+     * @param Requests\getDiscUsageRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getInfoAsyncWithHttpInfo(Requests\getInfoRequest $request) 
+    public function getDiscUsageAsyncWithHttpInfo(Requests\getDiscUsageRequest $request) 
     {
-        $returnType = '\GroupDocs\Viewer\Model\InfoResult';
-        $request = $this->getInfoRequest($request);
+        $returnType = '\GroupDocs\Viewer\Model\DiscUsage';
+        $request = $this->getDiscUsageRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -744,21 +245,17 @@ class ViewerApi
     }
 
     /*
-     * Create request for operation 'getInfo'
+     * Create request for operation 'getDiscUsage'
      *
-     * @param Requests\getInfoRequest $request is a request object for operation
+     * @param Requests\getDiscUsageRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function getInfoRequest(Requests\getInfoRequest $request)
+    protected function getDiscUsageRequest(Requests\getDiscUsageRequest $request)
     {
-        // verify the required parameter 'viewOptions' is set
-        if ($request->viewOptions === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $viewOptions when calling getInfo');
-        }
 
-        $resourcePath = '/viewer/info';
+        $resourcePath = '/viewer/storage/disc';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -766,19 +263,22 @@ class ViewerApi
         $multipart = false;
     
 
+        // query params
+        if ($request->storageName !== null) {
+            $localName = lcfirst('storageName');
+            $localValue = is_bool($request->storageName) ? ($request->storageName ? 'true' : 'false') : $request->storageName;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
     
     
         $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
 
         // body params
         $_tempBody = null;
-        if (isset($request->viewOptions)) {
-            if (is_string($request->viewOptions)) {
-                $_tempBody = "\"" . $request->viewOptions . "\"";   
-            } else {
-                $_tempBody = $request->viewOptions;
-            }
-        }
 
         if ($multipart) {
             $headers= $this->headerSelector->selectHeadersForMultipart(
@@ -844,46 +344,50 @@ class ViewerApi
         );
     
         $req = new Request(
-            'POST',
+            'GET',
             $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
     }
 
     /*
-     * Operation getSupportedFileFormats
+     * Operation getFileVersions
      *
-     * Get supported file formats
+     * Get file versions
+     *
+     * @param Requests\getFileVersionsRequest $request is a request object for operation
      *
      * @throws \GroupDocs\Viewer\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \GroupDocs\Viewer\Model\FormatsResult
+     * @return \GroupDocs\Viewer\Model\FileVersions
      */
-    public function getSupportedFileFormats()
+    public function getFileVersions(Requests\getFileVersionsRequest $request)
     {
-        list($response) = $this->getSupportedFileFormatsWithHttpInfo();
+        list($response) = $this->getFileVersionsWithHttpInfo($request);
         return $response;
     }
 
     /*
-     * Operation getSupportedFileFormatsWithHttpInfo
+     * Operation getFileVersionsWithHttpInfo
      *
-     * Get supported file formats
+     * Get file versions
+     *
+     * @param Requests\getFileVersionsRequest $request is a request object for operation
      *
      * @throws \GroupDocs\Viewer\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \GroupDocs\Viewer\Model\FormatsResult, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \GroupDocs\Viewer\Model\FileVersions, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getSupportedFileFormatsWithHttpInfo()
+    public function getFileVersionsWithHttpInfo(Requests\getFileVersionsRequest $request)
     {
-        $returnType = '\GroupDocs\Viewer\Model\FormatsResult';
-        $request = $this->getSupportedFileFormatsRequest();
+        $returnType = '\GroupDocs\Viewer\Model\FileVersions';
+        $request = $this->getFileVersionsRequest($request);
 
         try {
             $options = $this->_createHttpClientOption();
@@ -931,7 +435,7 @@ class ViewerApi
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             case 200:
-                    $data = ObjectSerializer::deserialize($e->getResponseBody(), '\GroupDocs\Viewer\Model\FormatsResult', $e->getResponseHeaders());
+                    $data = ObjectSerializer::deserialize($e->getResponseBody(), '\GroupDocs\Viewer\Model\FileVersions', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                 break;
             }
@@ -940,16 +444,18 @@ class ViewerApi
     }
 
     /*
-     * Operation getSupportedFileFormatsAsync
+     * Operation getFileVersionsAsync
      *
-     * Get supported file formats
+     * Get file versions
+     *
+     * @param Requests\getFileVersionsRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getSupportedFileFormatsAsync() 
+    public function getFileVersionsAsync(Requests\getFileVersionsRequest $request) 
     {
-        return $this->getSupportedFileFormatsAsyncWithHttpInfo()
+        return $this->getFileVersionsAsyncWithHttpInfo($request)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -958,19 +464,19 @@ class ViewerApi
     }
 
     /*
-     * Operation getSupportedFileFormatsAsyncWithHttpInfo
+     * Operation getFileVersionsAsyncWithHttpInfo
      *
-     * Get supported file formats
+     * Get file versions
      *
-     * @param Requests\getSupportedFileFormatsRequest $request is a request object for operation
+     * @param Requests\getFileVersionsRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getSupportedFileFormatsAsyncWithHttpInfo() 
+    public function getFileVersionsAsyncWithHttpInfo(Requests\getFileVersionsRequest $request) 
     {
-        $returnType = '\GroupDocs\Viewer\Model\FormatsResult';
-        $request = $this->getSupportedFileFormatsRequest();
+        $returnType = '\GroupDocs\Viewer\Model\FileVersions';
+        $request = $this->getFileVersionsRequest($request);
 
         return $this->client
             ->sendAsync($request, $this->_createHttpClientOption())
@@ -1008,23 +514,598 @@ class ViewerApi
     }
 
     /*
-     * Create request for operation 'getSupportedFileFormats'
+     * Create request for operation 'getFileVersions'
      *
-     * @param Requests\getSupportedFileFormatsRequest $request is a request object for operation
+     * @param Requests\getFileVersionsRequest $request is a request object for operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function getSupportedFileFormatsRequest()
+    protected function getFileVersionsRequest(Requests\getFileVersionsRequest $request)
     {
+        // verify the required parameter 'path' is set
+        if ($request->path === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $path when calling getFileVersions');
+        }
 
-        $resourcePath = '/viewer/formats';
+        $resourcePath = '/viewer/storage/version/{path}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = "";
         $multipart = false;
     
+        // path params
+        if ($request->path !== null) {
+            $localName = lcfirst('path');
+            $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($request->path), $resourcePath);
+        }
+
+        // query params
+        if ($request->storageName !== null) {
+            $localName = lcfirst('storageName');
+            $localValue = is_bool($request->storageName) ? ($request->storageName ? 'true' : 'false') : $request->storageName;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+    
+    
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers= $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'filename' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = $formParams["data"];
+            }
+        }
+    
+        $this->_requestToken();
+
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
+        }
+
+        $defaultHeaders = [];
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
+        }
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+    
+        $req = new Request(
+            'GET',
+            $resourcePath,
+            $headers,
+            $httpBody
+        );
+        if ($this->config->getDebug()) {
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
+        }
+        
+        return $req;
+    }
+
+    /*
+     * Operation objectExists
+     *
+     * Check if file or folder exists
+     *
+     * @param Requests\objectExistsRequest $request is a request object for operation
+     *
+     * @throws \GroupDocs\Viewer\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \GroupDocs\Viewer\Model\ObjectExist
+     */
+    public function objectExists(Requests\objectExistsRequest $request)
+    {
+        list($response) = $this->objectExistsWithHttpInfo($request);
+        return $response;
+    }
+
+    /*
+     * Operation objectExistsWithHttpInfo
+     *
+     * Check if file or folder exists
+     *
+     * @param Requests\objectExistsRequest $request is a request object for operation
+     *
+     * @throws \GroupDocs\Viewer\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \GroupDocs\Viewer\Model\ObjectExist, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function objectExistsWithHttpInfo(Requests\objectExistsRequest $request)
+    {
+        $returnType = '\GroupDocs\Viewer\Model\ObjectExist';
+        $request = $this->objectExistsRequest($request);
+
+        try {
+            $options = $this->_createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->Error != null && $error->Error->Message != null
+                    ? $error->Error->Message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {          
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+            
+            if ($this->config->getDebug()) {
+                $this->_writeResponseLog($statusCode, $response->getHeaders(), ObjectSerializer::deserialize($content, $returnType, []));
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            case 200:
+                    $data = ObjectSerializer::deserialize($e->getResponseBody(), '\GroupDocs\Viewer\Model\ObjectExist', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                break;
+            }
+            throw $e;
+        }
+    }
+
+    /*
+     * Operation objectExistsAsync
+     *
+     * Check if file or folder exists
+     *
+     * @param Requests\objectExistsRequest $request is a request object for operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function objectExistsAsync(Requests\objectExistsRequest $request) 
+    {
+        return $this->objectExistsAsyncWithHttpInfo($request)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /*
+     * Operation objectExistsAsyncWithHttpInfo
+     *
+     * Check if file or folder exists
+     *
+     * @param Requests\objectExistsRequest $request is a request object for operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function objectExistsAsyncWithHttpInfo(Requests\objectExistsRequest $request) 
+    {
+        $returnType = '\GroupDocs\Viewer\Model\ObjectExist';
+        $request = $this->objectExistsRequest($request);
+
+        return $this->client
+            ->sendAsync($request, $this->_createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+                    
+                    if ($this->config->getDebug()) {
+                        $this->_writeResponseLog($response->getStatusCode(), $response->getHeaders(), ObjectSerializer::deserialize($content, $returnType, []));
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {        
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();        
+          
+                    throw new ApiException(
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
+                    );
+                }
+            );
+    }
+
+    /*
+     * Create request for operation 'objectExists'
+     *
+     * @param Requests\objectExistsRequest $request is a request object for operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function objectExistsRequest(Requests\objectExistsRequest $request)
+    {
+        // verify the required parameter 'path' is set
+        if ($request->path === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $path when calling objectExists');
+        }
+
+        $resourcePath = '/viewer/storage/exist/{path}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = "";
+        $multipart = false;
+    
+        // path params
+        if ($request->path !== null) {
+            $localName = lcfirst('path');
+            $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($request->path), $resourcePath);
+        }
+
+        // query params
+        if ($request->storageName !== null) {
+            $localName = lcfirst('storageName');
+            $localValue = is_bool($request->storageName) ? ($request->storageName ? 'true' : 'false') : $request->storageName;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+        // query params
+        if ($request->versionId !== null) {
+            $localName = lcfirst('versionId');
+            $localValue = is_bool($request->versionId) ? ($request->versionId ? 'true' : 'false') : $request->versionId;
+            if (strpos($resourcePath, '{' . $localName . '}') !== false) {
+                $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($localValue), $resourcePath);
+            } else {
+                $queryParams[$localName] = ObjectSerializer::toQueryValue($localValue);
+            }
+        }
+    
+    
+        $resourcePath = $this->_buildUrl($resourcePath, $queryParams);
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers= $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'filename' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = $formParams["data"];
+            }
+        }
+    
+        $this->_requestToken();
+
+        if ($this->accessToken !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
+        }
+
+        $defaultHeaders = [];
+        
+        if ($this->config->getClientName()) {
+            $defaultHeaders['x-groupdocs-client'] = $this->config->getClientName();
+        }
+
+        if ($this->config->getClientVersion()) {
+            $defaultHeaders['x-groupdocs-client-version'] = $this->config->getClientVersion();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+    
+        $req = new Request(
+            'GET',
+            $resourcePath,
+            $headers,
+            $httpBody
+        );
+        if ($this->config->getDebug()) {
+            $this->_writeRequestLog('GET', $resourcePath, $headers, $httpBody);
+        }
+        
+        return $req;
+    }
+
+    /*
+     * Operation storageExists
+     *
+     * Check if storage exists
+     *
+     * @param Requests\storageExistsRequest $request is a request object for operation
+     *
+     * @throws \GroupDocs\Viewer\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \GroupDocs\Viewer\Model\StorageExist
+     */
+    public function storageExists(Requests\storageExistsRequest $request)
+    {
+        list($response) = $this->storageExistsWithHttpInfo($request);
+        return $response;
+    }
+
+    /*
+     * Operation storageExistsWithHttpInfo
+     *
+     * Check if storage exists
+     *
+     * @param Requests\storageExistsRequest $request is a request object for operation
+     *
+     * @throws \GroupDocs\Viewer\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \GroupDocs\Viewer\Model\StorageExist, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function storageExistsWithHttpInfo(Requests\storageExistsRequest $request)
+    {
+        $returnType = '\GroupDocs\Viewer\Model\StorageExist';
+        $request = $this->storageExistsRequest($request);
+
+        try {
+            $options = $this->_createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                $responseBody = $e->getResponse()->getBody();
+                $content = $responseBody->getContents();
+                $error = json_decode($content);
+
+                $errorCode = $e->getCode();
+                $errorMessage = $error->Error != null && $error->Error->Message != null
+                    ? $error->Error->Message
+                    : $e->getMessage();
+                
+                throw new ApiException($errorMessage, $errorCode);
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {          
+                throw new ApiException(sprintf('[%d] Error connecting to the API (%s)', $statusCode, $request->getUri()), $statusCode);
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+            
+            if ($this->config->getDebug()) {
+                $this->_writeResponseLog($statusCode, $response->getHeaders(), ObjectSerializer::deserialize($content, $returnType, []));
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            case 200:
+                    $data = ObjectSerializer::deserialize($e->getResponseBody(), '\GroupDocs\Viewer\Model\StorageExist', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                break;
+            }
+            throw $e;
+        }
+    }
+
+    /*
+     * Operation storageExistsAsync
+     *
+     * Check if storage exists
+     *
+     * @param Requests\storageExistsRequest $request is a request object for operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function storageExistsAsync(Requests\storageExistsRequest $request) 
+    {
+        return $this->storageExistsAsyncWithHttpInfo($request)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /*
+     * Operation storageExistsAsyncWithHttpInfo
+     *
+     * Check if storage exists
+     *
+     * @param Requests\storageExistsRequest $request is a request object for operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function storageExistsAsyncWithHttpInfo(Requests\storageExistsRequest $request) 
+    {
+        $returnType = '\GroupDocs\Viewer\Model\StorageExist';
+        $request = $this->storageExistsRequest($request);
+
+        return $this->client
+            ->sendAsync($request, $this->_createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+                    
+                    if ($this->config->getDebug()) {
+                        $this->_writeResponseLog($response->getStatusCode(), $response->getHeaders(), ObjectSerializer::deserialize($content, $returnType, []));
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {        
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();        
+          
+                    throw new ApiException(
+                        sprintf('[%d] Error connecting to the API (%s)', $statusCode, $exception->getRequest()->getUri()), $statusCode
+                    );
+                }
+            );
+    }
+
+    /*
+     * Create request for operation 'storageExists'
+     *
+     * @param Requests\storageExistsRequest $request is a request object for operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function storageExistsRequest(Requests\storageExistsRequest $request)
+    {
+        // verify the required parameter 'storageName' is set
+        if ($request->storageName === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $storageName when calling storageExists');
+        }
+
+        $resourcePath = '/viewer/storage/{storageName}/exist';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = "";
+        $multipart = false;
+    
+        // path params
+        if ($request->storageName !== null) {
+            $localName = lcfirst('storageName');
+            $resourcePath = str_replace('{' . $localName . '}', ObjectSerializer::toPathValue($request->storageName), $resourcePath);
+        }
 
     
     
@@ -1210,7 +1291,7 @@ class ViewerApi
 }
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="createViewRequest.php">
+ * <copyright company="Aspose Pty Ltd" file="getDiscUsageRequest.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -1238,28 +1319,28 @@ class ViewerApi
 namespace GroupDocs\Viewer\Model\Requests;
 
 /*
- * Request model for createView operation.
+ * Request model for getDiscUsage operation.
  */
-class createViewRequest
+class getDiscUsageRequest
 {
     /*
-     * Initializes a new instance of the createViewRequest class.
+     * Initializes a new instance of the getDiscUsageRequest class.
      *  
-     * @param \GroupDocs\Viewer\Model\ViewOptions $viewOptions View options
+     * @param string $storageName Storage name
      */
-    public function __construct($viewOptions)             
+    public function __construct($storageName = null)             
     {
-        $this->viewOptions = $viewOptions;
+        $this->storageName = $storageName;
     }
 
     /*
-     * View options
+     * Storage name
      */
-    public $viewOptions;
+    public $storageName;
 }
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="deleteViewRequest.php">
+ * <copyright company="Aspose Pty Ltd" file="getFileVersionsRequest.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -1287,28 +1368,35 @@ class createViewRequest
 namespace GroupDocs\Viewer\Model\Requests;
 
 /*
- * Request model for deleteView operation.
+ * Request model for getFileVersions operation.
  */
-class deleteViewRequest
+class getFileVersionsRequest
 {
     /*
-     * Initializes a new instance of the deleteViewRequest class.
+     * Initializes a new instance of the getFileVersionsRequest class.
      *  
-     * @param \GroupDocs\Viewer\Model\DeleteViewOptions $deleteViewOptions Delete options
+     * @param string $path File path e.g. '/file.ext'
+     * @param string $storageName Storage name
      */
-    public function __construct($deleteViewOptions)             
+    public function __construct($path, $storageName = null)             
     {
-        $this->deleteViewOptions = $deleteViewOptions;
+        $this->path = $path;
+        $this->storageName = $storageName;
     }
 
     /*
-     * Delete options
+     * File path e.g. '/file.ext'
      */
-    public $deleteViewOptions;
+    public $path;
+	
+    /*
+     * Storage name
+     */
+    public $storageName;
 }
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="getInfoRequest.php">
+ * <copyright company="Aspose Pty Ltd" file="objectExistsRequest.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -1336,22 +1424,85 @@ class deleteViewRequest
 namespace GroupDocs\Viewer\Model\Requests;
 
 /*
- * Request model for getInfo operation.
+ * Request model for objectExists operation.
  */
-class getInfoRequest
+class objectExistsRequest
 {
     /*
-     * Initializes a new instance of the getInfoRequest class.
+     * Initializes a new instance of the objectExistsRequest class.
      *  
-     * @param \GroupDocs\Viewer\Model\ViewOptions $viewOptions View options
+     * @param string $path File or folder path e.g. '/file.ext' or '/folder'
+     * @param string $storageName Storage name
+     * @param string $versionId File version ID
      */
-    public function __construct($viewOptions)             
+    public function __construct($path, $storageName = null, $versionId = null)             
     {
-        $this->viewOptions = $viewOptions;
+        $this->path = $path;
+        $this->storageName = $storageName;
+        $this->versionId = $versionId;
     }
 
     /*
-     * View options
+     * File or folder path e.g. '/file.ext' or '/folder'
      */
-    public $viewOptions;
+    public $path;
+	
+    /*
+     * Storage name
+     */
+    public $storageName;
+	
+    /*
+     * File version ID
+     */
+    public $versionId;
+}
+/*
+ * --------------------------------------------------------------------------------------------------------------------
+ * <copyright company="Aspose Pty Ltd" file="storageExistsRequest.php">
+ *   Copyright (c) 2003-2019 Aspose Pty Ltd
+ * </copyright>
+ * <summary>
+ *   Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ * 
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ * 
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ * </summary>
+ * --------------------------------------------------------------------------------------------------------------------
+ */
+
+namespace GroupDocs\Viewer\Model\Requests;
+
+/*
+ * Request model for storageExists operation.
+ */
+class storageExistsRequest
+{
+    /*
+     * Initializes a new instance of the storageExistsRequest class.
+     *  
+     * @param string $storageName Storage name
+     */
+    public function __construct($storageName)             
+    {
+        $this->storageName = $storageName;
+    }
+
+    /*
+     * Storage name
+     */
+    public $storageName;
 }

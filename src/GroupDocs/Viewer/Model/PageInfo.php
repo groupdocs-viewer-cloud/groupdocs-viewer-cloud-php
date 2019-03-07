@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="PageInfo.php">
- *   Copyright (c) 2003-2018 Aspose Pty Ltd
+ *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,7 +34,7 @@ use \GroupDocs\Viewer\ObjectSerializer;
 /*
  * PageInfo
  *
- * @description Page information.
+ * @description Page information
  */
 class PageInfo implements ArrayAccess
 {
@@ -54,12 +54,9 @@ class PageInfo implements ArrayAccess
      */
     protected static $swaggerTypes = [
         'number' => 'int',
-        'name' => 'string',
         'width' => 'int',
         'height' => 'int',
-        'angle' => 'int',
-        'visible' => 'bool',
-        'rows' => '\GroupDocs\Viewer\Model\RowInfo[]'
+        'rows' => '\GroupDocs\Viewer\Model\Row[]'
     ];
 
     /*
@@ -69,11 +66,8 @@ class PageInfo implements ArrayAccess
      */
     protected static $swaggerFormats = [
         'number' => 'int32',
-        'name' => null,
         'width' => 'int32',
         'height' => 'int32',
-        'angle' => 'int32',
-        'visible' => null,
         'rows' => null
     ];
 
@@ -104,13 +98,10 @@ class PageInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'number' => 'number',
-        'name' => 'name',
-        'width' => 'width',
-        'height' => 'height',
-        'angle' => 'angle',
-        'visible' => 'visible',
-        'rows' => 'rows'
+        'number' => 'Number',
+        'width' => 'Width',
+        'height' => 'Height',
+        'rows' => 'Rows'
     ];
 
     /*
@@ -120,11 +111,8 @@ class PageInfo implements ArrayAccess
      */
     protected static $setters = [
         'number' => 'setNumber',
-        'name' => 'setName',
         'width' => 'setWidth',
         'height' => 'setHeight',
-        'angle' => 'setAngle',
-        'visible' => 'setVisible',
         'rows' => 'setRows'
     ];
 
@@ -135,11 +123,8 @@ class PageInfo implements ArrayAccess
      */
     protected static $getters = [
         'number' => 'getNumber',
-        'name' => 'getName',
         'width' => 'getWidth',
         'height' => 'getHeight',
-        'angle' => 'getAngle',
-        'visible' => 'getVisible',
         'rows' => 'getRows'
     ];
 
@@ -204,11 +189,8 @@ class PageInfo implements ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['number'] = isset($data['number']) ? $data['number'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['width'] = isset($data['width']) ? $data['width'] : null;
         $this->container['height'] = isset($data['height']) ? $data['height'] : null;
-        $this->container['angle'] = isset($data['angle']) ? $data['angle'] : null;
-        $this->container['visible'] = isset($data['visible']) ? $data['visible'] : null;
         $this->container['rows'] = isset($data['rows']) ? $data['rows'] : null;
     }
 
@@ -221,6 +203,15 @@ class PageInfo implements ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['number'] === null) {
+            $invalidProperties[] = "'number' can't be null";
+        }
+        if ($this->container['width'] === null) {
+            $invalidProperties[] = "'width' can't be null";
+        }
+        if ($this->container['height'] === null) {
+            $invalidProperties[] = "'height' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -233,6 +224,15 @@ class PageInfo implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['number'] === null) {
+            return false;
+        }
+        if ($this->container['width'] === null) {
+            return false;
+        }
+        if ($this->container['height'] === null) {
+            return false;
+        }
         return true;
     }
 
@@ -250,37 +250,13 @@ class PageInfo implements ArrayAccess
     /*
      * Sets number
      *
-     * @param int $number Page number.
+     * @param int $number Page number
      *
      * @return $this
      */
     public function setNumber($number)
     {
         $this->container['number'] = $number;
-
-        return $this;
-    }
-
-    /*
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /*
-     * Sets name
-     *
-     * @param string $name Page name.
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
 
         return $this;
     }
@@ -298,7 +274,7 @@ class PageInfo implements ArrayAccess
     /*
      * Sets width
      *
-     * @param int $width Page width.
+     * @param int $width Image Page width
      *
      * @return $this
      */
@@ -322,7 +298,7 @@ class PageInfo implements ArrayAccess
     /*
      * Sets height
      *
-     * @param int $height Page height.
+     * @param int $height Image Page height
      *
      * @return $this
      */
@@ -334,57 +310,9 @@ class PageInfo implements ArrayAccess
     }
 
     /*
-     * Gets angle
-     *
-     * @return int
-     */
-    public function getAngle()
-    {
-        return $this->container['angle'];
-    }
-
-    /*
-     * Sets angle
-     *
-     * @param int $angle Page angle.
-     *
-     * @return $this
-     */
-    public function setAngle($angle)
-    {
-        $this->container['angle'] = $angle;
-
-        return $this;
-    }
-
-    /*
-     * Gets visible
-     *
-     * @return bool
-     */
-    public function getVisible()
-    {
-        return $this->container['visible'];
-    }
-
-    /*
-     * Sets visible
-     *
-     * @param bool $visible Page visibility.
-     *
-     * @return $this
-     */
-    public function setVisible($visible)
-    {
-        $this->container['visible'] = $visible;
-
-        return $this;
-    }
-
-    /*
      * Gets rows
      *
-     * @return \GroupDocs\Viewer\Model\RowInfo[]
+     * @return \GroupDocs\Viewer\Model\Row[]
      */
     public function getRows()
     {
@@ -394,7 +322,7 @@ class PageInfo implements ArrayAccess
     /*
      * Sets rows
      *
-     * @param \GroupDocs\Viewer\Model\RowInfo[] $rows Page rows.
+     * @param \GroupDocs\Viewer\Model\Row[] $rows Image Page rows
      *
      * @return $this
      */

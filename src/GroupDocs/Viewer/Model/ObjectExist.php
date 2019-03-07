@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="AttachmentInfo.php">
+ * <copyright company="Aspose Pty Ltd" file="ObjectExist.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * AttachmentInfo
+ * ObjectExist
  *
- * @description Attachment information
+ * @description Object exists
  */
-class AttachmentInfo implements ArrayAccess
+class ObjectExist implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class AttachmentInfo implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "AttachmentInfo";
+    protected static $swaggerModelName = "ObjectExist";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,7 +53,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'name' => 'string'
+        'exists' => 'bool',
+        'isFolder' => 'bool'
     ];
 
     /*
@@ -62,7 +63,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'name' => null
+        'exists' => null,
+        'isFolder' => null
     ];
 
     /*
@@ -92,7 +94,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name'
+        'exists' => 'Exists',
+        'isFolder' => 'IsFolder'
     ];
 
     /*
@@ -101,7 +104,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName'
+        'exists' => 'setExists',
+        'isFolder' => 'setIsFolder'
     ];
 
     /*
@@ -110,7 +114,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName'
+        'exists' => 'getExists',
+        'isFolder' => 'getIsFolder'
     ];
 
     /*
@@ -173,7 +178,8 @@ class AttachmentInfo implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['exists'] = isset($data['exists']) ? $data['exists'] : null;
+        $this->container['isFolder'] = isset($data['isFolder']) ? $data['isFolder'] : null;
     }
 
     /*
@@ -185,6 +191,12 @@ class AttachmentInfo implements ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['exists'] === null) {
+            $invalidProperties[] = "'exists' can't be null";
+        }
+        if ($this->container['isFolder'] === null) {
+            $invalidProperties[] = "'isFolder' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -197,30 +209,60 @@ class AttachmentInfo implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['exists'] === null) {
+            return false;
+        }
+        if ($this->container['isFolder'] === null) {
+            return false;
+        }
         return true;
     }
 
 
     /*
-     * Gets name
+     * Gets exists
      *
-     * @return string
+     * @return bool
      */
-    public function getName()
+    public function getExists()
     {
-        return $this->container['name'];
+        return $this->container['exists'];
     }
 
     /*
-     * Sets name
+     * Sets exists
      *
-     * @param string $name Attachment name
+     * @param bool $exists Indicates that the file or folder exists.
      *
      * @return $this
      */
-    public function setName($name)
+    public function setExists($exists)
     {
-        $this->container['name'] = $name;
+        $this->container['exists'] = $exists;
+
+        return $this;
+    }
+
+    /*
+     * Gets isFolder
+     *
+     * @return bool
+     */
+    public function getIsFolder()
+    {
+        return $this->container['isFolder'];
+    }
+
+    /*
+     * Sets isFolder
+     *
+     * @param bool $isFolder True if it is a folder, false if it is a file.
+     *
+     * @return $this
+     */
+    public function setIsFolder($isFolder)
+    {
+        $this->container['isFolder'] = $isFolder;
 
         return $this;
     }

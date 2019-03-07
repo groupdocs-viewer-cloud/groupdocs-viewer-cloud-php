@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="AttachmentInfo.php">
+ * <copyright company="Aspose Pty Ltd" file="FilesUploadResult.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * AttachmentInfo
+ * FilesUploadResult
  *
- * @description Attachment information
+ * @description File upload result
  */
-class AttachmentInfo implements ArrayAccess
+class FilesUploadResult implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class AttachmentInfo implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "AttachmentInfo";
+    protected static $swaggerModelName = "FilesUploadResult";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,7 +53,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'name' => 'string'
+        'uploaded' => 'string[]',
+        'errors' => '\GroupDocs\Viewer\Model\Error[]'
     ];
 
     /*
@@ -62,7 +63,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'name' => null
+        'uploaded' => null,
+        'errors' => null
     ];
 
     /*
@@ -92,7 +94,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name'
+        'uploaded' => 'Uploaded',
+        'errors' => 'Errors'
     ];
 
     /*
@@ -101,7 +104,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName'
+        'uploaded' => 'setUploaded',
+        'errors' => 'setErrors'
     ];
 
     /*
@@ -110,7 +114,8 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName'
+        'uploaded' => 'getUploaded',
+        'errors' => 'getErrors'
     ];
 
     /*
@@ -173,7 +178,8 @@ class AttachmentInfo implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['uploaded'] = isset($data['uploaded']) ? $data['uploaded'] : null;
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
     }
 
     /*
@@ -202,25 +208,49 @@ class AttachmentInfo implements ArrayAccess
 
 
     /*
-     * Gets name
+     * Gets uploaded
      *
-     * @return string
+     * @return string[]
      */
-    public function getName()
+    public function getUploaded()
     {
-        return $this->container['name'];
+        return $this->container['uploaded'];
     }
 
     /*
-     * Sets name
+     * Sets uploaded
      *
-     * @param string $name Attachment name
+     * @param string[] $uploaded List of uploaded file names
      *
      * @return $this
      */
-    public function setName($name)
+    public function setUploaded($uploaded)
     {
-        $this->container['name'] = $name;
+        $this->container['uploaded'] = $uploaded;
+
+        return $this;
+    }
+
+    /*
+     * Gets errors
+     *
+     * @return \GroupDocs\Viewer\Model\Error[]
+     */
+    public function getErrors()
+    {
+        return $this->container['errors'];
+    }
+
+    /*
+     * Sets errors
+     *
+     * @param \GroupDocs\Viewer\Model\Error[] $errors List of errors.
+     *
+     * @return $this
+     */
+    public function setErrors($errors)
+    {
+        $this->container['errors'] = $errors;
 
         return $this;
     }

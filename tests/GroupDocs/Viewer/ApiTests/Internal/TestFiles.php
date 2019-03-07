@@ -3,7 +3,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="TestFiles.php">
- *   Copyright (c) 2003-2018 Aspose Pty Ltd
+ *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -36,47 +36,19 @@ require_once "TestFile.php";
  */
 class TestFiles
 {
-    public static function getFileWithAttachmentMsg()
+    public static function getFileOnePageDocx()
     {
         $file = new TestFile();
-        $file->fileName = "with-attachment.msg";
-        $file->folder = "email\\msg";
-        $file->password = "";
-        $file->url = "";
-        $file->attachmentName = "password-protected.docx";
-        $file->attachmentPassword = "password";
-
+        $file->fileName = "one-page.docx";
+        $file->folder = "words\\docx\\";
         return $file;
     }
 
-    public static function getFileWithAttachmentPdf()
+    public static function getFileNotExist()
     {
         $file = new TestFile();
-        $file->fileName = "with-attachment.pdf";
-        $file->folder = "pdf\\pdf";
-        $file->password = "";
-        $file->url = "";
-        $file->attachmentName = "password-protected.docx";
-        $file->attachmentPassword = "password";
-
-        return $file;
-    }
-
-    public static function getFileFourPagesDocx()
-    {
-        $file = new TestFile();
-        $file->fileName = "four-pages.docx";
-        $file->folder = "words\\docx";
-
-        return $file;
-    }
-
-    public static function getFileTwoHiddenPagesVsd()
-    {
-        $file = new TestFile();
-        $file->fileName = "two-hidden-pages.vsd";
-        $file->folder = "diagram\\vsd";
-
+        $file->fileName = "NotExist.docx";
+        $file->folder = "some-folder/";
         return $file;
     }
 
@@ -84,45 +56,37 @@ class TestFiles
     {
         $file = new TestFile();
         $file->fileName = "password-protected.docx";
-        $file->folder = "words\\docx";
+        $file->folder = "words\\docx\\";
         $file->password = "password";
-
         return $file;
     }
 
-    public static function getFileCorruptedPdf()
+    public static function getFileTwoHiddenPagesVsd()
     {
         $file = new TestFile();
-        $file->fileName = "corrupted.pdf";
-        $file->folder = "pdf\\pdf";
-
+        $file->fileName = "two-hidden-pages.vsd";
+        $file->folder = "diagram\\vsd\\";
         return $file;
     }
-
-    public static function getFileFromUrlOnePageDocx()
+    public static function getFileWithHiddenRowsAndColumns()
     {
         $file = new TestFile();
-        $file->fileName = "one-page.docx";
-        $file->url = "https://www.dropbox.com/s/j260ve4f90h1p41/one-page.docx?dl=1";
-
+        $file->fileName = "with-hidden-rows-and-columns.xlsx";
+        $file->folder = "cells\\xlsx\\";
         return $file;
     }
-
-    public static function getFileFromUrlWithNotesPptx()
+    public static function getFileThreeLayoutsDwf()
     {
         $file = new TestFile();
-        $file->fileName = "with-notes.pptx";
-        $file->url = "https://www.dropbox.com/s/r2eioe2atushqcf/with-notes.pptx?dl=1";
-
+        $file->fileName = "three-layouts.dwf";
+        $file->folder = "cad\\dwf\\";
         return $file;
     }
-
-    public static function getFileOnePageDocx()
+    public static function getFileProjectMpp()
     {
         $file = new TestFile();
-        $file->fileName = "one-page.docx";
-        $file->folder = "words\\docx";
-
+        $file->fileName = "sample.mpp";
+        $file->folder = "project\\mpp\\";
         return $file;
     }
 
@@ -130,78 +94,38 @@ class TestFiles
     {
         $file = new TestFile();
         $file->fileName = "uses-custom-font.pptx";
-        $file->folder = "slides\\pptx";
-
+        $file->folder = "slides\\pptx\\";
         return $file;
     }
 
-    public static function getFileThreeSheetsXlsx()
+    public static function getFileFontTtf()
     {
         $file = new TestFile();
-        $file->fileName = "three-sheets.xlsx";
-        $file->folder = "cells\\xlsx";
-
+        $file->fileName = "foo.ttf";
+        $file->folder = "font\\ttf\\";
         return $file;
     }
 
-    public static function getFileProjectMpp()
+    public static function getFileFourPagesDocx()
     {
         $file = new TestFile();
-        $file->fileName = "sample.mpp";
-        $file->folder = "project\\mpp";
-
+        $file->fileName = "four-pages.docx";
+        $file->folder = "words\\docx\\";
         return $file;
     }
-    
-    public static function getFileOutlookPst()
-    {
-        $file = new TestFile();
-        $file->fileName = "sample.pst";
-        $file->folder = "email\\outlook";
 
-        return $file;
-    }
-    
-    public static function getFileImageCgm()
-    {
-        $file = new TestFile();
-        $file->fileName = "nasa.cgm";
-        $file->folder = "image";
-
-        return $file;
-    }
-    
-    public static function getFilePrintPs()
-    {
-        $file = new TestFile();
-        $file->fileName = "sample.ps";
-        $file->folder = "print";
-
-        return $file;
-    }
-    
-    public static function getFilePrintPcl()
-    {
-        $file = new TestFile();
-        $file->fileName = "print.pcl";
-        $file->folder = "print";
-
-        return $file;
-    }    
-
-    public static function getSupported()
+    public static function getTestFilesList()
     {        
         return array(
-            self::getFileFourPagesDocx(),
-            self::getFileTwoHiddenPagesVsd(),
             self::getFileOnePageDocx(),
-            self::getFileUsesCustomFontPptx(),
-            self::getFileThreeSheetsXlsx(),
+            self::getFilePasswordProtectedDocx(),
+            self::getFileTwoHiddenPagesVsd(),
+            self::getFileWithHiddenRowsAndColumns(),
+            self::getFileThreeLayoutsDwf(),
             self::getFileProjectMpp(),
-            self::getFileOutlookPst(),
-            self::getFileImageCgm(),
-            self::getFilePrintPs(),
-            self::getFilePrintPcl()
+            self::getFileUsesCustomFontPptx(),
+            self::getFileFontTtf(),
+            self::getFileFourPagesDocx()
         );
     }      
 }

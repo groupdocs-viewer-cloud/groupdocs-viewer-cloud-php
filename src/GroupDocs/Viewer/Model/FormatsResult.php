@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="AttachmentInfo.php">
+ * <copyright company="Aspose Pty Ltd" file="FormatsResult.php">
  *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * AttachmentInfo
+ * FormatsResult
  *
- * @description Attachment information
+ * @description Describes object which contains list of supported file formats.
  */
-class AttachmentInfo implements ArrayAccess
+class FormatsResult implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class AttachmentInfo implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "AttachmentInfo";
+    protected static $swaggerModelName = "FormatsResult";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,7 +53,7 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'name' => 'string'
+        'formats' => '\GroupDocs\Viewer\Model\Format[]'
     ];
 
     /*
@@ -62,7 +62,7 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'name' => null
+        'formats' => null
     ];
 
     /*
@@ -92,7 +92,7 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name'
+        'formats' => 'Formats'
     ];
 
     /*
@@ -101,7 +101,7 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName'
+        'formats' => 'setFormats'
     ];
 
     /*
@@ -110,7 +110,7 @@ class AttachmentInfo implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName'
+        'formats' => 'getFormats'
     ];
 
     /*
@@ -173,7 +173,7 @@ class AttachmentInfo implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['formats'] = isset($data['formats']) ? $data['formats'] : null;
     }
 
     /*
@@ -202,25 +202,25 @@ class AttachmentInfo implements ArrayAccess
 
 
     /*
-     * Gets name
+     * Gets formats
      *
-     * @return string
+     * @return \GroupDocs\Viewer\Model\Format[]
      */
-    public function getName()
+    public function getFormats()
     {
-        return $this->container['name'];
+        return $this->container['formats'];
     }
 
     /*
-     * Sets name
+     * Sets formats
      *
-     * @param string $name Attachment name
+     * @param \GroupDocs\Viewer\Model\Format[] $formats Supported file formats.
      *
      * @return $this
      */
-    public function setName($name)
+    public function setFormats($formats)
     {
-        $this->container['name'] = $name;
+        $this->container['formats'] = $formats;
 
         return $this;
     }

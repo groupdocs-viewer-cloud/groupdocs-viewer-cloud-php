@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="FieldLabel.php">
- *   Copyright (c) 2003-2018 Aspose Pty Ltd
+ *   Copyright (c) 2003-2019 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -94,8 +94,8 @@ class FieldLabel implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'field' => 'field',
-        'label' => 'label'
+        'field' => 'Field',
+        'label' => 'Label'
     ];
 
     /*
