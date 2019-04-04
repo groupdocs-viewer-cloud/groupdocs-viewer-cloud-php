@@ -52,7 +52,8 @@ class HtmlOptions extends RenderOptions
      */
     protected static $swaggerTypes = [
         'externalResources' => 'bool',
-        'resourcePath' => 'string'
+        'resourcePath' => 'string',
+        'isResponsive' => 'bool'
     ];
 
     /*
@@ -62,7 +63,8 @@ class HtmlOptions extends RenderOptions
      */
     protected static $swaggerFormats = [
         'externalResources' => null,
-        'resourcePath' => null
+        'resourcePath' => null,
+        'isResponsive' => null
     ];
 
     /*
@@ -93,7 +95,8 @@ class HtmlOptions extends RenderOptions
      */
     protected static $attributeMap = [
         'externalResources' => 'ExternalResources',
-        'resourcePath' => 'ResourcePath'
+        'resourcePath' => 'ResourcePath',
+        'isResponsive' => 'IsResponsive'
     ];
 
     /*
@@ -103,7 +106,8 @@ class HtmlOptions extends RenderOptions
      */
     protected static $setters = [
         'externalResources' => 'setExternalResources',
-        'resourcePath' => 'setResourcePath'
+        'resourcePath' => 'setResourcePath',
+        'isResponsive' => 'setIsResponsive'
     ];
 
     /*
@@ -113,7 +117,8 @@ class HtmlOptions extends RenderOptions
      */
     protected static $getters = [
         'externalResources' => 'getExternalResources',
-        'resourcePath' => 'getResourcePath'
+        'resourcePath' => 'getResourcePath',
+        'isResponsive' => 'getIsResponsive'
     ];
 
     /*
@@ -174,6 +179,7 @@ class HtmlOptions extends RenderOptions
 
         $this->container['externalResources'] = isset($data['externalResources']) ? $data['externalResources'] : null;
         $this->container['resourcePath'] = isset($data['resourcePath']) ? $data['resourcePath'] : null;
+        $this->container['isResponsive'] = isset($data['isResponsive']) ? $data['isResponsive'] : null;
     }
 
     /*
@@ -187,6 +193,9 @@ class HtmlOptions extends RenderOptions
 
         if ($this->container['externalResources'] === null) {
             $invalidProperties[] = "'externalResources' can't be null";
+        }
+        if ($this->container['isResponsive'] === null) {
+            $invalidProperties[] = "'isResponsive' can't be null";
         }
         return $invalidProperties;
     }
@@ -204,6 +213,9 @@ class HtmlOptions extends RenderOptions
         }
 
         if ($this->container['externalResources'] === null) {
+            return false;
+        }
+        if ($this->container['isResponsive'] === null) {
             return false;
         }
         return true;
@@ -254,6 +266,30 @@ class HtmlOptions extends RenderOptions
     public function setResourcePath($resourcePath)
     {
         $this->container['resourcePath'] = $resourcePath;
+
+        return $this;
+    }
+
+    /*
+     * Gets isResponsive
+     *
+     * @return bool
+     */
+    public function getIsResponsive()
+    {
+        return $this->container['isResponsive'];
+    }
+
+    /*
+     * Sets isResponsive
+     *
+     * @param bool $isResponsive Indicates whether rendering will provide responsive web pages, that look well on different device types. Default value is false.
+     *
+     * @return $this
+     */
+    public function setIsResponsive($isResponsive)
+    {
+        $this->container['isResponsive'] = $isResponsive;
 
         return $this;
     }
