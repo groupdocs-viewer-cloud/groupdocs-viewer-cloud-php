@@ -55,6 +55,7 @@ class ViewOptions implements ArrayAccess
     protected static $swaggerTypes = [
         'fileInfo' => '\GroupDocs\Viewer\Model\FileInfo',
         'viewFormat' => 'string',
+        'outputPath' => 'string',
         'fontsPath' => 'string',
         'watermark' => '\GroupDocs\Viewer\Model\Watermark',
         'renderOptions' => '\GroupDocs\Viewer\Model\RenderOptions'
@@ -68,6 +69,7 @@ class ViewOptions implements ArrayAccess
     protected static $swaggerFormats = [
         'fileInfo' => null,
         'viewFormat' => null,
+        'outputPath' => null,
         'fontsPath' => null,
         'watermark' => null,
         'renderOptions' => null
@@ -102,6 +104,7 @@ class ViewOptions implements ArrayAccess
     protected static $attributeMap = [
         'fileInfo' => 'FileInfo',
         'viewFormat' => 'ViewFormat',
+        'outputPath' => 'OutputPath',
         'fontsPath' => 'FontsPath',
         'watermark' => 'Watermark',
         'renderOptions' => 'RenderOptions'
@@ -115,6 +118,7 @@ class ViewOptions implements ArrayAccess
     protected static $setters = [
         'fileInfo' => 'setFileInfo',
         'viewFormat' => 'setViewFormat',
+        'outputPath' => 'setOutputPath',
         'fontsPath' => 'setFontsPath',
         'watermark' => 'setWatermark',
         'renderOptions' => 'setRenderOptions'
@@ -128,6 +132,7 @@ class ViewOptions implements ArrayAccess
     protected static $getters = [
         'fileInfo' => 'getFileInfo',
         'viewFormat' => 'getViewFormat',
+        'outputPath' => 'getOutputPath',
         'fontsPath' => 'getFontsPath',
         'watermark' => 'getWatermark',
         'renderOptions' => 'getRenderOptions'
@@ -216,6 +221,7 @@ class ViewOptions implements ArrayAccess
     {
         $this->container['fileInfo'] = isset($data['fileInfo']) ? $data['fileInfo'] : null;
         $this->container['viewFormat'] = isset($data['viewFormat']) ? $data['viewFormat'] : null;
+        $this->container['outputPath'] = isset($data['outputPath']) ? $data['outputPath'] : null;
         $this->container['fontsPath'] = isset($data['fontsPath']) ? $data['fontsPath'] : null;
         $this->container['watermark'] = isset($data['watermark']) ? $data['watermark'] : null;
         $this->container['renderOptions'] = isset($data['renderOptions']) ? $data['renderOptions'] : null;
@@ -313,6 +319,30 @@ class ViewOptions implements ArrayAccess
         }
 			
         $this->container['viewFormat'] = $viewFormat;
+
+        return $this;
+    }
+
+    /*
+     * Gets outputPath
+     *
+     * @return string
+     */
+    public function getOutputPath()
+    {
+        return $this->container['outputPath'];
+    }
+
+    /*
+     * Sets outputPath
+     *
+     * @param string $outputPath The output path. Default value is 'viewer\\{input file path}_{file extension}\\'
+     *
+     * @return $this
+     */
+    public function setOutputPath($outputPath)
+    {
+        $this->container['outputPath'] = $outputPath;
 
         return $this;
     }

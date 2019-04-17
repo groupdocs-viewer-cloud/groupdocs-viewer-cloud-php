@@ -90,7 +90,7 @@ class ViewerApi
     /*
      * Operation createView
      *
-     * Create new view if it not exists
+     * Render document pages
      *
      * @param Requests\createViewRequest $request is a request object for operation
      *
@@ -107,7 +107,7 @@ class ViewerApi
     /*
      * Operation createViewWithHttpInfo
      *
-     * Create new view if it not exists
+     * Render document pages
      *
      * @param Requests\createViewRequest $request is a request object for operation
      *
@@ -177,7 +177,7 @@ class ViewerApi
     /*
      * Operation createViewAsync
      *
-     * Create new view if it not exists
+     * Render document pages
      *
      * @param Requests\createViewRequest $request is a request object for operation
      *
@@ -197,7 +197,7 @@ class ViewerApi
     /*
      * Operation createViewAsyncWithHttpInfo
      *
-     * Create new view if it not exists
+     * Render document pages
      *
      * @param Requests\createViewRequest $request is a request object for operation
      *
@@ -360,7 +360,7 @@ class ViewerApi
     /*
      * Operation deleteView
      *
-     * Delete view
+     * Delete rendered pages
      *
      * @param Requests\deleteViewRequest $request is a request object for operation
      *
@@ -376,7 +376,7 @@ class ViewerApi
     /*
      * Operation deleteViewWithHttpInfo
      *
-     * Delete view
+     * Delete rendered pages
      *
      * @param Requests\deleteViewRequest $request is a request object for operation
      *
@@ -424,7 +424,7 @@ class ViewerApi
     /*
      * Operation deleteViewAsync
      *
-     * Delete view
+     * Delete rendered pages
      *
      * @param Requests\deleteViewRequest $request is a request object for operation
      *
@@ -444,7 +444,7 @@ class ViewerApi
     /*
      * Operation deleteViewAsyncWithHttpInfo
      *
-     * Delete view
+     * Delete rendered pages
      *
      * @param Requests\deleteViewRequest $request is a request object for operation
      *
@@ -589,7 +589,7 @@ class ViewerApi
     /*
      * Operation getInfo
      *
-     * Get information about view
+     * Retrieve information about document pages
      *
      * @param Requests\getInfoRequest $request is a request object for operation
      *
@@ -606,7 +606,7 @@ class ViewerApi
     /*
      * Operation getInfoWithHttpInfo
      *
-     * Get information about view
+     * Retrieve information about document pages
      *
      * @param Requests\getInfoRequest $request is a request object for operation
      *
@@ -676,7 +676,7 @@ class ViewerApi
     /*
      * Operation getInfoAsync
      *
-     * Get information about view
+     * Retrieve information about document pages
      *
      * @param Requests\getInfoRequest $request is a request object for operation
      *
@@ -696,7 +696,7 @@ class ViewerApi
     /*
      * Operation getInfoAsyncWithHttpInfo
      *
-     * Get information about view
+     * Retrieve information about document pages
      *
      * @param Requests\getInfoRequest $request is a request object for operation
      *
@@ -859,7 +859,7 @@ class ViewerApi
     /*
      * Operation getSupportedFileFormats
      *
-     * Get supported file formats
+     * List supported file formats
      *
      * @throws \GroupDocs\Viewer\ApiException on non-2xx response
      * @throws \InvalidArgumentException
@@ -874,7 +874,7 @@ class ViewerApi
     /*
      * Operation getSupportedFileFormatsWithHttpInfo
      *
-     * Get supported file formats
+     * List supported file formats
      *
      * @throws \GroupDocs\Viewer\ApiException on non-2xx response
      * @throws \InvalidArgumentException
@@ -942,7 +942,7 @@ class ViewerApi
     /*
      * Operation getSupportedFileFormatsAsync
      *
-     * Get supported file formats
+     * List supported file formats
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -960,7 +960,7 @@ class ViewerApi
     /*
      * Operation getSupportedFileFormatsAsyncWithHttpInfo
      *
-     * Get supported file formats
+     * List supported file formats
      *
      * @param Requests\getSupportedFileFormatsRequest $request is a request object for operation
      *
