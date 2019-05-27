@@ -44,7 +44,7 @@ class ViewerGetInfoApiTest extends BaseApiTest
         $viewOptions = new ViewOptions();
         $request = new Requests\getInfoRequest($viewOptions);
        
-        $response = self::$viewerApi->getInfo($request);
+        $response = self::$infoApi->getInfo($request);
     }
 
     public function testGetInfoReturnsFileNotFound()
@@ -57,7 +57,7 @@ class ViewerGetInfoApiTest extends BaseApiTest
         $viewOptions->setFileInfo($testFile->ToFileInfo());
         $request = new Requests\getInfoRequest($viewOptions);
        
-        $response = self::$viewerApi->getInfo($request);
+        $response = self::$infoApi->getInfo($request);
     }
 
     public function testGetInfoWithMinimalViewOptions()
@@ -67,7 +67,7 @@ class ViewerGetInfoApiTest extends BaseApiTest
         $viewOptions->setFileInfo($testFile->ToFileInfo());
         $request = new Requests\getInfoRequest($viewOptions);
        
-        $response = self::$viewerApi->getInfo($request);
+        $response = self::$infoApi->getInfo($request);
         $this->assertFalse(empty($response));
         $this->assertEquals(4, count($response->getPages()));
         $this->assertEquals(0, count($response->getAttachments()));
@@ -80,7 +80,7 @@ class ViewerGetInfoApiTest extends BaseApiTest
         $viewOptions->setFileInfo($testFile->ToFileInfo());
         $request = new Requests\getInfoRequest($viewOptions);
        
-        $response = self::$viewerApi->getInfo($request);
+        $response = self::$infoApi->getInfo($request);
 
         $this->assertEquals(1, count($response->getPages()));
         $this->assertEquals(0, count($response->getAttachments()));
@@ -95,7 +95,7 @@ class ViewerGetInfoApiTest extends BaseApiTest
         $viewOptions->setViewFormat(ViewOptions::VIEW_FORMAT_HTML);
         $request = new Requests\getInfoRequest($viewOptions);
        
-        $response = self::$viewerApi->getInfo($request);
+        $response = self::$infoApi->getInfo($request);
 
         $this->assertEquals(1, count($response->getPages()));
         $this->assertEquals(0, count($response->getAttachments()));
@@ -112,7 +112,7 @@ class ViewerGetInfoApiTest extends BaseApiTest
         $viewOptions->setViewFormat(ViewOptions::VIEW_FORMAT_PNG);
         $request = new Requests\getInfoRequest($viewOptions);
        
-        $response = self::$viewerApi->getInfo($request);
+        $response = self::$infoApi->getInfo($request);
 
         $this->assertEquals(1, count($response->getPages()));
         $this->assertEquals(0, count($response->getAttachments()));
@@ -131,7 +131,7 @@ class ViewerGetInfoApiTest extends BaseApiTest
         $viewOptions->setRenderOptions($renderOptions);
         $request = new Requests\getInfoRequest($viewOptions);
        
-        $response = self::$viewerApi->getInfo($request);
+        $response = self::$infoApi->getInfo($request);
 
         $this->assertEquals(3, count($response->getPages()));
     }
@@ -149,7 +149,7 @@ class ViewerGetInfoApiTest extends BaseApiTest
         $viewOptions->setRenderOptions($renderOptions);
         $request = new Requests\getInfoRequest($viewOptions);
        
-        $response = self::$viewerApi->getInfo($request);
+        $response = self::$infoApi->getInfo($request);
 
         $this->assertEquals(2, count($response->getPages()));
     }    
@@ -168,7 +168,7 @@ class ViewerGetInfoApiTest extends BaseApiTest
         $viewOptions->setRenderOptions($renderOptions);
         $request = new Requests\getInfoRequest($viewOptions);
        
-        $response = self::$viewerApi->getInfo($request);
+        $response = self::$infoApi->getInfo($request);
 
         $this->assertEquals(3, count($response->getPages()));
     }  
@@ -185,7 +185,7 @@ class ViewerGetInfoApiTest extends BaseApiTest
         $viewOptions->setRenderOptions($renderOptions);
         $request = new Requests\getInfoRequest($viewOptions);
        
-        $response = self::$viewerApi->getInfo($request);
+        $response = self::$infoApi->getInfo($request);
 
         $this->assertEquals(3, count($response->getPages()));
     }  
@@ -205,7 +205,7 @@ class ViewerGetInfoApiTest extends BaseApiTest
         $viewOptions->setRenderOptions($renderOptions);
         $request = new Requests\getInfoRequest($viewOptions);
        
-        $response = self::$viewerApi->getInfo($request);
+        $response = self::$infoApi->getInfo($request);
 
         $this->assertEquals(2, count($response->getPages()));
     }
@@ -221,7 +221,7 @@ class ViewerGetInfoApiTest extends BaseApiTest
         $viewOptions->setRenderOptions($renderOptions);
         $request = new Requests\getInfoRequest($viewOptions);
        
-        $response = self::$viewerApi->getInfo($request);
+        $response = self::$infoApi->getInfo($request);
 
         $this->assertEquals(1, count($response->getPages()));
         $this->assertEquals(0, count($response->getAttachments()));

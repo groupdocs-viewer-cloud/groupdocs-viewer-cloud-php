@@ -63,10 +63,10 @@ $configuration = new GroupDocs\Viewer\Configuration();
 $configuration->setAppSid("XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX");
 $configuration->setAppKey("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
-$viewerApi = new GroupDocs\Viewer\ViewerApi($configuration); 
+$infoApi = new GroupDocs\Viewer\InfoApi($configuration); 
 
 try {
-    $response = $viewerApi->getSupportedFileFormats();
+    $response = $infoApi->getSupportedFileFormats();
 
     foreach ($response->getFormats() as $key => $format) {
         echo $format->getFileFormat() . " - " .  $format->getExtension(), "\n";

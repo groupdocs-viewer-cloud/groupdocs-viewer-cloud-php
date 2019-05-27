@@ -28,7 +28,7 @@
 namespace GroupDocs\Viewer\ApiTests;
 
 use GroupDocs\Viewer\Configuration;
-use GroupDocs\Viewer\ViewerApi;
+use GroupDocs\Viewer\InfoApi;
 
 class AuthApiTest extends \PHPUnit_Framework_TestCase
 {
@@ -48,9 +48,9 @@ class AuthApiTest extends \PHPUnit_Framework_TestCase
         $viewerConfig->setAppKey("test");
         $viewerConfig->setApiBaseUrl($apiBaseUrl);
 
-        $viewerApi = new ViewerApi($viewerConfig);
+        $infoApi = new InfoApi($viewerConfig);
 
-        $response = $viewerApi->getSupportedFileFormats();
+        $response = $infoApi->getSupportedFileFormats();
     }
 
     /**
@@ -69,9 +69,9 @@ class AuthApiTest extends \PHPUnit_Framework_TestCase
         $viewerConfig->setAppKey("test");
         $viewerConfig->setApiBaseUrl($apiBaseUrl);
 
-        $viewerApi = new ViewerApi($viewerConfig);
+        $infoApi = new InfoApi($viewerConfig);
 
-        $response = $viewerApi->getSupportedFileFormats();
+        $response = $infoApi->getSupportedFileFormats();
     }
 
     protected static function getConfig()

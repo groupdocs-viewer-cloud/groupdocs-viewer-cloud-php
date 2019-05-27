@@ -44,7 +44,7 @@ class ViewerCreateViewApiTest extends BaseApiTest
         $viewOptions = new ViewOptions();
         $request = new Requests\createViewRequest($viewOptions);
        
-        $response = self::$viewerApi->createView($request);
+        $response = self::$viewApi->createView($request);
     }
 
     public function testCreateViewReturnsFileNotFound()
@@ -57,7 +57,7 @@ class ViewerCreateViewApiTest extends BaseApiTest
         $viewOptions->setFileInfo($testFile->ToFileInfo());
         $request = new Requests\createViewRequest($viewOptions);
        
-        $response = self::$viewerApi->createView($request);
+        $response = self::$viewApi->createView($request);
     }
 
     public function testCreateViewWithMinimalViewOptions()
@@ -67,7 +67,7 @@ class ViewerCreateViewApiTest extends BaseApiTest
         $viewOptions->setFileInfo($testFile->ToFileInfo());
         $request = new Requests\createViewRequest($viewOptions);
        
-        $response = self::$viewerApi->createView($request);
+        $response = self::$viewApi->createView($request);
         $this->assertFalse(empty($response));
         $this->assertEquals(4, count($response->getPages()));
         $this->assertEquals(0, count($response->getAttachments()));
@@ -86,7 +86,7 @@ class ViewerCreateViewApiTest extends BaseApiTest
         $viewOptions->setFileInfo($testFile->ToFileInfo());
         $request = new Requests\createViewRequest($viewOptions);
        
-        $response = self::$viewerApi->createView($request);
+        $response = self::$viewApi->createView($request);
 
         $this->assertEquals(1, count($response->getPages()));
         $this->assertEquals(0, count($response->getAttachments()));
@@ -101,7 +101,7 @@ class ViewerCreateViewApiTest extends BaseApiTest
         $viewOptions->setViewFormat(ViewOptions::VIEW_FORMAT_HTML);
         $request = new Requests\createViewRequest($viewOptions);
        
-        $response = self::$viewerApi->createView($request);
+        $response = self::$viewApi->createView($request);
 
         $this->assertEquals(1, count($response->getPages()));
         $this->assertEquals(0, count($response->getAttachments()));
@@ -117,7 +117,7 @@ class ViewerCreateViewApiTest extends BaseApiTest
         $viewOptions->setViewFormat(ViewOptions::VIEW_FORMAT_PNG);
         $request = new Requests\createViewRequest($viewOptions);
        
-        $response = self::$viewerApi->createView($request);
+        $response = self::$viewApi->createView($request);
 
         $this->assertEquals(1, count($response->getPages()));
         $this->assertEquals(0, count($response->getAttachments()));
@@ -135,7 +135,7 @@ class ViewerCreateViewApiTest extends BaseApiTest
         $viewOptions->setRenderOptions($renderOptions);
         $request = new Requests\createViewRequest($viewOptions);
        
-        $response = self::$viewerApi->createView($request);
+        $response = self::$viewApi->createView($request);
 
         $this->assertEquals(3, count($response->getPages()));
     }
@@ -153,7 +153,7 @@ class ViewerCreateViewApiTest extends BaseApiTest
         $viewOptions->setRenderOptions($renderOptions);
         $request = new Requests\createViewRequest($viewOptions);
        
-        $response = self::$viewerApi->createView($request);
+        $response = self::$viewApi->createView($request);
 
         $this->assertEquals(2, count($response->getPages()));
     }    
@@ -172,7 +172,7 @@ class ViewerCreateViewApiTest extends BaseApiTest
         $viewOptions->setRenderOptions($renderOptions);
         $request = new Requests\createViewRequest($viewOptions);
        
-        $response = self::$viewerApi->createView($request);
+        $response = self::$viewApi->createView($request);
 
         $this->assertEquals(3, count($response->getPages()));
     }  
@@ -189,7 +189,7 @@ class ViewerCreateViewApiTest extends BaseApiTest
         $viewOptions->setRenderOptions($renderOptions);
         $request = new Requests\createViewRequest($viewOptions);
        
-        $response = self::$viewerApi->createView($request);
+        $response = self::$viewApi->createView($request);
 
         $this->assertEquals(3, count($response->getPages()));
     }  
@@ -209,7 +209,7 @@ class ViewerCreateViewApiTest extends BaseApiTest
         $viewOptions->setRenderOptions($renderOptions);
         $request = new Requests\createViewRequest($viewOptions);
        
-        $response = self::$viewerApi->createView($request);
+        $response = self::$viewApi->createView($request);
 
         $this->assertEquals(2, count($response->getPages()));
     }
@@ -224,7 +224,7 @@ class ViewerCreateViewApiTest extends BaseApiTest
         $viewOptions->setRenderOptions($renderOptions);
         $request = new Requests\createViewRequest($viewOptions);
        
-        $response = self::$viewerApi->createView($request);
+        $response = self::$viewApi->createView($request);
 
         $this->assertEquals(1, count($response->getPages()));
         $this->assertEquals(0, count($response->getAttachments()));

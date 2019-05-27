@@ -29,7 +29,8 @@ namespace GroupDocs\Viewer\ApiTests;
 
 use PHPUnit\Framework\TestCase;
 use GroupDocs\Viewer\Configuration;
-use GroupDocs\Viewer\ViewerApi;
+use GroupDocs\Viewer\InfoApi;
+use GroupDocs\Viewer\ViewApi;
 use GroupDocs\Viewer\StorageApi;
 use GroupDocs\Viewer\FileApi;
 use GroupDocs\Viewer\FolderApi;
@@ -38,7 +39,8 @@ abstract class BaseApiTest extends \PHPUnit_Framework_TestCase
 {
     protected static $viewerConfig;
 
-    protected static $viewerApi;    
+    protected static $infoApi;
+    protected static $viewApi;
     protected static $storageApi;
     protected static $fileApi;
     protected static $folderApi;
@@ -84,7 +86,8 @@ abstract class BaseApiTest extends \PHPUnit_Framework_TestCase
         self::$viewerConfig->setAppKey($appKey);
         self::$viewerConfig->setApiBaseUrl($apiBaseUrl);
 
-        self::$viewerApi = new ViewerApi(self::$viewerConfig);
+        self::$infoApi = new InfoApi(self::$viewerConfig);
+        self::$viewApi = new ViewApi(self::$viewerConfig);
         self::$storageApi = new StorageApi(self::$viewerConfig);
         self::$fileApi = new FileApi(self::$viewerConfig);
         self::$folderApi = new FolderApi(self::$viewerConfig);

@@ -43,7 +43,7 @@ class ViewerDeleteViewApiTest extends BaseApiTest
         $viewOptions->setFileInfo($testFile->ToFileInfo());
         $request = new Requests\createViewRequest($viewOptions);
        
-        $response = self::$viewerApi->createView($request);
+        $response = self::$viewApi->createView($request);
 
         $this->assertEquals(1, count($response->getPages()));
         $this->assertEquals(0, count($response->getAttachments()));
@@ -54,6 +54,6 @@ class ViewerDeleteViewApiTest extends BaseApiTest
         $deleteOptions->setFileInfo($testFile->ToFileInfo());
         $deleteRequest = new Requests\deleteViewRequest($deleteOptions);
        
-        self::$viewerApi->deleteView($deleteRequest);        
+        self::$viewApi->deleteView($deleteRequest);        
     }    
 }
