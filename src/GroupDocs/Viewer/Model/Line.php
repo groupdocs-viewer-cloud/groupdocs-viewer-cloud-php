@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="ViewResult.php">
+ * <copyright company="Aspose Pty Ltd" file="Line.php">
  *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -27,16 +27,14 @@
  */
 
 namespace GroupDocs\Viewer\Model;
-
-use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * ViewResult
+ * Line
  *
- * @description View result information
+ * @description Represents relatively positioned rectangle which contains single line
  */
-class ViewResult implements ArrayAccess
+class Line extends TextElement 
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +43,7 @@ class ViewResult implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "ViewResult";
+    protected static $swaggerModelName = "Line";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,9 +51,7 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'pages' => '\GroupDocs\Viewer\Model\PageView[]',
-        'attachments' => '\GroupDocs\Viewer\Model\AttachmentView[]',
-        'file' => '\GroupDocs\Viewer\Model\Resource'
+        'words' => '\GroupDocs\Viewer\Model\Word[]'
     ];
 
     /*
@@ -64,9 +60,7 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'pages' => null,
-        'attachments' => null,
-        'file' => null
+        'words' => null
     ];
 
     /*
@@ -76,7 +70,7 @@ class ViewResult implements ArrayAccess
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes;
+        return self::$swaggerTypes + parent::swaggerTypes();
     }
 
     /*
@@ -86,7 +80,7 @@ class ViewResult implements ArrayAccess
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats;
+        return self::$swaggerFormats + parent::swaggerFormats();
     }
 
     /*
@@ -96,9 +90,7 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'pages' => 'Pages',
-        'attachments' => 'Attachments',
-        'file' => 'File'
+        'words' => 'Words'
     ];
 
     /*
@@ -107,9 +99,7 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'pages' => 'setPages',
-        'attachments' => 'setAttachments',
-        'file' => 'setFile'
+        'words' => 'setWords'
     ];
 
     /*
@@ -118,9 +108,7 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'pages' => 'getPages',
-        'attachments' => 'getAttachments',
-        'file' => 'getFile'
+        'words' => 'getWords'
     ];
 
     /*
@@ -131,7 +119,7 @@ class ViewResult implements ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /*
@@ -141,7 +129,7 @@ class ViewResult implements ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /*
@@ -151,7 +139,7 @@ class ViewResult implements ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /*
@@ -168,12 +156,6 @@ class ViewResult implements ArrayAccess
 
     
 
-    /*
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /*
      * Constructor
@@ -183,9 +165,9 @@ class ViewResult implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['pages'] = isset($data['pages']) ? $data['pages'] : null;
-        $this->container['attachments'] = isset($data['attachments']) ? $data['attachments'] : null;
-        $this->container['file'] = isset($data['file']) ? $data['file'] : null;
+        parent::__construct($data);
+
+        $this->container['words'] = isset($data['words']) ? $data['words'] : null;
     }
 
     /*
@@ -195,7 +177,7 @@ class ViewResult implements ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
         return $invalidProperties;
     }
@@ -208,79 +190,34 @@ class ViewResult implements ArrayAccess
      */
     public function valid()
     {
+        if (!parent::valid()) {
+            return false;
+        }
 
         return true;
     }
 
 
     /*
-     * Gets pages
+     * Gets words
      *
-     * @return \GroupDocs\Viewer\Model\PageView[]
+     * @return \GroupDocs\Viewer\Model\Word[]
      */
-    public function getPages()
+    public function getWords()
     {
-        return $this->container['pages'];
+        return $this->container['words'];
     }
 
     /*
-     * Sets pages
+     * Sets words
      *
-     * @param \GroupDocs\Viewer\Model\PageView[] $pages View result pages
+     * @param \GroupDocs\Viewer\Model\Word[] $words The words contained by the line
      *
      * @return $this
      */
-    public function setPages($pages)
+    public function setWords($words)
     {
-        $this->container['pages'] = $pages;
-
-        return $this;
-    }
-
-    /*
-     * Gets attachments
-     *
-     * @return \GroupDocs\Viewer\Model\AttachmentView[]
-     */
-    public function getAttachments()
-    {
-        return $this->container['attachments'];
-    }
-
-    /*
-     * Sets attachments
-     *
-     * @param \GroupDocs\Viewer\Model\AttachmentView[] $attachments Attachments
-     *
-     * @return $this
-     */
-    public function setAttachments($attachments)
-    {
-        $this->container['attachments'] = $attachments;
-
-        return $this;
-    }
-
-    /*
-     * Gets file
-     *
-     * @return \GroupDocs\Viewer\Model\Resource
-     */
-    public function getFile()
-    {
-        return $this->container['file'];
-    }
-
-    /*
-     * Sets file
-     *
-     * @param \GroupDocs\Viewer\Model\Resource $file ULR to retrieve file.
-     *
-     * @return $this
-     */
-    public function setFile($file)
-    {
-        $this->container['file'] = $file;
+        $this->container['words'] = $words;
 
         return $this;
     }

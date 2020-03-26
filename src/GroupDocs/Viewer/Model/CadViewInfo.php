@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="ViewResult.php">
+ * <copyright company="Aspose Pty Ltd" file="CadViewInfo.php">
  *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * ViewResult
+ * CadViewInfo
  *
- * @description View result information
+ * @description Represents view information for CAD drawing
  */
-class ViewResult implements ArrayAccess
+class CadViewInfo implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class ViewResult implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "ViewResult";
+    protected static $swaggerModelName = "CadViewInfo";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,9 +53,8 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'pages' => '\GroupDocs\Viewer\Model\PageView[]',
-        'attachments' => '\GroupDocs\Viewer\Model\AttachmentView[]',
-        'file' => '\GroupDocs\Viewer\Model\Resource'
+        'layers' => '\GroupDocs\Viewer\Model\Layer[]',
+        'layouts' => '\GroupDocs\Viewer\Model\Layout[]'
     ];
 
     /*
@@ -64,9 +63,8 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'pages' => null,
-        'attachments' => null,
-        'file' => null
+        'layers' => null,
+        'layouts' => null
     ];
 
     /*
@@ -96,9 +94,8 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'pages' => 'Pages',
-        'attachments' => 'Attachments',
-        'file' => 'File'
+        'layers' => 'Layers',
+        'layouts' => 'Layouts'
     ];
 
     /*
@@ -107,9 +104,8 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'pages' => 'setPages',
-        'attachments' => 'setAttachments',
-        'file' => 'setFile'
+        'layers' => 'setLayers',
+        'layouts' => 'setLayouts'
     ];
 
     /*
@@ -118,9 +114,8 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'pages' => 'getPages',
-        'attachments' => 'getAttachments',
-        'file' => 'getFile'
+        'layers' => 'getLayers',
+        'layouts' => 'getLayouts'
     ];
 
     /*
@@ -183,9 +178,8 @@ class ViewResult implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['pages'] = isset($data['pages']) ? $data['pages'] : null;
-        $this->container['attachments'] = isset($data['attachments']) ? $data['attachments'] : null;
-        $this->container['file'] = isset($data['file']) ? $data['file'] : null;
+        $this->container['layers'] = isset($data['layers']) ? $data['layers'] : null;
+        $this->container['layouts'] = isset($data['layouts']) ? $data['layouts'] : null;
     }
 
     /*
@@ -214,73 +208,49 @@ class ViewResult implements ArrayAccess
 
 
     /*
-     * Gets pages
+     * Gets layers
      *
-     * @return \GroupDocs\Viewer\Model\PageView[]
+     * @return \GroupDocs\Viewer\Model\Layer[]
      */
-    public function getPages()
+    public function getLayers()
     {
-        return $this->container['pages'];
+        return $this->container['layers'];
     }
 
     /*
-     * Sets pages
+     * Sets layers
      *
-     * @param \GroupDocs\Viewer\Model\PageView[] $pages View result pages
+     * @param \GroupDocs\Viewer\Model\Layer[] $layers The list of layers contained by the CAD drawing
      *
      * @return $this
      */
-    public function setPages($pages)
+    public function setLayers($layers)
     {
-        $this->container['pages'] = $pages;
+        $this->container['layers'] = $layers;
 
         return $this;
     }
 
     /*
-     * Gets attachments
+     * Gets layouts
      *
-     * @return \GroupDocs\Viewer\Model\AttachmentView[]
+     * @return \GroupDocs\Viewer\Model\Layout[]
      */
-    public function getAttachments()
+    public function getLayouts()
     {
-        return $this->container['attachments'];
+        return $this->container['layouts'];
     }
 
     /*
-     * Sets attachments
+     * Sets layouts
      *
-     * @param \GroupDocs\Viewer\Model\AttachmentView[] $attachments Attachments
+     * @param \GroupDocs\Viewer\Model\Layout[] $layouts The list of layouts contained by the CAD drawing
      *
      * @return $this
      */
-    public function setAttachments($attachments)
+    public function setLayouts($layouts)
     {
-        $this->container['attachments'] = $attachments;
-
-        return $this;
-    }
-
-    /*
-     * Gets file
-     *
-     * @return \GroupDocs\Viewer\Model\Resource
-     */
-    public function getFile()
-    {
-        return $this->container['file'];
-    }
-
-    /*
-     * Sets file
-     *
-     * @param \GroupDocs\Viewer\Model\Resource $file ULR to retrieve file.
-     *
-     * @return $this
-     */
-    public function setFile($file)
-    {
-        $this->container['file'] = $file;
+        $this->container['layouts'] = $layouts;
 
         return $this;
     }

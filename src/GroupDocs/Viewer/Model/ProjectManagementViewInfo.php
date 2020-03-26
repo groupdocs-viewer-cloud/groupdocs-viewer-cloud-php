@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="ViewResult.php">
+ * <copyright company="Aspose Pty Ltd" file="ProjectManagementViewInfo.php">
  *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * ViewResult
+ * ProjectManagementViewInfo
  *
- * @description View result information
+ * @description Represents view information for MS Project document
  */
-class ViewResult implements ArrayAccess
+class ProjectManagementViewInfo implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class ViewResult implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "ViewResult";
+    protected static $swaggerModelName = "ProjectManagementViewInfo";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,9 +53,8 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'pages' => '\GroupDocs\Viewer\Model\PageView[]',
-        'attachments' => '\GroupDocs\Viewer\Model\AttachmentView[]',
-        'file' => '\GroupDocs\Viewer\Model\Resource'
+        'startDate' => '\DateTime',
+        'endDate' => '\DateTime'
     ];
 
     /*
@@ -64,9 +63,8 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'pages' => null,
-        'attachments' => null,
-        'file' => null
+        'startDate' => 'date-time',
+        'endDate' => 'date-time'
     ];
 
     /*
@@ -96,9 +94,8 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'pages' => 'Pages',
-        'attachments' => 'Attachments',
-        'file' => 'File'
+        'startDate' => 'StartDate',
+        'endDate' => 'EndDate'
     ];
 
     /*
@@ -107,9 +104,8 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'pages' => 'setPages',
-        'attachments' => 'setAttachments',
-        'file' => 'setFile'
+        'startDate' => 'setStartDate',
+        'endDate' => 'setEndDate'
     ];
 
     /*
@@ -118,9 +114,8 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'pages' => 'getPages',
-        'attachments' => 'getAttachments',
-        'file' => 'getFile'
+        'startDate' => 'getStartDate',
+        'endDate' => 'getEndDate'
     ];
 
     /*
@@ -183,9 +178,8 @@ class ViewResult implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['pages'] = isset($data['pages']) ? $data['pages'] : null;
-        $this->container['attachments'] = isset($data['attachments']) ? $data['attachments'] : null;
-        $this->container['file'] = isset($data['file']) ? $data['file'] : null;
+        $this->container['startDate'] = isset($data['startDate']) ? $data['startDate'] : null;
+        $this->container['endDate'] = isset($data['endDate']) ? $data['endDate'] : null;
     }
 
     /*
@@ -197,6 +191,12 @@ class ViewResult implements ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['startDate'] === null) {
+            $invalidProperties[] = "'startDate' can't be null";
+        }
+        if ($this->container['endDate'] === null) {
+            $invalidProperties[] = "'endDate' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -209,78 +209,60 @@ class ViewResult implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['startDate'] === null) {
+            return false;
+        }
+        if ($this->container['endDate'] === null) {
+            return false;
+        }
         return true;
     }
 
 
     /*
-     * Gets pages
+     * Gets startDate
      *
-     * @return \GroupDocs\Viewer\Model\PageView[]
+     * @return \DateTime
      */
-    public function getPages()
+    public function getStartDate()
     {
-        return $this->container['pages'];
+        return $this->container['startDate'];
     }
 
     /*
-     * Sets pages
+     * Sets startDate
      *
-     * @param \GroupDocs\Viewer\Model\PageView[] $pages View result pages
+     * @param \DateTime $startDate The date time from which the project started
      *
      * @return $this
      */
-    public function setPages($pages)
+    public function setStartDate($startDate)
     {
-        $this->container['pages'] = $pages;
+        $this->container['startDate'] = $startDate;
 
         return $this;
     }
 
     /*
-     * Gets attachments
+     * Gets endDate
      *
-     * @return \GroupDocs\Viewer\Model\AttachmentView[]
+     * @return \DateTime
      */
-    public function getAttachments()
+    public function getEndDate()
     {
-        return $this->container['attachments'];
+        return $this->container['endDate'];
     }
 
     /*
-     * Sets attachments
+     * Sets endDate
      *
-     * @param \GroupDocs\Viewer\Model\AttachmentView[] $attachments Attachments
+     * @param \DateTime $endDate The date time when the project is to be completed
      *
      * @return $this
      */
-    public function setAttachments($attachments)
+    public function setEndDate($endDate)
     {
-        $this->container['attachments'] = $attachments;
-
-        return $this;
-    }
-
-    /*
-     * Gets file
-     *
-     * @return \GroupDocs\Viewer\Model\Resource
-     */
-    public function getFile()
-    {
-        return $this->container['file'];
-    }
-
-    /*
-     * Sets file
-     *
-     * @param \GroupDocs\Viewer\Model\Resource $file ULR to retrieve file.
-     *
-     * @return $this
-     */
-    public function setFile($file)
-    {
-        $this->container['file'] = $file;
+        $this->container['endDate'] = $endDate;
 
         return $this;
     }

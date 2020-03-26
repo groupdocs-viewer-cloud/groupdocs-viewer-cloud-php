@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="InfoResult.php">
- *   Copyright (c) 2003-2019 Aspose Pty Ltd
+ *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -53,8 +53,15 @@ class InfoResult implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
+        'formatExtension' => 'string',
+        'format' => 'string',
         'pages' => '\GroupDocs\Viewer\Model\PageInfo[]',
-        'attachments' => '\GroupDocs\Viewer\Model\AttachmentInfo[]'
+        'attachments' => '\GroupDocs\Viewer\Model\AttachmentInfo[]',
+        'archiveViewInfo' => '\GroupDocs\Viewer\Model\ArchiveViewInfo',
+        'cadViewInfo' => '\GroupDocs\Viewer\Model\CadViewInfo',
+        'projectManagementViewInfo' => '\GroupDocs\Viewer\Model\ProjectManagementViewInfo',
+        'outlookViewInfo' => '\GroupDocs\Viewer\Model\OutlookViewInfo',
+        'pdfViewInfo' => '\GroupDocs\Viewer\Model\PdfViewInfo'
     ];
 
     /*
@@ -63,8 +70,15 @@ class InfoResult implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
+        'formatExtension' => null,
+        'format' => null,
         'pages' => null,
-        'attachments' => null
+        'attachments' => null,
+        'archiveViewInfo' => null,
+        'cadViewInfo' => null,
+        'projectManagementViewInfo' => null,
+        'outlookViewInfo' => null,
+        'pdfViewInfo' => null
     ];
 
     /*
@@ -94,8 +108,15 @@ class InfoResult implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'formatExtension' => 'FormatExtension',
+        'format' => 'Format',
         'pages' => 'Pages',
-        'attachments' => 'Attachments'
+        'attachments' => 'Attachments',
+        'archiveViewInfo' => 'ArchiveViewInfo',
+        'cadViewInfo' => 'CadViewInfo',
+        'projectManagementViewInfo' => 'ProjectManagementViewInfo',
+        'outlookViewInfo' => 'OutlookViewInfo',
+        'pdfViewInfo' => 'PdfViewInfo'
     ];
 
     /*
@@ -104,8 +125,15 @@ class InfoResult implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'formatExtension' => 'setFormatExtension',
+        'format' => 'setFormat',
         'pages' => 'setPages',
-        'attachments' => 'setAttachments'
+        'attachments' => 'setAttachments',
+        'archiveViewInfo' => 'setArchiveViewInfo',
+        'cadViewInfo' => 'setCadViewInfo',
+        'projectManagementViewInfo' => 'setProjectManagementViewInfo',
+        'outlookViewInfo' => 'setOutlookViewInfo',
+        'pdfViewInfo' => 'setPdfViewInfo'
     ];
 
     /*
@@ -114,8 +142,15 @@ class InfoResult implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'formatExtension' => 'getFormatExtension',
+        'format' => 'getFormat',
         'pages' => 'getPages',
-        'attachments' => 'getAttachments'
+        'attachments' => 'getAttachments',
+        'archiveViewInfo' => 'getArchiveViewInfo',
+        'cadViewInfo' => 'getCadViewInfo',
+        'projectManagementViewInfo' => 'getProjectManagementViewInfo',
+        'outlookViewInfo' => 'getOutlookViewInfo',
+        'pdfViewInfo' => 'getPdfViewInfo'
     ];
 
     /*
@@ -178,8 +213,15 @@ class InfoResult implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        $this->container['formatExtension'] = isset($data['formatExtension']) ? $data['formatExtension'] : null;
+        $this->container['format'] = isset($data['format']) ? $data['format'] : null;
         $this->container['pages'] = isset($data['pages']) ? $data['pages'] : null;
         $this->container['attachments'] = isset($data['attachments']) ? $data['attachments'] : null;
+        $this->container['archiveViewInfo'] = isset($data['archiveViewInfo']) ? $data['archiveViewInfo'] : null;
+        $this->container['cadViewInfo'] = isset($data['cadViewInfo']) ? $data['cadViewInfo'] : null;
+        $this->container['projectManagementViewInfo'] = isset($data['projectManagementViewInfo']) ? $data['projectManagementViewInfo'] : null;
+        $this->container['outlookViewInfo'] = isset($data['outlookViewInfo']) ? $data['outlookViewInfo'] : null;
+        $this->container['pdfViewInfo'] = isset($data['pdfViewInfo']) ? $data['pdfViewInfo'] : null;
     }
 
     /*
@@ -206,6 +248,54 @@ class InfoResult implements ArrayAccess
         return true;
     }
 
+
+    /*
+     * Gets formatExtension
+     *
+     * @return string
+     */
+    public function getFormatExtension()
+    {
+        return $this->container['formatExtension'];
+    }
+
+    /*
+     * Sets formatExtension
+     *
+     * @param string $formatExtension File format extension
+     *
+     * @return $this
+     */
+    public function setFormatExtension($formatExtension)
+    {
+        $this->container['formatExtension'] = $formatExtension;
+
+        return $this;
+    }
+
+    /*
+     * Gets format
+     *
+     * @return string
+     */
+    public function getFormat()
+    {
+        return $this->container['format'];
+    }
+
+    /*
+     * Sets format
+     *
+     * @param string $format File format
+     *
+     * @return $this
+     */
+    public function setFormat($format)
+    {
+        $this->container['format'] = $format;
+
+        return $this;
+    }
 
     /*
      * Gets pages
@@ -251,6 +341,126 @@ class InfoResult implements ArrayAccess
     public function setAttachments($attachments)
     {
         $this->container['attachments'] = $attachments;
+
+        return $this;
+    }
+
+    /*
+     * Gets archiveViewInfo
+     *
+     * @return \GroupDocs\Viewer\Model\ArchiveViewInfo
+     */
+    public function getArchiveViewInfo()
+    {
+        return $this->container['archiveViewInfo'];
+    }
+
+    /*
+     * Sets archiveViewInfo
+     *
+     * @param \GroupDocs\Viewer\Model\ArchiveViewInfo $archiveViewInfo Represents view information for archive file
+     *
+     * @return $this
+     */
+    public function setArchiveViewInfo($archiveViewInfo)
+    {
+        $this->container['archiveViewInfo'] = $archiveViewInfo;
+
+        return $this;
+    }
+
+    /*
+     * Gets cadViewInfo
+     *
+     * @return \GroupDocs\Viewer\Model\CadViewInfo
+     */
+    public function getCadViewInfo()
+    {
+        return $this->container['cadViewInfo'];
+    }
+
+    /*
+     * Sets cadViewInfo
+     *
+     * @param \GroupDocs\Viewer\Model\CadViewInfo $cadViewInfo Represents view information for CAD drawing
+     *
+     * @return $this
+     */
+    public function setCadViewInfo($cadViewInfo)
+    {
+        $this->container['cadViewInfo'] = $cadViewInfo;
+
+        return $this;
+    }
+
+    /*
+     * Gets projectManagementViewInfo
+     *
+     * @return \GroupDocs\Viewer\Model\ProjectManagementViewInfo
+     */
+    public function getProjectManagementViewInfo()
+    {
+        return $this->container['projectManagementViewInfo'];
+    }
+
+    /*
+     * Sets projectManagementViewInfo
+     *
+     * @param \GroupDocs\Viewer\Model\ProjectManagementViewInfo $projectManagementViewInfo Represents view information for MS Project document
+     *
+     * @return $this
+     */
+    public function setProjectManagementViewInfo($projectManagementViewInfo)
+    {
+        $this->container['projectManagementViewInfo'] = $projectManagementViewInfo;
+
+        return $this;
+    }
+
+    /*
+     * Gets outlookViewInfo
+     *
+     * @return \GroupDocs\Viewer\Model\OutlookViewInfo
+     */
+    public function getOutlookViewInfo()
+    {
+        return $this->container['outlookViewInfo'];
+    }
+
+    /*
+     * Sets outlookViewInfo
+     *
+     * @param \GroupDocs\Viewer\Model\OutlookViewInfo $outlookViewInfo Represents view information for Outlook Data file
+     *
+     * @return $this
+     */
+    public function setOutlookViewInfo($outlookViewInfo)
+    {
+        $this->container['outlookViewInfo'] = $outlookViewInfo;
+
+        return $this;
+    }
+
+    /*
+     * Gets pdfViewInfo
+     *
+     * @return \GroupDocs\Viewer\Model\PdfViewInfo
+     */
+    public function getPdfViewInfo()
+    {
+        return $this->container['pdfViewInfo'];
+    }
+
+    /*
+     * Sets pdfViewInfo
+     *
+     * @param \GroupDocs\Viewer\Model\PdfViewInfo $pdfViewInfo Represents view information for PDF document
+     *
+     * @return $this
+     */
+    public function setPdfViewInfo($pdfViewInfo)
+    {
+        $this->container['pdfViewInfo'] = $pdfViewInfo;
 
         return $this;
     }

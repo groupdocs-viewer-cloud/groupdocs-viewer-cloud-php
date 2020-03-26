@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="PageInfo.php">
- *   Copyright (c) 2003-2019 Aspose Pty Ltd
+ *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -56,7 +56,8 @@ class PageInfo implements ArrayAccess
         'number' => 'int',
         'width' => 'int',
         'height' => 'int',
-        'rows' => '\GroupDocs\Viewer\Model\Row[]'
+        'visible' => 'bool',
+        'lines' => '\GroupDocs\Viewer\Model\Line[]'
     ];
 
     /*
@@ -68,7 +69,8 @@ class PageInfo implements ArrayAccess
         'number' => 'int32',
         'width' => 'int32',
         'height' => 'int32',
-        'rows' => null
+        'visible' => null,
+        'lines' => null
     ];
 
     /*
@@ -101,7 +103,8 @@ class PageInfo implements ArrayAccess
         'number' => 'Number',
         'width' => 'Width',
         'height' => 'Height',
-        'rows' => 'Rows'
+        'visible' => 'Visible',
+        'lines' => 'Lines'
     ];
 
     /*
@@ -113,7 +116,8 @@ class PageInfo implements ArrayAccess
         'number' => 'setNumber',
         'width' => 'setWidth',
         'height' => 'setHeight',
-        'rows' => 'setRows'
+        'visible' => 'setVisible',
+        'lines' => 'setLines'
     ];
 
     /*
@@ -125,7 +129,8 @@ class PageInfo implements ArrayAccess
         'number' => 'getNumber',
         'width' => 'getWidth',
         'height' => 'getHeight',
-        'rows' => 'getRows'
+        'visible' => 'getVisible',
+        'lines' => 'getLines'
     ];
 
     /*
@@ -191,7 +196,8 @@ class PageInfo implements ArrayAccess
         $this->container['number'] = isset($data['number']) ? $data['number'] : null;
         $this->container['width'] = isset($data['width']) ? $data['width'] : null;
         $this->container['height'] = isset($data['height']) ? $data['height'] : null;
-        $this->container['rows'] = isset($data['rows']) ? $data['rows'] : null;
+        $this->container['visible'] = isset($data['visible']) ? $data['visible'] : null;
+        $this->container['lines'] = isset($data['lines']) ? $data['lines'] : null;
     }
 
     /*
@@ -211,6 +217,9 @@ class PageInfo implements ArrayAccess
         }
         if ($this->container['height'] === null) {
             $invalidProperties[] = "'height' can't be null";
+        }
+        if ($this->container['visible'] === null) {
+            $invalidProperties[] = "'visible' can't be null";
         }
         return $invalidProperties;
     }
@@ -233,6 +242,9 @@ class PageInfo implements ArrayAccess
         if ($this->container['height'] === null) {
             return false;
         }
+        if ($this->container['visible'] === null) {
+            return false;
+        }
         return true;
     }
 
@@ -250,7 +262,7 @@ class PageInfo implements ArrayAccess
     /*
      * Sets number
      *
-     * @param int $number Page number
+     * @param int $number The page number
      *
      * @return $this
      */
@@ -274,7 +286,7 @@ class PageInfo implements ArrayAccess
     /*
      * Sets width
      *
-     * @param int $width Image Page width
+     * @param int $width The width of the page in pixels when viewing as JPG or PNG
      *
      * @return $this
      */
@@ -298,7 +310,7 @@ class PageInfo implements ArrayAccess
     /*
      * Sets height
      *
-     * @param int $height Image Page height
+     * @param int $height The height of the page in pixels when viewing as JPG or PNG
      *
      * @return $this
      */
@@ -310,25 +322,49 @@ class PageInfo implements ArrayAccess
     }
 
     /*
-     * Gets rows
+     * Gets visible
      *
-     * @return \GroupDocs\Viewer\Model\Row[]
+     * @return bool
      */
-    public function getRows()
+    public function getVisible()
     {
-        return $this->container['rows'];
+        return $this->container['visible'];
     }
 
     /*
-     * Sets rows
+     * Sets visible
      *
-     * @param \GroupDocs\Viewer\Model\Row[] $rows Image Page rows
+     * @param bool $visible The page visibility indicator
      *
      * @return $this
      */
-    public function setRows($rows)
+    public function setVisible($visible)
     {
-        $this->container['rows'] = $rows;
+        $this->container['visible'] = $visible;
+
+        return $this;
+    }
+
+    /*
+     * Gets lines
+     *
+     * @return \GroupDocs\Viewer\Model\Line[]
+     */
+    public function getLines()
+    {
+        return $this->container['lines'];
+    }
+
+    /*
+     * Sets lines
+     *
+     * @param \GroupDocs\Viewer\Model\Line[] $lines The lines contained by the page when viewing as JPG or PNG with enabled Text Extraction
+     *
+     * @return $this
+     */
+    public function setLines($lines)
+    {
+        $this->container['lines'] = $lines;
 
         return $this;
     }

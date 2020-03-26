@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="ViewResult.php">
+ * <copyright company="Aspose Pty Ltd" file="PdfOptions.php">
  *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -27,16 +27,14 @@
  */
 
 namespace GroupDocs\Viewer\Model;
-
-use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * ViewResult
+ * PdfOptions
  *
- * @description View result information
+ * @description Options for rendering document into PDF
  */
-class ViewResult implements ArrayAccess
+class PdfOptions extends RenderOptions 
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +43,7 @@ class ViewResult implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "ViewResult";
+    protected static $swaggerModelName = "PdfOptions";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,9 +51,10 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'pages' => '\GroupDocs\Viewer\Model\PageView[]',
-        'attachments' => '\GroupDocs\Viewer\Model\AttachmentView[]',
-        'file' => '\GroupDocs\Viewer\Model\Resource'
+        'jpgQuality' => 'int',
+        'documentOpenPassword' => 'string',
+        'permissionsPassword' => 'string',
+        'permissions' => 'string'
     ];
 
     /*
@@ -64,9 +63,10 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'pages' => null,
-        'attachments' => null,
-        'file' => null
+        'jpgQuality' => 'int32',
+        'documentOpenPassword' => null,
+        'permissionsPassword' => null,
+        'permissions' => null
     ];
 
     /*
@@ -76,7 +76,7 @@ class ViewResult implements ArrayAccess
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes;
+        return self::$swaggerTypes + parent::swaggerTypes();
     }
 
     /*
@@ -86,7 +86,7 @@ class ViewResult implements ArrayAccess
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats;
+        return self::$swaggerFormats + parent::swaggerFormats();
     }
 
     /*
@@ -96,9 +96,10 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'pages' => 'Pages',
-        'attachments' => 'Attachments',
-        'file' => 'File'
+        'jpgQuality' => 'JpgQuality',
+        'documentOpenPassword' => 'DocumentOpenPassword',
+        'permissionsPassword' => 'PermissionsPassword',
+        'permissions' => 'Permissions'
     ];
 
     /*
@@ -107,9 +108,10 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'pages' => 'setPages',
-        'attachments' => 'setAttachments',
-        'file' => 'setFile'
+        'jpgQuality' => 'setJpgQuality',
+        'documentOpenPassword' => 'setDocumentOpenPassword',
+        'permissionsPassword' => 'setPermissionsPassword',
+        'permissions' => 'setPermissions'
     ];
 
     /*
@@ -118,9 +120,10 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'pages' => 'getPages',
-        'attachments' => 'getAttachments',
-        'file' => 'getFile'
+        'jpgQuality' => 'getJpgQuality',
+        'documentOpenPassword' => 'getDocumentOpenPassword',
+        'permissionsPassword' => 'getPermissionsPassword',
+        'permissions' => 'getPermissions'
     ];
 
     /*
@@ -131,7 +134,7 @@ class ViewResult implements ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /*
@@ -141,7 +144,7 @@ class ViewResult implements ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /*
@@ -151,7 +154,7 @@ class ViewResult implements ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /*
@@ -164,16 +167,31 @@ class ViewResult implements ArrayAccess
         return self::$swaggerModelName;
     }
 
+    const PERMISSIONS_ALLOW_ALL = 'AllowAll';
+    const PERMISSIONS_DENY_PRINTING = 'DenyPrinting';
+    const PERMISSIONS_DENY_MODIFICATION = 'DenyModification';
+    const PERMISSIONS_DENY_DATA_EXTRACTION = 'DenyDataExtraction';
+    const PERMISSIONS_DENY_ALL = 'DenyAll';
     
 
     
-
     /*
-     * Associative array for storing property values
+     * Gets allowable values of the enum
      *
-     * @var mixed[]
+     * @return string[]
      */
-    protected $container = [];
+    public function getPermissionsAllowableValues()
+    {
+        return [
+            self::PERMISSIONS_ALLOW_ALL,
+            self::PERMISSIONS_DENY_PRINTING,
+            self::PERMISSIONS_DENY_MODIFICATION,
+            self::PERMISSIONS_DENY_DATA_EXTRACTION,
+            self::PERMISSIONS_DENY_ALL,
+        ];
+    }
+    
+
 
     /*
      * Constructor
@@ -183,9 +201,12 @@ class ViewResult implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['pages'] = isset($data['pages']) ? $data['pages'] : null;
-        $this->container['attachments'] = isset($data['attachments']) ? $data['attachments'] : null;
-        $this->container['file'] = isset($data['file']) ? $data['file'] : null;
+        parent::__construct($data);
+
+        $this->container['jpgQuality'] = isset($data['jpgQuality']) ? $data['jpgQuality'] : null;
+        $this->container['documentOpenPassword'] = isset($data['documentOpenPassword']) ? $data['documentOpenPassword'] : null;
+        $this->container['permissionsPassword'] = isset($data['permissionsPassword']) ? $data['permissionsPassword'] : null;
+        $this->container['permissions'] = isset($data['permissions']) ? $data['permissions'] : null;
     }
 
     /*
@@ -195,7 +216,21 @@ class ViewResult implements ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
+
+        if ($this->container['jpgQuality'] === null) {
+            $invalidProperties[] = "'jpgQuality' can't be null";
+        }
+        if ($this->container['permissions'] === null) {
+            $invalidProperties[] = "'permissions' can't be null";
+        }
+        $allowedValues = $this->getPermissionsAllowableValues();
+        if (!in_array($this->container['permissions'], $allowedValues)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'permissions', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
 
         return $invalidProperties;
     }
@@ -208,79 +243,121 @@ class ViewResult implements ArrayAccess
      */
     public function valid()
     {
+        if (!parent::valid()) {
+            return false;
+        }
 
+        if ($this->container['jpgQuality'] === null) {
+            return false;
+        }
+        if ($this->container['permissions'] === null) {
+            return false;
+        }
+        $allowedValues = $this->getPermissionsAllowableValues();
+        if (!in_array($this->container['permissions'], $allowedValues)) {
+            return false;
+        }
         return true;
     }
 
 
     /*
-     * Gets pages
+     * Gets jpgQuality
      *
-     * @return \GroupDocs\Viewer\Model\PageView[]
+     * @return int
      */
-    public function getPages()
+    public function getJpgQuality()
     {
-        return $this->container['pages'];
+        return $this->container['jpgQuality'];
     }
 
     /*
-     * Sets pages
+     * Sets jpgQuality
      *
-     * @param \GroupDocs\Viewer\Model\PageView[] $pages View result pages
+     * @param int $jpgQuality The quality of the JPG images contained by output PDF document; Valid values are between 1 and 100; Default value is 90
      *
      * @return $this
      */
-    public function setPages($pages)
+    public function setJpgQuality($jpgQuality)
     {
-        $this->container['pages'] = $pages;
+        $this->container['jpgQuality'] = $jpgQuality;
 
         return $this;
     }
 
     /*
-     * Gets attachments
+     * Gets documentOpenPassword
      *
-     * @return \GroupDocs\Viewer\Model\AttachmentView[]
+     * @return string
      */
-    public function getAttachments()
+    public function getDocumentOpenPassword()
     {
-        return $this->container['attachments'];
+        return $this->container['documentOpenPassword'];
     }
 
     /*
-     * Sets attachments
+     * Sets documentOpenPassword
      *
-     * @param \GroupDocs\Viewer\Model\AttachmentView[] $attachments Attachments
+     * @param string $documentOpenPassword The password required to open the PDF document
      *
      * @return $this
      */
-    public function setAttachments($attachments)
+    public function setDocumentOpenPassword($documentOpenPassword)
     {
-        $this->container['attachments'] = $attachments;
+        $this->container['documentOpenPassword'] = $documentOpenPassword;
 
         return $this;
     }
 
     /*
-     * Gets file
+     * Gets permissionsPassword
      *
-     * @return \GroupDocs\Viewer\Model\Resource
+     * @return string
      */
-    public function getFile()
+    public function getPermissionsPassword()
     {
-        return $this->container['file'];
+        return $this->container['permissionsPassword'];
     }
 
     /*
-     * Sets file
+     * Sets permissionsPassword
      *
-     * @param \GroupDocs\Viewer\Model\Resource $file ULR to retrieve file.
+     * @param string $permissionsPassword The password required to change permission settings; Using a permissions password  you can restrict printing, modification and data extraction
      *
      * @return $this
      */
-    public function setFile($file)
+    public function setPermissionsPassword($permissionsPassword)
     {
-        $this->container['file'] = $file;
+        $this->container['permissionsPassword'] = $permissionsPassword;
+
+        return $this;
+    }
+
+    /*
+     * Gets permissions
+     *
+     * @return string
+     */
+    public function getPermissions()
+    {
+        return $this->container['permissions'];
+    }
+
+    /*
+     * Sets permissions
+     *
+     * @param string $permissions The PDF document permissions such as printing, modification and data extraction
+     *
+     * @return $this
+     */
+    public function setPermissions($permissions)
+    {
+        $allowedValues = $this->getPermissionsAllowableValues();
+        if ((!is_numeric($permissions) && !in_array($permissions, $allowedValues)) || (is_numeric($permissions) && !in_array($allowedValues[$permissions], $allowedValues))) {
+            throw new \InvalidArgumentException(sprintf("Invalid value for 'permissions', must be one of '%s'", implode("', '", $allowedValues)));
+        }
+			
+        $this->container['permissions'] = $permissions;
 
         return $this;
     }

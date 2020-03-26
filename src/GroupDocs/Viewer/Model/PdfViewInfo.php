@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="ViewResult.php">
+ * <copyright company="Aspose Pty Ltd" file="PdfViewInfo.php">
  *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * ViewResult
+ * PdfViewInfo
  *
- * @description View result information
+ * @description Represents view information for PDF document
  */
-class ViewResult implements ArrayAccess
+class PdfViewInfo implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class ViewResult implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "ViewResult";
+    protected static $swaggerModelName = "PdfViewInfo";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,9 +53,7 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'pages' => '\GroupDocs\Viewer\Model\PageView[]',
-        'attachments' => '\GroupDocs\Viewer\Model\AttachmentView[]',
-        'file' => '\GroupDocs\Viewer\Model\Resource'
+        'printingAllowed' => 'bool'
     ];
 
     /*
@@ -64,9 +62,7 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'pages' => null,
-        'attachments' => null,
-        'file' => null
+        'printingAllowed' => null
     ];
 
     /*
@@ -96,9 +92,7 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'pages' => 'Pages',
-        'attachments' => 'Attachments',
-        'file' => 'File'
+        'printingAllowed' => 'PrintingAllowed'
     ];
 
     /*
@@ -107,9 +101,7 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'pages' => 'setPages',
-        'attachments' => 'setAttachments',
-        'file' => 'setFile'
+        'printingAllowed' => 'setPrintingAllowed'
     ];
 
     /*
@@ -118,9 +110,7 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'pages' => 'getPages',
-        'attachments' => 'getAttachments',
-        'file' => 'getFile'
+        'printingAllowed' => 'getPrintingAllowed'
     ];
 
     /*
@@ -183,9 +173,7 @@ class ViewResult implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['pages'] = isset($data['pages']) ? $data['pages'] : null;
-        $this->container['attachments'] = isset($data['attachments']) ? $data['attachments'] : null;
-        $this->container['file'] = isset($data['file']) ? $data['file'] : null;
+        $this->container['printingAllowed'] = isset($data['printingAllowed']) ? $data['printingAllowed'] : null;
     }
 
     /*
@@ -197,6 +185,9 @@ class ViewResult implements ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['printingAllowed'] === null) {
+            $invalidProperties[] = "'printingAllowed' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -209,78 +200,33 @@ class ViewResult implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['printingAllowed'] === null) {
+            return false;
+        }
         return true;
     }
 
 
     /*
-     * Gets pages
+     * Gets printingAllowed
      *
-     * @return \GroupDocs\Viewer\Model\PageView[]
+     * @return bool
      */
-    public function getPages()
+    public function getPrintingAllowed()
     {
-        return $this->container['pages'];
+        return $this->container['printingAllowed'];
     }
 
     /*
-     * Sets pages
+     * Sets printingAllowed
      *
-     * @param \GroupDocs\Viewer\Model\PageView[] $pages View result pages
+     * @param bool $printingAllowed Indicates if printing of the document is allowed
      *
      * @return $this
      */
-    public function setPages($pages)
+    public function setPrintingAllowed($printingAllowed)
     {
-        $this->container['pages'] = $pages;
-
-        return $this;
-    }
-
-    /*
-     * Gets attachments
-     *
-     * @return \GroupDocs\Viewer\Model\AttachmentView[]
-     */
-    public function getAttachments()
-    {
-        return $this->container['attachments'];
-    }
-
-    /*
-     * Sets attachments
-     *
-     * @param \GroupDocs\Viewer\Model\AttachmentView[] $attachments Attachments
-     *
-     * @return $this
-     */
-    public function setAttachments($attachments)
-    {
-        $this->container['attachments'] = $attachments;
-
-        return $this;
-    }
-
-    /*
-     * Gets file
-     *
-     * @return \GroupDocs\Viewer\Model\Resource
-     */
-    public function getFile()
-    {
-        return $this->container['file'];
-    }
-
-    /*
-     * Sets file
-     *
-     * @param \GroupDocs\Viewer\Model\Resource $file ULR to retrieve file.
-     *
-     * @return $this
-     */
-    public function setFile($file)
-    {
-        $this->container['file'] = $file;
+        $this->container['printingAllowed'] = $printingAllowed;
 
         return $this;
     }

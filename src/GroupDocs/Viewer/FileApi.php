@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="FileApi.php">
- *   Copyright (c) 2003-2019 Aspose Pty Ltd
+ *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -129,8 +129,8 @@ class FileApi
                 $error = json_decode($content);
 
                 $errorCode = $e->getCode();
-                $errorMessage = $error->Error != null && $error->Error->Message != null
-                    ? $error->Error->Message
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
                     : $e->getMessage();
                 
                 throw new ApiException($errorMessage, $errorCode);
@@ -400,8 +400,8 @@ class FileApi
                 $error = json_decode($content);
 
                 $errorCode = $e->getCode();
-                $errorMessage = $error->Error != null && $error->Error->Message != null
-                    ? $error->Error->Message
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
                     : $e->getMessage();
                 
                 throw new ApiException($errorMessage, $errorCode);
@@ -648,8 +648,8 @@ class FileApi
                 $error = json_decode($content);
 
                 $errorCode = $e->getCode();
-                $errorMessage = $error->Error != null && $error->Error->Message != null
-                    ? $error->Error->Message
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
                     : $e->getMessage();
                 
                 throw new ApiException($errorMessage, $errorCode);
@@ -935,8 +935,8 @@ class FileApi
                 $error = json_decode($content);
 
                 $errorCode = $e->getCode();
-                $errorMessage = $error->Error != null && $error->Error->Message != null
-                    ? $error->Error->Message
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
                     : $e->getMessage();
                 
                 throw new ApiException($errorMessage, $errorCode);
@@ -1207,8 +1207,8 @@ class FileApi
                 $error = json_decode($content);
 
                 $errorCode = $e->getCode();
-                $errorMessage = $error->Error != null && $error->Error->Message != null
-                    ? $error->Error->Message
+                $errorMessage = $error->error != null && $error->error->message != null
+                    ? $error->error->message
                     : $e->getMessage();
                 
                 throw new ApiException($errorMessage, $errorCode);
@@ -1443,13 +1443,13 @@ class FileApi
         );
     
         $req = new Request(
-            'POST',
+            'PUT',
             $resourcePath,
             $headers,
             $httpBody
         );
         if ($this->config->getDebug()) {
-            $this->_writeRequestLog('POST', $resourcePath, $headers, $httpBody);
+            $this->_writeRequestLog('PUT', $resourcePath, $headers, $httpBody);
         }
         
         return $req;
@@ -1557,7 +1557,7 @@ class FileApi
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="copyFileRequest.php">
- *   Copyright (c) 2003-2019 Aspose Pty Ltd
+ *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1634,7 +1634,7 @@ class copyFileRequest
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="deleteFileRequest.php">
- *   Copyright (c) 2003-2019 Aspose Pty Ltd
+ *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1697,7 +1697,7 @@ class deleteFileRequest
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="downloadFileRequest.php">
- *   Copyright (c) 2003-2019 Aspose Pty Ltd
+ *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1760,7 +1760,7 @@ class downloadFileRequest
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="moveFileRequest.php">
- *   Copyright (c) 2003-2019 Aspose Pty Ltd
+ *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1837,7 +1837,7 @@ class moveFileRequest
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="uploadFileRequest.php">
- *   Copyright (c) 2003-2019 Aspose Pty Ltd
+ *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy

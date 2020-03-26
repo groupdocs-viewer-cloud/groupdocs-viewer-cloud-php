@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="DeleteViewOptions.php">
- *   Copyright (c) 2003-2019 Aspose Pty Ltd
+ *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -53,7 +53,8 @@ class DeleteViewOptions implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'fileInfo' => '\GroupDocs\Viewer\Model\FileInfo'
+        'fileInfo' => '\GroupDocs\Viewer\Model\FileInfo',
+        'outputPath' => 'string'
     ];
 
     /*
@@ -62,7 +63,8 @@ class DeleteViewOptions implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'fileInfo' => null
+        'fileInfo' => null,
+        'outputPath' => null
     ];
 
     /*
@@ -92,7 +94,8 @@ class DeleteViewOptions implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'fileInfo' => 'FileInfo'
+        'fileInfo' => 'FileInfo',
+        'outputPath' => 'OutputPath'
     ];
 
     /*
@@ -101,7 +104,8 @@ class DeleteViewOptions implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'fileInfo' => 'setFileInfo'
+        'fileInfo' => 'setFileInfo',
+        'outputPath' => 'setOutputPath'
     ];
 
     /*
@@ -110,7 +114,8 @@ class DeleteViewOptions implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'fileInfo' => 'getFileInfo'
+        'fileInfo' => 'getFileInfo',
+        'outputPath' => 'getOutputPath'
     ];
 
     /*
@@ -174,6 +179,7 @@ class DeleteViewOptions implements ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['fileInfo'] = isset($data['fileInfo']) ? $data['fileInfo'] : null;
+        $this->container['outputPath'] = isset($data['outputPath']) ? $data['outputPath'] : null;
     }
 
     /*
@@ -221,6 +227,30 @@ class DeleteViewOptions implements ArrayAccess
     public function setFileInfo($fileInfo)
     {
         $this->container['fileInfo'] = $fileInfo;
+
+        return $this;
+    }
+
+    /*
+     * Gets outputPath
+     *
+     * @return string
+     */
+    public function getOutputPath()
+    {
+        return $this->container['outputPath'];
+    }
+
+    /*
+     * Sets outputPath
+     *
+     * @param string $outputPath The output path Default value is 'viewer\\{input file path}_{file extension}\\'
+     *
+     * @return $this
+     */
+    public function setOutputPath($outputPath)
+    {
+        $this->container['outputPath'] = $outputPath;
 
         return $this;
     }

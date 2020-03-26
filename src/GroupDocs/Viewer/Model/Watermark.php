@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="Watermark.php">
- *   Copyright (c) 2003-2019 Aspose Pty Ltd
+ *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -169,8 +169,33 @@ class Watermark implements ArrayAccess
         return self::$swaggerModelName;
     }
 
+    const POSITION_DIAGONAL = 'Diagonal';
+    const POSITION_TOP_LEFT = 'TopLeft';
+    const POSITION_TOP_CENTER = 'TopCenter';
+    const POSITION_TOP_RIGHT = 'TopRight';
+    const POSITION_BOTTOM_LEFT = 'BottomLeft';
+    const POSITION_BOTTOM_CENTER = 'BottomCenter';
+    const POSITION_BOTTOM_RIGHT = 'BottomRight';
     
 
+    
+    /*
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getPositionAllowableValues()
+    {
+        return [
+            self::POSITION_DIAGONAL,
+            self::POSITION_TOP_LEFT,
+            self::POSITION_TOP_CENTER,
+            self::POSITION_TOP_RIGHT,
+            self::POSITION_BOTTOM_LEFT,
+            self::POSITION_BOTTOM_CENTER,
+            self::POSITION_BOTTOM_RIGHT,
+        ];
+    }
     
 
     /*
@@ -203,6 +228,17 @@ class Watermark implements ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['position'] === null) {
+            $invalidProperties[] = "'position' can't be null";
+        }
+        $allowedValues = $this->getPositionAllowableValues();
+        if (!in_array($this->container['position'], $allowedValues)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'position', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['size'] === null) {
             $invalidProperties[] = "'size' can't be null";
         }
@@ -218,6 +254,13 @@ class Watermark implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['position'] === null) {
+            return false;
+        }
+        $allowedValues = $this->getPositionAllowableValues();
+        if (!in_array($this->container['position'], $allowedValues)) {
+            return false;
+        }
         if ($this->container['size'] === null) {
             return false;
         }
@@ -286,12 +329,17 @@ class Watermark implements ArrayAccess
     /*
      * Sets position
      *
-     * @param string $position Watermark position. Supported positions {Diagonal|TopLeft|TopCenter|TopRight|BottomLeft|BottomCenter|BottomRight}. Default value is \"Diagonal\".
+     * @param string $position Watermark position. Default value is \"Diagonal\".
      *
      * @return $this
      */
     public function setPosition($position)
     {
+        $allowedValues = $this->getPositionAllowableValues();
+        if ((!is_numeric($position) && !in_array($position, $allowedValues)) || (is_numeric($position) && !in_array($allowedValues[$position], $allowedValues))) {
+            throw new \InvalidArgumentException(sprintf("Invalid value for 'position', must be one of '%s'", implode("', '", $allowedValues)));
+        }
+			
         $this->container['position'] = $position;
 
         return $this;

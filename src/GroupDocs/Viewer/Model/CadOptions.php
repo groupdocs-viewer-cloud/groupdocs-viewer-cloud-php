@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="CadOptions.php">
- *   Copyright (c) 2003-2019 Aspose Pty Ltd
+ *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -55,7 +55,11 @@ class CadOptions implements ArrayAccess
     protected static $swaggerTypes = [
         'scaleFactor' => 'double',
         'width' => 'int',
-        'height' => 'int'
+        'height' => 'int',
+        'tiles' => '\GroupDocs\Viewer\Model\Tile[]',
+        'renderLayouts' => 'bool',
+        'layoutName' => 'string',
+        'layers' => 'string[]'
     ];
 
     /*
@@ -66,7 +70,11 @@ class CadOptions implements ArrayAccess
     protected static $swaggerFormats = [
         'scaleFactor' => 'double',
         'width' => 'int32',
-        'height' => 'int32'
+        'height' => 'int32',
+        'tiles' => null,
+        'renderLayouts' => null,
+        'layoutName' => null,
+        'layers' => null
     ];
 
     /*
@@ -98,7 +106,11 @@ class CadOptions implements ArrayAccess
     protected static $attributeMap = [
         'scaleFactor' => 'ScaleFactor',
         'width' => 'Width',
-        'height' => 'Height'
+        'height' => 'Height',
+        'tiles' => 'Tiles',
+        'renderLayouts' => 'RenderLayouts',
+        'layoutName' => 'LayoutName',
+        'layers' => 'Layers'
     ];
 
     /*
@@ -109,7 +121,11 @@ class CadOptions implements ArrayAccess
     protected static $setters = [
         'scaleFactor' => 'setScaleFactor',
         'width' => 'setWidth',
-        'height' => 'setHeight'
+        'height' => 'setHeight',
+        'tiles' => 'setTiles',
+        'renderLayouts' => 'setRenderLayouts',
+        'layoutName' => 'setLayoutName',
+        'layers' => 'setLayers'
     ];
 
     /*
@@ -120,7 +136,11 @@ class CadOptions implements ArrayAccess
     protected static $getters = [
         'scaleFactor' => 'getScaleFactor',
         'width' => 'getWidth',
-        'height' => 'getHeight'
+        'height' => 'getHeight',
+        'tiles' => 'getTiles',
+        'renderLayouts' => 'getRenderLayouts',
+        'layoutName' => 'getLayoutName',
+        'layers' => 'getLayers'
     ];
 
     /*
@@ -186,6 +206,10 @@ class CadOptions implements ArrayAccess
         $this->container['scaleFactor'] = isset($data['scaleFactor']) ? $data['scaleFactor'] : null;
         $this->container['width'] = isset($data['width']) ? $data['width'] : null;
         $this->container['height'] = isset($data['height']) ? $data['height'] : null;
+        $this->container['tiles'] = isset($data['tiles']) ? $data['tiles'] : null;
+        $this->container['renderLayouts'] = isset($data['renderLayouts']) ? $data['renderLayouts'] : null;
+        $this->container['layoutName'] = isset($data['layoutName']) ? $data['layoutName'] : null;
+        $this->container['layers'] = isset($data['layers']) ? $data['layers'] : null;
     }
 
     /*
@@ -206,6 +230,9 @@ class CadOptions implements ArrayAccess
         if ($this->container['height'] === null) {
             $invalidProperties[] = "'height' can't be null";
         }
+        if ($this->container['renderLayouts'] === null) {
+            $invalidProperties[] = "'renderLayouts' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -225,6 +252,9 @@ class CadOptions implements ArrayAccess
             return false;
         }
         if ($this->container['height'] === null) {
+            return false;
+        }
+        if ($this->container['renderLayouts'] === null) {
             return false;
         }
         return true;
@@ -299,6 +329,102 @@ class CadOptions implements ArrayAccess
     public function setHeight($height)
     {
         $this->container['height'] = $height;
+
+        return $this;
+    }
+
+    /*
+     * Gets tiles
+     *
+     * @return \GroupDocs\Viewer\Model\Tile[]
+     */
+    public function getTiles()
+    {
+        return $this->container['tiles'];
+    }
+
+    /*
+     * Sets tiles
+     *
+     * @param \GroupDocs\Viewer\Model\Tile[] $tiles The drawing regions to render This option supported only for DWG and DWT file types The RenderLayouts and LayoutName options are ignored when rendering by tiles
+     *
+     * @return $this
+     */
+    public function setTiles($tiles)
+    {
+        $this->container['tiles'] = $tiles;
+
+        return $this;
+    }
+
+    /*
+     * Gets renderLayouts
+     *
+     * @return bool
+     */
+    public function getRenderLayouts()
+    {
+        return $this->container['renderLayouts'];
+    }
+
+    /*
+     * Sets renderLayouts
+     *
+     * @param bool $renderLayouts Indicates whether layouts from CAD document should be rendered
+     *
+     * @return $this
+     */
+    public function setRenderLayouts($renderLayouts)
+    {
+        $this->container['renderLayouts'] = $renderLayouts;
+
+        return $this;
+    }
+
+    /*
+     * Gets layoutName
+     *
+     * @return string
+     */
+    public function getLayoutName()
+    {
+        return $this->container['layoutName'];
+    }
+
+    /*
+     * Sets layoutName
+     *
+     * @param string $layoutName The name of the specific layout to render. Layout name is case-sensitive
+     *
+     * @return $this
+     */
+    public function setLayoutName($layoutName)
+    {
+        $this->container['layoutName'] = $layoutName;
+
+        return $this;
+    }
+
+    /*
+     * Gets layers
+     *
+     * @return string[]
+     */
+    public function getLayers()
+    {
+        return $this->container['layers'];
+    }
+
+    /*
+     * Sets layers
+     *
+     * @param string[] $layers The CAD drawing layers to render By default all layers are rendered; Layer names are case-sensitive
+     *
+     * @return $this
+     */
+    public function setLayers($layers)
+    {
+        $this->container['layers'] = $layers;
 
         return $this;
     }

@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="EmailOptions.php">
- *   Copyright (c) 2003-2019 Aspose Pty Ltd
+ *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -159,8 +159,35 @@ class EmailOptions implements ArrayAccess
         return self::$swaggerModelName;
     }
 
+    const PAGE_SIZE_UNSPECIFIED = 'Unspecified';
+    const PAGE_SIZE_LETTER = 'Letter';
+    const PAGE_SIZE_LEDGER = 'Ledger';
+    const PAGE_SIZE_A0 = 'A0';
+    const PAGE_SIZE_A1 = 'A1';
+    const PAGE_SIZE_A2 = 'A2';
+    const PAGE_SIZE_A3 = 'A3';
+    const PAGE_SIZE_A4 = 'A4';
     
 
+    
+    /*
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getPageSizeAllowableValues()
+    {
+        return [
+            self::PAGE_SIZE_UNSPECIFIED,
+            self::PAGE_SIZE_LETTER,
+            self::PAGE_SIZE_LEDGER,
+            self::PAGE_SIZE_A0,
+            self::PAGE_SIZE_A1,
+            self::PAGE_SIZE_A2,
+            self::PAGE_SIZE_A3,
+            self::PAGE_SIZE_A4,
+        ];
+    }
     
 
     /*
@@ -191,6 +218,17 @@ class EmailOptions implements ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['pageSize'] === null) {
+            $invalidProperties[] = "'pageSize' can't be null";
+        }
+        $allowedValues = $this->getPageSizeAllowableValues();
+        if (!in_array($this->container['pageSize'], $allowedValues)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'pageSize', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -203,6 +241,13 @@ class EmailOptions implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['pageSize'] === null) {
+            return false;
+        }
+        $allowedValues = $this->getPageSizeAllowableValues();
+        if (!in_array($this->container['pageSize'], $allowedValues)) {
+            return false;
+        }
         return true;
     }
 
@@ -220,12 +265,17 @@ class EmailOptions implements ArrayAccess
     /*
      * Sets pageSize
      *
-     * @param string $pageSize The size of the output page when rendering as PDF or image. Supported values {Unknown|Letter|Ledger|A0|A1|A2|A3}: 1. Unknown - the default, unspecified page size. 2. Letter - the size of the Letter page in points is 792x612. 3. Ledger - the size of the Letter page in points is 1224x792. 4. A0 - the size of the A0 page in points is 3371x2384. 5. A1 - the size of the A1 page in points is 2384x1685. 6. A2 - the size of the A2 page in points is 1684x1190. 7. A3 - the size of the A3 page in points is 1190x842. 8. A4 - the size of the A4 page in points is 842x595.
+     * @param string $pageSize The size of the output page when rendering as PDF or image.
      *
      * @return $this
      */
     public function setPageSize($pageSize)
     {
+        $allowedValues = $this->getPageSizeAllowableValues();
+        if ((!is_numeric($pageSize) && !in_array($pageSize, $allowedValues)) || (is_numeric($pageSize) && !in_array($allowedValues[$pageSize], $allowedValues))) {
+            throw new \InvalidArgumentException(sprintf("Invalid value for 'pageSize', must be one of '%s'", implode("', '", $allowedValues)));
+        }
+			
         $this->container['pageSize'] = $pageSize;
 
         return $this;

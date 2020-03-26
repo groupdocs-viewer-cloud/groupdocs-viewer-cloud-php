@@ -2,7 +2,7 @@
 /**
 * --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose Pty Ltd" file="ViewerGetInfoApiTest.php">
-*   Copyright (c) 2003-2019 Aspose Pty Ltd
+*   Copyright (c) 2003-2020 Aspose Pty Ltd
 * </copyright>
 * <summary>
 *  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -194,8 +194,8 @@ class ViewerGetInfoApiTest extends BaseApiTest
     {
         $testFile = Internal\TestFiles::getFileProjectMpp();
         $projectOptions = new \GroupDocs\Viewer\Model\ProjectManagementOptions();
-        $projectOptions->setPageSize("Unknown");
-        $projectOptions->setTimeUnit("Months");
+        $projectOptions->setPageSize(\GroupDocs\Viewer\Model\ProjectManagementOptions::PAGE_SIZE_UNSPECIFIED);
+        $projectOptions->setTimeUnit(\GroupDocs\Viewer\Model\ProjectManagementOptions::TIME_UNIT_MONTHS);
         $projectOptions->setStartDate("2008/07/01");
         $projectOptions->setEndDate("2008/07/31");
         $renderOptions = new RenderOptions();
@@ -207,7 +207,7 @@ class ViewerGetInfoApiTest extends BaseApiTest
        
         $response = self::$infoApi->getInfo($request);
 
-        $this->assertEquals(2, count($response->getPages()));
+        $this->assertEquals(1, count($response->getPages()));
     }
 
     public function testGetInfoWithImageOptions()
@@ -227,6 +227,6 @@ class ViewerGetInfoApiTest extends BaseApiTest
         $this->assertEquals(0, count($response->getAttachments()));
         $page = $response->getPages()[0];
         $this->assertEquals(1, $page->getNumber());
-        $this->assertGreaterThan(0, count($page->getRows())); 
+        $this->assertGreaterThan(0, count($page->getLines())); 
     }      
 }

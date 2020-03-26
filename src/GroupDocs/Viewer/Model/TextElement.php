@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="ViewResult.php">
+ * <copyright company="Aspose Pty Ltd" file="TextElement.php">
  *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,20 +32,20 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * ViewResult
+ * TextElement
  *
- * @description View result information
+ * @description Text element
  */
-class ViewResult implements ArrayAccess
+class TextElement implements ArrayAccess
 {
-    const DISCRIMINATOR = null;
+    const DISCRIMINATOR = 'Type';
 
     /*
      * The original name of the model.
      *
      * @var string
      */
-    protected static $swaggerModelName = "ViewResult";
+    protected static $swaggerModelName = "TextElement";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,9 +53,11 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'pages' => '\GroupDocs\Viewer\Model\PageView[]',
-        'attachments' => '\GroupDocs\Viewer\Model\AttachmentView[]',
-        'file' => '\GroupDocs\Viewer\Model\Resource'
+        'x' => 'double',
+        'y' => 'double',
+        'width' => 'double',
+        'height' => 'double',
+        'value' => 'string'
     ];
 
     /*
@@ -64,9 +66,11 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'pages' => null,
-        'attachments' => null,
-        'file' => null
+        'x' => 'double',
+        'y' => 'double',
+        'width' => 'double',
+        'height' => 'double',
+        'value' => null
     ];
 
     /*
@@ -96,9 +100,11 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'pages' => 'Pages',
-        'attachments' => 'Attachments',
-        'file' => 'File'
+        'x' => 'X',
+        'y' => 'Y',
+        'width' => 'Width',
+        'height' => 'Height',
+        'value' => 'Value'
     ];
 
     /*
@@ -107,9 +113,11 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'pages' => 'setPages',
-        'attachments' => 'setAttachments',
-        'file' => 'setFile'
+        'x' => 'setX',
+        'y' => 'setY',
+        'width' => 'setWidth',
+        'height' => 'setHeight',
+        'value' => 'setValue'
     ];
 
     /*
@@ -118,9 +126,11 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'pages' => 'getPages',
-        'attachments' => 'getAttachments',
-        'file' => 'getFile'
+        'x' => 'getX',
+        'y' => 'getY',
+        'width' => 'getWidth',
+        'height' => 'getHeight',
+        'value' => 'getValue'
     ];
 
     /*
@@ -183,9 +193,15 @@ class ViewResult implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['pages'] = isset($data['pages']) ? $data['pages'] : null;
-        $this->container['attachments'] = isset($data['attachments']) ? $data['attachments'] : null;
-        $this->container['file'] = isset($data['file']) ? $data['file'] : null;
+        $this->container['x'] = isset($data['x']) ? $data['x'] : null;
+        $this->container['y'] = isset($data['y']) ? $data['y'] : null;
+        $this->container['width'] = isset($data['width']) ? $data['width'] : null;
+        $this->container['height'] = isset($data['height']) ? $data['height'] : null;
+        $this->container['value'] = isset($data['value']) ? $data['value'] : null;
+
+        // Initialize discriminator property with the model name.
+        $discriminator = array_search('Type', self::$attributeMap);
+        $this->container[$discriminator] = static::$swaggerModelName;
     }
 
     /*
@@ -197,6 +213,18 @@ class ViewResult implements ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['x'] === null) {
+            $invalidProperties[] = "'x' can't be null";
+        }
+        if ($this->container['y'] === null) {
+            $invalidProperties[] = "'y' can't be null";
+        }
+        if ($this->container['width'] === null) {
+            $invalidProperties[] = "'width' can't be null";
+        }
+        if ($this->container['height'] === null) {
+            $invalidProperties[] = "'height' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -209,78 +237,138 @@ class ViewResult implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['x'] === null) {
+            return false;
+        }
+        if ($this->container['y'] === null) {
+            return false;
+        }
+        if ($this->container['width'] === null) {
+            return false;
+        }
+        if ($this->container['height'] === null) {
+            return false;
+        }
         return true;
     }
 
 
     /*
-     * Gets pages
+     * Gets x
      *
-     * @return \GroupDocs\Viewer\Model\PageView[]
+     * @return double
      */
-    public function getPages()
+    public function getX()
     {
-        return $this->container['pages'];
+        return $this->container['x'];
     }
 
     /*
-     * Sets pages
+     * Sets x
      *
-     * @param \GroupDocs\Viewer\Model\PageView[] $pages View result pages
+     * @param double $x The X coordinate of the highest left point on the page layout where the rectangle that contains element begins.
      *
      * @return $this
      */
-    public function setPages($pages)
+    public function setX($x)
     {
-        $this->container['pages'] = $pages;
+        $this->container['x'] = $x;
 
         return $this;
     }
 
     /*
-     * Gets attachments
+     * Gets y
      *
-     * @return \GroupDocs\Viewer\Model\AttachmentView[]
+     * @return double
      */
-    public function getAttachments()
+    public function getY()
     {
-        return $this->container['attachments'];
+        return $this->container['y'];
     }
 
     /*
-     * Sets attachments
+     * Sets y
      *
-     * @param \GroupDocs\Viewer\Model\AttachmentView[] $attachments Attachments
+     * @param double $y The Y coordinate of the highest left point on the page layout where the rectangle that contains element begins.
      *
      * @return $this
      */
-    public function setAttachments($attachments)
+    public function setY($y)
     {
-        $this->container['attachments'] = $attachments;
+        $this->container['y'] = $y;
 
         return $this;
     }
 
     /*
-     * Gets file
+     * Gets width
      *
-     * @return \GroupDocs\Viewer\Model\Resource
+     * @return double
      */
-    public function getFile()
+    public function getWidth()
     {
-        return $this->container['file'];
+        return $this->container['width'];
     }
 
     /*
-     * Sets file
+     * Sets width
      *
-     * @param \GroupDocs\Viewer\Model\Resource $file ULR to retrieve file.
+     * @param double $width The width of the rectangle which contains the element (in pixels).
      *
      * @return $this
      */
-    public function setFile($file)
+    public function setWidth($width)
     {
-        $this->container['file'] = $file;
+        $this->container['width'] = $width;
+
+        return $this;
+    }
+
+    /*
+     * Gets height
+     *
+     * @return double
+     */
+    public function getHeight()
+    {
+        return $this->container['height'];
+    }
+
+    /*
+     * Sets height
+     *
+     * @param double $height The height of the rectangle which contains the element (in pixels).
+     *
+     * @return $this
+     */
+    public function setHeight($height)
+    {
+        $this->container['height'] = $height;
+
+        return $this;
+    }
+
+    /*
+     * Gets value
+     *
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->container['value'];
+    }
+
+    /*
+     * Sets value
+     *
+     * @param string $value The element value
+     *
+     * @return $this
+     */
+    public function setValue($value)
+    {
+        $this->container['value'] = $value;
 
         return $this;
     }

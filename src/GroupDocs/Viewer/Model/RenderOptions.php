@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="RenderOptions.php">
- *   Copyright (c) 2003-2019 Aspose Pty Ltd
+ *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -55,14 +55,21 @@ class RenderOptions implements ArrayAccess
     protected static $swaggerTypes = [
         'startPageNumber' => 'int',
         'countPagesToRender' => 'int',
+        'pagesToRender' => 'int[]',
+        'pageRotations' => '\GroupDocs\Viewer\Model\PageRotation[]',
         'defaultFontName' => 'string',
         'defaultEncoding' => 'string',
         'renderComments' => 'bool',
+        'renderNotes' => 'bool',
         'renderHiddenPages' => 'bool',
         'spreadsheetOptions' => '\GroupDocs\Viewer\Model\SpreadsheetOptions',
         'cadOptions' => '\GroupDocs\Viewer\Model\CadOptions',
         'emailOptions' => '\GroupDocs\Viewer\Model\EmailOptions',
-        'projectManagementOptions' => '\GroupDocs\Viewer\Model\ProjectManagementOptions'
+        'projectManagementOptions' => '\GroupDocs\Viewer\Model\ProjectManagementOptions',
+        'pdfDocumentOptions' => '\GroupDocs\Viewer\Model\PdfDocumentOptions',
+        'wordProcessingOptions' => '\GroupDocs\Viewer\Model\WordProcessingOptions',
+        'outlookOptions' => '\GroupDocs\Viewer\Model\OutlookOptions',
+        'archiveOptions' => '\GroupDocs\Viewer\Model\ArchiveOptions'
     ];
 
     /*
@@ -73,14 +80,21 @@ class RenderOptions implements ArrayAccess
     protected static $swaggerFormats = [
         'startPageNumber' => 'int32',
         'countPagesToRender' => 'int32',
+        'pagesToRender' => 'int32',
+        'pageRotations' => null,
         'defaultFontName' => null,
         'defaultEncoding' => null,
         'renderComments' => null,
+        'renderNotes' => null,
         'renderHiddenPages' => null,
         'spreadsheetOptions' => null,
         'cadOptions' => null,
         'emailOptions' => null,
-        'projectManagementOptions' => null
+        'projectManagementOptions' => null,
+        'pdfDocumentOptions' => null,
+        'wordProcessingOptions' => null,
+        'outlookOptions' => null,
+        'archiveOptions' => null
     ];
 
     /*
@@ -112,14 +126,21 @@ class RenderOptions implements ArrayAccess
     protected static $attributeMap = [
         'startPageNumber' => 'StartPageNumber',
         'countPagesToRender' => 'CountPagesToRender',
+        'pagesToRender' => 'PagesToRender',
+        'pageRotations' => 'PageRotations',
         'defaultFontName' => 'DefaultFontName',
         'defaultEncoding' => 'DefaultEncoding',
         'renderComments' => 'RenderComments',
+        'renderNotes' => 'RenderNotes',
         'renderHiddenPages' => 'RenderHiddenPages',
         'spreadsheetOptions' => 'SpreadsheetOptions',
         'cadOptions' => 'CadOptions',
         'emailOptions' => 'EmailOptions',
-        'projectManagementOptions' => 'ProjectManagementOptions'
+        'projectManagementOptions' => 'ProjectManagementOptions',
+        'pdfDocumentOptions' => 'PdfDocumentOptions',
+        'wordProcessingOptions' => 'WordProcessingOptions',
+        'outlookOptions' => 'OutlookOptions',
+        'archiveOptions' => 'ArchiveOptions'
     ];
 
     /*
@@ -130,14 +151,21 @@ class RenderOptions implements ArrayAccess
     protected static $setters = [
         'startPageNumber' => 'setStartPageNumber',
         'countPagesToRender' => 'setCountPagesToRender',
+        'pagesToRender' => 'setPagesToRender',
+        'pageRotations' => 'setPageRotations',
         'defaultFontName' => 'setDefaultFontName',
         'defaultEncoding' => 'setDefaultEncoding',
         'renderComments' => 'setRenderComments',
+        'renderNotes' => 'setRenderNotes',
         'renderHiddenPages' => 'setRenderHiddenPages',
         'spreadsheetOptions' => 'setSpreadsheetOptions',
         'cadOptions' => 'setCadOptions',
         'emailOptions' => 'setEmailOptions',
-        'projectManagementOptions' => 'setProjectManagementOptions'
+        'projectManagementOptions' => 'setProjectManagementOptions',
+        'pdfDocumentOptions' => 'setPdfDocumentOptions',
+        'wordProcessingOptions' => 'setWordProcessingOptions',
+        'outlookOptions' => 'setOutlookOptions',
+        'archiveOptions' => 'setArchiveOptions'
     ];
 
     /*
@@ -148,14 +176,21 @@ class RenderOptions implements ArrayAccess
     protected static $getters = [
         'startPageNumber' => 'getStartPageNumber',
         'countPagesToRender' => 'getCountPagesToRender',
+        'pagesToRender' => 'getPagesToRender',
+        'pageRotations' => 'getPageRotations',
         'defaultFontName' => 'getDefaultFontName',
         'defaultEncoding' => 'getDefaultEncoding',
         'renderComments' => 'getRenderComments',
+        'renderNotes' => 'getRenderNotes',
         'renderHiddenPages' => 'getRenderHiddenPages',
         'spreadsheetOptions' => 'getSpreadsheetOptions',
         'cadOptions' => 'getCadOptions',
         'emailOptions' => 'getEmailOptions',
-        'projectManagementOptions' => 'getProjectManagementOptions'
+        'projectManagementOptions' => 'getProjectManagementOptions',
+        'pdfDocumentOptions' => 'getPdfDocumentOptions',
+        'wordProcessingOptions' => 'getWordProcessingOptions',
+        'outlookOptions' => 'getOutlookOptions',
+        'archiveOptions' => 'getArchiveOptions'
     ];
 
     /*
@@ -220,14 +255,21 @@ class RenderOptions implements ArrayAccess
     {
         $this->container['startPageNumber'] = isset($data['startPageNumber']) ? $data['startPageNumber'] : null;
         $this->container['countPagesToRender'] = isset($data['countPagesToRender']) ? $data['countPagesToRender'] : null;
+        $this->container['pagesToRender'] = isset($data['pagesToRender']) ? $data['pagesToRender'] : null;
+        $this->container['pageRotations'] = isset($data['pageRotations']) ? $data['pageRotations'] : null;
         $this->container['defaultFontName'] = isset($data['defaultFontName']) ? $data['defaultFontName'] : null;
         $this->container['defaultEncoding'] = isset($data['defaultEncoding']) ? $data['defaultEncoding'] : null;
         $this->container['renderComments'] = isset($data['renderComments']) ? $data['renderComments'] : null;
+        $this->container['renderNotes'] = isset($data['renderNotes']) ? $data['renderNotes'] : null;
         $this->container['renderHiddenPages'] = isset($data['renderHiddenPages']) ? $data['renderHiddenPages'] : null;
         $this->container['spreadsheetOptions'] = isset($data['spreadsheetOptions']) ? $data['spreadsheetOptions'] : null;
         $this->container['cadOptions'] = isset($data['cadOptions']) ? $data['cadOptions'] : null;
         $this->container['emailOptions'] = isset($data['emailOptions']) ? $data['emailOptions'] : null;
         $this->container['projectManagementOptions'] = isset($data['projectManagementOptions']) ? $data['projectManagementOptions'] : null;
+        $this->container['pdfDocumentOptions'] = isset($data['pdfDocumentOptions']) ? $data['pdfDocumentOptions'] : null;
+        $this->container['wordProcessingOptions'] = isset($data['wordProcessingOptions']) ? $data['wordProcessingOptions'] : null;
+        $this->container['outlookOptions'] = isset($data['outlookOptions']) ? $data['outlookOptions'] : null;
+        $this->container['archiveOptions'] = isset($data['archiveOptions']) ? $data['archiveOptions'] : null;
 
         // Initialize discriminator property with the model name.
         $discriminator = array_search('Type', self::$attributeMap);
@@ -252,6 +294,9 @@ class RenderOptions implements ArrayAccess
         if ($this->container['renderComments'] === null) {
             $invalidProperties[] = "'renderComments' can't be null";
         }
+        if ($this->container['renderNotes'] === null) {
+            $invalidProperties[] = "'renderNotes' can't be null";
+        }
         if ($this->container['renderHiddenPages'] === null) {
             $invalidProperties[] = "'renderHiddenPages' can't be null";
         }
@@ -274,6 +319,9 @@ class RenderOptions implements ArrayAccess
             return false;
         }
         if ($this->container['renderComments'] === null) {
+            return false;
+        }
+        if ($this->container['renderNotes'] === null) {
             return false;
         }
         if ($this->container['renderHiddenPages'] === null) {
@@ -327,6 +375,54 @@ class RenderOptions implements ArrayAccess
     public function setCountPagesToRender($countPagesToRender)
     {
         $this->container['countPagesToRender'] = $countPagesToRender;
+
+        return $this;
+    }
+
+    /*
+     * Gets pagesToRender
+     *
+     * @return int[]
+     */
+    public function getPagesToRender()
+    {
+        return $this->container['pagesToRender'];
+    }
+
+    /*
+     * Sets pagesToRender
+     *
+     * @param int[] $pagesToRender Pages list to render. Ignored, if StartPageNumber and CountPagesToRender are provided
+     *
+     * @return $this
+     */
+    public function setPagesToRender($pagesToRender)
+    {
+        $this->container['pagesToRender'] = $pagesToRender;
+
+        return $this;
+    }
+
+    /*
+     * Gets pageRotations
+     *
+     * @return \GroupDocs\Viewer\Model\PageRotation[]
+     */
+    public function getPageRotations()
+    {
+        return $this->container['pageRotations'];
+    }
+
+    /*
+     * Sets pageRotations
+     *
+     * @param \GroupDocs\Viewer\Model\PageRotation[] $pageRotations Page rotations
+     *
+     * @return $this
+     */
+    public function setPageRotations($pageRotations)
+    {
+        $this->container['pageRotations'] = $pageRotations;
 
         return $this;
     }
@@ -392,13 +488,37 @@ class RenderOptions implements ArrayAccess
     /*
      * Sets renderComments
      *
-     * @param bool $renderComments When enabled comments will be rendered to the output.
+     * @param bool $renderComments When enabled comments will be rendered to the output
      *
      * @return $this
      */
     public function setRenderComments($renderComments)
     {
         $this->container['renderComments'] = $renderComments;
+
+        return $this;
+    }
+
+    /*
+     * Gets renderNotes
+     *
+     * @return bool
+     */
+    public function getRenderNotes()
+    {
+        return $this->container['renderNotes'];
+    }
+
+    /*
+     * Sets renderNotes
+     *
+     * @param bool $renderNotes When enabled notes will be rendered to the output
+     *
+     * @return $this
+     */
+    public function setRenderNotes($renderNotes)
+    {
+        $this->container['renderNotes'] = $renderNotes;
 
         return $this;
     }
@@ -440,7 +560,7 @@ class RenderOptions implements ArrayAccess
     /*
      * Sets spreadsheetOptions
      *
-     * @param \GroupDocs\Viewer\Model\SpreadsheetOptions $spreadsheetOptions Rendering options for Spreadsheet file formats. Spreadsheet file formats include files with extensions: .xls, .xlsx, .xlsm, .xlsb, .csv, .ods, .ots, .xltx, .xltm, .tsv
+     * @param \GroupDocs\Viewer\Model\SpreadsheetOptions $spreadsheetOptions Rendering options for Spreadsheet source file formats Spreadsheet file formats include files with extensions: .xls, .xlsx, .xlsm, .xlsb, .csv, .ods, .ots, .xltx, .xltm, .tsv
      *
      * @return $this
      */
@@ -464,7 +584,7 @@ class RenderOptions implements ArrayAccess
     /*
      * Sets cadOptions
      *
-     * @param \GroupDocs\Viewer\Model\CadOptions $cadOptions Rendering options for CAD file formats. CAD file formats include files with extensions: .dwg, .dxf, .dgn, .ifc, .stl
+     * @param \GroupDocs\Viewer\Model\CadOptions $cadOptions Rendering options for CAD source file formats CAD file formats include files with extensions: .dwg, .dxf, .dgn, .ifc, .stl
      *
      * @return $this
      */
@@ -488,7 +608,7 @@ class RenderOptions implements ArrayAccess
     /*
      * Sets emailOptions
      *
-     * @param \GroupDocs\Viewer\Model\EmailOptions $emailOptions Rendering options for Email file formats. Email file formats include files with extensions: .msg, .eml, .emlx, .ifc, .stl
+     * @param \GroupDocs\Viewer\Model\EmailOptions $emailOptions Rendering options for Email source file formats Email file formats include files with extensions: .msg, .eml, .emlx, .ifc, .stl
      *
      * @return $this
      */
@@ -512,13 +632,109 @@ class RenderOptions implements ArrayAccess
     /*
      * Sets projectManagementOptions
      *
-     * @param \GroupDocs\Viewer\Model\ProjectManagementOptions $projectManagementOptions Rendering options for Project file formats. Project file formats include files with extensions: .mpt, .mpp
+     * @param \GroupDocs\Viewer\Model\ProjectManagementOptions $projectManagementOptions Rendering options for MS Project source file formats Project file formats include files with extensions: .mpt, .mpp
      *
      * @return $this
      */
     public function setProjectManagementOptions($projectManagementOptions)
     {
         $this->container['projectManagementOptions'] = $projectManagementOptions;
+
+        return $this;
+    }
+
+    /*
+     * Gets pdfDocumentOptions
+     *
+     * @return \GroupDocs\Viewer\Model\PdfDocumentOptions
+     */
+    public function getPdfDocumentOptions()
+    {
+        return $this->container['pdfDocumentOptions'];
+    }
+
+    /*
+     * Sets pdfDocumentOptions
+     *
+     * @param \GroupDocs\Viewer\Model\PdfDocumentOptions $pdfDocumentOptions Rendering options for PDF source file formats
+     *
+     * @return $this
+     */
+    public function setPdfDocumentOptions($pdfDocumentOptions)
+    {
+        $this->container['pdfDocumentOptions'] = $pdfDocumentOptions;
+
+        return $this;
+    }
+
+    /*
+     * Gets wordProcessingOptions
+     *
+     * @return \GroupDocs\Viewer\Model\WordProcessingOptions
+     */
+    public function getWordProcessingOptions()
+    {
+        return $this->container['wordProcessingOptions'];
+    }
+
+    /*
+     * Sets wordProcessingOptions
+     *
+     * @param \GroupDocs\Viewer\Model\WordProcessingOptions $wordProcessingOptions Rendering options for WordProcessing source file formats
+     *
+     * @return $this
+     */
+    public function setWordProcessingOptions($wordProcessingOptions)
+    {
+        $this->container['wordProcessingOptions'] = $wordProcessingOptions;
+
+        return $this;
+    }
+
+    /*
+     * Gets outlookOptions
+     *
+     * @return \GroupDocs\Viewer\Model\OutlookOptions
+     */
+    public function getOutlookOptions()
+    {
+        return $this->container['outlookOptions'];
+    }
+
+    /*
+     * Sets outlookOptions
+     *
+     * @param \GroupDocs\Viewer\Model\OutlookOptions $outlookOptions Rendering options for Outlook source file formats
+     *
+     * @return $this
+     */
+    public function setOutlookOptions($outlookOptions)
+    {
+        $this->container['outlookOptions'] = $outlookOptions;
+
+        return $this;
+    }
+
+    /*
+     * Gets archiveOptions
+     *
+     * @return \GroupDocs\Viewer\Model\ArchiveOptions
+     */
+    public function getArchiveOptions()
+    {
+        return $this->container['archiveOptions'];
+    }
+
+    /*
+     * Sets archiveOptions
+     *
+     * @param \GroupDocs\Viewer\Model\ArchiveOptions $archiveOptions Rendering options for Archive source file formats
+     *
+     * @return $this
+     */
+    public function setArchiveOptions($archiveOptions)
+    {
+        $this->container['archiveOptions'] = $archiveOptions;
 
         return $this;
     }

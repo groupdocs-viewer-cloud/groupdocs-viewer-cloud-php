@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="ProjectManagementOptions.php">
- *   Copyright (c) 2003-2019 Aspose Pty Ltd
+ *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -169,8 +169,54 @@ class ProjectManagementOptions implements ArrayAccess
         return self::$swaggerModelName;
     }
 
+    const PAGE_SIZE_UNSPECIFIED = 'Unspecified';
+    const PAGE_SIZE_LETTER = 'Letter';
+    const PAGE_SIZE_LEDGER = 'Ledger';
+    const PAGE_SIZE_A0 = 'A0';
+    const PAGE_SIZE_A1 = 'A1';
+    const PAGE_SIZE_A2 = 'A2';
+    const PAGE_SIZE_A3 = 'A3';
+    const PAGE_SIZE_A4 = 'A4';
+    const TIME_UNIT_UNSPECIFIED = 'Unspecified';
+    const TIME_UNIT_DAYS = 'Days';
+    const TIME_UNIT_THIRDS_OF_MONTHS = 'ThirdsOfMonths';
+    const TIME_UNIT_MONTHS = 'Months';
     
 
+    
+    /*
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getPageSizeAllowableValues()
+    {
+        return [
+            self::PAGE_SIZE_UNSPECIFIED,
+            self::PAGE_SIZE_LETTER,
+            self::PAGE_SIZE_LEDGER,
+            self::PAGE_SIZE_A0,
+            self::PAGE_SIZE_A1,
+            self::PAGE_SIZE_A2,
+            self::PAGE_SIZE_A3,
+            self::PAGE_SIZE_A4,
+        ];
+    }
+    
+    /*
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getTimeUnitAllowableValues()
+    {
+        return [
+            self::TIME_UNIT_UNSPECIFIED,
+            self::TIME_UNIT_DAYS,
+            self::TIME_UNIT_THIRDS_OF_MONTHS,
+            self::TIME_UNIT_MONTHS,
+        ];
+    }
     
 
     /*
@@ -203,6 +249,28 @@ class ProjectManagementOptions implements ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['pageSize'] === null) {
+            $invalidProperties[] = "'pageSize' can't be null";
+        }
+        $allowedValues = $this->getPageSizeAllowableValues();
+        if (!in_array($this->container['pageSize'], $allowedValues)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'pageSize', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['timeUnit'] === null) {
+            $invalidProperties[] = "'timeUnit' can't be null";
+        }
+        $allowedValues = $this->getTimeUnitAllowableValues();
+        if (!in_array($this->container['timeUnit'], $allowedValues)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'timeUnit', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['startDate'] === null) {
             $invalidProperties[] = "'startDate' can't be null";
         }
@@ -221,6 +289,20 @@ class ProjectManagementOptions implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['pageSize'] === null) {
+            return false;
+        }
+        $allowedValues = $this->getPageSizeAllowableValues();
+        if (!in_array($this->container['pageSize'], $allowedValues)) {
+            return false;
+        }
+        if ($this->container['timeUnit'] === null) {
+            return false;
+        }
+        $allowedValues = $this->getTimeUnitAllowableValues();
+        if (!in_array($this->container['timeUnit'], $allowedValues)) {
+            return false;
+        }
         if ($this->container['startDate'] === null) {
             return false;
         }
@@ -244,12 +326,17 @@ class ProjectManagementOptions implements ArrayAccess
     /*
      * Sets pageSize
      *
-     * @param string $pageSize The size of the page. Supported values {Unknown|Letter|Ledger|A0|A1|A2|A3}: 1. Unknown - the default, unspecified page size. 2. Letter - the size of the Letter page in points is 792x612. 3. Ledger - the size of the Letter page in points is 1224x792. 4. A0 - the size of the A0 page in points is 3371x2384. 5. A1 - the size of the A1 page in points is 2384x1685. 6. A2 - the size of the A2 page in points is 1684x1190. 7. A3 - the size of the A3 page in points is 1190x842. 8. A4 - the size of the A4 page in points is 842x595.
+     * @param string $pageSize The size of the page.
      *
      * @return $this
      */
     public function setPageSize($pageSize)
     {
+        $allowedValues = $this->getPageSizeAllowableValues();
+        if ((!is_numeric($pageSize) && !in_array($pageSize, $allowedValues)) || (is_numeric($pageSize) && !in_array($allowedValues[$pageSize], $allowedValues))) {
+            throw new \InvalidArgumentException(sprintf("Invalid value for 'pageSize', must be one of '%s'", implode("', '", $allowedValues)));
+        }
+			
         $this->container['pageSize'] = $pageSize;
 
         return $this;
@@ -268,12 +355,17 @@ class ProjectManagementOptions implements ArrayAccess
     /*
      * Sets timeUnit
      *
-     * @param string $timeUnit The time unit to use as minimal point. Supported values {Unknown|Days|ThirdsOfMonths|Months}: 1. Unknown - unknown, unspecified time scale. 2. Days - one day interval. 3. ThirdsOfMonths - one third of the month. 4. Months - one month interval.
+     * @param string $timeUnit The time unit to use as minimal point.
      *
      * @return $this
      */
     public function setTimeUnit($timeUnit)
     {
+        $allowedValues = $this->getTimeUnitAllowableValues();
+        if ((!is_numeric($timeUnit) && !in_array($timeUnit, $allowedValues)) || (is_numeric($timeUnit) && !in_array($allowedValues[$timeUnit], $allowedValues))) {
+            throw new \InvalidArgumentException(sprintf("Invalid value for 'timeUnit', must be one of '%s'", implode("', '", $allowedValues)));
+        }
+			
         $this->container['timeUnit'] = $timeUnit;
 
         return $this;

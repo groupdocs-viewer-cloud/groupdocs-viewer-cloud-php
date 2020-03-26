@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="ViewResult.php">
+ * <copyright company="Aspose Pty Ltd" file="PageRotation.php">
  *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * ViewResult
+ * PageRotation
  *
- * @description View result information
+ * @description Clockwise page rotation
  */
-class ViewResult implements ArrayAccess
+class PageRotation implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class ViewResult implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "ViewResult";
+    protected static $swaggerModelName = "PageRotation";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,9 +53,8 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'pages' => '\GroupDocs\Viewer\Model\PageView[]',
-        'attachments' => '\GroupDocs\Viewer\Model\AttachmentView[]',
-        'file' => '\GroupDocs\Viewer\Model\Resource'
+        'pageNumber' => 'int',
+        'rotationAngle' => 'string'
     ];
 
     /*
@@ -64,9 +63,8 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'pages' => null,
-        'attachments' => null,
-        'file' => null
+        'pageNumber' => 'int32',
+        'rotationAngle' => null
     ];
 
     /*
@@ -96,9 +94,8 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'pages' => 'Pages',
-        'attachments' => 'Attachments',
-        'file' => 'File'
+        'pageNumber' => 'PageNumber',
+        'rotationAngle' => 'RotationAngle'
     ];
 
     /*
@@ -107,9 +104,8 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'pages' => 'setPages',
-        'attachments' => 'setAttachments',
-        'file' => 'setFile'
+        'pageNumber' => 'setPageNumber',
+        'rotationAngle' => 'setRotationAngle'
     ];
 
     /*
@@ -118,9 +114,8 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'pages' => 'getPages',
-        'attachments' => 'getAttachments',
-        'file' => 'getFile'
+        'pageNumber' => 'getPageNumber',
+        'rotationAngle' => 'getRotationAngle'
     ];
 
     /*
@@ -164,8 +159,25 @@ class ViewResult implements ArrayAccess
         return self::$swaggerModelName;
     }
 
+    const ROTATION_ANGLE_ON90_DEGREE = 'On90Degree';
+    const ROTATION_ANGLE_ON180_DEGREE = 'On180Degree';
+    const ROTATION_ANGLE_ON270_DEGREE = 'On270Degree';
     
 
+    
+    /*
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getRotationAngleAllowableValues()
+    {
+        return [
+            self::ROTATION_ANGLE_ON90_DEGREE,
+            self::ROTATION_ANGLE_ON180_DEGREE,
+            self::ROTATION_ANGLE_ON270_DEGREE,
+        ];
+    }
     
 
     /*
@@ -183,9 +195,8 @@ class ViewResult implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['pages'] = isset($data['pages']) ? $data['pages'] : null;
-        $this->container['attachments'] = isset($data['attachments']) ? $data['attachments'] : null;
-        $this->container['file'] = isset($data['file']) ? $data['file'] : null;
+        $this->container['pageNumber'] = isset($data['pageNumber']) ? $data['pageNumber'] : null;
+        $this->container['rotationAngle'] = isset($data['rotationAngle']) ? $data['rotationAngle'] : null;
     }
 
     /*
@@ -196,6 +207,20 @@ class ViewResult implements ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if ($this->container['pageNumber'] === null) {
+            $invalidProperties[] = "'pageNumber' can't be null";
+        }
+        if ($this->container['rotationAngle'] === null) {
+            $invalidProperties[] = "'rotationAngle' can't be null";
+        }
+        $allowedValues = $this->getRotationAngleAllowableValues();
+        if (!in_array($this->container['rotationAngle'], $allowedValues)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'rotationAngle', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
 
         return $invalidProperties;
     }
@@ -209,78 +234,69 @@ class ViewResult implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['pageNumber'] === null) {
+            return false;
+        }
+        if ($this->container['rotationAngle'] === null) {
+            return false;
+        }
+        $allowedValues = $this->getRotationAngleAllowableValues();
+        if (!in_array($this->container['rotationAngle'], $allowedValues)) {
+            return false;
+        }
         return true;
     }
 
 
     /*
-     * Gets pages
+     * Gets pageNumber
      *
-     * @return \GroupDocs\Viewer\Model\PageView[]
+     * @return int
      */
-    public function getPages()
+    public function getPageNumber()
     {
-        return $this->container['pages'];
+        return $this->container['pageNumber'];
     }
 
     /*
-     * Sets pages
+     * Sets pageNumber
      *
-     * @param \GroupDocs\Viewer\Model\PageView[] $pages View result pages
+     * @param int $pageNumber Page number to rotate
      *
      * @return $this
      */
-    public function setPages($pages)
+    public function setPageNumber($pageNumber)
     {
-        $this->container['pages'] = $pages;
+        $this->container['pageNumber'] = $pageNumber;
 
         return $this;
     }
 
     /*
-     * Gets attachments
+     * Gets rotationAngle
      *
-     * @return \GroupDocs\Viewer\Model\AttachmentView[]
+     * @return string
      */
-    public function getAttachments()
+    public function getRotationAngle()
     {
-        return $this->container['attachments'];
+        return $this->container['rotationAngle'];
     }
 
     /*
-     * Sets attachments
+     * Sets rotationAngle
      *
-     * @param \GroupDocs\Viewer\Model\AttachmentView[] $attachments Attachments
+     * @param string $rotationAngle Rotation angle
      *
      * @return $this
      */
-    public function setAttachments($attachments)
+    public function setRotationAngle($rotationAngle)
     {
-        $this->container['attachments'] = $attachments;
-
-        return $this;
-    }
-
-    /*
-     * Gets file
-     *
-     * @return \GroupDocs\Viewer\Model\Resource
-     */
-    public function getFile()
-    {
-        return $this->container['file'];
-    }
-
-    /*
-     * Sets file
-     *
-     * @param \GroupDocs\Viewer\Model\Resource $file ULR to retrieve file.
-     *
-     * @return $this
-     */
-    public function setFile($file)
-    {
-        $this->container['file'] = $file;
+        $allowedValues = $this->getRotationAngleAllowableValues();
+        if ((!is_numeric($rotationAngle) && !in_array($rotationAngle, $allowedValues)) || (is_numeric($rotationAngle) && !in_array($allowedValues[$rotationAngle], $allowedValues))) {
+            throw new \InvalidArgumentException(sprintf("Invalid value for 'rotationAngle', must be one of '%s'", implode("', '", $allowedValues)));
+        }
+			
+        $this->container['rotationAngle'] = $rotationAngle;
 
         return $this;
     }

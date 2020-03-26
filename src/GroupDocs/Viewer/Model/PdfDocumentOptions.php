@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="ViewOptions.php">
+ * <copyright company="Aspose Pty Ltd" file="PdfDocumentOptions.php">
  *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * ViewOptions
+ * PdfDocumentOptions
  *
- * @description View options
+ * @description Provides options for rendering PDF documents
  */
-class ViewOptions implements ArrayAccess
+class PdfDocumentOptions implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class ViewOptions implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "ViewOptions";
+    protected static $swaggerModelName = "PdfDocumentOptions";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,12 +53,11 @@ class ViewOptions implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'fileInfo' => '\GroupDocs\Viewer\Model\FileInfo',
-        'viewFormat' => 'string',
-        'outputPath' => 'string',
-        'fontsPath' => 'string',
-        'watermark' => '\GroupDocs\Viewer\Model\Watermark',
-        'renderOptions' => '\GroupDocs\Viewer\Model\RenderOptions'
+        'disableCharsGrouping' => 'bool',
+        'enableLayeredRendering' => 'bool',
+        'enableFontHinting' => 'bool',
+        'renderOriginalPageSize' => 'bool',
+        'imageQuality' => 'string'
     ];
 
     /*
@@ -67,12 +66,11 @@ class ViewOptions implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'fileInfo' => null,
-        'viewFormat' => null,
-        'outputPath' => null,
-        'fontsPath' => null,
-        'watermark' => null,
-        'renderOptions' => null
+        'disableCharsGrouping' => null,
+        'enableLayeredRendering' => null,
+        'enableFontHinting' => null,
+        'renderOriginalPageSize' => null,
+        'imageQuality' => null
     ];
 
     /*
@@ -102,12 +100,11 @@ class ViewOptions implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'fileInfo' => 'FileInfo',
-        'viewFormat' => 'ViewFormat',
-        'outputPath' => 'OutputPath',
-        'fontsPath' => 'FontsPath',
-        'watermark' => 'Watermark',
-        'renderOptions' => 'RenderOptions'
+        'disableCharsGrouping' => 'DisableCharsGrouping',
+        'enableLayeredRendering' => 'EnableLayeredRendering',
+        'enableFontHinting' => 'EnableFontHinting',
+        'renderOriginalPageSize' => 'RenderOriginalPageSize',
+        'imageQuality' => 'ImageQuality'
     ];
 
     /*
@@ -116,12 +113,11 @@ class ViewOptions implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'fileInfo' => 'setFileInfo',
-        'viewFormat' => 'setViewFormat',
-        'outputPath' => 'setOutputPath',
-        'fontsPath' => 'setFontsPath',
-        'watermark' => 'setWatermark',
-        'renderOptions' => 'setRenderOptions'
+        'disableCharsGrouping' => 'setDisableCharsGrouping',
+        'enableLayeredRendering' => 'setEnableLayeredRendering',
+        'enableFontHinting' => 'setEnableFontHinting',
+        'renderOriginalPageSize' => 'setRenderOriginalPageSize',
+        'imageQuality' => 'setImageQuality'
     ];
 
     /*
@@ -130,12 +126,11 @@ class ViewOptions implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'fileInfo' => 'getFileInfo',
-        'viewFormat' => 'getViewFormat',
-        'outputPath' => 'getOutputPath',
-        'fontsPath' => 'getFontsPath',
-        'watermark' => 'getWatermark',
-        'renderOptions' => 'getRenderOptions'
+        'disableCharsGrouping' => 'getDisableCharsGrouping',
+        'enableLayeredRendering' => 'getEnableLayeredRendering',
+        'enableFontHinting' => 'getEnableFontHinting',
+        'renderOriginalPageSize' => 'getRenderOriginalPageSize',
+        'imageQuality' => 'getImageQuality'
     ];
 
     /*
@@ -179,10 +174,9 @@ class ViewOptions implements ArrayAccess
         return self::$swaggerModelName;
     }
 
-    const VIEW_FORMAT_HTML = 'HTML';
-    const VIEW_FORMAT_PNG = 'PNG';
-    const VIEW_FORMAT_JPG = 'JPG';
-    const VIEW_FORMAT_PDF = 'PDF';
+    const IMAGE_QUALITY_LOW = 'Low';
+    const IMAGE_QUALITY_MEDIUM = 'Medium';
+    const IMAGE_QUALITY_HIGH = 'High';
     
 
     
@@ -191,13 +185,12 @@ class ViewOptions implements ArrayAccess
      *
      * @return string[]
      */
-    public function getViewFormatAllowableValues()
+    public function getImageQualityAllowableValues()
     {
         return [
-            self::VIEW_FORMAT_HTML,
-            self::VIEW_FORMAT_PNG,
-            self::VIEW_FORMAT_JPG,
-            self::VIEW_FORMAT_PDF,
+            self::IMAGE_QUALITY_LOW,
+            self::IMAGE_QUALITY_MEDIUM,
+            self::IMAGE_QUALITY_HIGH,
         ];
     }
     
@@ -217,12 +210,11 @@ class ViewOptions implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['fileInfo'] = isset($data['fileInfo']) ? $data['fileInfo'] : null;
-        $this->container['viewFormat'] = isset($data['viewFormat']) ? $data['viewFormat'] : null;
-        $this->container['outputPath'] = isset($data['outputPath']) ? $data['outputPath'] : null;
-        $this->container['fontsPath'] = isset($data['fontsPath']) ? $data['fontsPath'] : null;
-        $this->container['watermark'] = isset($data['watermark']) ? $data['watermark'] : null;
-        $this->container['renderOptions'] = isset($data['renderOptions']) ? $data['renderOptions'] : null;
+        $this->container['disableCharsGrouping'] = isset($data['disableCharsGrouping']) ? $data['disableCharsGrouping'] : null;
+        $this->container['enableLayeredRendering'] = isset($data['enableLayeredRendering']) ? $data['enableLayeredRendering'] : null;
+        $this->container['enableFontHinting'] = isset($data['enableFontHinting']) ? $data['enableFontHinting'] : null;
+        $this->container['renderOriginalPageSize'] = isset($data['renderOriginalPageSize']) ? $data['renderOriginalPageSize'] : null;
+        $this->container['imageQuality'] = isset($data['imageQuality']) ? $data['imageQuality'] : null;
     }
 
     /*
@@ -234,13 +226,25 @@ class ViewOptions implements ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['viewFormat'] === null) {
-            $invalidProperties[] = "'viewFormat' can't be null";
+        if ($this->container['disableCharsGrouping'] === null) {
+            $invalidProperties[] = "'disableCharsGrouping' can't be null";
         }
-        $allowedValues = $this->getViewFormatAllowableValues();
-        if (!in_array($this->container['viewFormat'], $allowedValues)) {
+        if ($this->container['enableLayeredRendering'] === null) {
+            $invalidProperties[] = "'enableLayeredRendering' can't be null";
+        }
+        if ($this->container['enableFontHinting'] === null) {
+            $invalidProperties[] = "'enableFontHinting' can't be null";
+        }
+        if ($this->container['renderOriginalPageSize'] === null) {
+            $invalidProperties[] = "'renderOriginalPageSize' can't be null";
+        }
+        if ($this->container['imageQuality'] === null) {
+            $invalidProperties[] = "'imageQuality' can't be null";
+        }
+        $allowedValues = $this->getImageQualityAllowableValues();
+        if (!in_array($this->container['imageQuality'], $allowedValues)) {
             $invalidProperties[] = sprintf(
-                "invalid value for 'viewFormat', must be one of '%s'",
+                "invalid value for 'imageQuality', must be one of '%s'",
                 implode("', '", $allowedValues)
             );
         }
@@ -257,11 +261,23 @@ class ViewOptions implements ArrayAccess
     public function valid()
     {
 
-        if ($this->container['viewFormat'] === null) {
+        if ($this->container['disableCharsGrouping'] === null) {
             return false;
         }
-        $allowedValues = $this->getViewFormatAllowableValues();
-        if (!in_array($this->container['viewFormat'], $allowedValues)) {
+        if ($this->container['enableLayeredRendering'] === null) {
+            return false;
+        }
+        if ($this->container['enableFontHinting'] === null) {
+            return false;
+        }
+        if ($this->container['renderOriginalPageSize'] === null) {
+            return false;
+        }
+        if ($this->container['imageQuality'] === null) {
+            return false;
+        }
+        $allowedValues = $this->getImageQualityAllowableValues();
+        if (!in_array($this->container['imageQuality'], $allowedValues)) {
             return false;
         }
         return true;
@@ -269,150 +285,126 @@ class ViewOptions implements ArrayAccess
 
 
     /*
-     * Gets fileInfo
+     * Gets disableCharsGrouping
      *
-     * @return \GroupDocs\Viewer\Model\FileInfo
+     * @return bool
      */
-    public function getFileInfo()
+    public function getDisableCharsGrouping()
     {
-        return $this->container['fileInfo'];
+        return $this->container['disableCharsGrouping'];
     }
 
     /*
-     * Sets fileInfo
+     * Sets disableCharsGrouping
      *
-     * @param \GroupDocs\Viewer\Model\FileInfo $fileInfo File info
+     * @param bool $disableCharsGrouping Disables chars grouping to keep maximum precision during chars positioning when rendering the page
      *
      * @return $this
      */
-    public function setFileInfo($fileInfo)
+    public function setDisableCharsGrouping($disableCharsGrouping)
     {
-        $this->container['fileInfo'] = $fileInfo;
+        $this->container['disableCharsGrouping'] = $disableCharsGrouping;
 
         return $this;
     }
 
     /*
-     * Gets viewFormat
+     * Gets enableLayeredRendering
      *
-     * @return string
+     * @return bool
      */
-    public function getViewFormat()
+    public function getEnableLayeredRendering()
     {
-        return $this->container['viewFormat'];
+        return $this->container['enableLayeredRendering'];
     }
 
     /*
-     * Sets viewFormat
+     * Sets enableLayeredRendering
      *
-     * @param string $viewFormat View format (HTML, PNG, JPG, or PDF) Default value is HTML.
+     * @param bool $enableLayeredRendering Enables rendering of text and graphics according to z-order in original PDF document  when rendering into HTML
      *
      * @return $this
      */
-    public function setViewFormat($viewFormat)
+    public function setEnableLayeredRendering($enableLayeredRendering)
     {
-        $allowedValues = $this->getViewFormatAllowableValues();
-        if ((!is_numeric($viewFormat) && !in_array($viewFormat, $allowedValues)) || (is_numeric($viewFormat) && !in_array($allowedValues[$viewFormat], $allowedValues))) {
-            throw new \InvalidArgumentException(sprintf("Invalid value for 'viewFormat', must be one of '%s'", implode("', '", $allowedValues)));
+        $this->container['enableLayeredRendering'] = $enableLayeredRendering;
+
+        return $this;
+    }
+
+    /*
+     * Gets enableFontHinting
+     *
+     * @return bool
+     */
+    public function getEnableFontHinting()
+    {
+        return $this->container['enableFontHinting'];
+    }
+
+    /*
+     * Sets enableFontHinting
+     *
+     * @param bool $enableFontHinting Enables font hinting. The font hinting adjusts the display of an outline font. Supported only for TTF fonts when these fonts are used in source document.
+     *
+     * @return $this
+     */
+    public function setEnableFontHinting($enableFontHinting)
+    {
+        $this->container['enableFontHinting'] = $enableFontHinting;
+
+        return $this;
+    }
+
+    /*
+     * Gets renderOriginalPageSize
+     *
+     * @return bool
+     */
+    public function getRenderOriginalPageSize()
+    {
+        return $this->container['renderOriginalPageSize'];
+    }
+
+    /*
+     * Sets renderOriginalPageSize
+     *
+     * @param bool $renderOriginalPageSize When this option enabled the output pages will have the same size in pixels as page size in a source PDF document. By default GroupDocs.Viewer calculates output image page size for better rendering quality. This option is supported when rendering into PNG or JPG formats.
+     *
+     * @return $this
+     */
+    public function setRenderOriginalPageSize($renderOriginalPageSize)
+    {
+        $this->container['renderOriginalPageSize'] = $renderOriginalPageSize;
+
+        return $this;
+    }
+
+    /*
+     * Gets imageQuality
+     *
+     * @return string
+     */
+    public function getImageQuality()
+    {
+        return $this->container['imageQuality'];
+    }
+
+    /*
+     * Sets imageQuality
+     *
+     * @param string $imageQuality Specifies output image quality for image resources when rendering into HTML. The default value is Low
+     *
+     * @return $this
+     */
+    public function setImageQuality($imageQuality)
+    {
+        $allowedValues = $this->getImageQualityAllowableValues();
+        if ((!is_numeric($imageQuality) && !in_array($imageQuality, $allowedValues)) || (is_numeric($imageQuality) && !in_array($allowedValues[$imageQuality], $allowedValues))) {
+            throw new \InvalidArgumentException(sprintf("Invalid value for 'imageQuality', must be one of '%s'", implode("', '", $allowedValues)));
         }
 			
-        $this->container['viewFormat'] = $viewFormat;
-
-        return $this;
-    }
-
-    /*
-     * Gets outputPath
-     *
-     * @return string
-     */
-    public function getOutputPath()
-    {
-        return $this->container['outputPath'];
-    }
-
-    /*
-     * Sets outputPath
-     *
-     * @param string $outputPath The output path Default value is 'viewer\\{input file path}_{file extension}\\'
-     *
-     * @return $this
-     */
-    public function setOutputPath($outputPath)
-    {
-        $this->container['outputPath'] = $outputPath;
-
-        return $this;
-    }
-
-    /*
-     * Gets fontsPath
-     *
-     * @return string
-     */
-    public function getFontsPath()
-    {
-        return $this->container['fontsPath'];
-    }
-
-    /*
-     * Sets fontsPath
-     *
-     * @param string $fontsPath The path to directory containing custom fonts in storage
-     *
-     * @return $this
-     */
-    public function setFontsPath($fontsPath)
-    {
-        $this->container['fontsPath'] = $fontsPath;
-
-        return $this;
-    }
-
-    /*
-     * Gets watermark
-     *
-     * @return \GroupDocs\Viewer\Model\Watermark
-     */
-    public function getWatermark()
-    {
-        return $this->container['watermark'];
-    }
-
-    /*
-     * Sets watermark
-     *
-     * @param \GroupDocs\Viewer\Model\Watermark $watermark Text watermark
-     *
-     * @return $this
-     */
-    public function setWatermark($watermark)
-    {
-        $this->container['watermark'] = $watermark;
-
-        return $this;
-    }
-
-    /*
-     * Gets renderOptions
-     *
-     * @return \GroupDocs\Viewer\Model\RenderOptions
-     */
-    public function getRenderOptions()
-    {
-        return $this->container['renderOptions'];
-    }
-
-    /*
-     * Sets renderOptions
-     *
-     * @param \GroupDocs\Viewer\Model\RenderOptions $renderOptions Rendering options
-     *
-     * @return $this
-     */
-    public function setRenderOptions($renderOptions)
-    {
-        $this->container['renderOptions'] = $renderOptions;
+        $this->container['imageQuality'] = $imageQuality;
 
         return $this;
     }

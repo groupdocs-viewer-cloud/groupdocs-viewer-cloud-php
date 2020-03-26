@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="HtmlOptions.php">
- *   Copyright (c) 2003-2019 Aspose Pty Ltd
+ *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -53,7 +53,10 @@ class HtmlOptions extends RenderOptions
     protected static $swaggerTypes = [
         'externalResources' => 'bool',
         'resourcePath' => 'string',
-        'isResponsive' => 'bool'
+        'isResponsive' => 'bool',
+        'minify' => 'bool',
+        'excludeFonts' => 'bool',
+        'fontsToExclude' => 'string[]'
     ];
 
     /*
@@ -64,7 +67,10 @@ class HtmlOptions extends RenderOptions
     protected static $swaggerFormats = [
         'externalResources' => null,
         'resourcePath' => null,
-        'isResponsive' => null
+        'isResponsive' => null,
+        'minify' => null,
+        'excludeFonts' => null,
+        'fontsToExclude' => null
     ];
 
     /*
@@ -96,7 +102,10 @@ class HtmlOptions extends RenderOptions
     protected static $attributeMap = [
         'externalResources' => 'ExternalResources',
         'resourcePath' => 'ResourcePath',
-        'isResponsive' => 'IsResponsive'
+        'isResponsive' => 'IsResponsive',
+        'minify' => 'Minify',
+        'excludeFonts' => 'ExcludeFonts',
+        'fontsToExclude' => 'FontsToExclude'
     ];
 
     /*
@@ -107,7 +116,10 @@ class HtmlOptions extends RenderOptions
     protected static $setters = [
         'externalResources' => 'setExternalResources',
         'resourcePath' => 'setResourcePath',
-        'isResponsive' => 'setIsResponsive'
+        'isResponsive' => 'setIsResponsive',
+        'minify' => 'setMinify',
+        'excludeFonts' => 'setExcludeFonts',
+        'fontsToExclude' => 'setFontsToExclude'
     ];
 
     /*
@@ -118,7 +130,10 @@ class HtmlOptions extends RenderOptions
     protected static $getters = [
         'externalResources' => 'getExternalResources',
         'resourcePath' => 'getResourcePath',
-        'isResponsive' => 'getIsResponsive'
+        'isResponsive' => 'getIsResponsive',
+        'minify' => 'getMinify',
+        'excludeFonts' => 'getExcludeFonts',
+        'fontsToExclude' => 'getFontsToExclude'
     ];
 
     /*
@@ -180,6 +195,9 @@ class HtmlOptions extends RenderOptions
         $this->container['externalResources'] = isset($data['externalResources']) ? $data['externalResources'] : null;
         $this->container['resourcePath'] = isset($data['resourcePath']) ? $data['resourcePath'] : null;
         $this->container['isResponsive'] = isset($data['isResponsive']) ? $data['isResponsive'] : null;
+        $this->container['minify'] = isset($data['minify']) ? $data['minify'] : null;
+        $this->container['excludeFonts'] = isset($data['excludeFonts']) ? $data['excludeFonts'] : null;
+        $this->container['fontsToExclude'] = isset($data['fontsToExclude']) ? $data['fontsToExclude'] : null;
     }
 
     /*
@@ -196,6 +214,12 @@ class HtmlOptions extends RenderOptions
         }
         if ($this->container['isResponsive'] === null) {
             $invalidProperties[] = "'isResponsive' can't be null";
+        }
+        if ($this->container['minify'] === null) {
+            $invalidProperties[] = "'minify' can't be null";
+        }
+        if ($this->container['excludeFonts'] === null) {
+            $invalidProperties[] = "'excludeFonts' can't be null";
         }
         return $invalidProperties;
     }
@@ -216,6 +240,12 @@ class HtmlOptions extends RenderOptions
             return false;
         }
         if ($this->container['isResponsive'] === null) {
+            return false;
+        }
+        if ($this->container['minify'] === null) {
+            return false;
+        }
+        if ($this->container['excludeFonts'] === null) {
             return false;
         }
         return true;
@@ -290,6 +320,78 @@ class HtmlOptions extends RenderOptions
     public function setIsResponsive($isResponsive)
     {
         $this->container['isResponsive'] = $isResponsive;
+
+        return $this;
+    }
+
+    /*
+     * Gets minify
+     *
+     * @return bool
+     */
+    public function getMinify()
+    {
+        return $this->container['minify'];
+    }
+
+    /*
+     * Sets minify
+     *
+     * @param bool $minify Enables HTML content and HTML resources minification
+     *
+     * @return $this
+     */
+    public function setMinify($minify)
+    {
+        $this->container['minify'] = $minify;
+
+        return $this;
+    }
+
+    /*
+     * Gets excludeFonts
+     *
+     * @return bool
+     */
+    public function getExcludeFonts()
+    {
+        return $this->container['excludeFonts'];
+    }
+
+    /*
+     * Sets excludeFonts
+     *
+     * @param bool $excludeFonts When enabled prevents adding any fonts into HTML document
+     *
+     * @return $this
+     */
+    public function setExcludeFonts($excludeFonts)
+    {
+        $this->container['excludeFonts'] = $excludeFonts;
+
+        return $this;
+    }
+
+    /*
+     * Gets fontsToExclude
+     *
+     * @return string[]
+     */
+    public function getFontsToExclude()
+    {
+        return $this->container['fontsToExclude'];
+    }
+
+    /*
+     * Sets fontsToExclude
+     *
+     * @param string[] $fontsToExclude This option is supported for presentations only. The list of font names, to exclude from HTML document
+     *
+     * @return $this
+     */
+    public function setFontsToExclude($fontsToExclude)
+    {
+        $this->container['fontsToExclude'] = $fontsToExclude;
 
         return $this;
     }

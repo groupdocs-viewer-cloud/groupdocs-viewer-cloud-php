@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="ViewResult.php">
+ * <copyright company="Aspose Pty Ltd" file="Layout.php">
  *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * ViewResult
+ * Layout
  *
- * @description View result information
+ * @description Represents layout contained by the CAD drawing
  */
-class ViewResult implements ArrayAccess
+class Layout implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class ViewResult implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "ViewResult";
+    protected static $swaggerModelName = "Layout";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,9 +53,9 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'pages' => '\GroupDocs\Viewer\Model\PageView[]',
-        'attachments' => '\GroupDocs\Viewer\Model\AttachmentView[]',
-        'file' => '\GroupDocs\Viewer\Model\Resource'
+        'name' => 'string',
+        'width' => 'double',
+        'height' => 'double'
     ];
 
     /*
@@ -64,9 +64,9 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'pages' => null,
-        'attachments' => null,
-        'file' => null
+        'name' => null,
+        'width' => 'double',
+        'height' => 'double'
     ];
 
     /*
@@ -96,9 +96,9 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'pages' => 'Pages',
-        'attachments' => 'Attachments',
-        'file' => 'File'
+        'name' => 'Name',
+        'width' => 'Width',
+        'height' => 'Height'
     ];
 
     /*
@@ -107,9 +107,9 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'pages' => 'setPages',
-        'attachments' => 'setAttachments',
-        'file' => 'setFile'
+        'name' => 'setName',
+        'width' => 'setWidth',
+        'height' => 'setHeight'
     ];
 
     /*
@@ -118,9 +118,9 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'pages' => 'getPages',
-        'attachments' => 'getAttachments',
-        'file' => 'getFile'
+        'name' => 'getName',
+        'width' => 'getWidth',
+        'height' => 'getHeight'
     ];
 
     /*
@@ -183,9 +183,9 @@ class ViewResult implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['pages'] = isset($data['pages']) ? $data['pages'] : null;
-        $this->container['attachments'] = isset($data['attachments']) ? $data['attachments'] : null;
-        $this->container['file'] = isset($data['file']) ? $data['file'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['width'] = isset($data['width']) ? $data['width'] : null;
+        $this->container['height'] = isset($data['height']) ? $data['height'] : null;
     }
 
     /*
@@ -197,6 +197,12 @@ class ViewResult implements ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['width'] === null) {
+            $invalidProperties[] = "'width' can't be null";
+        }
+        if ($this->container['height'] === null) {
+            $invalidProperties[] = "'height' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -209,78 +215,84 @@ class ViewResult implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['width'] === null) {
+            return false;
+        }
+        if ($this->container['height'] === null) {
+            return false;
+        }
         return true;
     }
 
 
     /*
-     * Gets pages
+     * Gets name
      *
-     * @return \GroupDocs\Viewer\Model\PageView[]
+     * @return string
      */
-    public function getPages()
+    public function getName()
     {
-        return $this->container['pages'];
+        return $this->container['name'];
     }
 
     /*
-     * Sets pages
+     * Sets name
      *
-     * @param \GroupDocs\Viewer\Model\PageView[] $pages View result pages
+     * @param string $name The name of the layout
      *
      * @return $this
      */
-    public function setPages($pages)
+    public function setName($name)
     {
-        $this->container['pages'] = $pages;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /*
-     * Gets attachments
+     * Gets width
      *
-     * @return \GroupDocs\Viewer\Model\AttachmentView[]
+     * @return double
      */
-    public function getAttachments()
+    public function getWidth()
     {
-        return $this->container['attachments'];
+        return $this->container['width'];
     }
 
     /*
-     * Sets attachments
+     * Sets width
      *
-     * @param \GroupDocs\Viewer\Model\AttachmentView[] $attachments Attachments
+     * @param double $width The width of the layout
      *
      * @return $this
      */
-    public function setAttachments($attachments)
+    public function setWidth($width)
     {
-        $this->container['attachments'] = $attachments;
+        $this->container['width'] = $width;
 
         return $this;
     }
 
     /*
-     * Gets file
+     * Gets height
      *
-     * @return \GroupDocs\Viewer\Model\Resource
+     * @return double
      */
-    public function getFile()
+    public function getHeight()
     {
-        return $this->container['file'];
+        return $this->container['height'];
     }
 
     /*
-     * Sets file
+     * Sets height
      *
-     * @param \GroupDocs\Viewer\Model\Resource $file ULR to retrieve file.
+     * @param double $height The height of the layout
      *
      * @return $this
      */
-    public function setFile($file)
+    public function setHeight($height)
     {
-        $this->container['file'] = $file;
+        $this->container['height'] = $height;
 
         return $this;
     }

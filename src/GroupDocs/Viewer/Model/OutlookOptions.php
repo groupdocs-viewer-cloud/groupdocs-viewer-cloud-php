@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="ViewResult.php">
+ * <copyright company="Aspose Pty Ltd" file="OutlookOptions.php">
  *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * ViewResult
+ * OutlookOptions
  *
- * @description View result information
+ * @description Provides options for rendering Outlook data files
  */
-class ViewResult implements ArrayAccess
+class OutlookOptions implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class ViewResult implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "ViewResult";
+    protected static $swaggerModelName = "OutlookOptions";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,9 +53,10 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'pages' => '\GroupDocs\Viewer\Model\PageView[]',
-        'attachments' => '\GroupDocs\Viewer\Model\AttachmentView[]',
-        'file' => '\GroupDocs\Viewer\Model\Resource'
+        'folder' => 'string',
+        'textFilter' => 'string',
+        'addressFilter' => 'string',
+        'maxItemsInFolder' => 'int'
     ];
 
     /*
@@ -64,9 +65,10 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'pages' => null,
-        'attachments' => null,
-        'file' => null
+        'folder' => null,
+        'textFilter' => null,
+        'addressFilter' => null,
+        'maxItemsInFolder' => 'int32'
     ];
 
     /*
@@ -96,9 +98,10 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'pages' => 'Pages',
-        'attachments' => 'Attachments',
-        'file' => 'File'
+        'folder' => 'Folder',
+        'textFilter' => 'TextFilter',
+        'addressFilter' => 'AddressFilter',
+        'maxItemsInFolder' => 'MaxItemsInFolder'
     ];
 
     /*
@@ -107,9 +110,10 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'pages' => 'setPages',
-        'attachments' => 'setAttachments',
-        'file' => 'setFile'
+        'folder' => 'setFolder',
+        'textFilter' => 'setTextFilter',
+        'addressFilter' => 'setAddressFilter',
+        'maxItemsInFolder' => 'setMaxItemsInFolder'
     ];
 
     /*
@@ -118,9 +122,10 @@ class ViewResult implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'pages' => 'getPages',
-        'attachments' => 'getAttachments',
-        'file' => 'getFile'
+        'folder' => 'getFolder',
+        'textFilter' => 'getTextFilter',
+        'addressFilter' => 'getAddressFilter',
+        'maxItemsInFolder' => 'getMaxItemsInFolder'
     ];
 
     /*
@@ -183,9 +188,10 @@ class ViewResult implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['pages'] = isset($data['pages']) ? $data['pages'] : null;
-        $this->container['attachments'] = isset($data['attachments']) ? $data['attachments'] : null;
-        $this->container['file'] = isset($data['file']) ? $data['file'] : null;
+        $this->container['folder'] = isset($data['folder']) ? $data['folder'] : null;
+        $this->container['textFilter'] = isset($data['textFilter']) ? $data['textFilter'] : null;
+        $this->container['addressFilter'] = isset($data['addressFilter']) ? $data['addressFilter'] : null;
+        $this->container['maxItemsInFolder'] = isset($data['maxItemsInFolder']) ? $data['maxItemsInFolder'] : null;
     }
 
     /*
@@ -197,6 +203,9 @@ class ViewResult implements ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['maxItemsInFolder'] === null) {
+            $invalidProperties[] = "'maxItemsInFolder' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -209,78 +218,105 @@ class ViewResult implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['maxItemsInFolder'] === null) {
+            return false;
+        }
         return true;
     }
 
 
     /*
-     * Gets pages
+     * Gets folder
      *
-     * @return \GroupDocs\Viewer\Model\PageView[]
+     * @return string
      */
-    public function getPages()
+    public function getFolder()
     {
-        return $this->container['pages'];
+        return $this->container['folder'];
     }
 
     /*
-     * Sets pages
+     * Sets folder
      *
-     * @param \GroupDocs\Viewer\Model\PageView[] $pages View result pages
+     * @param string $folder The name of the folder (e.g. Inbox, Sent Item or Deleted Items) to render
      *
      * @return $this
      */
-    public function setPages($pages)
+    public function setFolder($folder)
     {
-        $this->container['pages'] = $pages;
+        $this->container['folder'] = $folder;
 
         return $this;
     }
 
     /*
-     * Gets attachments
+     * Gets textFilter
      *
-     * @return \GroupDocs\Viewer\Model\AttachmentView[]
+     * @return string
      */
-    public function getAttachments()
+    public function getTextFilter()
     {
-        return $this->container['attachments'];
+        return $this->container['textFilter'];
     }
 
     /*
-     * Sets attachments
+     * Sets textFilter
      *
-     * @param \GroupDocs\Viewer\Model\AttachmentView[] $attachments Attachments
+     * @param string $textFilter The keywords used to filter messages
      *
      * @return $this
      */
-    public function setAttachments($attachments)
+    public function setTextFilter($textFilter)
     {
-        $this->container['attachments'] = $attachments;
+        $this->container['textFilter'] = $textFilter;
 
         return $this;
     }
 
     /*
-     * Gets file
+     * Gets addressFilter
      *
-     * @return \GroupDocs\Viewer\Model\Resource
+     * @return string
      */
-    public function getFile()
+    public function getAddressFilter()
     {
-        return $this->container['file'];
+        return $this->container['addressFilter'];
     }
 
     /*
-     * Sets file
+     * Sets addressFilter
      *
-     * @param \GroupDocs\Viewer\Model\Resource $file ULR to retrieve file.
+     * @param string $addressFilter The email-address used to filter messages by sender or recipient
      *
      * @return $this
      */
-    public function setFile($file)
+    public function setAddressFilter($addressFilter)
     {
-        $this->container['file'] = $file;
+        $this->container['addressFilter'] = $addressFilter;
+
+        return $this;
+    }
+
+    /*
+     * Gets maxItemsInFolder
+     *
+     * @return int
+     */
+    public function getMaxItemsInFolder()
+    {
+        return $this->container['maxItemsInFolder'];
+    }
+
+    /*
+     * Sets maxItemsInFolder
+     *
+     * @param int $maxItemsInFolder The maximum number of messages or items, that can be rendered from one folder
+     *
+     * @return $this
+     */
+    public function setMaxItemsInFolder($maxItemsInFolder)
+    {
+        $this->container['maxItemsInFolder'] = $maxItemsInFolder;
 
         return $this;
     }

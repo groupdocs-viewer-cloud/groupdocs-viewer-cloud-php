@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="SpreadsheetOptions.php">
- *   Copyright (c) 2003-2019 Aspose Pty Ltd
+ *   Copyright (c) 2003-2020 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -60,7 +60,8 @@ class SpreadsheetOptions implements ArrayAccess
         'renderEmptyColumns' => 'bool',
         'renderHiddenRows' => 'bool',
         'renderHiddenColumns' => 'bool',
-        'renderPrintAreaOnly' => 'bool'
+        'renderPrintAreaOnly' => 'bool',
+        'textOverflowMode' => 'string'
     ];
 
     /*
@@ -76,7 +77,8 @@ class SpreadsheetOptions implements ArrayAccess
         'renderEmptyColumns' => null,
         'renderHiddenRows' => null,
         'renderHiddenColumns' => null,
-        'renderPrintAreaOnly' => null
+        'renderPrintAreaOnly' => null,
+        'textOverflowMode' => null
     ];
 
     /*
@@ -113,7 +115,8 @@ class SpreadsheetOptions implements ArrayAccess
         'renderEmptyColumns' => 'RenderEmptyColumns',
         'renderHiddenRows' => 'RenderHiddenRows',
         'renderHiddenColumns' => 'RenderHiddenColumns',
-        'renderPrintAreaOnly' => 'RenderPrintAreaOnly'
+        'renderPrintAreaOnly' => 'RenderPrintAreaOnly',
+        'textOverflowMode' => 'TextOverflowMode'
     ];
 
     /*
@@ -129,7 +132,8 @@ class SpreadsheetOptions implements ArrayAccess
         'renderEmptyColumns' => 'setRenderEmptyColumns',
         'renderHiddenRows' => 'setRenderHiddenRows',
         'renderHiddenColumns' => 'setRenderHiddenColumns',
-        'renderPrintAreaOnly' => 'setRenderPrintAreaOnly'
+        'renderPrintAreaOnly' => 'setRenderPrintAreaOnly',
+        'textOverflowMode' => 'setTextOverflowMode'
     ];
 
     /*
@@ -145,7 +149,8 @@ class SpreadsheetOptions implements ArrayAccess
         'renderEmptyColumns' => 'getRenderEmptyColumns',
         'renderHiddenRows' => 'getRenderHiddenRows',
         'renderHiddenColumns' => 'getRenderHiddenColumns',
-        'renderPrintAreaOnly' => 'getRenderPrintAreaOnly'
+        'renderPrintAreaOnly' => 'getRenderPrintAreaOnly',
+        'textOverflowMode' => 'getTextOverflowMode'
     ];
 
     /*
@@ -189,8 +194,27 @@ class SpreadsheetOptions implements ArrayAccess
         return self::$swaggerModelName;
     }
 
+    const TEXT_OVERFLOW_MODE_OVERLAY = 'Overlay';
+    const TEXT_OVERFLOW_MODE_OVERLAY_IF_NEXT_IS_EMPTY = 'OverlayIfNextIsEmpty';
+    const TEXT_OVERFLOW_MODE_AUTO_FIT_COLUMN = 'AutoFitColumn';
+    const TEXT_OVERFLOW_MODE_HIDE_TEXT = 'HideText';
     
 
+    
+    /*
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getTextOverflowModeAllowableValues()
+    {
+        return [
+            self::TEXT_OVERFLOW_MODE_OVERLAY,
+            self::TEXT_OVERFLOW_MODE_OVERLAY_IF_NEXT_IS_EMPTY,
+            self::TEXT_OVERFLOW_MODE_AUTO_FIT_COLUMN,
+            self::TEXT_OVERFLOW_MODE_HIDE_TEXT,
+        ];
+    }
     
 
     /*
@@ -216,6 +240,7 @@ class SpreadsheetOptions implements ArrayAccess
         $this->container['renderHiddenRows'] = isset($data['renderHiddenRows']) ? $data['renderHiddenRows'] : null;
         $this->container['renderHiddenColumns'] = isset($data['renderHiddenColumns']) ? $data['renderHiddenColumns'] : null;
         $this->container['renderPrintAreaOnly'] = isset($data['renderPrintAreaOnly']) ? $data['renderPrintAreaOnly'] : null;
+        $this->container['textOverflowMode'] = isset($data['textOverflowMode']) ? $data['textOverflowMode'] : null;
     }
 
     /*
@@ -251,6 +276,17 @@ class SpreadsheetOptions implements ArrayAccess
         if ($this->container['renderPrintAreaOnly'] === null) {
             $invalidProperties[] = "'renderPrintAreaOnly' can't be null";
         }
+        if ($this->container['textOverflowMode'] === null) {
+            $invalidProperties[] = "'textOverflowMode' can't be null";
+        }
+        $allowedValues = $this->getTextOverflowModeAllowableValues();
+        if (!in_array($this->container['textOverflowMode'], $allowedValues)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'textOverflowMode', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -285,6 +321,13 @@ class SpreadsheetOptions implements ArrayAccess
             return false;
         }
         if ($this->container['renderPrintAreaOnly'] === null) {
+            return false;
+        }
+        if ($this->container['textOverflowMode'] === null) {
+            return false;
+        }
+        $allowedValues = $this->getTextOverflowModeAllowableValues();
+        if (!in_array($this->container['textOverflowMode'], $allowedValues)) {
             return false;
         }
         return true;
@@ -479,6 +522,35 @@ class SpreadsheetOptions implements ArrayAccess
     public function setRenderPrintAreaOnly($renderPrintAreaOnly)
     {
         $this->container['renderPrintAreaOnly'] = $renderPrintAreaOnly;
+
+        return $this;
+    }
+
+    /*
+     * Gets textOverflowMode
+     *
+     * @return string
+     */
+    public function getTextOverflowMode()
+    {
+        return $this->container['textOverflowMode'];
+    }
+
+    /*
+     * Sets textOverflowMode
+     *
+     * @param string $textOverflowMode The text overflow mode for rendering spreadsheet documents into HTML
+     *
+     * @return $this
+     */
+    public function setTextOverflowMode($textOverflowMode)
+    {
+        $allowedValues = $this->getTextOverflowModeAllowableValues();
+        if ((!is_numeric($textOverflowMode) && !in_array($textOverflowMode, $allowedValues)) || (is_numeric($textOverflowMode) && !in_array($allowedValues[$textOverflowMode], $allowedValues))) {
+            throw new \InvalidArgumentException(sprintf("Invalid value for 'textOverflowMode', must be one of '%s'", implode("', '", $allowedValues)));
+        }
+			
+        $this->container['textOverflowMode'] = $textOverflowMode;
 
         return $this;
     }
