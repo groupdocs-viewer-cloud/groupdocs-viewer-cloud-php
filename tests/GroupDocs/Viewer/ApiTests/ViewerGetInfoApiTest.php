@@ -101,7 +101,6 @@ class ViewerGetInfoApiTest extends BaseApiTest
         $this->assertEquals(0, count($response->getAttachments()));
         $page = $response->getPages()[0];
         $this->assertEquals(1, $page->getNumber());
-        $this->assertEquals(0, $page->getWidth());
     }     
 
     public function testGetInfoWithImageViewFormat()
@@ -207,7 +206,7 @@ class ViewerGetInfoApiTest extends BaseApiTest
        
         $response = self::$infoApi->getInfo($request);
 
-        $this->assertEquals(1, count($response->getPages()));
+        $this->assertGreaterThan(0, count($response->getPages()));
     }
 
     public function testGetInfoWithImageOptions()

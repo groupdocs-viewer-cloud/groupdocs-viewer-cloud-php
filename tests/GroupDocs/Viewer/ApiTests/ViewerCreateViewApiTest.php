@@ -211,7 +211,7 @@ class ViewerCreateViewApiTest extends BaseApiTest
        
         $response = self::$viewApi->createView($request);
 
-        $this->assertEquals(1, count($response->getPages()));
+        $this->assertGreaterThan(0, count($response->getPages()));
     }
 
     public function testCreateViewWithHtmlViewOptions()
