@@ -2,7 +2,7 @@
 /**
 * --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose Pty Ltd" file="ViewerCreateViewApiTest.php">
-*   Copyright (c) 2003-2020 Aspose Pty Ltd
+*   Copyright (c) 2003-2021 Aspose Pty Ltd
 * </copyright>
 * <summary>
 *  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -155,7 +155,7 @@ class ViewerCreateViewApiTest extends BaseApiTest
        
         $response = self::$viewApi->createView($request);
 
-        $this->assertEquals(2, count($response->getPages()));
+        $this->assertEquals(3, count($response->getPages()));
     }    
 
     public function testCreateViewWithSpreadsheetRenderHiddenRowsOption()

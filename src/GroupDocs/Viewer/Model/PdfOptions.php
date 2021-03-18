@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="PdfOptions.php">
- *   Copyright (c) 2003-2020 Aspose Pty Ltd
+ *   Copyright (c) 2003-2021 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -54,7 +54,7 @@ class PdfOptions extends RenderOptions
         'jpgQuality' => 'int',
         'documentOpenPassword' => 'string',
         'permissionsPassword' => 'string',
-        'permissions' => 'string'
+        'permissions' => 'string[]'
     ];
 
     /*
@@ -167,29 +167,8 @@ class PdfOptions extends RenderOptions
         return self::$swaggerModelName;
     }
 
-    const PERMISSIONS_ALLOW_ALL = 'AllowAll';
-    const PERMISSIONS_DENY_PRINTING = 'DenyPrinting';
-    const PERMISSIONS_DENY_MODIFICATION = 'DenyModification';
-    const PERMISSIONS_DENY_DATA_EXTRACTION = 'DenyDataExtraction';
-    const PERMISSIONS_DENY_ALL = 'DenyAll';
     
 
-    
-    /*
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getPermissionsAllowableValues()
-    {
-        return [
-            self::PERMISSIONS_ALLOW_ALL,
-            self::PERMISSIONS_DENY_PRINTING,
-            self::PERMISSIONS_DENY_MODIFICATION,
-            self::PERMISSIONS_DENY_DATA_EXTRACTION,
-            self::PERMISSIONS_DENY_ALL,
-        ];
-    }
     
 
 
@@ -221,17 +200,6 @@ class PdfOptions extends RenderOptions
         if ($this->container['jpgQuality'] === null) {
             $invalidProperties[] = "'jpgQuality' can't be null";
         }
-        if ($this->container['permissions'] === null) {
-            $invalidProperties[] = "'permissions' can't be null";
-        }
-        $allowedValues = $this->getPermissionsAllowableValues();
-        if (!in_array($this->container['permissions'], $allowedValues)) {
-            $invalidProperties[] = sprintf(
-                "invalid value for 'permissions', must be one of '%s'",
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -248,13 +216,6 @@ class PdfOptions extends RenderOptions
         }
 
         if ($this->container['jpgQuality'] === null) {
-            return false;
-        }
-        if ($this->container['permissions'] === null) {
-            return false;
-        }
-        $allowedValues = $this->getPermissionsAllowableValues();
-        if (!in_array($this->container['permissions'], $allowedValues)) {
             return false;
         }
         return true;
@@ -336,7 +297,7 @@ class PdfOptions extends RenderOptions
     /*
      * Gets permissions
      *
-     * @return string
+     * @return string[]
      */
     public function getPermissions()
     {
@@ -346,17 +307,12 @@ class PdfOptions extends RenderOptions
     /*
      * Sets permissions
      *
-     * @param string $permissions The PDF document permissions such as printing, modification and data extraction
+     * @param string[] $permissions The array of PDF document permissions. Allowed values are: AllowAll, DenyPrinting, DenyModification, DenyDataExtraction, DenyAll Default value is AllowAll, if now permissions are set.
      *
      * @return $this
      */
     public function setPermissions($permissions)
     {
-        $allowedValues = $this->getPermissionsAllowableValues();
-        if ((!is_numeric($permissions) && !in_array($permissions, $allowedValues)) || (is_numeric($permissions) && !in_array($allowedValues[$permissions], $allowedValues))) {
-            throw new \InvalidArgumentException(sprintf("Invalid value for 'permissions', must be one of '%s'", implode("', '", $allowedValues)));
-        }
-			
         $this->container['permissions'] = $permissions;
 
         return $this;
