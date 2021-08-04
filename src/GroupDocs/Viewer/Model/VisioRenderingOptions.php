@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="WordProcessingOptions.php">
+ * <copyright company="Aspose Pty Ltd" file="VisioRenderingOptions.php">
  *   Copyright (c) 2003-2021 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * WordProcessingOptions
+ * VisioRenderingOptions
  *
- * @description Provides options for rendering word processing documents
+ * @description The Visio files processing documents view options.
  */
-class WordProcessingOptions implements ArrayAccess
+class VisioRenderingOptions implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class WordProcessingOptions implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "WordProcessingOptions";
+    protected static $swaggerModelName = "VisioRenderingOptions";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,11 +53,8 @@ class WordProcessingOptions implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'renderTrackedChanges' => 'bool',
-        'leftMargin' => 'double',
-        'rightMargin' => 'double',
-        'topMargin' => 'double',
-        'bottomMargin' => 'double'
+        'renderFiguresOnly' => 'bool',
+        'figureWidth' => 'int'
     ];
 
     /*
@@ -66,11 +63,8 @@ class WordProcessingOptions implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'renderTrackedChanges' => null,
-        'leftMargin' => 'double',
-        'rightMargin' => 'double',
-        'topMargin' => 'double',
-        'bottomMargin' => 'double'
+        'renderFiguresOnly' => null,
+        'figureWidth' => 'int32'
     ];
 
     /*
@@ -100,11 +94,8 @@ class WordProcessingOptions implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'renderTrackedChanges' => 'RenderTrackedChanges',
-        'leftMargin' => 'LeftMargin',
-        'rightMargin' => 'RightMargin',
-        'topMargin' => 'TopMargin',
-        'bottomMargin' => 'BottomMargin'
+        'renderFiguresOnly' => 'RenderFiguresOnly',
+        'figureWidth' => 'FigureWidth'
     ];
 
     /*
@@ -113,11 +104,8 @@ class WordProcessingOptions implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'renderTrackedChanges' => 'setRenderTrackedChanges',
-        'leftMargin' => 'setLeftMargin',
-        'rightMargin' => 'setRightMargin',
-        'topMargin' => 'setTopMargin',
-        'bottomMargin' => 'setBottomMargin'
+        'renderFiguresOnly' => 'setRenderFiguresOnly',
+        'figureWidth' => 'setFigureWidth'
     ];
 
     /*
@@ -126,11 +114,8 @@ class WordProcessingOptions implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'renderTrackedChanges' => 'getRenderTrackedChanges',
-        'leftMargin' => 'getLeftMargin',
-        'rightMargin' => 'getRightMargin',
-        'topMargin' => 'getTopMargin',
-        'bottomMargin' => 'getBottomMargin'
+        'renderFiguresOnly' => 'getRenderFiguresOnly',
+        'figureWidth' => 'getFigureWidth'
     ];
 
     /*
@@ -193,11 +178,8 @@ class WordProcessingOptions implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['renderTrackedChanges'] = isset($data['renderTrackedChanges']) ? $data['renderTrackedChanges'] : null;
-        $this->container['leftMargin'] = isset($data['leftMargin']) ? $data['leftMargin'] : null;
-        $this->container['rightMargin'] = isset($data['rightMargin']) ? $data['rightMargin'] : null;
-        $this->container['topMargin'] = isset($data['topMargin']) ? $data['topMargin'] : null;
-        $this->container['bottomMargin'] = isset($data['bottomMargin']) ? $data['bottomMargin'] : null;
+        $this->container['renderFiguresOnly'] = isset($data['renderFiguresOnly']) ? $data['renderFiguresOnly'] : null;
+        $this->container['figureWidth'] = isset($data['figureWidth']) ? $data['figureWidth'] : null;
     }
 
     /*
@@ -209,20 +191,11 @@ class WordProcessingOptions implements ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['renderTrackedChanges'] === null) {
-            $invalidProperties[] = "'renderTrackedChanges' can't be null";
+        if ($this->container['renderFiguresOnly'] === null) {
+            $invalidProperties[] = "'renderFiguresOnly' can't be null";
         }
-        if ($this->container['leftMargin'] === null) {
-            $invalidProperties[] = "'leftMargin' can't be null";
-        }
-        if ($this->container['rightMargin'] === null) {
-            $invalidProperties[] = "'rightMargin' can't be null";
-        }
-        if ($this->container['topMargin'] === null) {
-            $invalidProperties[] = "'topMargin' can't be null";
-        }
-        if ($this->container['bottomMargin'] === null) {
-            $invalidProperties[] = "'bottomMargin' can't be null";
+        if ($this->container['figureWidth'] === null) {
+            $invalidProperties[] = "'figureWidth' can't be null";
         }
         return $invalidProperties;
     }
@@ -236,19 +209,10 @@ class WordProcessingOptions implements ArrayAccess
     public function valid()
     {
 
-        if ($this->container['renderTrackedChanges'] === null) {
+        if ($this->container['renderFiguresOnly'] === null) {
             return false;
         }
-        if ($this->container['leftMargin'] === null) {
-            return false;
-        }
-        if ($this->container['rightMargin'] === null) {
-            return false;
-        }
-        if ($this->container['topMargin'] === null) {
-            return false;
-        }
-        if ($this->container['bottomMargin'] === null) {
+        if ($this->container['figureWidth'] === null) {
             return false;
         }
         return true;
@@ -256,121 +220,49 @@ class WordProcessingOptions implements ArrayAccess
 
 
     /*
-     * Gets renderTrackedChanges
+     * Gets renderFiguresOnly
      *
      * @return bool
      */
-    public function getRenderTrackedChanges()
+    public function getRenderFiguresOnly()
     {
-        return $this->container['renderTrackedChanges'];
+        return $this->container['renderFiguresOnly'];
     }
 
     /*
-     * Sets renderTrackedChanges
+     * Sets renderFiguresOnly
      *
-     * @param bool $renderTrackedChanges Enables tracked changes (revisions) rendering
+     * @param bool $renderFiguresOnly Render only Visio figures, not a diagram.
      *
      * @return $this
      */
-    public function setRenderTrackedChanges($renderTrackedChanges)
+    public function setRenderFiguresOnly($renderFiguresOnly)
     {
-        $this->container['renderTrackedChanges'] = $renderTrackedChanges;
+        $this->container['renderFiguresOnly'] = $renderFiguresOnly;
 
         return $this;
     }
 
     /*
-     * Gets leftMargin
+     * Gets figureWidth
      *
-     * @return double
+     * @return int
      */
-    public function getLeftMargin()
+    public function getFigureWidth()
     {
-        return $this->container['leftMargin'];
+        return $this->container['figureWidth'];
     }
 
     /*
-     * Sets leftMargin
+     * Sets figureWidth
      *
-     * @param double $leftMargin Left page margin (for HTML rendering only)
+     * @param int $figureWidth Figure width, height will be calculated automatically. Default value is 100.
      *
      * @return $this
      */
-    public function setLeftMargin($leftMargin)
+    public function setFigureWidth($figureWidth)
     {
-        $this->container['leftMargin'] = $leftMargin;
-
-        return $this;
-    }
-
-    /*
-     * Gets rightMargin
-     *
-     * @return double
-     */
-    public function getRightMargin()
-    {
-        return $this->container['rightMargin'];
-    }
-
-    /*
-     * Sets rightMargin
-     *
-     * @param double $rightMargin Right page margin (for HTML rendering only)
-     *
-     * @return $this
-     */
-    public function setRightMargin($rightMargin)
-    {
-        $this->container['rightMargin'] = $rightMargin;
-
-        return $this;
-    }
-
-    /*
-     * Gets topMargin
-     *
-     * @return double
-     */
-    public function getTopMargin()
-    {
-        return $this->container['topMargin'];
-    }
-
-    /*
-     * Sets topMargin
-     *
-     * @param double $topMargin Top page margin (for HTML rendering only)
-     *
-     * @return $this
-     */
-    public function setTopMargin($topMargin)
-    {
-        $this->container['topMargin'] = $topMargin;
-
-        return $this;
-    }
-
-    /*
-     * Gets bottomMargin
-     *
-     * @return double
-     */
-    public function getBottomMargin()
-    {
-        return $this->container['bottomMargin'];
-    }
-
-    /*
-     * Sets bottomMargin
-     *
-     * @param double $bottomMargin Bottom page margin (for HTML rendering only)
-     *
-     * @return $this
-     */
-    public function setBottomMargin($bottomMargin)
-    {
-        $this->container['bottomMargin'] = $bottomMargin;
+        $this->container['figureWidth'] = $figureWidth;
 
         return $this;
     }

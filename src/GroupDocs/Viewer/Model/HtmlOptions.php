@@ -56,7 +56,13 @@ class HtmlOptions extends RenderOptions
         'isResponsive' => 'bool',
         'minify' => 'bool',
         'excludeFonts' => 'bool',
-        'fontsToExclude' => 'string[]'
+        'fontsToExclude' => 'string[]',
+        'forPrinting' => 'bool',
+        'imageHeight' => 'int',
+        'imageWidth' => 'int',
+        'imageMaxHeight' => 'int',
+        'imageMaxWidth' => 'int',
+        'renderToSinglePage' => 'bool'
     ];
 
     /*
@@ -70,7 +76,13 @@ class HtmlOptions extends RenderOptions
         'isResponsive' => null,
         'minify' => null,
         'excludeFonts' => null,
-        'fontsToExclude' => null
+        'fontsToExclude' => null,
+        'forPrinting' => null,
+        'imageHeight' => 'int32',
+        'imageWidth' => 'int32',
+        'imageMaxHeight' => 'int32',
+        'imageMaxWidth' => 'int32',
+        'renderToSinglePage' => null
     ];
 
     /*
@@ -105,7 +117,13 @@ class HtmlOptions extends RenderOptions
         'isResponsive' => 'IsResponsive',
         'minify' => 'Minify',
         'excludeFonts' => 'ExcludeFonts',
-        'fontsToExclude' => 'FontsToExclude'
+        'fontsToExclude' => 'FontsToExclude',
+        'forPrinting' => 'ForPrinting',
+        'imageHeight' => 'ImageHeight',
+        'imageWidth' => 'ImageWidth',
+        'imageMaxHeight' => 'ImageMaxHeight',
+        'imageMaxWidth' => 'ImageMaxWidth',
+        'renderToSinglePage' => 'RenderToSinglePage'
     ];
 
     /*
@@ -119,7 +137,13 @@ class HtmlOptions extends RenderOptions
         'isResponsive' => 'setIsResponsive',
         'minify' => 'setMinify',
         'excludeFonts' => 'setExcludeFonts',
-        'fontsToExclude' => 'setFontsToExclude'
+        'fontsToExclude' => 'setFontsToExclude',
+        'forPrinting' => 'setForPrinting',
+        'imageHeight' => 'setImageHeight',
+        'imageWidth' => 'setImageWidth',
+        'imageMaxHeight' => 'setImageMaxHeight',
+        'imageMaxWidth' => 'setImageMaxWidth',
+        'renderToSinglePage' => 'setRenderToSinglePage'
     ];
 
     /*
@@ -133,7 +157,13 @@ class HtmlOptions extends RenderOptions
         'isResponsive' => 'getIsResponsive',
         'minify' => 'getMinify',
         'excludeFonts' => 'getExcludeFonts',
-        'fontsToExclude' => 'getFontsToExclude'
+        'fontsToExclude' => 'getFontsToExclude',
+        'forPrinting' => 'getForPrinting',
+        'imageHeight' => 'getImageHeight',
+        'imageWidth' => 'getImageWidth',
+        'imageMaxHeight' => 'getImageMaxHeight',
+        'imageMaxWidth' => 'getImageMaxWidth',
+        'renderToSinglePage' => 'getRenderToSinglePage'
     ];
 
     /*
@@ -198,6 +228,12 @@ class HtmlOptions extends RenderOptions
         $this->container['minify'] = isset($data['minify']) ? $data['minify'] : null;
         $this->container['excludeFonts'] = isset($data['excludeFonts']) ? $data['excludeFonts'] : null;
         $this->container['fontsToExclude'] = isset($data['fontsToExclude']) ? $data['fontsToExclude'] : null;
+        $this->container['forPrinting'] = isset($data['forPrinting']) ? $data['forPrinting'] : null;
+        $this->container['imageHeight'] = isset($data['imageHeight']) ? $data['imageHeight'] : null;
+        $this->container['imageWidth'] = isset($data['imageWidth']) ? $data['imageWidth'] : null;
+        $this->container['imageMaxHeight'] = isset($data['imageMaxHeight']) ? $data['imageMaxHeight'] : null;
+        $this->container['imageMaxWidth'] = isset($data['imageMaxWidth']) ? $data['imageMaxWidth'] : null;
+        $this->container['renderToSinglePage'] = isset($data['renderToSinglePage']) ? $data['renderToSinglePage'] : null;
     }
 
     /*
@@ -220,6 +256,24 @@ class HtmlOptions extends RenderOptions
         }
         if ($this->container['excludeFonts'] === null) {
             $invalidProperties[] = "'excludeFonts' can't be null";
+        }
+        if ($this->container['forPrinting'] === null) {
+            $invalidProperties[] = "'forPrinting' can't be null";
+        }
+        if ($this->container['imageHeight'] === null) {
+            $invalidProperties[] = "'imageHeight' can't be null";
+        }
+        if ($this->container['imageWidth'] === null) {
+            $invalidProperties[] = "'imageWidth' can't be null";
+        }
+        if ($this->container['imageMaxHeight'] === null) {
+            $invalidProperties[] = "'imageMaxHeight' can't be null";
+        }
+        if ($this->container['imageMaxWidth'] === null) {
+            $invalidProperties[] = "'imageMaxWidth' can't be null";
+        }
+        if ($this->container['renderToSinglePage'] === null) {
+            $invalidProperties[] = "'renderToSinglePage' can't be null";
         }
         return $invalidProperties;
     }
@@ -246,6 +300,24 @@ class HtmlOptions extends RenderOptions
             return false;
         }
         if ($this->container['excludeFonts'] === null) {
+            return false;
+        }
+        if ($this->container['forPrinting'] === null) {
+            return false;
+        }
+        if ($this->container['imageHeight'] === null) {
+            return false;
+        }
+        if ($this->container['imageWidth'] === null) {
+            return false;
+        }
+        if ($this->container['imageMaxHeight'] === null) {
+            return false;
+        }
+        if ($this->container['imageMaxWidth'] === null) {
+            return false;
+        }
+        if ($this->container['renderToSinglePage'] === null) {
             return false;
         }
         return true;
@@ -392,6 +464,150 @@ class HtmlOptions extends RenderOptions
     public function setFontsToExclude($fontsToExclude)
     {
         $this->container['fontsToExclude'] = $fontsToExclude;
+
+        return $this;
+    }
+
+    /*
+     * Gets forPrinting
+     *
+     * @return bool
+     */
+    public function getForPrinting()
+    {
+        return $this->container['forPrinting'];
+    }
+
+    /*
+     * Sets forPrinting
+     *
+     * @param bool $forPrinting Indicates whether to optimize output HTML for printing.
+     *
+     * @return $this
+     */
+    public function setForPrinting($forPrinting)
+    {
+        $this->container['forPrinting'] = $forPrinting;
+
+        return $this;
+    }
+
+    /*
+     * Gets imageHeight
+     *
+     * @return int
+     */
+    public function getImageHeight()
+    {
+        return $this->container['imageHeight'];
+    }
+
+    /*
+     * Sets imageHeight
+     *
+     * @param int $imageHeight The height of an output image in pixels. (When converting single image to HTML only)
+     *
+     * @return $this
+     */
+    public function setImageHeight($imageHeight)
+    {
+        $this->container['imageHeight'] = $imageHeight;
+
+        return $this;
+    }
+
+    /*
+     * Gets imageWidth
+     *
+     * @return int
+     */
+    public function getImageWidth()
+    {
+        return $this->container['imageWidth'];
+    }
+
+    /*
+     * Sets imageWidth
+     *
+     * @param int $imageWidth The width of the output image in pixels. (When converting single image to HTML only)
+     *
+     * @return $this
+     */
+    public function setImageWidth($imageWidth)
+    {
+        $this->container['imageWidth'] = $imageWidth;
+
+        return $this;
+    }
+
+    /*
+     * Gets imageMaxHeight
+     *
+     * @return int
+     */
+    public function getImageMaxHeight()
+    {
+        return $this->container['imageMaxHeight'];
+    }
+
+    /*
+     * Sets imageMaxHeight
+     *
+     * @param int $imageMaxHeight Max height of an output image in pixels. (When converting single image to HTML only)
+     *
+     * @return $this
+     */
+    public function setImageMaxHeight($imageMaxHeight)
+    {
+        $this->container['imageMaxHeight'] = $imageMaxHeight;
+
+        return $this;
+    }
+
+    /*
+     * Gets imageMaxWidth
+     *
+     * @return int
+     */
+    public function getImageMaxWidth()
+    {
+        return $this->container['imageMaxWidth'];
+    }
+
+    /*
+     * Sets imageMaxWidth
+     *
+     * @param int $imageMaxWidth Max width of an output image in pixels. (When converting single image to HTML only)
+     *
+     * @return $this
+     */
+    public function setImageMaxWidth($imageMaxWidth)
+    {
+        $this->container['imageMaxWidth'] = $imageMaxWidth;
+
+        return $this;
+    }
+
+    /*
+     * Gets renderToSinglePage
+     *
+     * @return bool
+     */
+    public function getRenderToSinglePage()
+    {
+        return $this->container['renderToSinglePage'];
+    }
+
+    /*
+     * Sets renderToSinglePage
+     *
+     * @param bool $renderToSinglePage Enables HTML content will be rendered to single page
+     *
+     * @return $this
+     */
+    public function setRenderToSinglePage($renderToSinglePage)
+    {
+        $this->container['renderToSinglePage'] = $renderToSinglePage;
 
         return $this;
     }

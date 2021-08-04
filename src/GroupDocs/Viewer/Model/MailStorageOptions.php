@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="WordProcessingOptions.php">
+ * <copyright company="Aspose Pty Ltd" file="MailStorageOptions.php">
  *   Copyright (c) 2003-2021 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * WordProcessingOptions
+ * MailStorageOptions
  *
- * @description Provides options for rendering word processing documents
+ * @description Provides options for rendering Mail storage (Lotus Notes, MBox) data files.
  */
-class WordProcessingOptions implements ArrayAccess
+class MailStorageOptions implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class WordProcessingOptions implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "WordProcessingOptions";
+    protected static $swaggerModelName = "MailStorageOptions";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -53,11 +53,9 @@ class WordProcessingOptions implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'renderTrackedChanges' => 'bool',
-        'leftMargin' => 'double',
-        'rightMargin' => 'double',
-        'topMargin' => 'double',
-        'bottomMargin' => 'double'
+        'textFilter' => 'string',
+        'addressFilter' => 'string',
+        'maxItems' => 'int'
     ];
 
     /*
@@ -66,11 +64,9 @@ class WordProcessingOptions implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'renderTrackedChanges' => null,
-        'leftMargin' => 'double',
-        'rightMargin' => 'double',
-        'topMargin' => 'double',
-        'bottomMargin' => 'double'
+        'textFilter' => null,
+        'addressFilter' => null,
+        'maxItems' => 'int32'
     ];
 
     /*
@@ -100,11 +96,9 @@ class WordProcessingOptions implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'renderTrackedChanges' => 'RenderTrackedChanges',
-        'leftMargin' => 'LeftMargin',
-        'rightMargin' => 'RightMargin',
-        'topMargin' => 'TopMargin',
-        'bottomMargin' => 'BottomMargin'
+        'textFilter' => 'TextFilter',
+        'addressFilter' => 'AddressFilter',
+        'maxItems' => 'MaxItems'
     ];
 
     /*
@@ -113,11 +107,9 @@ class WordProcessingOptions implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'renderTrackedChanges' => 'setRenderTrackedChanges',
-        'leftMargin' => 'setLeftMargin',
-        'rightMargin' => 'setRightMargin',
-        'topMargin' => 'setTopMargin',
-        'bottomMargin' => 'setBottomMargin'
+        'textFilter' => 'setTextFilter',
+        'addressFilter' => 'setAddressFilter',
+        'maxItems' => 'setMaxItems'
     ];
 
     /*
@@ -126,11 +118,9 @@ class WordProcessingOptions implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'renderTrackedChanges' => 'getRenderTrackedChanges',
-        'leftMargin' => 'getLeftMargin',
-        'rightMargin' => 'getRightMargin',
-        'topMargin' => 'getTopMargin',
-        'bottomMargin' => 'getBottomMargin'
+        'textFilter' => 'getTextFilter',
+        'addressFilter' => 'getAddressFilter',
+        'maxItems' => 'getMaxItems'
     ];
 
     /*
@@ -193,11 +183,9 @@ class WordProcessingOptions implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['renderTrackedChanges'] = isset($data['renderTrackedChanges']) ? $data['renderTrackedChanges'] : null;
-        $this->container['leftMargin'] = isset($data['leftMargin']) ? $data['leftMargin'] : null;
-        $this->container['rightMargin'] = isset($data['rightMargin']) ? $data['rightMargin'] : null;
-        $this->container['topMargin'] = isset($data['topMargin']) ? $data['topMargin'] : null;
-        $this->container['bottomMargin'] = isset($data['bottomMargin']) ? $data['bottomMargin'] : null;
+        $this->container['textFilter'] = isset($data['textFilter']) ? $data['textFilter'] : null;
+        $this->container['addressFilter'] = isset($data['addressFilter']) ? $data['addressFilter'] : null;
+        $this->container['maxItems'] = isset($data['maxItems']) ? $data['maxItems'] : null;
     }
 
     /*
@@ -209,20 +197,8 @@ class WordProcessingOptions implements ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['renderTrackedChanges'] === null) {
-            $invalidProperties[] = "'renderTrackedChanges' can't be null";
-        }
-        if ($this->container['leftMargin'] === null) {
-            $invalidProperties[] = "'leftMargin' can't be null";
-        }
-        if ($this->container['rightMargin'] === null) {
-            $invalidProperties[] = "'rightMargin' can't be null";
-        }
-        if ($this->container['topMargin'] === null) {
-            $invalidProperties[] = "'topMargin' can't be null";
-        }
-        if ($this->container['bottomMargin'] === null) {
-            $invalidProperties[] = "'bottomMargin' can't be null";
+        if ($this->container['maxItems'] === null) {
+            $invalidProperties[] = "'maxItems' can't be null";
         }
         return $invalidProperties;
     }
@@ -236,19 +212,7 @@ class WordProcessingOptions implements ArrayAccess
     public function valid()
     {
 
-        if ($this->container['renderTrackedChanges'] === null) {
-            return false;
-        }
-        if ($this->container['leftMargin'] === null) {
-            return false;
-        }
-        if ($this->container['rightMargin'] === null) {
-            return false;
-        }
-        if ($this->container['topMargin'] === null) {
-            return false;
-        }
-        if ($this->container['bottomMargin'] === null) {
+        if ($this->container['maxItems'] === null) {
             return false;
         }
         return true;
@@ -256,121 +220,73 @@ class WordProcessingOptions implements ArrayAccess
 
 
     /*
-     * Gets renderTrackedChanges
+     * Gets textFilter
      *
-     * @return bool
+     * @return string
      */
-    public function getRenderTrackedChanges()
+    public function getTextFilter()
     {
-        return $this->container['renderTrackedChanges'];
+        return $this->container['textFilter'];
     }
 
     /*
-     * Sets renderTrackedChanges
+     * Sets textFilter
      *
-     * @param bool $renderTrackedChanges Enables tracked changes (revisions) rendering
+     * @param string $textFilter The keywords used to filter messages.
      *
      * @return $this
      */
-    public function setRenderTrackedChanges($renderTrackedChanges)
+    public function setTextFilter($textFilter)
     {
-        $this->container['renderTrackedChanges'] = $renderTrackedChanges;
+        $this->container['textFilter'] = $textFilter;
 
         return $this;
     }
 
     /*
-     * Gets leftMargin
+     * Gets addressFilter
      *
-     * @return double
+     * @return string
      */
-    public function getLeftMargin()
+    public function getAddressFilter()
     {
-        return $this->container['leftMargin'];
+        return $this->container['addressFilter'];
     }
 
     /*
-     * Sets leftMargin
+     * Sets addressFilter
      *
-     * @param double $leftMargin Left page margin (for HTML rendering only)
+     * @param string $addressFilter The email-address used to filter messages by sender or recipient.
      *
      * @return $this
      */
-    public function setLeftMargin($leftMargin)
+    public function setAddressFilter($addressFilter)
     {
-        $this->container['leftMargin'] = $leftMargin;
+        $this->container['addressFilter'] = $addressFilter;
 
         return $this;
     }
 
     /*
-     * Gets rightMargin
+     * Gets maxItems
      *
-     * @return double
+     * @return int
      */
-    public function getRightMargin()
+    public function getMaxItems()
     {
-        return $this->container['rightMargin'];
+        return $this->container['maxItems'];
     }
 
     /*
-     * Sets rightMargin
+     * Sets maxItems
      *
-     * @param double $rightMargin Right page margin (for HTML rendering only)
+     * @param int $maxItems The maximum number of messages or items for render. Default value is 0 - all messages will be rendered
      *
      * @return $this
      */
-    public function setRightMargin($rightMargin)
+    public function setMaxItems($maxItems)
     {
-        $this->container['rightMargin'] = $rightMargin;
-
-        return $this;
-    }
-
-    /*
-     * Gets topMargin
-     *
-     * @return double
-     */
-    public function getTopMargin()
-    {
-        return $this->container['topMargin'];
-    }
-
-    /*
-     * Sets topMargin
-     *
-     * @param double $topMargin Top page margin (for HTML rendering only)
-     *
-     * @return $this
-     */
-    public function setTopMargin($topMargin)
-    {
-        $this->container['topMargin'] = $topMargin;
-
-        return $this;
-    }
-
-    /*
-     * Gets bottomMargin
-     *
-     * @return double
-     */
-    public function getBottomMargin()
-    {
-        return $this->container['bottomMargin'];
-    }
-
-    /*
-     * Sets bottomMargin
-     *
-     * @param double $bottomMargin Bottom page margin (for HTML rendering only)
-     *
-     * @return $this
-     */
-    public function setBottomMargin($bottomMargin)
-    {
-        $this->container['bottomMargin'] = $bottomMargin;
+        $this->container['maxItems'] = $maxItems;
 
         return $this;
     }

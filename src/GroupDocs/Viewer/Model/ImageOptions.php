@@ -54,7 +54,9 @@ class ImageOptions extends RenderOptions
         'width' => 'int',
         'height' => 'int',
         'extractText' => 'bool',
-        'jpegQuality' => 'int'
+        'jpegQuality' => 'int',
+        'maxWidth' => 'int',
+        'maxHeight' => 'int'
     ];
 
     /*
@@ -66,7 +68,9 @@ class ImageOptions extends RenderOptions
         'width' => 'int32',
         'height' => 'int32',
         'extractText' => null,
-        'jpegQuality' => 'int32'
+        'jpegQuality' => 'int32',
+        'maxWidth' => 'int32',
+        'maxHeight' => 'int32'
     ];
 
     /*
@@ -99,7 +103,9 @@ class ImageOptions extends RenderOptions
         'width' => 'Width',
         'height' => 'Height',
         'extractText' => 'ExtractText',
-        'jpegQuality' => 'JpegQuality'
+        'jpegQuality' => 'JpegQuality',
+        'maxWidth' => 'MaxWidth',
+        'maxHeight' => 'MaxHeight'
     ];
 
     /*
@@ -111,7 +117,9 @@ class ImageOptions extends RenderOptions
         'width' => 'setWidth',
         'height' => 'setHeight',
         'extractText' => 'setExtractText',
-        'jpegQuality' => 'setJpegQuality'
+        'jpegQuality' => 'setJpegQuality',
+        'maxWidth' => 'setMaxWidth',
+        'maxHeight' => 'setMaxHeight'
     ];
 
     /*
@@ -123,7 +131,9 @@ class ImageOptions extends RenderOptions
         'width' => 'getWidth',
         'height' => 'getHeight',
         'extractText' => 'getExtractText',
-        'jpegQuality' => 'getJpegQuality'
+        'jpegQuality' => 'getJpegQuality',
+        'maxWidth' => 'getMaxWidth',
+        'maxHeight' => 'getMaxHeight'
     ];
 
     /*
@@ -186,6 +196,8 @@ class ImageOptions extends RenderOptions
         $this->container['height'] = isset($data['height']) ? $data['height'] : null;
         $this->container['extractText'] = isset($data['extractText']) ? $data['extractText'] : null;
         $this->container['jpegQuality'] = isset($data['jpegQuality']) ? $data['jpegQuality'] : null;
+        $this->container['maxWidth'] = isset($data['maxWidth']) ? $data['maxWidth'] : null;
+        $this->container['maxHeight'] = isset($data['maxHeight']) ? $data['maxHeight'] : null;
     }
 
     /*
@@ -208,6 +220,12 @@ class ImageOptions extends RenderOptions
         }
         if ($this->container['jpegQuality'] === null) {
             $invalidProperties[] = "'jpegQuality' can't be null";
+        }
+        if ($this->container['maxWidth'] === null) {
+            $invalidProperties[] = "'maxWidth' can't be null";
+        }
+        if ($this->container['maxHeight'] === null) {
+            $invalidProperties[] = "'maxHeight' can't be null";
         }
         return $invalidProperties;
     }
@@ -234,6 +252,12 @@ class ImageOptions extends RenderOptions
             return false;
         }
         if ($this->container['jpegQuality'] === null) {
+            return false;
+        }
+        if ($this->container['maxWidth'] === null) {
+            return false;
+        }
+        if ($this->container['maxHeight'] === null) {
             return false;
         }
         return true;
@@ -332,6 +356,54 @@ class ImageOptions extends RenderOptions
     public function setJpegQuality($jpegQuality)
     {
         $this->container['jpegQuality'] = $jpegQuality;
+
+        return $this;
+    }
+
+    /*
+     * Gets maxWidth
+     *
+     * @return int
+     */
+    public function getMaxWidth()
+    {
+        return $this->container['maxWidth'];
+    }
+
+    /*
+     * Sets maxWidth
+     *
+     * @param int $maxWidth Max width of an output image in pixels
+     *
+     * @return $this
+     */
+    public function setMaxWidth($maxWidth)
+    {
+        $this->container['maxWidth'] = $maxWidth;
+
+        return $this;
+    }
+
+    /*
+     * Gets maxHeight
+     *
+     * @return int
+     */
+    public function getMaxHeight()
+    {
+        return $this->container['maxHeight'];
+    }
+
+    /*
+     * Sets maxHeight
+     *
+     * @param int $maxHeight Max height of an output image in pixels
+     *
+     * @return $this
+     */
+    public function setMaxHeight($maxHeight)
+    {
+        $this->container['maxHeight'] = $maxHeight;
 
         return $this;
     }

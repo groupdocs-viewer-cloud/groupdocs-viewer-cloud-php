@@ -57,7 +57,8 @@ class PdfDocumentOptions implements ArrayAccess
         'enableLayeredRendering' => 'bool',
         'enableFontHinting' => 'bool',
         'renderOriginalPageSize' => 'bool',
-        'imageQuality' => 'string'
+        'imageQuality' => 'string',
+        'renderTextAsImage' => 'bool'
     ];
 
     /*
@@ -70,7 +71,8 @@ class PdfDocumentOptions implements ArrayAccess
         'enableLayeredRendering' => null,
         'enableFontHinting' => null,
         'renderOriginalPageSize' => null,
-        'imageQuality' => null
+        'imageQuality' => null,
+        'renderTextAsImage' => null
     ];
 
     /*
@@ -104,7 +106,8 @@ class PdfDocumentOptions implements ArrayAccess
         'enableLayeredRendering' => 'EnableLayeredRendering',
         'enableFontHinting' => 'EnableFontHinting',
         'renderOriginalPageSize' => 'RenderOriginalPageSize',
-        'imageQuality' => 'ImageQuality'
+        'imageQuality' => 'ImageQuality',
+        'renderTextAsImage' => 'RenderTextAsImage'
     ];
 
     /*
@@ -117,7 +120,8 @@ class PdfDocumentOptions implements ArrayAccess
         'enableLayeredRendering' => 'setEnableLayeredRendering',
         'enableFontHinting' => 'setEnableFontHinting',
         'renderOriginalPageSize' => 'setRenderOriginalPageSize',
-        'imageQuality' => 'setImageQuality'
+        'imageQuality' => 'setImageQuality',
+        'renderTextAsImage' => 'setRenderTextAsImage'
     ];
 
     /*
@@ -130,7 +134,8 @@ class PdfDocumentOptions implements ArrayAccess
         'enableLayeredRendering' => 'getEnableLayeredRendering',
         'enableFontHinting' => 'getEnableFontHinting',
         'renderOriginalPageSize' => 'getRenderOriginalPageSize',
-        'imageQuality' => 'getImageQuality'
+        'imageQuality' => 'getImageQuality',
+        'renderTextAsImage' => 'getRenderTextAsImage'
     ];
 
     /*
@@ -215,6 +220,7 @@ class PdfDocumentOptions implements ArrayAccess
         $this->container['enableFontHinting'] = isset($data['enableFontHinting']) ? $data['enableFontHinting'] : null;
         $this->container['renderOriginalPageSize'] = isset($data['renderOriginalPageSize']) ? $data['renderOriginalPageSize'] : null;
         $this->container['imageQuality'] = isset($data['imageQuality']) ? $data['imageQuality'] : null;
+        $this->container['renderTextAsImage'] = isset($data['renderTextAsImage']) ? $data['renderTextAsImage'] : null;
     }
 
     /*
@@ -249,6 +255,9 @@ class PdfDocumentOptions implements ArrayAccess
             );
         }
 
+        if ($this->container['renderTextAsImage'] === null) {
+            $invalidProperties[] = "'renderTextAsImage' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -278,6 +287,9 @@ class PdfDocumentOptions implements ArrayAccess
         }
         $allowedValues = $this->getImageQualityAllowableValues();
         if (!in_array($this->container['imageQuality'], $allowedValues)) {
+            return false;
+        }
+        if ($this->container['renderTextAsImage'] === null) {
             return false;
         }
         return true;
@@ -405,6 +417,30 @@ class PdfDocumentOptions implements ArrayAccess
         }
 			
         $this->container['imageQuality'] = $imageQuality;
+
+        return $this;
+    }
+
+    /*
+     * Gets renderTextAsImage
+     *
+     * @return bool
+     */
+    public function getRenderTextAsImage()
+    {
+        return $this->container['renderTextAsImage'];
+    }
+
+    /*
+     * Sets renderTextAsImage
+     *
+     * @param bool $renderTextAsImage When this option is set to true, the text is rendered as an image in the output HTML. Enable this option to make text unselectable or to fix characters rendering and make HTML look like PDF. The default value is false. This option is supported when rendering into HTML.
+     *
+     * @return $this
+     */
+    public function setRenderTextAsImage($renderTextAsImage)
+    {
+        $this->container['renderTextAsImage'] = $renderTextAsImage;
 
         return $this;
     }

@@ -54,7 +54,9 @@ class EmailOptions implements ArrayAccess
      */
     protected static $swaggerTypes = [
         'pageSize' => 'string',
-        'fieldLabels' => '\GroupDocs\Viewer\Model\FieldLabel[]'
+        'fieldLabels' => '\GroupDocs\Viewer\Model\FieldLabel[]',
+        'dateTimeFormat' => 'string',
+        'timeZoneOffset' => 'string'
     ];
 
     /*
@@ -64,7 +66,9 @@ class EmailOptions implements ArrayAccess
      */
     protected static $swaggerFormats = [
         'pageSize' => null,
-        'fieldLabels' => null
+        'fieldLabels' => null,
+        'dateTimeFormat' => null,
+        'timeZoneOffset' => null
     ];
 
     /*
@@ -95,7 +99,9 @@ class EmailOptions implements ArrayAccess
      */
     protected static $attributeMap = [
         'pageSize' => 'PageSize',
-        'fieldLabels' => 'FieldLabels'
+        'fieldLabels' => 'FieldLabels',
+        'dateTimeFormat' => 'DateTimeFormat',
+        'timeZoneOffset' => 'TimeZoneOffset'
     ];
 
     /*
@@ -105,7 +111,9 @@ class EmailOptions implements ArrayAccess
      */
     protected static $setters = [
         'pageSize' => 'setPageSize',
-        'fieldLabels' => 'setFieldLabels'
+        'fieldLabels' => 'setFieldLabels',
+        'dateTimeFormat' => 'setDateTimeFormat',
+        'timeZoneOffset' => 'setTimeZoneOffset'
     ];
 
     /*
@@ -115,7 +123,9 @@ class EmailOptions implements ArrayAccess
      */
     protected static $getters = [
         'pageSize' => 'getPageSize',
-        'fieldLabels' => 'getFieldLabels'
+        'fieldLabels' => 'getFieldLabels',
+        'dateTimeFormat' => 'getDateTimeFormat',
+        'timeZoneOffset' => 'getTimeZoneOffset'
     ];
 
     /*
@@ -207,6 +217,8 @@ class EmailOptions implements ArrayAccess
     {
         $this->container['pageSize'] = isset($data['pageSize']) ? $data['pageSize'] : null;
         $this->container['fieldLabels'] = isset($data['fieldLabels']) ? $data['fieldLabels'] : null;
+        $this->container['dateTimeFormat'] = isset($data['dateTimeFormat']) ? $data['dateTimeFormat'] : null;
+        $this->container['timeZoneOffset'] = isset($data['timeZoneOffset']) ? $data['timeZoneOffset'] : null;
     }
 
     /*
@@ -301,6 +313,54 @@ class EmailOptions implements ArrayAccess
     public function setFieldLabels($fieldLabels)
     {
         $this->container['fieldLabels'] = $fieldLabels;
+
+        return $this;
+    }
+
+    /*
+     * Gets dateTimeFormat
+     *
+     * @return string
+     */
+    public function getDateTimeFormat()
+    {
+        return $this->container['dateTimeFormat'];
+    }
+
+    /*
+     * Sets dateTimeFormat
+     *
+     * @param string $dateTimeFormat Time Format (can be include TimeZone) for example: 'MM d yyyy HH:mm tt', if not set - current system format is used
+     *
+     * @return $this
+     */
+    public function setDateTimeFormat($dateTimeFormat)
+    {
+        $this->container['dateTimeFormat'] = $dateTimeFormat;
+
+        return $this;
+    }
+
+    /*
+     * Gets timeZoneOffset
+     *
+     * @return string
+     */
+    public function getTimeZoneOffset()
+    {
+        return $this->container['timeZoneOffset'];
+    }
+
+    /*
+     * Sets timeZoneOffset
+     *
+     * @param string $timeZoneOffset Message time zone offset. Format should be compatible with .net TimeSpan
+     *
+     * @return $this
+     */
+    public function setTimeZoneOffset($timeZoneOffset)
+    {
+        $this->container['timeZoneOffset'] = $timeZoneOffset;
 
         return $this;
     }

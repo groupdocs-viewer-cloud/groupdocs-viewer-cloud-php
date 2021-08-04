@@ -55,11 +55,13 @@ class SpreadsheetOptions implements ArrayAccess
     protected static $swaggerTypes = [
         'paginateSheets' => 'bool',
         'countRowsPerPage' => 'int',
+        'countColumnsPerPage' => 'int',
         'renderGridLines' => 'bool',
         'renderEmptyRows' => 'bool',
         'renderEmptyColumns' => 'bool',
         'renderHiddenRows' => 'bool',
         'renderHiddenColumns' => 'bool',
+        'renderHeadings' => 'bool',
         'renderPrintAreaOnly' => 'bool',
         'textOverflowMode' => 'string'
     ];
@@ -72,11 +74,13 @@ class SpreadsheetOptions implements ArrayAccess
     protected static $swaggerFormats = [
         'paginateSheets' => null,
         'countRowsPerPage' => 'int32',
+        'countColumnsPerPage' => 'int32',
         'renderGridLines' => null,
         'renderEmptyRows' => null,
         'renderEmptyColumns' => null,
         'renderHiddenRows' => null,
         'renderHiddenColumns' => null,
+        'renderHeadings' => null,
         'renderPrintAreaOnly' => null,
         'textOverflowMode' => null
     ];
@@ -110,11 +114,13 @@ class SpreadsheetOptions implements ArrayAccess
     protected static $attributeMap = [
         'paginateSheets' => 'PaginateSheets',
         'countRowsPerPage' => 'CountRowsPerPage',
+        'countColumnsPerPage' => 'CountColumnsPerPage',
         'renderGridLines' => 'RenderGridLines',
         'renderEmptyRows' => 'RenderEmptyRows',
         'renderEmptyColumns' => 'RenderEmptyColumns',
         'renderHiddenRows' => 'RenderHiddenRows',
         'renderHiddenColumns' => 'RenderHiddenColumns',
+        'renderHeadings' => 'RenderHeadings',
         'renderPrintAreaOnly' => 'RenderPrintAreaOnly',
         'textOverflowMode' => 'TextOverflowMode'
     ];
@@ -127,11 +133,13 @@ class SpreadsheetOptions implements ArrayAccess
     protected static $setters = [
         'paginateSheets' => 'setPaginateSheets',
         'countRowsPerPage' => 'setCountRowsPerPage',
+        'countColumnsPerPage' => 'setCountColumnsPerPage',
         'renderGridLines' => 'setRenderGridLines',
         'renderEmptyRows' => 'setRenderEmptyRows',
         'renderEmptyColumns' => 'setRenderEmptyColumns',
         'renderHiddenRows' => 'setRenderHiddenRows',
         'renderHiddenColumns' => 'setRenderHiddenColumns',
+        'renderHeadings' => 'setRenderHeadings',
         'renderPrintAreaOnly' => 'setRenderPrintAreaOnly',
         'textOverflowMode' => 'setTextOverflowMode'
     ];
@@ -144,11 +152,13 @@ class SpreadsheetOptions implements ArrayAccess
     protected static $getters = [
         'paginateSheets' => 'getPaginateSheets',
         'countRowsPerPage' => 'getCountRowsPerPage',
+        'countColumnsPerPage' => 'getCountColumnsPerPage',
         'renderGridLines' => 'getRenderGridLines',
         'renderEmptyRows' => 'getRenderEmptyRows',
         'renderEmptyColumns' => 'getRenderEmptyColumns',
         'renderHiddenRows' => 'getRenderHiddenRows',
         'renderHiddenColumns' => 'getRenderHiddenColumns',
+        'renderHeadings' => 'getRenderHeadings',
         'renderPrintAreaOnly' => 'getRenderPrintAreaOnly',
         'textOverflowMode' => 'getTextOverflowMode'
     ];
@@ -234,11 +244,13 @@ class SpreadsheetOptions implements ArrayAccess
     {
         $this->container['paginateSheets'] = isset($data['paginateSheets']) ? $data['paginateSheets'] : null;
         $this->container['countRowsPerPage'] = isset($data['countRowsPerPage']) ? $data['countRowsPerPage'] : null;
+        $this->container['countColumnsPerPage'] = isset($data['countColumnsPerPage']) ? $data['countColumnsPerPage'] : null;
         $this->container['renderGridLines'] = isset($data['renderGridLines']) ? $data['renderGridLines'] : null;
         $this->container['renderEmptyRows'] = isset($data['renderEmptyRows']) ? $data['renderEmptyRows'] : null;
         $this->container['renderEmptyColumns'] = isset($data['renderEmptyColumns']) ? $data['renderEmptyColumns'] : null;
         $this->container['renderHiddenRows'] = isset($data['renderHiddenRows']) ? $data['renderHiddenRows'] : null;
         $this->container['renderHiddenColumns'] = isset($data['renderHiddenColumns']) ? $data['renderHiddenColumns'] : null;
+        $this->container['renderHeadings'] = isset($data['renderHeadings']) ? $data['renderHeadings'] : null;
         $this->container['renderPrintAreaOnly'] = isset($data['renderPrintAreaOnly']) ? $data['renderPrintAreaOnly'] : null;
         $this->container['textOverflowMode'] = isset($data['textOverflowMode']) ? $data['textOverflowMode'] : null;
     }
@@ -258,6 +270,9 @@ class SpreadsheetOptions implements ArrayAccess
         if ($this->container['countRowsPerPage'] === null) {
             $invalidProperties[] = "'countRowsPerPage' can't be null";
         }
+        if ($this->container['countColumnsPerPage'] === null) {
+            $invalidProperties[] = "'countColumnsPerPage' can't be null";
+        }
         if ($this->container['renderGridLines'] === null) {
             $invalidProperties[] = "'renderGridLines' can't be null";
         }
@@ -272,6 +287,9 @@ class SpreadsheetOptions implements ArrayAccess
         }
         if ($this->container['renderHiddenColumns'] === null) {
             $invalidProperties[] = "'renderHiddenColumns' can't be null";
+        }
+        if ($this->container['renderHeadings'] === null) {
+            $invalidProperties[] = "'renderHeadings' can't be null";
         }
         if ($this->container['renderPrintAreaOnly'] === null) {
             $invalidProperties[] = "'renderPrintAreaOnly' can't be null";
@@ -305,6 +323,9 @@ class SpreadsheetOptions implements ArrayAccess
         if ($this->container['countRowsPerPage'] === null) {
             return false;
         }
+        if ($this->container['countColumnsPerPage'] === null) {
+            return false;
+        }
         if ($this->container['renderGridLines'] === null) {
             return false;
         }
@@ -318,6 +339,9 @@ class SpreadsheetOptions implements ArrayAccess
             return false;
         }
         if ($this->container['renderHiddenColumns'] === null) {
+            return false;
+        }
+        if ($this->container['renderHeadings'] === null) {
             return false;
         }
         if ($this->container['renderPrintAreaOnly'] === null) {
@@ -378,6 +402,30 @@ class SpreadsheetOptions implements ArrayAccess
     public function setCountRowsPerPage($countRowsPerPage)
     {
         $this->container['countRowsPerPage'] = $countRowsPerPage;
+
+        return $this;
+    }
+
+    /*
+     * Gets countColumnsPerPage
+     *
+     * @return int
+     */
+    public function getCountColumnsPerPage()
+    {
+        return $this->container['countColumnsPerPage'];
+    }
+
+    /*
+     * Sets countColumnsPerPage
+     *
+     * @param int $countColumnsPerPage The columns count to include into each page when splitting worksheet into pages.
+     *
+     * @return $this
+     */
+    public function setCountColumnsPerPage($countColumnsPerPage)
+    {
+        $this->container['countColumnsPerPage'] = $countColumnsPerPage;
 
         return $this;
     }
@@ -498,6 +546,30 @@ class SpreadsheetOptions implements ArrayAccess
     public function setRenderHiddenColumns($renderHiddenColumns)
     {
         $this->container['renderHiddenColumns'] = $renderHiddenColumns;
+
+        return $this;
+    }
+
+    /*
+     * Gets renderHeadings
+     *
+     * @return bool
+     */
+    public function getRenderHeadings()
+    {
+        return $this->container['renderHeadings'];
+    }
+
+    /*
+     * Sets renderHeadings
+     *
+     * @param bool $renderHeadings Enables headings rendering.
+     *
+     * @return $this
+     */
+    public function setRenderHeadings($renderHeadings)
+    {
+        $this->container['renderHeadings'] = $renderHeadings;
 
         return $this;
     }

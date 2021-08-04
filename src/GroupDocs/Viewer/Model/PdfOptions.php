@@ -54,7 +54,11 @@ class PdfOptions extends RenderOptions
         'jpgQuality' => 'int',
         'documentOpenPassword' => 'string',
         'permissionsPassword' => 'string',
-        'permissions' => 'string[]'
+        'permissions' => 'string[]',
+        'imageMaxWidth' => 'int',
+        'imageMaxHeight' => 'int',
+        'imageWidth' => 'int',
+        'imageHeight' => 'int'
     ];
 
     /*
@@ -66,7 +70,11 @@ class PdfOptions extends RenderOptions
         'jpgQuality' => 'int32',
         'documentOpenPassword' => null,
         'permissionsPassword' => null,
-        'permissions' => null
+        'permissions' => null,
+        'imageMaxWidth' => 'int32',
+        'imageMaxHeight' => 'int32',
+        'imageWidth' => 'int32',
+        'imageHeight' => 'int32'
     ];
 
     /*
@@ -99,7 +107,11 @@ class PdfOptions extends RenderOptions
         'jpgQuality' => 'JpgQuality',
         'documentOpenPassword' => 'DocumentOpenPassword',
         'permissionsPassword' => 'PermissionsPassword',
-        'permissions' => 'Permissions'
+        'permissions' => 'Permissions',
+        'imageMaxWidth' => 'ImageMaxWidth',
+        'imageMaxHeight' => 'ImageMaxHeight',
+        'imageWidth' => 'ImageWidth',
+        'imageHeight' => 'ImageHeight'
     ];
 
     /*
@@ -111,7 +123,11 @@ class PdfOptions extends RenderOptions
         'jpgQuality' => 'setJpgQuality',
         'documentOpenPassword' => 'setDocumentOpenPassword',
         'permissionsPassword' => 'setPermissionsPassword',
-        'permissions' => 'setPermissions'
+        'permissions' => 'setPermissions',
+        'imageMaxWidth' => 'setImageMaxWidth',
+        'imageMaxHeight' => 'setImageMaxHeight',
+        'imageWidth' => 'setImageWidth',
+        'imageHeight' => 'setImageHeight'
     ];
 
     /*
@@ -123,7 +139,11 @@ class PdfOptions extends RenderOptions
         'jpgQuality' => 'getJpgQuality',
         'documentOpenPassword' => 'getDocumentOpenPassword',
         'permissionsPassword' => 'getPermissionsPassword',
-        'permissions' => 'getPermissions'
+        'permissions' => 'getPermissions',
+        'imageMaxWidth' => 'getImageMaxWidth',
+        'imageMaxHeight' => 'getImageMaxHeight',
+        'imageWidth' => 'getImageWidth',
+        'imageHeight' => 'getImageHeight'
     ];
 
     /*
@@ -186,6 +206,10 @@ class PdfOptions extends RenderOptions
         $this->container['documentOpenPassword'] = isset($data['documentOpenPassword']) ? $data['documentOpenPassword'] : null;
         $this->container['permissionsPassword'] = isset($data['permissionsPassword']) ? $data['permissionsPassword'] : null;
         $this->container['permissions'] = isset($data['permissions']) ? $data['permissions'] : null;
+        $this->container['imageMaxWidth'] = isset($data['imageMaxWidth']) ? $data['imageMaxWidth'] : null;
+        $this->container['imageMaxHeight'] = isset($data['imageMaxHeight']) ? $data['imageMaxHeight'] : null;
+        $this->container['imageWidth'] = isset($data['imageWidth']) ? $data['imageWidth'] : null;
+        $this->container['imageHeight'] = isset($data['imageHeight']) ? $data['imageHeight'] : null;
     }
 
     /*
@@ -199,6 +223,18 @@ class PdfOptions extends RenderOptions
 
         if ($this->container['jpgQuality'] === null) {
             $invalidProperties[] = "'jpgQuality' can't be null";
+        }
+        if ($this->container['imageMaxWidth'] === null) {
+            $invalidProperties[] = "'imageMaxWidth' can't be null";
+        }
+        if ($this->container['imageMaxHeight'] === null) {
+            $invalidProperties[] = "'imageMaxHeight' can't be null";
+        }
+        if ($this->container['imageWidth'] === null) {
+            $invalidProperties[] = "'imageWidth' can't be null";
+        }
+        if ($this->container['imageHeight'] === null) {
+            $invalidProperties[] = "'imageHeight' can't be null";
         }
         return $invalidProperties;
     }
@@ -216,6 +252,18 @@ class PdfOptions extends RenderOptions
         }
 
         if ($this->container['jpgQuality'] === null) {
+            return false;
+        }
+        if ($this->container['imageMaxWidth'] === null) {
+            return false;
+        }
+        if ($this->container['imageMaxHeight'] === null) {
+            return false;
+        }
+        if ($this->container['imageWidth'] === null) {
+            return false;
+        }
+        if ($this->container['imageHeight'] === null) {
             return false;
         }
         return true;
@@ -314,6 +362,102 @@ class PdfOptions extends RenderOptions
     public function setPermissions($permissions)
     {
         $this->container['permissions'] = $permissions;
+
+        return $this;
+    }
+
+    /*
+     * Gets imageMaxWidth
+     *
+     * @return int
+     */
+    public function getImageMaxWidth()
+    {
+        return $this->container['imageMaxWidth'];
+    }
+
+    /*
+     * Sets imageMaxWidth
+     *
+     * @param int $imageMaxWidth Max width of an output image in pixels. (When converting single image to HTML only)
+     *
+     * @return $this
+     */
+    public function setImageMaxWidth($imageMaxWidth)
+    {
+        $this->container['imageMaxWidth'] = $imageMaxWidth;
+
+        return $this;
+    }
+
+    /*
+     * Gets imageMaxHeight
+     *
+     * @return int
+     */
+    public function getImageMaxHeight()
+    {
+        return $this->container['imageMaxHeight'];
+    }
+
+    /*
+     * Sets imageMaxHeight
+     *
+     * @param int $imageMaxHeight Max height of an output image in pixels. (When converting single image to HTML only)
+     *
+     * @return $this
+     */
+    public function setImageMaxHeight($imageMaxHeight)
+    {
+        $this->container['imageMaxHeight'] = $imageMaxHeight;
+
+        return $this;
+    }
+
+    /*
+     * Gets imageWidth
+     *
+     * @return int
+     */
+    public function getImageWidth()
+    {
+        return $this->container['imageWidth'];
+    }
+
+    /*
+     * Sets imageWidth
+     *
+     * @param int $imageWidth The width of the output image in pixels. (When converting single image to HTML only)
+     *
+     * @return $this
+     */
+    public function setImageWidth($imageWidth)
+    {
+        $this->container['imageWidth'] = $imageWidth;
+
+        return $this;
+    }
+
+    /*
+     * Gets imageHeight
+     *
+     * @return int
+     */
+    public function getImageHeight()
+    {
+        return $this->container['imageHeight'];
+    }
+
+    /*
+     * Sets imageHeight
+     *
+     * @param int $imageHeight The height of an output image in pixels. (When converting single image to HTML only)
+     *
+     * @return $this
+     */
+    public function setImageHeight($imageHeight)
+    {
+        $this->container['imageHeight'] = $imageHeight;
 
         return $this;
     }

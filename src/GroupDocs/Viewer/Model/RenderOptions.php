@@ -69,7 +69,10 @@ class RenderOptions implements ArrayAccess
         'pdfDocumentOptions' => '\GroupDocs\Viewer\Model\PdfDocumentOptions',
         'wordProcessingOptions' => '\GroupDocs\Viewer\Model\WordProcessingOptions',
         'outlookOptions' => '\GroupDocs\Viewer\Model\OutlookOptions',
-        'archiveOptions' => '\GroupDocs\Viewer\Model\ArchiveOptions'
+        'archiveOptions' => '\GroupDocs\Viewer\Model\ArchiveOptions',
+        'textOptions' => '\GroupDocs\Viewer\Model\TextOptions',
+        'mailStorageOptions' => '\GroupDocs\Viewer\Model\MailStorageOptions',
+        'visioRenderingOptions' => '\GroupDocs\Viewer\Model\VisioRenderingOptions'
     ];
 
     /*
@@ -94,7 +97,10 @@ class RenderOptions implements ArrayAccess
         'pdfDocumentOptions' => null,
         'wordProcessingOptions' => null,
         'outlookOptions' => null,
-        'archiveOptions' => null
+        'archiveOptions' => null,
+        'textOptions' => null,
+        'mailStorageOptions' => null,
+        'visioRenderingOptions' => null
     ];
 
     /*
@@ -140,7 +146,10 @@ class RenderOptions implements ArrayAccess
         'pdfDocumentOptions' => 'PdfDocumentOptions',
         'wordProcessingOptions' => 'WordProcessingOptions',
         'outlookOptions' => 'OutlookOptions',
-        'archiveOptions' => 'ArchiveOptions'
+        'archiveOptions' => 'ArchiveOptions',
+        'textOptions' => 'TextOptions',
+        'mailStorageOptions' => 'MailStorageOptions',
+        'visioRenderingOptions' => 'VisioRenderingOptions'
     ];
 
     /*
@@ -165,7 +174,10 @@ class RenderOptions implements ArrayAccess
         'pdfDocumentOptions' => 'setPdfDocumentOptions',
         'wordProcessingOptions' => 'setWordProcessingOptions',
         'outlookOptions' => 'setOutlookOptions',
-        'archiveOptions' => 'setArchiveOptions'
+        'archiveOptions' => 'setArchiveOptions',
+        'textOptions' => 'setTextOptions',
+        'mailStorageOptions' => 'setMailStorageOptions',
+        'visioRenderingOptions' => 'setVisioRenderingOptions'
     ];
 
     /*
@@ -190,7 +202,10 @@ class RenderOptions implements ArrayAccess
         'pdfDocumentOptions' => 'getPdfDocumentOptions',
         'wordProcessingOptions' => 'getWordProcessingOptions',
         'outlookOptions' => 'getOutlookOptions',
-        'archiveOptions' => 'getArchiveOptions'
+        'archiveOptions' => 'getArchiveOptions',
+        'textOptions' => 'getTextOptions',
+        'mailStorageOptions' => 'getMailStorageOptions',
+        'visioRenderingOptions' => 'getVisioRenderingOptions'
     ];
 
     /*
@@ -270,6 +285,9 @@ class RenderOptions implements ArrayAccess
         $this->container['wordProcessingOptions'] = isset($data['wordProcessingOptions']) ? $data['wordProcessingOptions'] : null;
         $this->container['outlookOptions'] = isset($data['outlookOptions']) ? $data['outlookOptions'] : null;
         $this->container['archiveOptions'] = isset($data['archiveOptions']) ? $data['archiveOptions'] : null;
+        $this->container['textOptions'] = isset($data['textOptions']) ? $data['textOptions'] : null;
+        $this->container['mailStorageOptions'] = isset($data['mailStorageOptions']) ? $data['mailStorageOptions'] : null;
+        $this->container['visioRenderingOptions'] = isset($data['visioRenderingOptions']) ? $data['visioRenderingOptions'] : null;
 
         // Initialize discriminator property with the model name.
         $discriminator = array_search('Type', self::$attributeMap);
@@ -735,6 +753,78 @@ class RenderOptions implements ArrayAccess
     public function setArchiveOptions($archiveOptions)
     {
         $this->container['archiveOptions'] = $archiveOptions;
+
+        return $this;
+    }
+
+    /*
+     * Gets textOptions
+     *
+     * @return \GroupDocs\Viewer\Model\TextOptions
+     */
+    public function getTextOptions()
+    {
+        return $this->container['textOptions'];
+    }
+
+    /*
+     * Sets textOptions
+     *
+     * @param \GroupDocs\Viewer\Model\TextOptions $textOptions Rendering options for Text source file formats
+     *
+     * @return $this
+     */
+    public function setTextOptions($textOptions)
+    {
+        $this->container['textOptions'] = $textOptions;
+
+        return $this;
+    }
+
+    /*
+     * Gets mailStorageOptions
+     *
+     * @return \GroupDocs\Viewer\Model\MailStorageOptions
+     */
+    public function getMailStorageOptions()
+    {
+        return $this->container['mailStorageOptions'];
+    }
+
+    /*
+     * Sets mailStorageOptions
+     *
+     * @param \GroupDocs\Viewer\Model\MailStorageOptions $mailStorageOptions Rendering options for Mail storage (Lotus Notes, MBox) data files.
+     *
+     * @return $this
+     */
+    public function setMailStorageOptions($mailStorageOptions)
+    {
+        $this->container['mailStorageOptions'] = $mailStorageOptions;
+
+        return $this;
+    }
+
+    /*
+     * Gets visioRenderingOptions
+     *
+     * @return \GroupDocs\Viewer\Model\VisioRenderingOptions
+     */
+    public function getVisioRenderingOptions()
+    {
+        return $this->container['visioRenderingOptions'];
+    }
+
+    /*
+     * Sets visioRenderingOptions
+     *
+     * @param \GroupDocs\Viewer\Model\VisioRenderingOptions $visioRenderingOptions Rendering options for Visio source file formats
+     *
+     * @return $this
+     */
+    public function setVisioRenderingOptions($visioRenderingOptions)
+    {
+        $this->container['visioRenderingOptions'] = $visioRenderingOptions;
 
         return $this;
     }

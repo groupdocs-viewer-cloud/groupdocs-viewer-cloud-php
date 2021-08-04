@@ -53,7 +53,9 @@ class ArchiveOptions implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'folder' => 'string'
+        'folder' => 'string',
+        'fileName' => 'string',
+        'itemsPerPage' => 'int'
     ];
 
     /*
@@ -62,7 +64,9 @@ class ArchiveOptions implements ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'folder' => null
+        'folder' => null,
+        'fileName' => null,
+        'itemsPerPage' => 'int32'
     ];
 
     /*
@@ -92,7 +96,9 @@ class ArchiveOptions implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'folder' => 'Folder'
+        'folder' => 'Folder',
+        'fileName' => 'FileName',
+        'itemsPerPage' => 'ItemsPerPage'
     ];
 
     /*
@@ -101,7 +107,9 @@ class ArchiveOptions implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'folder' => 'setFolder'
+        'folder' => 'setFolder',
+        'fileName' => 'setFileName',
+        'itemsPerPage' => 'setItemsPerPage'
     ];
 
     /*
@@ -110,7 +118,9 @@ class ArchiveOptions implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'folder' => 'getFolder'
+        'folder' => 'getFolder',
+        'fileName' => 'getFileName',
+        'itemsPerPage' => 'getItemsPerPage'
     ];
 
     /*
@@ -174,6 +184,8 @@ class ArchiveOptions implements ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['folder'] = isset($data['folder']) ? $data['folder'] : null;
+        $this->container['fileName'] = isset($data['fileName']) ? $data['fileName'] : null;
+        $this->container['itemsPerPage'] = isset($data['itemsPerPage']) ? $data['itemsPerPage'] : null;
     }
 
     /*
@@ -185,6 +197,9 @@ class ArchiveOptions implements ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['itemsPerPage'] === null) {
+            $invalidProperties[] = "'itemsPerPage' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -197,6 +212,9 @@ class ArchiveOptions implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['itemsPerPage'] === null) {
+            return false;
+        }
         return true;
     }
 
@@ -221,6 +239,54 @@ class ArchiveOptions implements ArrayAccess
     public function setFolder($folder)
     {
         $this->container['folder'] = $folder;
+
+        return $this;
+    }
+
+    /*
+     * Gets fileName
+     *
+     * @return string
+     */
+    public function getFileName()
+    {
+        return $this->container['fileName'];
+    }
+
+    /*
+     * Sets fileName
+     *
+     * @param string $fileName The filename to display in the header. By default the name of the source file is displayed.
+     *
+     * @return $this
+     */
+    public function setFileName($fileName)
+    {
+        $this->container['fileName'] = $fileName;
+
+        return $this;
+    }
+
+    /*
+     * Gets itemsPerPage
+     *
+     * @return int
+     */
+    public function getItemsPerPage()
+    {
+        return $this->container['itemsPerPage'];
+    }
+
+    /*
+     * Sets itemsPerPage
+     *
+     * @param int $itemsPerPage Number of records per page (for rendering to HTML only)
+     *
+     * @return $this
+     */
+    public function setItemsPerPage($itemsPerPage)
+    {
+        $this->container['itemsPerPage'] = $itemsPerPage;
 
         return $this;
     }
