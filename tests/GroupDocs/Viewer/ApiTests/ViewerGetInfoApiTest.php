@@ -60,6 +60,19 @@ class ViewerGetInfoApiTest extends BaseApiTest
         $response = self::$infoApi->getInfo($request);
     }
 
+    public function testTestGetInfoPasswordProtected()
+    {
+        $this->setExpectedExceptionRegExp(
+            \GroupDocs\Viewer\ApiException::class, "/Please specify password to load the document./");
+
+        $testFile = Internal\TestFiles::getFilePasswordProtectedDocx();
+        $viewOptions = new ViewOptions();
+        $viewOptions->setFileInfo($testFile->ToFileInfo());
+        $viewOptions->getFileInfo()->setPassword(null);
+        $request = new Requests\getInfoRequest($viewOptions);
+       
+        $response = self::$infoApi->getInfo($request);
+    }
     public function testGetInfoWithMinimalViewOptions()
     {
         $testFile = Internal\TestFiles::getFilePasswordProtectedDocx();
