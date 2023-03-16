@@ -2,7 +2,7 @@
 /**
 * --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose Pty Ltd" file="ViewerCreateViewApiTest.php">
-*   Copyright (c) 2003-2021 Aspose Pty Ltd
+*   Copyright (c) 2003-2023 Aspose Pty Ltd
 * </copyright>
 * <summary>
 *  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,14 +32,14 @@ use \GroupDocs\Viewer\Model\ViewOptions;
 use \GroupDocs\Viewer\Model\RenderOptions;
 use \GroupDocs\Viewer\Model\HtmlOptions;
 
-require_once "BaseApiTest.php";
+require_once "BaseApiTestCase.php";
 
-class ViewerCreateViewApiTest extends BaseApiTest
+class ViewerCreateViewApiTest extends BaseApiTestCase
 {
     public function testCreateViewReturnsMissingFileInfo()
     {
-        $this->setExpectedExceptionRegExp(
-            \GroupDocs\Viewer\ApiException::class, "/Parameter 'FileInfo' is not specified./");
+        $this->expectException(\GroupDocs\Viewer\ApiException::class);
+        $this->expectExceptionMessageMatches("/Parameter 'FileInfo' is not specified./");
 
         $viewOptions = new ViewOptions();
         $request = new Requests\createViewRequest($viewOptions);
@@ -49,8 +49,8 @@ class ViewerCreateViewApiTest extends BaseApiTest
 
     public function testCreateViewReturnsFileNotFound()
     {
-        $this->setExpectedExceptionRegExp(
-            \GroupDocs\Viewer\ApiException::class, "/Can't find file located at 'some-folder\/NotExist.docx'./");
+        $this->expectException(\GroupDocs\Viewer\ApiException::class);
+        $this->expectExceptionMessageMatches("/Can't find file located at 'some-folder\/NotExist.docx'./");        
 
         $testFile = Internal\TestFiles::getFileNotExist();
         $viewOptions = new ViewOptions();

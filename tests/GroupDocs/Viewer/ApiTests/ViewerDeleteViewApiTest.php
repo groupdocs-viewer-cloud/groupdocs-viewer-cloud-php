@@ -2,7 +2,7 @@
 /**
 * --------------------------------------------------------------------------------------------------------------------
 * <copyright company="Aspose Pty Ltd" file="ViewerDeleteViewApiTest.php">
-*   Copyright (c) 2003-2021 Aspose Pty Ltd
+*   Copyright (c) 2003-2023 Aspose Pty Ltd
 * </copyright>
 * <summary>
 *  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -31,9 +31,9 @@ use GroupDocs\Viewer\Model\Requests;
 use \GroupDocs\Viewer\Model\ViewOptions;
 use \GroupDocs\Viewer\Model\DeleteViewOptions;
 
-require_once "BaseApiTest.php";
+require_once "BaseApiTestCase.php";
 
-class ViewerDeleteViewApiTest extends BaseApiTest
+class ViewerDeleteViewApiTest extends BaseApiTestCase
 {
     public function testDeleteViewWithDefaultViewFormat()
     {

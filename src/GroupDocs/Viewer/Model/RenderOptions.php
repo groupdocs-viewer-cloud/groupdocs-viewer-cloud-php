@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="RenderOptions.php">
- *   Copyright (c) 2003-2021 Aspose Pty Ltd
+ *   Copyright (c) 2003-2023 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -59,6 +59,7 @@ class RenderOptions implements ArrayAccess
         'pageRotations' => '\GroupDocs\Viewer\Model\PageRotation[]',
         'defaultFontName' => 'string',
         'defaultEncoding' => 'string',
+        'detectEncoding' => 'bool',
         'renderComments' => 'bool',
         'renderNotes' => 'bool',
         'renderHiddenPages' => 'bool',
@@ -72,7 +73,8 @@ class RenderOptions implements ArrayAccess
         'archiveOptions' => '\GroupDocs\Viewer\Model\ArchiveOptions',
         'textOptions' => '\GroupDocs\Viewer\Model\TextOptions',
         'mailStorageOptions' => '\GroupDocs\Viewer\Model\MailStorageOptions',
-        'visioRenderingOptions' => '\GroupDocs\Viewer\Model\VisioRenderingOptions'
+        'visioRenderingOptions' => '\GroupDocs\Viewer\Model\VisioRenderingOptions',
+        'webDocumentOptions' => '\GroupDocs\Viewer\Model\WebDocumentOptions'
     ];
 
     /*
@@ -87,6 +89,7 @@ class RenderOptions implements ArrayAccess
         'pageRotations' => null,
         'defaultFontName' => null,
         'defaultEncoding' => null,
+        'detectEncoding' => null,
         'renderComments' => null,
         'renderNotes' => null,
         'renderHiddenPages' => null,
@@ -100,7 +103,8 @@ class RenderOptions implements ArrayAccess
         'archiveOptions' => null,
         'textOptions' => null,
         'mailStorageOptions' => null,
-        'visioRenderingOptions' => null
+        'visioRenderingOptions' => null,
+        'webDocumentOptions' => null
     ];
 
     /*
@@ -136,6 +140,7 @@ class RenderOptions implements ArrayAccess
         'pageRotations' => 'PageRotations',
         'defaultFontName' => 'DefaultFontName',
         'defaultEncoding' => 'DefaultEncoding',
+        'detectEncoding' => 'DetectEncoding',
         'renderComments' => 'RenderComments',
         'renderNotes' => 'RenderNotes',
         'renderHiddenPages' => 'RenderHiddenPages',
@@ -149,7 +154,8 @@ class RenderOptions implements ArrayAccess
         'archiveOptions' => 'ArchiveOptions',
         'textOptions' => 'TextOptions',
         'mailStorageOptions' => 'MailStorageOptions',
-        'visioRenderingOptions' => 'VisioRenderingOptions'
+        'visioRenderingOptions' => 'VisioRenderingOptions',
+        'webDocumentOptions' => 'WebDocumentOptions'
     ];
 
     /*
@@ -164,6 +170,7 @@ class RenderOptions implements ArrayAccess
         'pageRotations' => 'setPageRotations',
         'defaultFontName' => 'setDefaultFontName',
         'defaultEncoding' => 'setDefaultEncoding',
+        'detectEncoding' => 'setDetectEncoding',
         'renderComments' => 'setRenderComments',
         'renderNotes' => 'setRenderNotes',
         'renderHiddenPages' => 'setRenderHiddenPages',
@@ -177,7 +184,8 @@ class RenderOptions implements ArrayAccess
         'archiveOptions' => 'setArchiveOptions',
         'textOptions' => 'setTextOptions',
         'mailStorageOptions' => 'setMailStorageOptions',
-        'visioRenderingOptions' => 'setVisioRenderingOptions'
+        'visioRenderingOptions' => 'setVisioRenderingOptions',
+        'webDocumentOptions' => 'setWebDocumentOptions'
     ];
 
     /*
@@ -192,6 +200,7 @@ class RenderOptions implements ArrayAccess
         'pageRotations' => 'getPageRotations',
         'defaultFontName' => 'getDefaultFontName',
         'defaultEncoding' => 'getDefaultEncoding',
+        'detectEncoding' => 'getDetectEncoding',
         'renderComments' => 'getRenderComments',
         'renderNotes' => 'getRenderNotes',
         'renderHiddenPages' => 'getRenderHiddenPages',
@@ -205,7 +214,8 @@ class RenderOptions implements ArrayAccess
         'archiveOptions' => 'getArchiveOptions',
         'textOptions' => 'getTextOptions',
         'mailStorageOptions' => 'getMailStorageOptions',
-        'visioRenderingOptions' => 'getVisioRenderingOptions'
+        'visioRenderingOptions' => 'getVisioRenderingOptions',
+        'webDocumentOptions' => 'getWebDocumentOptions'
     ];
 
     /*
@@ -274,6 +284,7 @@ class RenderOptions implements ArrayAccess
         $this->container['pageRotations'] = isset($data['pageRotations']) ? $data['pageRotations'] : null;
         $this->container['defaultFontName'] = isset($data['defaultFontName']) ? $data['defaultFontName'] : null;
         $this->container['defaultEncoding'] = isset($data['defaultEncoding']) ? $data['defaultEncoding'] : null;
+        $this->container['detectEncoding'] = isset($data['detectEncoding']) ? $data['detectEncoding'] : null;
         $this->container['renderComments'] = isset($data['renderComments']) ? $data['renderComments'] : null;
         $this->container['renderNotes'] = isset($data['renderNotes']) ? $data['renderNotes'] : null;
         $this->container['renderHiddenPages'] = isset($data['renderHiddenPages']) ? $data['renderHiddenPages'] : null;
@@ -288,6 +299,7 @@ class RenderOptions implements ArrayAccess
         $this->container['textOptions'] = isset($data['textOptions']) ? $data['textOptions'] : null;
         $this->container['mailStorageOptions'] = isset($data['mailStorageOptions']) ? $data['mailStorageOptions'] : null;
         $this->container['visioRenderingOptions'] = isset($data['visioRenderingOptions']) ? $data['visioRenderingOptions'] : null;
+        $this->container['webDocumentOptions'] = isset($data['webDocumentOptions']) ? $data['webDocumentOptions'] : null;
 
         // Initialize discriminator property with the model name.
         $discriminator = array_search('Type', self::$attributeMap);
@@ -489,6 +501,30 @@ class RenderOptions implements ArrayAccess
     public function setDefaultEncoding($defaultEncoding)
     {
         $this->container['defaultEncoding'] = $defaultEncoding;
+
+        return $this;
+    }
+
+    /*
+     * Gets detectEncoding
+     *
+     * @return bool
+     */
+    public function getDetectEncoding()
+    {
+        return $this->container['detectEncoding'];
+    }
+
+    /*
+     * Sets detectEncoding
+     *
+     * @param bool $detectEncoding This option enables TXT, TSV, and CSV files encoding detection. In case the encoding can't be detected the DefaultEncoding is used.
+     *
+     * @return $this
+     */
+    public function setDetectEncoding($detectEncoding)
+    {
+        $this->container['detectEncoding'] = $detectEncoding;
 
         return $this;
     }
@@ -825,6 +861,30 @@ class RenderOptions implements ArrayAccess
     public function setVisioRenderingOptions($visioRenderingOptions)
     {
         $this->container['visioRenderingOptions'] = $visioRenderingOptions;
+
+        return $this;
+    }
+
+    /*
+     * Gets webDocumentOptions
+     *
+     * @return \GroupDocs\Viewer\Model\WebDocumentOptions
+     */
+    public function getWebDocumentOptions()
+    {
+        return $this->container['webDocumentOptions'];
+    }
+
+    /*
+     * Sets webDocumentOptions
+     *
+     * @param \GroupDocs\Viewer\Model\WebDocumentOptions $webDocumentOptions This rendering options enables you to customize the appearance of the output HTML/PDF/PNG/JPEG when rendering Web documents.
+     *
+     * @return $this
+     */
+    public function setWebDocumentOptions($webDocumentOptions)
+    {
+        $this->container['webDocumentOptions'] = $webDocumentOptions;
 
         return $this;
     }

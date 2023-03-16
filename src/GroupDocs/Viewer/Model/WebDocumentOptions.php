@@ -1,7 +1,7 @@
 <?php
 /*
  * --------------------------------------------------------------------------------------------------------------------
- * <copyright company="Aspose Pty Ltd" file="EmailOptions.php">
+ * <copyright company="Aspose Pty Ltd" file="WebDocumentOptions.php">
  *   Copyright (c) 2003-2023 Aspose Pty Ltd
  * </copyright>
  * <summary>
@@ -32,11 +32,11 @@ use \ArrayAccess;
 use \GroupDocs\Viewer\ObjectSerializer;
 
 /*
- * EmailOptions
+ * WebDocumentOptions
  *
- * @description Rendering options for Email file formats. Email file formats include files with extensions: .msg, .eml, .emlx, .ifc, .stl
+ * @description This rendering options enables you to customize the appearance of the output HTML/PDF/PNG/JPEG when rendering Web documents.
  */
-class EmailOptions implements ArrayAccess
+class WebDocumentOptions implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class EmailOptions implements ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = "EmailOptions";
+    protected static $swaggerModelName = "WebDocumentOptions";
 
     /*
      * Array of property to type mappings. Used for (de)serialization
@@ -54,9 +54,10 @@ class EmailOptions implements ArrayAccess
      */
     protected static $swaggerTypes = [
         'pageSize' => 'string',
-        'fieldLabels' => '\GroupDocs\Viewer\Model\FieldLabel[]',
-        'dateTimeFormat' => 'string',
-        'timeZoneOffset' => 'string'
+        'leftMargin' => 'double',
+        'rightMargin' => 'double',
+        'topMargin' => 'double',
+        'bottomMargin' => 'double'
     ];
 
     /*
@@ -66,9 +67,10 @@ class EmailOptions implements ArrayAccess
      */
     protected static $swaggerFormats = [
         'pageSize' => null,
-        'fieldLabels' => null,
-        'dateTimeFormat' => null,
-        'timeZoneOffset' => null
+        'leftMargin' => 'double',
+        'rightMargin' => 'double',
+        'topMargin' => 'double',
+        'bottomMargin' => 'double'
     ];
 
     /*
@@ -99,9 +101,10 @@ class EmailOptions implements ArrayAccess
      */
     protected static $attributeMap = [
         'pageSize' => 'PageSize',
-        'fieldLabels' => 'FieldLabels',
-        'dateTimeFormat' => 'DateTimeFormat',
-        'timeZoneOffset' => 'TimeZoneOffset'
+        'leftMargin' => 'LeftMargin',
+        'rightMargin' => 'RightMargin',
+        'topMargin' => 'TopMargin',
+        'bottomMargin' => 'BottomMargin'
     ];
 
     /*
@@ -111,9 +114,10 @@ class EmailOptions implements ArrayAccess
      */
     protected static $setters = [
         'pageSize' => 'setPageSize',
-        'fieldLabels' => 'setFieldLabels',
-        'dateTimeFormat' => 'setDateTimeFormat',
-        'timeZoneOffset' => 'setTimeZoneOffset'
+        'leftMargin' => 'setLeftMargin',
+        'rightMargin' => 'setRightMargin',
+        'topMargin' => 'setTopMargin',
+        'bottomMargin' => 'setBottomMargin'
     ];
 
     /*
@@ -123,9 +127,10 @@ class EmailOptions implements ArrayAccess
      */
     protected static $getters = [
         'pageSize' => 'getPageSize',
-        'fieldLabels' => 'getFieldLabels',
-        'dateTimeFormat' => 'getDateTimeFormat',
-        'timeZoneOffset' => 'getTimeZoneOffset'
+        'leftMargin' => 'getLeftMargin',
+        'rightMargin' => 'getRightMargin',
+        'topMargin' => 'getTopMargin',
+        'bottomMargin' => 'getBottomMargin'
     ];
 
     /*
@@ -216,9 +221,10 @@ class EmailOptions implements ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['pageSize'] = isset($data['pageSize']) ? $data['pageSize'] : null;
-        $this->container['fieldLabels'] = isset($data['fieldLabels']) ? $data['fieldLabels'] : null;
-        $this->container['dateTimeFormat'] = isset($data['dateTimeFormat']) ? $data['dateTimeFormat'] : null;
-        $this->container['timeZoneOffset'] = isset($data['timeZoneOffset']) ? $data['timeZoneOffset'] : null;
+        $this->container['leftMargin'] = isset($data['leftMargin']) ? $data['leftMargin'] : null;
+        $this->container['rightMargin'] = isset($data['rightMargin']) ? $data['rightMargin'] : null;
+        $this->container['topMargin'] = isset($data['topMargin']) ? $data['topMargin'] : null;
+        $this->container['bottomMargin'] = isset($data['bottomMargin']) ? $data['bottomMargin'] : null;
     }
 
     /*
@@ -241,6 +247,18 @@ class EmailOptions implements ArrayAccess
             );
         }
 
+        if ($this->container['leftMargin'] === null) {
+            $invalidProperties[] = "'leftMargin' can't be null";
+        }
+        if ($this->container['rightMargin'] === null) {
+            $invalidProperties[] = "'rightMargin' can't be null";
+        }
+        if ($this->container['topMargin'] === null) {
+            $invalidProperties[] = "'topMargin' can't be null";
+        }
+        if ($this->container['bottomMargin'] === null) {
+            $invalidProperties[] = "'bottomMargin' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -260,6 +278,18 @@ class EmailOptions implements ArrayAccess
         if (!in_array($this->container['pageSize'], $allowedValues)) {
             return false;
         }
+        if ($this->container['leftMargin'] === null) {
+            return false;
+        }
+        if ($this->container['rightMargin'] === null) {
+            return false;
+        }
+        if ($this->container['topMargin'] === null) {
+            return false;
+        }
+        if ($this->container['bottomMargin'] === null) {
+            return false;
+        }
         return true;
     }
 
@@ -277,7 +307,7 @@ class EmailOptions implements ArrayAccess
     /*
      * Sets pageSize
      *
-     * @param string $pageSize The size of the output page when rendering as PDF or image.
+     * @param string $pageSize The size of the output page. The default value is GroupDocs.Viewer.Options.PageSize.Letter 792 x 612 points. When contents does not fit set a larger page size e.g. GroupDocs.Viewer.Options.PageSize.A3.
      *
      * @return $this
      */
@@ -294,73 +324,97 @@ class EmailOptions implements ArrayAccess
     }
 
     /*
-     * Gets fieldLabels
+     * Gets leftMargin
      *
-     * @return \GroupDocs\Viewer\Model\FieldLabel[]
+     * @return double
      */
-    public function getFieldLabels()
+    public function getLeftMargin()
     {
-        return $this->container['fieldLabels'];
+        return $this->container['leftMargin'];
     }
 
     /*
-     * Sets fieldLabels
+     * Sets leftMargin
      *
-     * @param \GroupDocs\Viewer\Model\FieldLabel[] $fieldLabels The list of supported email message field labels: 1. Field: \"Anniversary\" - default label is \"Anniversary\". 2. Field: \"Attachments\" - default label is \"Attachments\". 3. Field: \"Bcc\" - default label is \"Bcc\". 4. Field: \"Birthday\" - default label is \"Birthday\". 5. Field: \"Business\" - default label is \"Business\". 6. Field: \"BusinessAddress\" - default label is \"Business Address\". 7. Field: \"BusinessFax\" - default label is \"Business Fax\". 8. Field: \"BusinessHomepage\" - default label is \"BusinessHomePage\". 9. Field: \"Cc\" - default label is \"Cc\". 10. Field: \"Company\" - default label is \"Company\". 11. Field: \"Department\" - default label is \"Department\". 12. Field: \"Email\" - default label is \"Email\". 13. Field: \"EmailDisplayAs\" - default label is \"Email Display As\". 14. Field: \"Email2\" - default label is \"Email2\". 15. Field: \"Email2DisplayAs\" - default label is \"Email2 Display As\". 16. Field: \"Email3\" - default label is \"Email3\". 17. Field: \"Email3DisplayAs\" - default label is \"Email3 Display As\". 18. Field: \"End\" - default label is \"End\". 19. Field: \"FirstName\" - default label is \"First Name\". 20. Field: \"From\" - default label is \"From\". 21. Field: \"FullName\" - default label is \"Full Name\". 22. Field: \"Gender\" - default label is \"Gender\". 23. Field: \"Hobbies\" - default label is \"Hobbies\". 24. Field: \"Home\" - default label is \"Home\". 25. Field: \"HomeAddress\" - default label is \"Home Address\". 26. Field: \"Importance\" - default label is \"Importance\". 27. Field: \"JobTitle\" - default label is \"Job Title\". 28. Field: \"LastName\" - default label is \"Last Name\". 29. Field: \"Location\" - default label is \"Location\". 30. Field: \"MiddleName\" - default label is \"Middle Name\". 31. Field: \"Mobile\" - default label is \"Mobile\". 32. Field: \"Organizer\" - default label is \"Organizer\". 33. Field: \"OtherAddress\" - default label is \"Other Address\". 34. Field: \"PersonalHomepage\" - default label is \"PersonalHomePage\". 35. Field: \"Profession\" - default label is \"Profession\". 36. Field: \"Recurrence\" - default label is \"Recurrence\". 37. Field: \"RecurrencePattern\" - default label is \"Recurrence Pattern\". 38. Field: \"RequiredAttendees\" - default label is \"Required Attendees\". 39. Field: \"Sent\" - default label is \"Sent\". 40. Field: \"ShowTimeAs\" - default label is \"Show Time As\". 41. Field: \"SpousePartner\" - default label is \"Spouse/Partner\". 42. Field: \"Start\" - default label is \"Start\". 43. Field: \"Subject\" - default label is \"Subject\". 44. Field: \"To\" - default label is \"To\". 45. Field: \"UserField1\" - default label is \"User Field 1\". 46. Field: \"UserField2\" - default label is \"User Field 2\". 47. Field: \"UserField3\" - default label is \"User Field 3\". 48. Field: \"UserField4\" - default label is \"User Field 4\".
+     * @param double $leftMargin The distance (in points) between the left edge of the page and the left boundary  of the body text. The default value is 5 points.
      *
      * @return $this
      */
-    public function setFieldLabels($fieldLabels)
+    public function setLeftMargin($leftMargin)
     {
-        $this->container['fieldLabels'] = $fieldLabels;
+        $this->container['leftMargin'] = $leftMargin;
 
         return $this;
     }
 
     /*
-     * Gets dateTimeFormat
+     * Gets rightMargin
      *
-     * @return string
+     * @return double
      */
-    public function getDateTimeFormat()
+    public function getRightMargin()
     {
-        return $this->container['dateTimeFormat'];
+        return $this->container['rightMargin'];
     }
 
     /*
-     * Sets dateTimeFormat
+     * Sets rightMargin
      *
-     * @param string $dateTimeFormat Time Format (can be include TimeZone) for example: 'MM d yyyy HH:mm tt', if not set - current system format is used
+     * @param double $rightMargin The distance (in points) between the right edge of the page and the right boundary of the body text. The default value is 5 points.
      *
      * @return $this
      */
-    public function setDateTimeFormat($dateTimeFormat)
+    public function setRightMargin($rightMargin)
     {
-        $this->container['dateTimeFormat'] = $dateTimeFormat;
+        $this->container['rightMargin'] = $rightMargin;
 
         return $this;
     }
 
     /*
-     * Gets timeZoneOffset
+     * Gets topMargin
      *
-     * @return string
+     * @return double
      */
-    public function getTimeZoneOffset()
+    public function getTopMargin()
     {
-        return $this->container['timeZoneOffset'];
+        return $this->container['topMargin'];
     }
 
     /*
-     * Sets timeZoneOffset
+     * Sets topMargin
      *
-     * @param string $timeZoneOffset Message time zone offset. Format should be compatible with .net TimeSpan
+     * @param double $topMargin The distance (in points) between the top edge of the page and the top boundary of the body text. The default value is 72 points.
      *
      * @return $this
      */
-    public function setTimeZoneOffset($timeZoneOffset)
+    public function setTopMargin($topMargin)
     {
-        $this->container['timeZoneOffset'] = $timeZoneOffset;
+        $this->container['topMargin'] = $topMargin;
+
+        return $this;
+    }
+
+    /*
+     * Gets bottomMargin
+     *
+     * @return double
+     */
+    public function getBottomMargin()
+    {
+        return $this->container['bottomMargin'];
+    }
+
+    /*
+     * Sets bottomMargin
+     *
+     * @param double $bottomMargin The distance (in points) between the bottom edge of the page and the bottom boundary of the body text. The default value is 72 points.
+     *
+     * @return $this
+     */
+    public function setBottomMargin($bottomMargin)
+    {
+        $this->container['bottomMargin'] = $bottomMargin;
 
         return $this;
     }
