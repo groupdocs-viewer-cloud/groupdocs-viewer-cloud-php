@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="PdfOptions.php">
- *   Copyright (c) 2003-2023 Aspose Pty Ltd
+ *   Copyright (c) 2003-2024 Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -51,10 +51,10 @@ class PdfOptions extends RenderOptions
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'jpgQuality' => 'int',
         'documentOpenPassword' => 'string',
         'permissionsPassword' => 'string',
         'permissions' => 'string[]',
+        'pdfOptimizationOptions' => '\GroupDocs\Viewer\Model\PdfOptimizationOptions',
         'imageMaxWidth' => 'int',
         'imageMaxHeight' => 'int',
         'imageWidth' => 'int',
@@ -67,10 +67,10 @@ class PdfOptions extends RenderOptions
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'jpgQuality' => 'int32',
         'documentOpenPassword' => null,
         'permissionsPassword' => null,
         'permissions' => null,
+        'pdfOptimizationOptions' => null,
         'imageMaxWidth' => 'int32',
         'imageMaxHeight' => 'int32',
         'imageWidth' => 'int32',
@@ -104,10 +104,10 @@ class PdfOptions extends RenderOptions
      * @var string[]
      */
     protected static $attributeMap = [
-        'jpgQuality' => 'JpgQuality',
         'documentOpenPassword' => 'DocumentOpenPassword',
         'permissionsPassword' => 'PermissionsPassword',
         'permissions' => 'Permissions',
+        'pdfOptimizationOptions' => 'PdfOptimizationOptions',
         'imageMaxWidth' => 'ImageMaxWidth',
         'imageMaxHeight' => 'ImageMaxHeight',
         'imageWidth' => 'ImageWidth',
@@ -120,10 +120,10 @@ class PdfOptions extends RenderOptions
      * @var string[]
      */
     protected static $setters = [
-        'jpgQuality' => 'setJpgQuality',
         'documentOpenPassword' => 'setDocumentOpenPassword',
         'permissionsPassword' => 'setPermissionsPassword',
         'permissions' => 'setPermissions',
+        'pdfOptimizationOptions' => 'setPdfOptimizationOptions',
         'imageMaxWidth' => 'setImageMaxWidth',
         'imageMaxHeight' => 'setImageMaxHeight',
         'imageWidth' => 'setImageWidth',
@@ -136,10 +136,10 @@ class PdfOptions extends RenderOptions
      * @var string[]
      */
     protected static $getters = [
-        'jpgQuality' => 'getJpgQuality',
         'documentOpenPassword' => 'getDocumentOpenPassword',
         'permissionsPassword' => 'getPermissionsPassword',
         'permissions' => 'getPermissions',
+        'pdfOptimizationOptions' => 'getPdfOptimizationOptions',
         'imageMaxWidth' => 'getImageMaxWidth',
         'imageMaxHeight' => 'getImageMaxHeight',
         'imageWidth' => 'getImageWidth',
@@ -202,10 +202,10 @@ class PdfOptions extends RenderOptions
     {
         parent::__construct($data);
 
-        $this->container['jpgQuality'] = isset($data['jpgQuality']) ? $data['jpgQuality'] : null;
         $this->container['documentOpenPassword'] = isset($data['documentOpenPassword']) ? $data['documentOpenPassword'] : null;
         $this->container['permissionsPassword'] = isset($data['permissionsPassword']) ? $data['permissionsPassword'] : null;
         $this->container['permissions'] = isset($data['permissions']) ? $data['permissions'] : null;
+        $this->container['pdfOptimizationOptions'] = isset($data['pdfOptimizationOptions']) ? $data['pdfOptimizationOptions'] : null;
         $this->container['imageMaxWidth'] = isset($data['imageMaxWidth']) ? $data['imageMaxWidth'] : null;
         $this->container['imageMaxHeight'] = isset($data['imageMaxHeight']) ? $data['imageMaxHeight'] : null;
         $this->container['imageWidth'] = isset($data['imageWidth']) ? $data['imageWidth'] : null;
@@ -221,9 +221,6 @@ class PdfOptions extends RenderOptions
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if ($this->container['jpgQuality'] === null) {
-            $invalidProperties[] = "'jpgQuality' can't be null";
-        }
         if ($this->container['imageMaxWidth'] === null) {
             $invalidProperties[] = "'imageMaxWidth' can't be null";
         }
@@ -251,9 +248,6 @@ class PdfOptions extends RenderOptions
             return false;
         }
 
-        if ($this->container['jpgQuality'] === null) {
-            return false;
-        }
         if ($this->container['imageMaxWidth'] === null) {
             return false;
         }
@@ -269,30 +263,6 @@ class PdfOptions extends RenderOptions
         return true;
     }
 
-
-    /*
-     * Gets jpgQuality
-     *
-     * @return int
-     */
-    public function getJpgQuality()
-    {
-        return $this->container['jpgQuality'];
-    }
-
-    /*
-     * Sets jpgQuality
-     *
-     * @param int $jpgQuality The quality of the JPG images contained by output PDF document; Valid values are between 1 and 100; Default value is 90
-     *
-     * @return $this
-     */
-    public function setJpgQuality($jpgQuality)
-    {
-        $this->container['jpgQuality'] = $jpgQuality;
-
-        return $this;
-    }
 
     /*
      * Gets documentOpenPassword
@@ -362,6 +332,30 @@ class PdfOptions extends RenderOptions
     public function setPermissions($permissions)
     {
         $this->container['permissions'] = $permissions;
+
+        return $this;
+    }
+
+    /*
+     * Gets pdfOptimizationOptions
+     *
+     * @return \GroupDocs\Viewer\Model\PdfOptimizationOptions
+     */
+    public function getPdfOptimizationOptions()
+    {
+        return $this->container['pdfOptimizationOptions'];
+    }
+
+    /*
+     * Sets pdfOptimizationOptions
+     *
+     * @param \GroupDocs\Viewer\Model\PdfOptimizationOptions $pdfOptimizationOptions Contains options for rendering documents into PDF format.
+     *
+     * @return $this
+     */
+    public function setPdfOptimizationOptions($pdfOptimizationOptions)
+    {
+        $this->container['pdfOptimizationOptions'] = $pdfOptimizationOptions;
 
         return $this;
     }
