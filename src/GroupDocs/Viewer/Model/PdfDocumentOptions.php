@@ -58,7 +58,10 @@ class PdfDocumentOptions implements ArrayAccess
         'enableFontHinting' => 'bool',
         'renderOriginalPageSize' => 'bool',
         'imageQuality' => 'string',
-        'renderTextAsImage' => 'bool'
+        'renderTextAsImage' => 'bool',
+        'fixedLayout' => 'bool',
+        'wrapImagesInSvg' => 'bool',
+        'disableFontLicenseVerifications' => 'bool'
     ];
 
     /*
@@ -72,7 +75,10 @@ class PdfDocumentOptions implements ArrayAccess
         'enableFontHinting' => null,
         'renderOriginalPageSize' => null,
         'imageQuality' => null,
-        'renderTextAsImage' => null
+        'renderTextAsImage' => null,
+        'fixedLayout' => null,
+        'wrapImagesInSvg' => null,
+        'disableFontLicenseVerifications' => null
     ];
 
     /*
@@ -107,7 +113,10 @@ class PdfDocumentOptions implements ArrayAccess
         'enableFontHinting' => 'EnableFontHinting',
         'renderOriginalPageSize' => 'RenderOriginalPageSize',
         'imageQuality' => 'ImageQuality',
-        'renderTextAsImage' => 'RenderTextAsImage'
+        'renderTextAsImage' => 'RenderTextAsImage',
+        'fixedLayout' => 'FixedLayout',
+        'wrapImagesInSvg' => 'WrapImagesInSvg',
+        'disableFontLicenseVerifications' => 'DisableFontLicenseVerifications'
     ];
 
     /*
@@ -121,7 +130,10 @@ class PdfDocumentOptions implements ArrayAccess
         'enableFontHinting' => 'setEnableFontHinting',
         'renderOriginalPageSize' => 'setRenderOriginalPageSize',
         'imageQuality' => 'setImageQuality',
-        'renderTextAsImage' => 'setRenderTextAsImage'
+        'renderTextAsImage' => 'setRenderTextAsImage',
+        'fixedLayout' => 'setFixedLayout',
+        'wrapImagesInSvg' => 'setWrapImagesInSvg',
+        'disableFontLicenseVerifications' => 'setDisableFontLicenseVerifications'
     ];
 
     /*
@@ -135,7 +147,10 @@ class PdfDocumentOptions implements ArrayAccess
         'enableFontHinting' => 'getEnableFontHinting',
         'renderOriginalPageSize' => 'getRenderOriginalPageSize',
         'imageQuality' => 'getImageQuality',
-        'renderTextAsImage' => 'getRenderTextAsImage'
+        'renderTextAsImage' => 'getRenderTextAsImage',
+        'fixedLayout' => 'getFixedLayout',
+        'wrapImagesInSvg' => 'getWrapImagesInSvg',
+        'disableFontLicenseVerifications' => 'getDisableFontLicenseVerifications'
     ];
 
     /*
@@ -221,6 +236,9 @@ class PdfDocumentOptions implements ArrayAccess
         $this->container['renderOriginalPageSize'] = isset($data['renderOriginalPageSize']) ? $data['renderOriginalPageSize'] : null;
         $this->container['imageQuality'] = isset($data['imageQuality']) ? $data['imageQuality'] : null;
         $this->container['renderTextAsImage'] = isset($data['renderTextAsImage']) ? $data['renderTextAsImage'] : null;
+        $this->container['fixedLayout'] = isset($data['fixedLayout']) ? $data['fixedLayout'] : null;
+        $this->container['wrapImagesInSvg'] = isset($data['wrapImagesInSvg']) ? $data['wrapImagesInSvg'] : null;
+        $this->container['disableFontLicenseVerifications'] = isset($data['disableFontLicenseVerifications']) ? $data['disableFontLicenseVerifications'] : null;
     }
 
     /*
@@ -258,6 +276,15 @@ class PdfDocumentOptions implements ArrayAccess
         if ($this->container['renderTextAsImage'] === null) {
             $invalidProperties[] = "'renderTextAsImage' can't be null";
         }
+        if ($this->container['fixedLayout'] === null) {
+            $invalidProperties[] = "'fixedLayout' can't be null";
+        }
+        if ($this->container['wrapImagesInSvg'] === null) {
+            $invalidProperties[] = "'wrapImagesInSvg' can't be null";
+        }
+        if ($this->container['disableFontLicenseVerifications'] === null) {
+            $invalidProperties[] = "'disableFontLicenseVerifications' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -290,6 +317,15 @@ class PdfDocumentOptions implements ArrayAccess
             return false;
         }
         if ($this->container['renderTextAsImage'] === null) {
+            return false;
+        }
+        if ($this->container['fixedLayout'] === null) {
+            return false;
+        }
+        if ($this->container['wrapImagesInSvg'] === null) {
+            return false;
+        }
+        if ($this->container['disableFontLicenseVerifications'] === null) {
             return false;
         }
         return true;
@@ -441,6 +477,78 @@ class PdfDocumentOptions implements ArrayAccess
     public function setRenderTextAsImage($renderTextAsImage)
     {
         $this->container['renderTextAsImage'] = $renderTextAsImage;
+
+        return $this;
+    }
+
+    /*
+     * Gets fixedLayout
+     *
+     * @return bool
+     */
+    public function getFixedLayout()
+    {
+        return $this->container['fixedLayout'];
+    }
+
+    /*
+     * Sets fixedLayout
+     *
+     * @param bool $fixedLayout Enables rendering the PDF and EPUB documents to HTML with a fixed layout.
+     *
+     * @return $this
+     */
+    public function setFixedLayout($fixedLayout)
+    {
+        $this->container['fixedLayout'] = $fixedLayout;
+
+        return $this;
+    }
+
+    /*
+     * Gets wrapImagesInSvg
+     *
+     * @return bool
+     */
+    public function getWrapImagesInSvg()
+    {
+        return $this->container['wrapImagesInSvg'];
+    }
+
+    /*
+     * Sets wrapImagesInSvg
+     *
+     * @param bool $wrapImagesInSvg Enables wrapping each image in the output HTML document in SVG tag to improve the output quality.
+     *
+     * @return $this
+     */
+    public function setWrapImagesInSvg($wrapImagesInSvg)
+    {
+        $this->container['wrapImagesInSvg'] = $wrapImagesInSvg;
+
+        return $this;
+    }
+
+    /*
+     * Gets disableFontLicenseVerifications
+     *
+     * @return bool
+     */
+    public function getDisableFontLicenseVerifications()
+    {
+        return $this->container['disableFontLicenseVerifications'];
+    }
+
+    /*
+     * Sets disableFontLicenseVerifications
+     *
+     * @param bool $disableFontLicenseVerifications Disables any license restrictions for all fonts in the current XPS/OXPS document.
+     *
+     * @return $this
+     */
+    public function setDisableFontLicenseVerifications($disableFontLicenseVerifications)
+    {
+        $this->container['disableFontLicenseVerifications'] = $disableFontLicenseVerifications;
 
         return $this;
     }

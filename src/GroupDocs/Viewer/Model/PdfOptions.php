@@ -373,7 +373,7 @@ class PdfOptions extends RenderOptions
     /*
      * Sets imageMaxWidth
      *
-     * @param int $imageMaxWidth Max width of an output image in pixels. (When converting single image to HTML only)
+     * @param int $imageMaxWidth Max width of an output image in pixels. (When converting single image to PDF only)
      *
      * @return $this
      */
@@ -397,7 +397,7 @@ class PdfOptions extends RenderOptions
     /*
      * Sets imageMaxHeight
      *
-     * @param int $imageMaxHeight Max height of an output image in pixels. (When converting single image to HTML only)
+     * @param int $imageMaxHeight Max height of an output image in pixels. (When converting single image to PDF only)
      *
      * @return $this
      */
@@ -421,7 +421,7 @@ class PdfOptions extends RenderOptions
     /*
      * Sets imageWidth
      *
-     * @param int $imageWidth The width of the output image in pixels. (When converting single image to HTML only)
+     * @param int $imageWidth The width of the output image in pixels. (When converting single image to PDF only)
      *
      * @return $this
      */
@@ -445,7 +445,7 @@ class PdfOptions extends RenderOptions
     /*
      * Sets imageHeight
      *
-     * @param int $imageHeight The height of an output image in pixels. (When converting single image to HTML only)
+     * @param int $imageHeight The height of an output image in pixels. (When converting single image to PDF only)
      *
      * @return $this
      */
