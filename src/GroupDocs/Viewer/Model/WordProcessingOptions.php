@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="WordProcessingOptions.php">
- *   Copyright (c) 2003-2024 Aspose Pty Ltd
+ *   Copyright (c) Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -57,7 +57,11 @@ class WordProcessingOptions implements ArrayAccess
         'leftMargin' => 'double',
         'rightMargin' => 'double',
         'topMargin' => 'double',
-        'bottomMargin' => 'double'
+        'bottomMargin' => 'double',
+        'pageSize' => 'string',
+        'enableOpenTypeFeatures' => 'bool',
+        'unlinkTableOfContents' => 'bool',
+        'updateFields' => 'bool'
     ];
 
     /*
@@ -70,7 +74,11 @@ class WordProcessingOptions implements ArrayAccess
         'leftMargin' => 'double',
         'rightMargin' => 'double',
         'topMargin' => 'double',
-        'bottomMargin' => 'double'
+        'bottomMargin' => 'double',
+        'pageSize' => null,
+        'enableOpenTypeFeatures' => null,
+        'unlinkTableOfContents' => null,
+        'updateFields' => null
     ];
 
     /*
@@ -104,7 +112,11 @@ class WordProcessingOptions implements ArrayAccess
         'leftMargin' => 'LeftMargin',
         'rightMargin' => 'RightMargin',
         'topMargin' => 'TopMargin',
-        'bottomMargin' => 'BottomMargin'
+        'bottomMargin' => 'BottomMargin',
+        'pageSize' => 'PageSize',
+        'enableOpenTypeFeatures' => 'EnableOpenTypeFeatures',
+        'unlinkTableOfContents' => 'UnlinkTableOfContents',
+        'updateFields' => 'UpdateFields'
     ];
 
     /*
@@ -117,7 +129,11 @@ class WordProcessingOptions implements ArrayAccess
         'leftMargin' => 'setLeftMargin',
         'rightMargin' => 'setRightMargin',
         'topMargin' => 'setTopMargin',
-        'bottomMargin' => 'setBottomMargin'
+        'bottomMargin' => 'setBottomMargin',
+        'pageSize' => 'setPageSize',
+        'enableOpenTypeFeatures' => 'setEnableOpenTypeFeatures',
+        'unlinkTableOfContents' => 'setUnlinkTableOfContents',
+        'updateFields' => 'setUpdateFields'
     ];
 
     /*
@@ -130,7 +146,11 @@ class WordProcessingOptions implements ArrayAccess
         'leftMargin' => 'getLeftMargin',
         'rightMargin' => 'getRightMargin',
         'topMargin' => 'getTopMargin',
-        'bottomMargin' => 'getBottomMargin'
+        'bottomMargin' => 'getBottomMargin',
+        'pageSize' => 'getPageSize',
+        'enableOpenTypeFeatures' => 'getEnableOpenTypeFeatures',
+        'unlinkTableOfContents' => 'getUnlinkTableOfContents',
+        'updateFields' => 'getUpdateFields'
     ];
 
     /*
@@ -174,8 +194,35 @@ class WordProcessingOptions implements ArrayAccess
         return self::$swaggerModelName;
     }
 
+    const PAGE_SIZE_UNSPECIFIED = 'Unspecified';
+    const PAGE_SIZE_LETTER = 'Letter';
+    const PAGE_SIZE_LEDGER = 'Ledger';
+    const PAGE_SIZE_A0 = 'A0';
+    const PAGE_SIZE_A1 = 'A1';
+    const PAGE_SIZE_A2 = 'A2';
+    const PAGE_SIZE_A3 = 'A3';
+    const PAGE_SIZE_A4 = 'A4';
     
 
+    
+    /*
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getPageSizeAllowableValues()
+    {
+        return [
+            self::PAGE_SIZE_UNSPECIFIED,
+            self::PAGE_SIZE_LETTER,
+            self::PAGE_SIZE_LEDGER,
+            self::PAGE_SIZE_A0,
+            self::PAGE_SIZE_A1,
+            self::PAGE_SIZE_A2,
+            self::PAGE_SIZE_A3,
+            self::PAGE_SIZE_A4,
+        ];
+    }
     
 
     /*
@@ -198,6 +245,10 @@ class WordProcessingOptions implements ArrayAccess
         $this->container['rightMargin'] = isset($data['rightMargin']) ? $data['rightMargin'] : null;
         $this->container['topMargin'] = isset($data['topMargin']) ? $data['topMargin'] : null;
         $this->container['bottomMargin'] = isset($data['bottomMargin']) ? $data['bottomMargin'] : null;
+        $this->container['pageSize'] = isset($data['pageSize']) ? $data['pageSize'] : null;
+        $this->container['enableOpenTypeFeatures'] = isset($data['enableOpenTypeFeatures']) ? $data['enableOpenTypeFeatures'] : null;
+        $this->container['unlinkTableOfContents'] = isset($data['unlinkTableOfContents']) ? $data['unlinkTableOfContents'] : null;
+        $this->container['updateFields'] = isset($data['updateFields']) ? $data['updateFields'] : null;
     }
 
     /*
@@ -224,6 +275,26 @@ class WordProcessingOptions implements ArrayAccess
         if ($this->container['bottomMargin'] === null) {
             $invalidProperties[] = "'bottomMargin' can't be null";
         }
+        if ($this->container['pageSize'] === null) {
+            $invalidProperties[] = "'pageSize' can't be null";
+        }
+        $allowedValues = $this->getPageSizeAllowableValues();
+        if (!in_array($this->container['pageSize'], $allowedValues)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'pageSize', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['enableOpenTypeFeatures'] === null) {
+            $invalidProperties[] = "'enableOpenTypeFeatures' can't be null";
+        }
+        if ($this->container['unlinkTableOfContents'] === null) {
+            $invalidProperties[] = "'unlinkTableOfContents' can't be null";
+        }
+        if ($this->container['updateFields'] === null) {
+            $invalidProperties[] = "'updateFields' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -249,6 +320,22 @@ class WordProcessingOptions implements ArrayAccess
             return false;
         }
         if ($this->container['bottomMargin'] === null) {
+            return false;
+        }
+        if ($this->container['pageSize'] === null) {
+            return false;
+        }
+        $allowedValues = $this->getPageSizeAllowableValues();
+        if (!in_array($this->container['pageSize'], $allowedValues)) {
+            return false;
+        }
+        if ($this->container['enableOpenTypeFeatures'] === null) {
+            return false;
+        }
+        if ($this->container['unlinkTableOfContents'] === null) {
+            return false;
+        }
+        if ($this->container['updateFields'] === null) {
             return false;
         }
         return true;
@@ -371,6 +458,107 @@ class WordProcessingOptions implements ArrayAccess
     public function setBottomMargin($bottomMargin)
     {
         $this->container['bottomMargin'] = $bottomMargin;
+
+        return $this;
+    }
+
+    /*
+     * Gets pageSize
+     *
+     * @return string
+     */
+    public function getPageSize()
+    {
+        return $this->container['pageSize'];
+    }
+
+    /*
+     * Sets pageSize
+     *
+     * @param string $pageSize The size of the page.
+     *
+     * @return $this
+     */
+    public function setPageSize($pageSize)
+    {
+        $allowedValues = $this->getPageSizeAllowableValues();
+        if ((!is_numeric($pageSize) && !in_array($pageSize, $allowedValues)) || (is_numeric($pageSize) && !in_array($allowedValues[$pageSize], $allowedValues))) {
+            throw new \InvalidArgumentException(sprintf("Invalid value for 'pageSize', must be one of '%s'", implode("', '", $allowedValues)));
+        }
+			
+        $this->container['pageSize'] = $pageSize;
+
+        return $this;
+    }
+
+    /*
+     * Gets enableOpenTypeFeatures
+     *
+     * @return bool
+     */
+    public function getEnableOpenTypeFeatures()
+    {
+        return $this->container['enableOpenTypeFeatures'];
+    }
+
+    /*
+     * Sets enableOpenTypeFeatures
+     *
+     * @param bool $enableOpenTypeFeatures This option enables kerning and other OpenType Features when rendering Arabic, Hebrew, Indian Latin-based, or Cyrillic-based scripts.
+     *
+     * @return $this
+     */
+    public function setEnableOpenTypeFeatures($enableOpenTypeFeatures)
+    {
+        $this->container['enableOpenTypeFeatures'] = $enableOpenTypeFeatures;
+
+        return $this;
+    }
+
+    /*
+     * Gets unlinkTableOfContents
+     *
+     * @return bool
+     */
+    public function getUnlinkTableOfContents()
+    {
+        return $this->container['unlinkTableOfContents'];
+    }
+
+    /*
+     * Sets unlinkTableOfContents
+     *
+     * @param bool $unlinkTableOfContents When rendering to HTML or PDF, you can set this option to `true` to disable navigation from the table of contents. For HTML rendering, `a` tags with relative links will be replaced with `span` tags, removing functionality but preserving visual appearance. For PDF rendering, the table of contents will be rendered as plain text without links to document sections.
+     *
+     * @return $this
+     */
+    public function setUnlinkTableOfContents($unlinkTableOfContents)
+    {
+        $this->container['unlinkTableOfContents'] = $unlinkTableOfContents;
+
+        return $this;
+    }
+
+    /*
+     * Gets updateFields
+     *
+     * @return bool
+     */
+    public function getUpdateFields()
+    {
+        return $this->container['updateFields'];
+    }
+
+    /*
+     * Sets updateFields
+     *
+     * @param bool $updateFields Determines if fields of certain types should be updated before saving the input WordProcessing document to the HTML, PDF, PNG, or JPEG output formats. Default value for this property is true — fields will be updated before saving.
+     *
+     * @return $this
+     */
+    public function setUpdateFields($updateFields)
+    {
+        $this->container['updateFields'] = $updateFields;
 
         return $this;
     }

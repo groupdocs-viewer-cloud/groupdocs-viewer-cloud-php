@@ -2,7 +2,7 @@
 /*
  * --------------------------------------------------------------------------------------------------------------------
  * <copyright company="Aspose Pty Ltd" file="HtmlOptions.php">
- *   Copyright (c) 2003-2024 Aspose Pty Ltd
+ *   Copyright (c) Aspose Pty Ltd
  * </copyright>
  * <summary>
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -62,7 +62,8 @@ class HtmlOptions extends RenderOptions
         'imageWidth' => 'int',
         'imageMaxHeight' => 'int',
         'imageMaxWidth' => 'int',
-        'renderToSinglePage' => 'bool'
+        'renderToSinglePage' => 'bool',
+        'removeJavaScript' => 'bool'
     ];
 
     /*
@@ -82,7 +83,8 @@ class HtmlOptions extends RenderOptions
         'imageWidth' => 'int32',
         'imageMaxHeight' => 'int32',
         'imageMaxWidth' => 'int32',
-        'renderToSinglePage' => null
+        'renderToSinglePage' => null,
+        'removeJavaScript' => null
     ];
 
     /*
@@ -123,7 +125,8 @@ class HtmlOptions extends RenderOptions
         'imageWidth' => 'ImageWidth',
         'imageMaxHeight' => 'ImageMaxHeight',
         'imageMaxWidth' => 'ImageMaxWidth',
-        'renderToSinglePage' => 'RenderToSinglePage'
+        'renderToSinglePage' => 'RenderToSinglePage',
+        'removeJavaScript' => 'RemoveJavaScript'
     ];
 
     /*
@@ -143,7 +146,8 @@ class HtmlOptions extends RenderOptions
         'imageWidth' => 'setImageWidth',
         'imageMaxHeight' => 'setImageMaxHeight',
         'imageMaxWidth' => 'setImageMaxWidth',
-        'renderToSinglePage' => 'setRenderToSinglePage'
+        'renderToSinglePage' => 'setRenderToSinglePage',
+        'removeJavaScript' => 'setRemoveJavaScript'
     ];
 
     /*
@@ -163,7 +167,8 @@ class HtmlOptions extends RenderOptions
         'imageWidth' => 'getImageWidth',
         'imageMaxHeight' => 'getImageMaxHeight',
         'imageMaxWidth' => 'getImageMaxWidth',
-        'renderToSinglePage' => 'getRenderToSinglePage'
+        'renderToSinglePage' => 'getRenderToSinglePage',
+        'removeJavaScript' => 'getRemoveJavaScript'
     ];
 
     /*
@@ -234,6 +239,7 @@ class HtmlOptions extends RenderOptions
         $this->container['imageMaxHeight'] = isset($data['imageMaxHeight']) ? $data['imageMaxHeight'] : null;
         $this->container['imageMaxWidth'] = isset($data['imageMaxWidth']) ? $data['imageMaxWidth'] : null;
         $this->container['renderToSinglePage'] = isset($data['renderToSinglePage']) ? $data['renderToSinglePage'] : null;
+        $this->container['removeJavaScript'] = isset($data['removeJavaScript']) ? $data['removeJavaScript'] : null;
     }
 
     /*
@@ -274,6 +280,9 @@ class HtmlOptions extends RenderOptions
         }
         if ($this->container['renderToSinglePage'] === null) {
             $invalidProperties[] = "'renderToSinglePage' can't be null";
+        }
+        if ($this->container['removeJavaScript'] === null) {
+            $invalidProperties[] = "'removeJavaScript' can't be null";
         }
         return $invalidProperties;
     }
@@ -318,6 +327,9 @@ class HtmlOptions extends RenderOptions
             return false;
         }
         if ($this->container['renderToSinglePage'] === null) {
+            return false;
+        }
+        if ($this->container['removeJavaScript'] === null) {
             return false;
         }
         return true;
@@ -608,6 +620,30 @@ class HtmlOptions extends RenderOptions
     public function setRenderToSinglePage($renderToSinglePage)
     {
         $this->container['renderToSinglePage'] = $renderToSinglePage;
+
+        return $this;
+    }
+
+    /*
+     * Gets removeJavaScript
+     *
+     * @return bool
+     */
+    public function getRemoveJavaScript()
+    {
+        return $this->container['removeJavaScript'];
+    }
+
+    /*
+     * Sets removeJavaScript
+     *
+     * @param bool $removeJavaScript Allows to remove the JavaScript source code from the links in resultant HTML documents, when rendering input documents, which have the scripts. By default is enabled (true).
+     *
+     * @return $this
+     */
+    public function setRemoveJavaScript($removeJavaScript)
+    {
+        $this->container['removeJavaScript'] = $removeJavaScript;
 
         return $this;
     }
