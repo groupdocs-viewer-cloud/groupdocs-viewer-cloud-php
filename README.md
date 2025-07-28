@@ -51,29 +51,77 @@ php composer.phar install
 ```
 
 ## Getting Started
-Please follow the [installation procedure](#installation--usage) and then run the following:
 
 ```php
 <?php
 
 require_once(__DIR__ . '/vendor/autoload.php');
 
-//TODO: Get your AppSID and AppKey at https://dashboard.groupdocs.cloud (free registration is required).
+// Get your AppSID and AppKey at https://dashboard.groupdocs.cloud (free registration is required).
 $configuration = new GroupDocs\Viewer\Configuration();
 $configuration->setAppSid("XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX");
 $configuration->setAppKey("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
-$infoApi = new GroupDocs\Viewer\InfoApi($configuration); 
+$viewApi = new GroupDocs\Viewer\ViewApi($configuration);
 
 try {
-    $response = $infoApi->getSupportedFileFormats();
+    // Convert and download a document as JPG
+    $format = "jpg";
+    $filePath = "myfile.docx";
+    $request = new GroupDocs\Viewer\Model\Requests\convertAndDownloadRequest($format, $filePath);
+    $result = $viewApi->convertAndDownload($request);
 
-    foreach ($response->getFormats() as $key => $format) {
-        echo $format->getFileFormat() . " - " .  $format->getExtension(), "\n";
-    }
+    // Save the resulting file
+    $outputPath = __DIR__ . "/output.jpg";
+    file_put_contents($outputPath, $result->fread($result->getSize()));
+    echo "File converted and saved to: " . $outputPath . "\n";
 } catch (Exception $e) {
-    echo  "Something went wrong: ",  $e->getMessage(), "\n";
-    PHP_EOL;
+    echo "Something went wrong: ", $e->getMessage(), "\n";
+}
+
+?>
+```
+
+Below is an example demonstrating how to upload a document, render it, and download the result using GroupDocs.Viewer Cloud SDK for PHP.
+
+```php
+<?php
+
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$configuration = new GroupDocs\Viewer\Configuration();
+$configuration->setAppSid("XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX");
+$configuration->setAppKey("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+
+$fileApi = new GroupDocs\Viewer\FileApi($configuration);
+$viewApi = new GroupDocs\Viewer\ViewApi($configuration);
+
+try {
+    // Upload a file to cloud storage
+    $uploadRequest = new GroupDocs\Viewer\Model\Requests\uploadFileRequest("myfile.docx", __DIR__ . "/myfile.docx");
+    $fileApi->uploadFile($uploadRequest);
+
+    // Render it to HTML
+    $viewOptions = new GroupDocs\Viewer\Model\ViewOptions();
+    $fileInfo = new GroupDocs\Viewer\Model\FileInfo();
+    $fileInfo->setFilePath("myfile.docx");
+    $viewOptions->setFileInfo($fileInfo);
+    $viewOptions->setViewFormat("HTML");
+    $viewOptions->setOutputPath("myfile.html");
+
+    $viewRequest = new GroupDocs\Viewer\Model\Requests\createViewRequest($viewOptions);
+    $viewApi->createView($viewRequest);
+
+    // Download the result
+    $downloadRequest = new GroupDocs\Viewer\Model\Requests\downloadFileRequest("myfile.html");
+    $result = $fileApi->downloadFile($downloadRequest);
+
+    // Save the resulting file
+    $outputPath = __DIR__ . "/myfile.html";
+    file_put_contents($outputPath, $result->fread($result->getSize()));
+    echo "Rendered file downloaded to: " . $outputPath . "\n";
+} catch (Exception $e) {
+    echo "Something went wrong: ", $e->getMessage(), "\n";
 }
 
 ?>
